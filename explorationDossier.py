@@ -1,4 +1,5 @@
 import os
+import mimetypes
 
 """
     Explore un dossier et ses sous-dossiers pour afficher les chemins des fichiers audio (MP3 ou FLAC).
@@ -24,8 +25,13 @@ def explorer_dossier(chemin):
             
             # Vérifie si le nom du fichier se termine par '.mp3' ou '.flac' 
             if nom.endswith(".mp3") or nom.endswith(".flac"):
-                print(f" - {chemin_complet}")
+                
+                # Vérifie le type MIME du fichier
+                type_mime, _ = mimetypes.guess_type(chemin_complet)
 
+                # Vérifie même si un fichier a l'extension correcte, il doit également être de type audio valide
+                if type_mime in ['audio/mpeg', 'audio/flac']:
+                    print(f" - {chemin_complet}")
 
 
 # Utiliser la fonction en passant le chemin du dossier à explorer
