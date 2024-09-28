@@ -4,6 +4,7 @@ from mutagen.id3 import ID3, APIC
 from mutagen.flac import FLAC, Picture
 from PIL import Image
 import io
+import os
 
 """
     Convertit une durée millisecondes en minutes et secondes.
@@ -72,6 +73,9 @@ def extraire_et_afficher_tag(chemin : str) -> None:
     - Aucun (affiche directement la couverture via une fenêtre d'image).
 """
 def extraire_et_afficher_cover(chemin : str) -> None:
+    # Pour récupérer uniquement le nom du fichier à partir du chemin donné
+    nom_fichier = os.path.basename(chemin)
+    
     audio = None
     if chemin.endswith('.mp3'):
         audio = MP3(chemin, ID3=ID3)
@@ -83,7 +87,7 @@ def extraire_et_afficher_cover(chemin : str) -> None:
         for tag in audio.tags.values():
             if isinstance(tag, APIC):
                 # Si une image est trouvée, récupère les données de l'image
-                print(f">> Cover art trouvée MP3!")
+                print(f">> Cover art trouvée pour {nom_fichier}!")
                 cover_data = tag.data
                 
                 # Utilise PIL pour ouvrir et afficher l'image
@@ -92,13 +96,14 @@ def extraire_et_afficher_cover(chemin : str) -> None:
 
                 break
         else:
-            print(">> Aucune couverture trouvée MP3.")
+            print(f">> Aucune couverture trouvée pour {nom_fichier}!")
+
     elif isinstance(audio, FLAC):
         # Parcourt les images jointes pour trouver la couverture
         for picture in audio.pictures:
             if isinstance(picture, Picture):
                 # PICTURE = Frame for cover art in FLAC
-                print(f">> Cover art trouvée FLAC!")
+                print(f">> Cover art trouvée pour {nom_fichier}!")
                 cover_data = picture.data
                 
                 # Utilise PIL pour ouvrir et afficher l'image
@@ -107,7 +112,7 @@ def extraire_et_afficher_cover(chemin : str) -> None:
 
                 break
         else:
-            print(">> Aucune couverture trouvée FLAC.")
+            print(f">> Aucune couverture trouvée pour {nom_fichier}!")
 
 
 
