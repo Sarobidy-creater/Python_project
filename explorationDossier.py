@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
+
 import os
 import mimetypes
 
@@ -35,7 +38,7 @@ def explorer_dossier(chemin):
 
 
 # Utiliser la fonction en passant le chemin du dossier à explorer
-chemin_dossier = "c:\\Chemin\\vers\\fichier"  
+chemin_dossier = r"c:\Chemin\vers\fichier"
 
 # Appel de la fonction pour afficher les chemins des fichiers audio (MP3 ou FLAC).
 explorer_dossier(chemin_dossier)

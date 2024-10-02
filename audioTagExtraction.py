@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
+
 from mutagen.easyid3 import EasyID3
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3, APIC
@@ -91,7 +94,7 @@ def extraire_et_afficher_cover(chemin : str) -> None:
                 cover_data = tag.data
                 
                 # Utilise PIL pour ouvrir et afficher l'image
-                image = Image.open(io.BytesIO(cover_data))
+                image = Image.open(cover_data)
                 image.show()  # Affiche l'image
 
                 break
@@ -118,7 +121,7 @@ def extraire_et_afficher_cover(chemin : str) -> None:
 
 
 # Chemin vers le fichier audio à analyser (remplacez-le par le fichier de votre  mp3 ou flac)
-chemin = "c:\\Chemin\\vers\\fichier"
+chemin = r"c:\Chemin\vers\fichier"
 
 print(f"***************************************************************")
 # Appel de la fonction pour extraire et afficher les métadonnées
