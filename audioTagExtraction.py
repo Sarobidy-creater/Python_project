@@ -5,7 +5,7 @@ from mutagen.easyid3 import EasyID3
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3, APIC
 from mutagen.flac import FLAC, Picture
-from PIL import Image
+from PIL import Image #COMPLETER README POUR QU'ON PUISSE TESTER, INCLURE UN DOSSIER AVEC FICHIER TEST
 import io
 import os
 
