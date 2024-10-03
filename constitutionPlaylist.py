@@ -42,8 +42,14 @@ def creerUnFichierxspf():
     Retour :
     - Aucun
 """
-def deleteUnFichierxspf(chemin : str): 
-    os.remove(chemin)
+def deleteUnFichierxspf(chemin: str): 
+    try:
+        os.remove(chemin)
+        print(f"Le fichier '{chemin}' a été supprimé avec succès.")
+    except FileNotFoundError:
+        print(f"Erreur : Le fichier '{chemin}' n'a pas été trouvé.")
+    except Exception as e:
+        print(f"Une erreur est survenue : {e}")
 
 
 """
@@ -113,6 +119,27 @@ def ecritureFichierxspf(cheminFichier: str, cheminAudio: str, titrePlay: str):
         f.write(etree.tostring(tree, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
 
 
+"""
+    Lit le fichier contenant les chemins des fichiers audio et retourne une liste de ces chemins.
+
+    Paramètres :
+    - Aucun
+
+    Retour :
+    - List[str] : Une liste de chemins audio trouvés.
+"""
+def lire_fichier_audio():
+    # Chemin du fichier de sortie
+    fichier_sortie = 'Python_project\\FichierTemp\\TempFile.txt'
+
+    try:
+        with open(fichier_sortie, 'r', encoding='utf-8') as f:
+            for ligne in f:
+                return ligne.strip()
+    except FileNotFoundError:
+        print(f"Erreur : Le fichier '{fichier_sortie}' n'a pas été trouvé.")
+    except Exception as e:
+        print(f"Une erreur est survenue : {e}")
 
 
 """
