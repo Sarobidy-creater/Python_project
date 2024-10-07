@@ -1,168 +1,155 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-from lxml import etree
-import os
-import datetime
-from explorationDossier import Explorer
+# Importation des modules nécessaires
+from lxml import etree  # Pour manipuler les fichiers XML
+import os  # Importe la bibliothèque os pour interagir avec le système de fichiers
+import datetime  # Pour gérer les dates et heures
+from explorationDossier import Explorer  # Importe la classe Explorer du module explorationDossier pour explorer les dossiers
 
+
+"""
+    Une classe qui gère la création et l'écriture de fichiers de playlist au format XSPF.
+"""
 class Playlist():
 
+
     """
-        Crée un fichier XSPF vide dans le dossier spécifié.
+        Fonction qui crée un fichier XSPF par défaut dans le dossier spécifié.
 
         Paramètre :
         - Aucun
 
         Retour :
-        - Le chemin du fichier XSPF créé.
+        - str : Le chemin du fichier XSPF créé, ou None en cas d'erreur.
     """
     def creerUnFichierxspf(self):  
-        dossier = 'Python_project\\Playlist'
+        dossier = 'Python_project/Playlist'  # Définition du chemin du dossier où le fichier sera créé
         try:
             # Vérifier si le dossier existe, sinon le créer
             os.makedirs(dossier, exist_ok=True)
 
-            # Spécifier le chemin complet
+            # Spécifier le chemin complet du fichier XSPF
             nom = os.path.join(dossier, 'fichierPlaylist.xspf')
 
             # Écrire le contenu initial du fichier
             with open(nom, 'w', encoding='utf-8') as fichier:
+                # Écriture de la déclaration XML et de la balise <playlist> dans le fichier
                 fichier.write("<?xml version='1.0' encoding='UTF-8'?>\n")
                 fichier.write("<playlist version=\"1\" xmlns=\"http://xspf.org/ns/0/\"></playlist>\n")
 
+            # Retourner le chemin du fichier créé avec les barres obliques correctes
             return nom.replace("\\", "/")
         
         except OSError as e:
+            # Gestion des erreurs lors de la création du dossier ou du fichier
             print(f"Erreur lors de la création du fichier : {e}")
             return None
 
-    
+
     """
-        Crée un fichier XSPF vide dans le dossier spécifié.
+        Fonction qui crée un fichier XSPF avec un nom spécifié dans le dossier de playlists.
 
         Paramètre :
-        - Aucun
+        - fichier_name : str : Le nom du fichier XSPF à créer.
 
         Retour :
-        - Le chemin du fichier XSPF créé.
+        - str : Le chemin du fichier XSPF créé, ou None en cas d'erreur.
     """
     def creation_specifique_fichier_xspf(self, fichier_name: str):  
-        # Utilisation de 'os.path.join' pour construire le chemin
-        dossier = os.path.abspath('Playlist')  # Utilisation de '/' au lieu de '\\'
+        # Utilisation du chemin absolu pour le dossier
+        dossier = os.path.abspath('Playlist')  
         
-        # Vérifier si le dossier existe et le créer s'il n'existe pas
-        if not os.path.exists(dossier):
-            os.makedirs(dossier)
-        # print(f"Analyse du dossier : {dossier}")
-        # print(f"Analyse du fichier_name : {fichier_name}")
+        try:
+            # Vérifier si le dossier existe et le créer s'il n'existe pas
+            if not os.path.exists(dossier):
+                os.makedirs(dossier)
 
-        chem = os.path.join(dossier, fichier_name)  # Spécifier le chemin complet
-        # print(f"Analyse du chem : {chem}")
-        nom = os.path.abspath(chem)
-        # print(f"Analyse du nom : {nom}")
-        
-        # Utilisation de 'with' pour gérer le fichier, ce qui assure une bonne fermeture
-        with open(nom, 'w', encoding='utf-8') as fichier:  # Ouverture du fichier en écriture
-            # Écriture de plusieurs lignes dans le fichier
-            fichier.write("<?xml version='1.0' encoding='UTF-8'?>\n")
-            fichier.write("<playlist version=\"1\" xmlns=\"http://xspf.org/ns/0/\"></playlist>\n")
-
-        varfic = nom.replace("\\", "/")
-        return varfic
-
-
-    def ecritureFichierxspf(self,dossier_muxic: str,out_Fichier_nom: str):
-        chemin_file = None
-        if out_Fichier_nom == None: 
-            chemin_file = self.creerUnFichierxspf()
-        else:
-            chemin_file = self.creation_specifique_fichier_xspf(out_Fichier_nom)
-        
-        # print(f"Analyse du chemin_file : {chemin_file}")
-        
+            # Spécifier le chemin complet du fichier
+            chem = os.path.join(dossier, fichier_name)  
+            nom = os.path.abspath(chem)  # Obtenir le chemin absolu
             
-        """
-        Parse le fichier .xspf existant
-        """
-        # Charge et analyse le fichier XML à partir du chemin donné
-        tree = etree.parse(chemin_file) 
-        # Récupère l'élément racine du document XML (la balise <playlist>) 
-        root = tree.getroot() 
-        # Crée un élément <title> pour indiquer le titre de la chanson
-        date = etree.Element("date") 
-        # Définit le titre de la chanson 
-        date.text = datetime.datetime.today().strftime('%d-%m-%y %H:%M:%S')  
-        # Ajoute l'élément <title> comme enfant de <track>
-        root.append(date) 
+            # Utilisation de 'with' pour gérer le fichier, ce qui assure une bonne fermeture
+            with open(nom, 'w', encoding='utf-8') as fichier:
+                # Écriture de la déclaration XML et de la balise <playlist>
+                fichier.write("<?xml version='1.0' encoding='UTF-8'?>\n")
+                fichier.write("<playlist version=\"1\" xmlns=\"http://xspf.org/ns/0/\"></playlist>\n")
 
-        """
-        Crée de nouveaux éléments (par exemple, une liste de pistes avec une seule piste)
-        """
-        # Crée un nouvel élément <trackList> qui contiendra les pistes
-        tracklist = etree.Element("trackList") 
-        # 
-        explorer = Explorer()
-        # 
-        d_save = os.path.abspath(f"{dossier_muxic}") 
-        dossier_save = d_save.replace("\\", "/")
-        # print(f"Analyse du dossier_save : {dossier_save}")
-
-        # lire_fiche =explorer.explorer_dossier_interface(dossier_save)
-        # Chemin du fichier  temp
-        fichier_lire_chemin = explorer.explorer_dossier_interface(dossier_save)
-        # print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-        # print(f"Analyse du fichier_lire_chemin : {fichier_lire_chemin}")
-        # print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-
-        with open(fichier_lire_chemin, 'r', encoding='utf-8') as f:
-            for ligne in f:
-                chemin_Audi = ligne.strip()
-                # Crée un nouvel élément <track> pour une piste spécifique 
-                track = etree.Element("track")  
-                """
-                Définit les détails de la piste
-                """
-                # Crée un élément <location> pour spécifier l'emplacement du fichier audio
-                location = etree.Element("location")  
-                # Obtenir le chemin absolu du fichier
-                cheminAudio = os.path.abspath(chemin_Audi)
-                # Remplace les antislashs par des barres obliques pour le chemin audio
-                cheminVar = cheminAudio.replace("\\", "/")
-                # Définit l'URL ou le chemin du fichier audio pour cette piste
-                location.text = f"file:///{cheminVar}" 
-                # Ajoute l'élément <location> comme enfant de <track>
-                track.append(location)  
-                # Ajoute l'élément <title> comme enfant de <track>
-                #track.append(title)  
-                # Ajoute l'élément <track> à l'élément <trackList>
-                tracklist.append(track)   
+            # Retourner le chemin du fichier créé avec les barres obliques correctes
+            return nom.replace("\\", "/")
+        
+        except OSError as e:
+            # Gestion des erreurs lors de la création du fichier spécifique
+            print(f"Erreur lors de la création du fichier spécifique : {e}")
+            return None
 
 
-        """
-        Ajoute la liste de pistes à la racine du document XML
-        """
-        # Ajoute l'élément <trackList> à l'élément racine <playlist>
-        root.append(tracklist)  
+    """
+        Fonction qui écrit les informations d'une playlist dans un fichier XSPF.
 
-        """
-        Écrit le fichier XML mis à jour
-        """
-        # Ouvre le fichier en mode binaire (écriture)
-        with open(chemin_file, 'wb') as f:  
-            # Écrit le contenu XML dans le fichier avec un formatage lisible, la déclaration XML et un encodage UTF-8
-            f.write(etree.tostring(tree, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
+        Paramètre :
+        - dossier_music : str : Le chemin du dossier contenant les fichiers musicaux.
+        - out_Fichier_nom : str : Le nom du fichier de sortie XSPF (peut être None pour un fichier par défaut).
 
+        Retour :
+        - None : Cette méthode n'a pas de retour, elle effectue des opérations d'écriture dans un fichier.
+    """
+    def ecritureFichierxspf(self, dossier_music: str, out_Fichier_nom: str):
+        chemin_file = None  # Initialisation de la variable pour le chemin du fichier
+        try:
+            # Si aucun nom de fichier de sortie n'est donné, créer un fichier par défaut
+            if out_Fichier_nom is None: 
+                chemin_file = self.creerUnFichierxspf()
+            else:
+                chemin_file = self.creation_specifique_fichier_xspf(out_Fichier_nom)
 
+            # Charger et analyser le fichier XML à partir du chemin donné
+            tree = etree.parse(chemin_file)  # Parser le fichier XML
+            root = tree.getroot()  # Récupérer l'élément racine du document XML (la balise <playlist>)
+            
+            # Créer un élément <date> pour indiquer la date actuelle
+            date = etree.Element("date") 
+            date.text = datetime.datetime.today().strftime('%d-%m-%y %H:%M:%S')  # Définir le texte de la date
+            root.append(date)  # Ajouter l'élément <date> à l'élément racine
 
-# out_cheminFichier = "muxic"
-# in_cheminFichier = "MyoooooPlaylist.xspf"
+            # Créer un nouvel élément <trackList> pour contenir les pistes
+            tracklist = etree.Element("trackList") 
+            explorer = Explorer()  # Créer une instance de la classe Explorer
+            d_save = os.path.abspath(dossier_music)  # Obtenir le chemin absolu du dossier de musique
+            dossier_save = d_save.replace("\\", "/")  # Remplacer les antislashs par des barres obliques
 
-# playlist = Playlist()
+            # Obtenir le chemin du fichier à lire à partir de l'exploration du dossier
+            fichier_lire_chemin = explorer.explorer_dossier_interface(dossier_save)
 
-# playlist.ecritureFichierxspf(out_cheminFichier,in_cheminFichier)
+            # Ouvrir le fichier pour lire les chemins des fichiers audio
+            with open(fichier_lire_chemin, 'r', encoding='utf-8') as f:
+                for ligne in f:
+                    chemin_Audi = ligne.strip()  # Supprimer les espaces autour du chemin
+                    track = etree.Element("track")  # Créer un nouvel élément <track> pour chaque piste
+                    location = etree.Element("location")  # Créer un élément <location> pour spécifier l'emplacement
+                    cheminAudio = os.path.abspath(chemin_Audi)  # Obtenir le chemin absolu du fichier audio
+                    cheminVar = cheminAudio.replace("\\", "/")  # Remplacer les antislashs par des barres obliques
+                    location.text = f"file:///{cheminVar}"  # Définir l'URL ou le chemin du fichier audio
+                    track.append(location)  # Ajouter l'élément <location> à <track>
+                    tracklist.append(track)  # Ajouter l'élément <track> à <trackList> 
 
+            # Ajouter la liste de pistes à l'élément racine <playlist>
+            root.append(tracklist)  
 
-
-
-
+            # Ouvrir le fichier en mode binaire pour l'écriture
+            with open(chemin_file, 'wb') as f:  
+                # Écrire le contenu XML dans le fichier avec un formatage lisible, la déclaration XML et un encodage UTF-8
+                f.write(etree.tostring(tree, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
+        
+        except etree.XMLSyntaxError as e:
+            # Gestion des erreurs de parsing XML
+            print(f"Erreur de parsing XML : {e}")
+        except FileNotFoundError as e:
+            # Gestion des erreurs d'ouverture de fichier non trouvé
+            print(f"Erreur lors de l'ouverture du fichier : {e}")
+        except OSError as e:
+            # Gestion des erreurs lors de l'écriture dans le fichier
+            print(f"Erreur lors de l'écriture dans le fichier : {e}")
+        except Exception as e:
+            # Gestion de toutes les autres erreurs inattendues
+            print(f"Une erreur inattendue s'est produite : {e}")
