@@ -191,9 +191,13 @@ class Extraction():
 
         # Initialisation de la variable fichier_audio à None
         fichier_audio = None
-
+    
         # Création du chemin temporaire
-        temp_chem = fr"Python_project\{file_aud}"
+        # Création du chemin temporaire
+        # temp_chem = os.path.abspath(fr"Python_project\\muxic\\{file_aud}")
+        temp_chem = os.path.abspath(fr"muxic\\{file_aud}")
+        print(f"chemin pour le fichier : {temp_chem}")
+        print("\n**********************************************\n")
 
         # Vérification de l'existence du chemin temporaire
         if os.path.isfile(temp_chem):
@@ -257,38 +261,10 @@ class Extraction():
 
 
 
+# ad = Extraction()
 
+# chemin = "RERD.mp3"
 
-
-
-# Chemin vers le fichier audio à analyser.
-# chemin = r"c:\Users\nelly\Documents\L3-info\S5-2024-2025\S5\PYTHON\Symphony No.6 (1st movement).flac"
-
-# print(f"***************************************************************")
-# Affiche une ligne de séparation dans la console.
-
-# Appel de la fonction pour extraire et afficher les métadonnées.
-# Extraction().extraire_et_afficher_tag(chemin)
-
-# Appel de la fonction pour extraire et afficher la couverture.
-# Extraction().extraire_et_afficher_cover(chemin)
-
-# print(f"***************************************************************")
-# Affiche une autre ligne de séparation dans la console.
-
-chemin = r"c:\Users\nelly\Documents\L3-info\S5-2024-2025\S5\PYTHON\sample4.flac"
-# Appel de la fonction pour extraire et afficher les métadonnées.
-Extraction().audio_extraire_et_afficher_tag(chemin)
-
-
-
-
-
-
-
-
-
-
-
+# ad.audio_extraire_et_afficher_tag(chemin)
 
 

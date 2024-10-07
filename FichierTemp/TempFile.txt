@@ -1,3 +1,16 @@
-C:\Users\nelly\Documents\L3-info\S5-2024-2025\S5\PYTHON\09 - RER D - Copie.mp3
-C:\Users\nelly\Documents\L3-info\S5-2024-2025\S5\PYTHON\09 - RER D.mp3
-C:\Users\nelly\Documents\L3-info\S5-2024-2025\S5\PYTHON\Imagine Dragons  Bad Liar.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - 929.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - Alanis' Interlude.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - Ashley.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - clementine.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - Dominic's Interlude.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - Finally __ beautiful stranger.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - Forever ... (is a long time).mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - Graveyard.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - I HATE EVERYBODY.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - killing boys.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - More.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - Still Learning.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - SUGA's Interlude.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - Without Me.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\Halsey - You should be sad.mp3
+C:/Users/nelly/Desktop/projet python/python_project/muxic\RERD.mp3
