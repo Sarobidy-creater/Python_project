@@ -7,6 +7,7 @@ import os  # Importe la bibliothèque os pour interagir avec le système de fich
 from audioTagExtraction import Extraction  # Importe la classe Extraction du module audioTagExtraction pour extraire les métadonnées audio
 from constitutionPlaylist import Playlist  # Importe la classe Playlist du module constitutionPlaylist pour générer des playlists
 from explorationDossier import Explorer  # Importe la classe Explorer du module explorationDossier pour explorer les dossiers
+from ecouterAudio import Ecouter # Importe la classe Ecouter du module ecouterAudio pour lire un fichier audio mp3 ou flac dans la console
 
 
 """
@@ -32,6 +33,7 @@ class Console:
             -f, --file FILE     Spécifier un fichier MP3 ou FLAC pour extraire les métadonnées
             -d, --directory DIR Spécifier un dossier pour analyser et générer une playlist
             -o, --output FILE   Spécifier un fichier de sortie XSPF pour la playlist générée
+            -l, --listen FILE   Spécifier un fichier audio pour lire dans la console
         """
         print(aide)  # Affiche le texte d'aide défini ci-dessus
 
@@ -54,6 +56,8 @@ class Console:
         parser.add_argument('-d', '--directory', type=str, help='Dossier à analyser pour les fichiers audio')
         # Ajout de l'argument pour spécifier un fichier de sortie pour la playlist générée
         parser.add_argument('-o', '--output', type=str, help='Fichier de sortie pour la playlist')
+        # Ajout de l'argument pour spécifier un fichier audio à lire dans la console
+        parser.add_argument('-l', '--listen', type=str, help='Fichier audio à lire')
 
         # Analyse les arguments fournis par l'utilisateur
         args = parser.parse_args()
@@ -62,6 +66,7 @@ class Console:
         extraction = Extraction()  # Instance pour l'extraction des métadonnées audio
         explorer = Explorer()  # Instance pour explorer les dossiers
         playlist = Playlist()  # Instance pour générer une playlist
+        ecouter = Ecouter() # Instance pour ecouter les audios mp3 et flac
 
         # Vérification si aucun argument n'a été fourni (valeurs None ou vides)
         if not any(vars(args).values()):
