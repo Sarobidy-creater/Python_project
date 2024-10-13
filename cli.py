@@ -4,6 +4,7 @@
 # Importation des modules nécessaires
 import argparse  # Importe la bibliothèque argparse pour gérer les arguments en ligne de commande
 import os  # Importe la bibliothèque os pour interagir avec le système de fichiers
+
 from audioTagExtraction import Extraction  # Importe la classe Extraction du module audioTagExtraction pour extraire les métadonnées audio
 from constitutionPlaylist import Playlist  # Importe la classe Playlist du module constitutionPlaylist pour générer des playlists
 from explorationDossier import Explorer  # Importe la classe Explorer du module explorationDossier pour explorer les dossiers
@@ -57,7 +58,7 @@ class Console:
         # Ajout de l'argument pour spécifier un fichier de sortie pour la playlist générée
         parser.add_argument('-o', '--output', type=str, help='Fichier de sortie pour la playlist')
         # Ajout de l'argument pour spécifier un fichier audio à lire dans la console
-        parser.add_argument('-l', '--listen', type=str, help='Fichier audio à lire')
+        parser.add_argument('-l', '--listen', action='store_true', help='Fichier audio à lire')
 
         # Analyse les arguments fournis par l'utilisateur
         args = parser.parse_args()
@@ -90,12 +91,17 @@ class Console:
 
             # Si un fichier est fourni, extraire et afficher ses métadonnées
             if args.file:
-                # Vérifier si le fichier existe
-                if not os.path.isfile(args.file):
-                    # Si le fichier n'existe pas, lever une exception
+                chemin_fichier = os.path.abspath(fr"music\\{args.file}")  # Chemin absolu du fichier
+                if not os.path.isfile(chemin_fichier):
                     raise FileNotFoundError(f"Le fichier '{args.file}' n'existe pas ou n'est pas accessible.")
-                print(f"Affichage des métadonnées pour le fichier : {args.file}")  # Message indiquant le fichier analysé
-                extraction.audio_extraire_et_afficher_tag(args.file)  # Extraire et afficher les métadonnées du fichier
+                print(f"Affichage des métadonnées pour le fichier : {args.file}")
+                extraction.audio_extraire_et_afficher_tag(args.file)  # Extraire et afficher les métadonnées
+
+                # Si l'option de lecture est spécifiée
+                if args.listen:
+                    print(f"Lecture du fichier : {args.file}")  # Message indiquant le fichier à lire
+                    ecouter.lecture_music(chemin_fichier)  # Lire le fichier audio
+            
 
             # Si un dossier et un fichier de sortie sont fournis, générer une playlist
             if args.directory and args.output:
@@ -113,6 +119,7 @@ class Console:
         # Gestion d'autres erreurs imprévues
         except Exception as e:
             print(f"Une erreur inattendue s'est produite : {e}")  # Affiche un message pour toute autre erreur inattendue
+
 
 
 # Vérifie si le fichier est exécuté en tant que script principal
