@@ -77,12 +77,29 @@ class Ecouter:  # Déclaration de la classe 'Ecouter', qui contient des méthode
         while pygame.mixer.music.get_busy():  # Tant que la musique est en cours de lecture...
             time.sleep(1)  # Pause d'une seconde pour éviter une boucle continue et permettre une lecture fluide.
 
+    def lire_fichier_audio(self, chemin):
+        """
+        Charge et lit un fichier audio.
+        :param chemin: Chemin du fichier audio.
+        """
+        # Initialiser le mixer de pygame
+        pygame.mixer.init()  # Initialise le module mixer de Pygame pour la lecture audio.
+        pygame.mixer.music.load(chemin)
+        pygame.mixer.music.play()
+    
+    def pause(self):
+        """Met en pause la lecture audio."""
+        pygame.mixer.music.pause()
+
+    def reprendre(self):
+        """Reprend la lecture audio en pause."""
+        pygame.mixer.music.unpause()
 
 # Exemple d'utilisation :
-ecoute = Ecouter()  # Crée une instance de la classe Ecouter.
+# ecoute = Ecouter()  # Crée une instance de la classe Ecouter.
 
 # Lire un fichier FLAC (exemple désactivé)
 # ecoute.lire_fichier_flac('chemin_du_fichier.flac')  # Lancer la lecture d'un fichier FLAC (cette ligne est actuellement commentée).
 
 # Lire un fichier MP3
-ecoute.lire_fichier_mp3(r'C:\Users\nelly\Desktop\projet python\Python_project\music\Halsey - 929.mp3')  # Lancer la lecture d'un fichier MP3.
+# ecoute.lire_fichier_mp3(r'C:\Users\nelly\Desktop\projet python\Python_project\music\Halsey - 929.mp3')  # Lancer la lecture d'un fichier MP3.

@@ -139,7 +139,7 @@ class InterfaceMusicale:
         self.liste_fichiers.grid(row=1, column=2, sticky="nsew", padx=5, pady=5)
         self.liste_fichiers.bind("<<ListboxSelect>>", self.afficher_details_audio)
 
-        # Affichage de la couverture d’album
+        # Affichage de la couverture d’album**************************************************
         self.photo_album = ttk.Label(self.root, text="Pas de couverture", anchor="center")
         self.photo_album.grid(row=1, column=0, sticky="nsew", padx=5, pady=5)
 
@@ -205,7 +205,7 @@ class InterfaceMusicale:
             self.metadonnees.config(text=f"Erreur: {e}")
 
     def extraire_et_afficher_cover(self, chemin):
-        """Affiche la couverture d'album du fichier audio."""
+        """Affiche la couverture d'album du fichier audio.**************************************************"""
         try:
             audio = MP3(chemin) if chemin.endswith('.mp3') else FLAC(chemin)
             image = next((Image.open(io.BytesIO(tag.data)) for tag in audio.tags.values() if isinstance(tag, APIC)), None)

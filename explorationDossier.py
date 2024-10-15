@@ -57,11 +57,12 @@ class Explorer():
         - str : Le chemin du fichier temporaire contenant les chemins des fichiers audio, ou None en cas d'erreur.
     """
     def explorer_dossier_interface(self, chemin) -> str:
-        fichier_sortie = os.path.abspath(r'FichierTemp\TempFile.txt')
-
+        fichier_sortie = os.path.abspath(r'Python_project\FichierTemp\TempFile.txt')  
+            
+        out_dir = fichier_sortie.replace("\\", "/") 
         try:
             # Ouvre le fichier de sortie en mode écriture
-            with open(fichier_sortie, 'w', encoding='utf-8') as f:
+            with open(out_dir, 'w', encoding='utf-8') as f:
                 # Boucle à travers les dossiers, sous-dossiers et fichiers à partir du chemin donné
                 for racine, sous_dossiers, fichiers in os.walk(chemin):
                     # Boucle à travers chaque fichier dans la liste des fichiers du dossier courant
@@ -79,6 +80,7 @@ class Explorer():
                             if type_mime in ['audio/mpeg', 'audio/flac']:
                                 # Écrit le chemin complet dans le fichier
                                 f.write(f"{chemin_complet}\n")
+             
             return fichier_sortie
         except Exception as e:
             print(f"Une erreur est survenue lors de l'écriture dans le fichier : {e}")

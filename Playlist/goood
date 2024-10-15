@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<playlist xmlns="http://xspf.org/ns/0/" version="1">
+  <date>15-10-24 22:48:15</date>
+  <trackList>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - 929.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - Alanis' Interlude.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - Ashley.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - clementine.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - Dominic's Interlude.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - Finally __ beautiful stranger.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - Forever ... (is a long time).mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - Graveyard.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - I HATE EVERYBODY.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - killing boys.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - More.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - Still Learning.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - SUGA's Interlude.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - Without Me.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/Halsey - You should be sad.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/projet python/Python_project/music/RERD.mp3</location>
+    </track>
+  </trackList>
+</playlist>

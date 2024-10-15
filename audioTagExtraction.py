@@ -144,6 +144,49 @@ class Extraction():
 
         except Exception as e:  # Capture toute exception pouvant survenir dans le bloc try.
             print(f"Une erreur s'est produite lors de l'extraction de la couverture : {e}")  # Affiche un message d'erreur.
+    
+    
+    def extraire_et_afficher_gui(self, chemin: str) -> Image.Image:
+        """Méthode qui extrait la couverture d'un fichier audio donné et la renvoie sous forme d'objet PIL."""
+        
+        nom_fichier = os.path.basename(chemin)  # Récupère le nom du fichier à partir du chemin donné.
+        audio = None  # Initialise une variable audio à None.
+        cover_image = None  # Initialise une variable pour l'image de couverture.
+
+        try:
+            if chemin.endswith('.mp3'):
+                audio = MP3(chemin, ID3=ID3)  # Crée un objet MP3 si c'est un fichier MP3.
+            elif chemin.endswith('.flac'):
+                audio = FLAC(chemin)  # Crée un objet FLAC si c'est un fichier FLAC.
+
+            if isinstance(audio, MP3):
+                # Vérifie si l'objet audio est une instance de MP3.
+                for tag in audio.tags.values():  # Parcourt tous les tags de l'audio.
+                    if isinstance(tag, APIC):  # Vérifie si le tag est de type APIC (Attached Picture).
+                        print(f">> Cover art trouvée pour {nom_fichier}!")  # Indique que la couverture a été trouvée pour le fichier.
+
+                        cover_data = tag.data  # Récupère les données de l'image de couverture.
+                        cover_image = Image.open(io.BytesIO(cover_data))  # Ouvre l'image à partir des données en mémoire.
+                        break  # Sort de la boucle après avoir trouvé l'image.
+                else:
+                    print(f">> Aucune couverture trouvée pour {nom_fichier}!")  # Indique qu'il n'y a pas de couverture pour le fichier.
+
+            elif isinstance(audio, FLAC):
+                # Vérifie si l'objet audio est une instance de FLAC.
+                for picture in audio.pictures:  # Parcourt toutes les images jointes dans le fichier FLAC.
+                    if isinstance(picture, Picture):  # Vérifie si l'image est de type Picture.
+                        print(f">> Cover art trouvée pour {nom_fichier}!")  # Indique que la couverture a été trouvée pour le fichier.
+
+                        cover_data = picture.data  # Récupère les données de l'image de couverture.
+                        cover_image = Image.open(io.BytesIO(cover_data))  # Ouvre l'image à partir des données en mémoire.
+                        break  # Sort de la boucle après avoir trouvé l'image.
+                else:
+                    print(f">> Aucune couverture trouvée pour {nom_fichier}!")  # Indique qu'il n'y a pas de couverture pour le fichier.
+
+        except Exception as e:  # Capture toute exception pouvant survenir dans le bloc try.
+            print(f"Une erreur s'est produite lors de l'extraction de la couverture : {e}")  # Affiche un message d'erreur.
+
+        return cover_image  # Renvoie l'image de couverture (ou None si aucune image n'a été trouvée).
 
 
     """
@@ -208,3 +251,51 @@ class Extraction():
 
         except Exception as e:  # Capture toute exception pouvant survenir dans le bloc try.
             print(f"Une erreur s'est produite lors de l'extraction des tags : {e}")  # Affiche un message d'erreur.
+
+
+    def extraction_et_afficher_tag(self, file_aud: str) -> str:
+        """Extrait et retourne les métadonnées d'un fichier audio sous forme de chaîne."""
+        
+        # Chemin temporaire du fichier audio
+        temp_chem = os.path.abspath(os.path.join("music", file_aud))
+        print(f"Chemin pour le fichier : {temp_chem}")
+        print("\n**********************************************\n")
+
+        # Vérification de l'existence du fichier audio
+        if not os.path.isfile(temp_chem):
+            return f"Le fichier {file_aud} n'existe pas dans le répertoire 'music'."
+
+        fichier_audio = temp_chem
+        audio = None
+
+        try:
+            if fichier_audio.endswith('.mp3'):
+                audio = MP3(fichier_audio, ID3=EasyID3)
+            elif fichier_audio.endswith('.flac'):
+                audio = FLAC(fichier_audio)
+
+            if audio is None:
+                return "Le fichier n'est ni au format MP3 ni FLAC."
+
+            # Récupération des métadonnées
+            metadata = {
+                'Titre': audio.get('title', ['Titre inconnu'])[0],
+                '\n\nArtiste': audio.get('artist', ['Artiste inconnu'])[0],
+                '\n\nAlbum': audio.get('album', ['Album inconnu'])[0],
+                '\n\nGenre': audio.get('genre', ['Genre inconnu'])[0],
+                '\n\nDate': audio.get('date', ['Date inconnu'])[0],
+                '\n\nOrganisation': audio.get('organization', ['Organisation inconnue'])[0],
+            }
+
+            # Création de la chaîne pour afficher les métadonnées
+            metadata_str = "\n".join(f"{key} : {value}" for key, value in metadata.items())
+
+            # Récupération de la durée de l'audio
+            duree = audio.info.length
+            minutes, secondes = self.convertir_ms_en_minutes_secondes(duree)
+            metadata_str += f"\n\n\nDurée : {minutes}:{int(secondes):02d}"
+
+            return metadata_str  # Retourne la chaîne contenant les métadonnées
+
+        except Exception as e:
+            return f"Une erreur s'est produite lors de l'extraction des tags : {e}"

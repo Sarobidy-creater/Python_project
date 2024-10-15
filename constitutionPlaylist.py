@@ -30,7 +30,7 @@ class Playlist():
             os.makedirs(dossier, exist_ok=True)
 
             # Spécifier le chemin complet du fichier XSPF
-            nom = os.path.join(dossier, 'fichierPlaylist.xspf')
+            nom = os.path.join(dossier, 'maPlaylist.xspf')
 
             # Écrire le contenu initial du fichier
             with open(nom, 'w', encoding='utf-8') as fichier:
@@ -58,7 +58,7 @@ class Playlist():
     """
     def creation_specifique_fichier_xspf(self, fichier_name: str):  
         # Utilisation du chemin absolu pour le dossier
-        dossier = os.path.abspath('Playlist')  
+        dossier = os.path.abspath('Python_project/Playlist')  
         
         try:
             # Vérifier si le dossier existe et le créer s'il n'existe pas
@@ -66,7 +66,7 @@ class Playlist():
                 os.makedirs(dossier)
 
             # Spécifier le chemin complet du fichier
-            chem = os.path.join(dossier, fichier_name)  
+            chem = os.path.join(dossier, fichier_name) 
             nom = os.path.abspath(chem)  # Obtenir le chemin absolu
             
             # Utilisation de 'with' pour gérer le fichier, ce qui assure une bonne fermeture
