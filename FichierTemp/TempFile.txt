@@ -1,4 +1,3 @@
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - 929.mp3
 C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Alanis' Interlude.mp3
 C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Ashley.mp3
 C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - clementine.mp3
@@ -14,3 +13,6 @@ C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - SUGA's Interl
 C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Without Me.mp3
 C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - You should be sad.mp3
 C:/Users/nelly/Desktop/projet python/Python_project/music\RERD.mp3
+C:/Users/nelly/Desktop/projet python/Python_project/music\sample2.flac
+C:/Users/nelly/Desktop/projet python/Python_project/music\sample4.flac
+C:/Users/nelly/Desktop/projet python/Python_project/music\Symphony No.6 (1st movement).flac

@@ -9,7 +9,7 @@ from .audioTagExtraction import Extraction  # Importation de la classe Extractio
 from .constitutionPlaylist import Playlist  # Importation de la classe Playlist pour générer des playlists.
 from .explorationDossier import Explorer  # Importation de la classe Explorer pour explorer les dossiers de fichiers audio.
 from .ecouterAudio import Ecouter # Importation de la classe Ecouter pour ecouter les dossiers de fichiers audio.
-from .fenetre import AudioPlayerApp # Importation de la
+from .gui import Interface # Importation de la
 from .cli import Console
 # from .apiRequest import AudioPlayerApp # Importation de la
 

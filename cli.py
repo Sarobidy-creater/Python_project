@@ -57,7 +57,7 @@ class Console:
         # Ajout de l'argument pour spécifier un fichier de sortie pour la playlist générée
         parser.add_argument('-o', '--output', type=str, help='Fichier de sortie pour la playlist')
         # Ajout de l'argument pour spécifier un fichier audio à lire dans la console
-        parser.add_argument('-l', '--listen', type=str, help='Fichier audio à lire')
+        parser.add_argument('-l', '--listen', action='store_true', help='Fichier audio à lire')
 
         # Analyse les arguments fournis par l'utilisateur
         args = parser.parse_args()
@@ -90,12 +90,13 @@ class Console:
 
             # Si un fichier est fourni, extraire et afficher ses métadonnées
             if args.file:
-                # Vérifier si le fichier existe
-                if not os.path.isfile(args.file):
-                    # Si le fichier n'existe pas, lever une exception
-                    raise FileNotFoundError(f"Le fichier '{args.file}' n'existe pas ou n'est pas accessible.")
                 print(f"Affichage des métadonnées pour le fichier : {args.file}")  # Message indiquant le fichier analysé
                 extraction.audio_extraire_et_afficher_tag(args.file)  # Extraire et afficher les métadonnées du fichier
+            
+            # Lire le fichier MP3 si l'argument -l est présent
+            if args.file and args.listen:
+                print(f"Lire le fichier : {args.file}")  # Message indiquant le fichier analysé
+                ecouter.lire_fichier_mp3(args.file)
 
             # Si un dossier et un fichier de sortie sont fournis, générer une playlist
             if args.directory and args.output:

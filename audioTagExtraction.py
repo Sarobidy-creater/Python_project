@@ -203,7 +203,7 @@ class Extraction():
 
         fichier_audio = None  # Initialisation de la variable fichier_audio à None
 
-        temp_chem = os.path.abspath(fr"music\\{file_aud}")  # Création du chemin temporaire à partir du nom du fichier audio.
+        temp_chem = os.path.abspath(fr"music\{file_aud}")  # Création du chemin temporaire à partir du nom du fichier audio.
         print(f"chemin pour le fichier : {temp_chem}")  # Affiche le chemin pour le fichier audio temporaire.
         print("\n**********************************************\n")  # Affiche un séparateur visuel.
 
@@ -254,12 +254,11 @@ class Extraction():
 
 
     def extraction_et_afficher_tag(self, file_aud: str) -> str:
+
         """Extrait et retourne les métadonnées d'un fichier audio sous forme de chaîne."""
         
         # Chemin temporaire du fichier audio
         temp_chem = os.path.abspath(os.path.join("music", file_aud))
-        print(f"Chemin pour le fichier : {temp_chem}")
-        print("\n**********************************************\n")
 
         # Vérification de l'existence du fichier audio
         if not os.path.isfile(temp_chem):
@@ -299,3 +298,4 @@ class Extraction():
 
         except Exception as e:
             return f"Une erreur s'est produite lors de l'extraction des tags : {e}"
+        
