@@ -44,8 +44,22 @@ class Ecouter:  # Déclaration de la classe 'Ecouter', qui contient des méthode
     - Aucun.
     """
     def lire_fichier_flac(self, chemin_fichier):  
+        fichier_audio = None  # Initialisation de la variable fichier_audio à None
+
+        temp_chem = os.path.abspath(fr"music\{chemin_fichier}")  # Création du chemin temporaire à partir du nom du fichier audio.
+        print(f"lire_fichier_flac : {temp_chem}")  # Affiche le chemin pour le fichier audio temporaire.
+        print("\n**********************************************\n")  # Affiche un séparateur visuel.
+
+        # Vérification de l'existence du chemin temporaire
+        if os.path.isfile(temp_chem):
+            # Si le chemin temporaire existe, on l'assigne à fichier_audio
+            fichier_audio = temp_chem
+        else:
+            # Sinon, on utilise le chemin original
+            fichier_audio = chemin_fichier
+
         # Charger un fichier FLAC
-        audio = AudioSegment.from_file(chemin_fichier, format="flac")  # Utilise Pydub pour charger le fichier FLAC.
+        audio = AudioSegment.from_file(fichier_audio, format="flac")  # Utilise Pydub pour charger le fichier FLAC.
 
         # Exporter temporairement le fichier FLAC au format WAV pour le jouer avec pygame
         fichier_temp = "temp_audio.wav"  # Nom du fichier temporaire qui va contenir l'audio converti en WAV.
@@ -67,10 +81,24 @@ class Ecouter:  # Déclaration de la classe 'Ecouter', qui contient des méthode
     Retour :
     - Aucun.
     """
-    def lire_fichier_mp3(self, chemin_fichier):  # Définit une méthode pour lire un fichier audio au format MP3.
+    def lire_fichier_mp3(self, chemin_fichier):  # Définit une méthode pour lire un fichier audio au format MP3. 
+        fichier_audio = None  # Initialisation de la variable fichier_audio à None
+
+        temp_chem = os.path.abspath(fr"music\{chemin_fichier}")  # Création du chemin temporaire à partir du nom du fichier audio.
+        print(f"lire_fichier_flac : {temp_chem}")  # Affiche le chemin pour le fichier audio temporaire.
+        print("\n**********************************************\n")  # Affiche un séparateur visuel.
+
+        # Vérification de l'existence du chemin temporaire
+        if os.path.isfile(temp_chem):
+            # Si le chemin temporaire existe, on l'assigne à fichier_audio
+            fichier_audio = temp_chem
+        else:
+            # Sinon, on utilise le chemin original
+            fichier_audio = chemin_fichier
+
         # Initialiser le mixer de pygame
         pygame.mixer.init()  # Initialise le module mixer de Pygame pour la lecture audio.
-        pygame.mixer.music.load(chemin_fichier)  # Charge le fichier MP3 spécifié dans le chemin.
+        pygame.mixer.music.load(fichier_audio)  # Charge le fichier MP3 spécifié dans le chemin.
         pygame.mixer.music.play()  # Joue le fichier audio.
 
         # Attendre que la musique se termine
@@ -94,6 +122,8 @@ class Ecouter:  # Déclaration de la classe 'Ecouter', qui contient des méthode
     def reprendre(self):
         """Reprend la lecture audio en pause."""
         pygame.mixer.music.unpause()
+
+    
 
 # Exemple d'utilisation :
 # ecoute = Ecouter()  # Crée une instance de la classe Ecouter.
