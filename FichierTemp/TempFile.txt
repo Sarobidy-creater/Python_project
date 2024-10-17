@@ -1,8 +1,18 @@
-C:/Users/nelly/Documents/L3-info\S5-2024-2025\S5\PROBA\untitled.mp3
-C:/Users/nelly/Documents/L3-info\S5-2024-2025\S5\PYTHON\09 - RER D - Copie.mp3
-C:/Users/nelly/Documents/L3-info\S5-2024-2025\S5\PYTHON\09 - RER D.flac
-C:/Users/nelly/Documents/L3-info\S5-2024-2025\S5\PYTHON\09 - RER D.mp3
-C:/Users/nelly/Documents/L3-info\S5-2024-2025\S5\PYTHON\Imagine-Dragons-Bad-Liar.flac
-C:/Users/nelly/Documents/L3-info\S5-2024-2025\S5\PYTHON\sample2.flac
-C:/Users/nelly/Documents/L3-info\S5-2024-2025\S5\PYTHON\sample4.flac
-C:/Users/nelly/Documents/L3-info\S5-2024-2025\S5\PYTHON\Symphony No.6 (1st movement).flac
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - Alanis' Interlude.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - Ashley.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - clementine.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - Dominic's Interlude.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - Finally __ beautiful stranger.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - Forever ... (is a long time).mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - Graveyard.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - I HATE EVERYBODY.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - killing boys.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - More.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - Still Learning.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - SUGA's Interlude.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - Without Me.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Halsey - You should be sad.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\RERD.mp3
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\sample2.flac
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\sample4.flac
+C:/Users/nelly/Desktop/projetGitHUB/Python_project/music\Symphony No.6 (1st movement).flac

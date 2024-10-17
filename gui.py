@@ -38,6 +38,8 @@ class Interface:
 
         # Variable pour ecouter premier audio
         self.Varbutt = ""
+        self.buttnext = 0
+        self.tailleListbox = 0
         
 
         # Panel 1 - avec une image, un fond bleu ciel et un bouton
@@ -72,8 +74,12 @@ class Interface:
         # Cadre 1******************************************
         self.entry1 = tk.Entry(self.frame1, width=150)
         self.entry1.pack(side=tk.LEFT, padx=5, pady=5)
+
         self.button2 = tk.Button(self.frame1, text="Check", width=12)
-        self.button2.pack(side=tk.RIGHT, padx=10, pady=10)  # Aligné à droite
+        self.button2.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
+
+        self.butt_modif = tk.Button(self.frame1, text=":::", width=12)
+        self.butt_modif.pack(side=tk.RIGHT, padx=10, pady=10) 
 
         # Cadre 2******************************************
         # Configurer le grid pour 3 colonnes de taille égale
@@ -127,7 +133,6 @@ class Interface:
         self.path_A = Label(self.path_lab2, text="", width=2, height=1, justify="left", bg="lightyellow")
         self.path_A.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
 
-
         # Label pour afficher le chemin complet du fichier sélectionné
         self.path_label3 = Label(self.section3, text="", width=70, height=10, justify="left", bg="lightyellow")
         self.path_label3.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
@@ -140,7 +145,7 @@ class Interface:
 
         self.frame3.grid_rowconfigure(0, weight=1)  # Une seule ligne
 
-        self.sect1 = tk.Frame(self.frame3, bg="lightyellow")
+        self.sect1 = tk.Frame(self.frame3, bg="lightyellow", width=28)
         self.sect1.grid(row=0, column=0, sticky='nsew', padx=2, pady=2)
 
         self.sect2 = tk.Frame(self.frame3, bg='dodgerblue')
@@ -149,26 +154,32 @@ class Interface:
         self.sect3 = tk.Frame(self.frame3, bg='dodgerblue')
         self.sect3.grid(row=0, column=2, sticky='nsew',padx=2, pady=2)
 
-        self.button3 = tk.Button(self.sect1, text="Exploration", command=self.exploration_dossier, width=12)
+        # Chargement et ajout de l'image dans le panel1
+        chem_im = os.path.abspath(r"Python_project/img/nn.webp")
+        self.im = Image.open(chem_im)  # Remplace par le chemin de ton image
+        self.im = self.im.resize((24, 24))  # Redimensionner si nécessaire
+        self.im_tk = ImageTk.PhotoImage(self.im)
+        self.label_im = tk.Label(self.sect3, image=self.im_tk, bg="dodgerblue")
+        self.label_im.pack(side=tk.RIGHT, padx=10, pady=10) 
+
+        self.button3 = tk.Button(self.sect1, text="Exploration", command=self.exploration_dossier, width=13)
         self.button3.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à gauche
 
-        self.button4 = tk.Button(self.sect1, text="Playlist", command=self.open_new_fenetre, width=12)
+        self.button4 = tk.Button(self.sect1, text="Playlist", command=self.open_new_fenetre, width=13)
         self.button4.pack(side=tk.RIGHT, padx=10, pady=10)  # Aligné à droite
-
-        
 
         self.butt_play = tk.Button(self.path_A, text="Lecture", command= self.lire_audio, width=10)
         self.butt_play.pack(side=tk.LEFT, padx=10, pady=10)  
 
         self.butt_pause_reprendre = tk.Button(self.path_A, text=" Pause ", command=self.toggle_pause, width=10)
         self.butt_pause_reprendre.pack(side=tk.LEFT, padx=10, pady=10)
-
-
-        self.butt_reprendre = tk.Button(self.path_A, text="::", width=10)
-        self.butt_reprendre.pack(side=tk.RIGHT, padx=10, pady=10) 
+ 
+        self.butt_next = tk.Button(self.path_A, text="Next", command=self.next_audio, width=12)
+        self.butt_next.pack(side=tk.RIGHT, padx=10, pady=10) 
 
 
     def direct_Goto(self):
+        """Passage au panneau 2 et chargement de la musique par défaut."""
         self.switch_to_panel2()
         chem = os.path.abspath(r"Python_project\music")
         self.AZEexploration_dossier(chem) 
@@ -181,8 +192,9 @@ class Interface:
         self.path_label3.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
         self.cover_image(audio_path)
         self.Varbutt="0"
+        self.buttnext=0
 
-
+    
     def exploration_dossier(self):
         """Ouvre une boîte de dialogue pour sélectionner un dossier contenant des fichiers audio."""
         
@@ -224,6 +236,7 @@ class Interface:
 
                     # Insère le nom du fichier dans la Listbox
                     self.song_listbox.insert(tk.END, nom_fichier)
+                    self.tailleListbox = self.song_listbox.size()
     
 
     def AZEexploration_dossier(self,path):
@@ -267,6 +280,7 @@ class Interface:
                     varchar = str(i)
                     self.mon_dictionnaire[varchar] = f"{cheminVar}"
                     i += 1  # Incrémenter le compteur pour les clés du dictionnaire
+                    self.tailleListbox = self.song_listbox.size()
 
                     # Insère le nom du fichier dans la Listbox
                     self.song_listbox.insert(tk.END, nom_fichier)
@@ -277,11 +291,14 @@ class Interface:
         audio = None
         
         # Récupérer l'index du fichier sélectionné dans la Listbox
-        select_index = self.song_listbox.curselection()        
+        select_index = self.song_listbox.curselection() 
+        self.buttnext = select_index[0] 
+        self.Varbutt == "1"     
         
         if select_index:
             # Obtenir le chemin du fichier audio sélectionné
-            varstr = str(select_index[0])
+            varstr = str(self.buttnext)
+
             audio_path = self.mon_dictionnaire[varstr]
             # Récupère seulement le nom du fichier à partir du chemin
             nom_fichier = os.path.basename(audio_path)
@@ -295,6 +312,7 @@ class Interface:
 
 
     def cover_image(self,audio_path):
+        """Charge et affiche l'image de couverture de l'audio sélectionné."""
         audio = None
         # Charger l'audio en fonction de son format
         try:
@@ -348,19 +366,19 @@ class Interface:
     
     
     def switch_to_panel2(self):
+        """Cache le panneau 1 et affiche le panneau 2."""
         self.panel1.pack_forget()  # Cache le panel1
         self.panel2.pack(fill="both", expand=True)  # Affiche le panel2
 
 
     def lire_audio(self):
         """Lance la lecture du fichier audio sélectionné."""
-
         select_index = self.song_listbox.curselection()  
         varstr = ""  
         if self.Varbutt == "0":
             # Obtenir le chemin du fichier audio sélectionné
-            varstr = self.Varbutt     
-        if select_index:
+            varstr = str(self.buttnext)     
+        elif self.Varbutt == "1":
             # Obtenir le chemin du fichier audio sélectionné
             varstr = str(select_index[0])
             
@@ -375,6 +393,7 @@ class Interface:
 
 
     def toggle_pause(self):
+        """Met en pause ou reprend la lecture de l'audio."""
         if self.is_paused:
             self.ecoute.reprendre()  # Reprend la lecture
             self.butt_pause_reprendre.config(text="Pause")  # Met à jour le texte du bouton
@@ -383,7 +402,6 @@ class Interface:
             self.ecoute.pause()  # Met en pause la lecture
             self.butt_pause_reprendre.config(text="Reprendre")  # Met à jour le texte du bouton
             self.is_paused = True
-
 
     # Fonction à exécuter lorsque le bouton "Annuler" est cliqué
     def annuler(self):
@@ -403,7 +421,7 @@ class Interface:
         self.playlist.gui_ecritureFichierxspf(self.varDirectory,texte_saisi)
         entry.delete(0, tk.END)  # Efface le contenu de l'Entry après avoir spécifié
 
-    # Fonction pour ouvrir une nouvelle fenêtre
+    # Fonction pour ouvrir une nouvelle petite fenêtre
     def open_new_fenetre(self):
         global new_window, label, entry
         new_window = Toplevel(root)
@@ -425,6 +443,24 @@ class Interface:
 
         button_specifier = tk.Button(new_window, text="Spécifier", command=self.specifier)
         button_specifier.pack(side=tk.LEFT, padx=10, pady=10)
+
+
+    def next_audio(self):
+        if self.tailleListbox >= self.buttnext:
+            self.buttnext = self.buttnext + 1
+            varstr = str(self.buttnext)      
+
+            audio_path = self.mon_dictionnaire[varstr]
+            # Récupère seulement le nom du fichier à partir du chemin
+            nom_fichier = os.path.basename(audio_path)
+            self.path_B.config(text=nom_fichier)
+            
+            # Extraire et afficher les métadonnées de l'audio
+            metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+            self.path_label3.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+            
+            self.cover_image(audio_path)
+            self.Varbutt == "0"
 
 
 # Création de la fenêtre principale
