@@ -178,14 +178,94 @@ Pour utiliser le script depuis la ligne de commande, assurez-vous d'abord d'êtr
     python3 gui.py
     ```
 
+- **Ecouter un fichier audio donné** :
+  
+    ```bash
+    python3 cli.py -l -f music.mp3
+    ```
+
+    ou
+
+    ```bash
+    python3 cli.py --listen --file music.mp3
+    ```
+
+- **Ecouter un fichier audio en donnant un chemin spécifique** :
+  
+    ```bash
+    python3 cli.py -l -f "chemin\vers\la\musique\music.mp3"
+    ```
+
+    ou
+
+    ```bash
+    python3 cli.py --listen --file "chemin\vers\la\musique\music.mp3"
+    ```
+
+## Interface de Gestion des Fichiers Audio
+
+Ce projet est une interface graphique qui permet d'explorer des fichiers audio sur votre ordinateur, d'en extraire les métadonnées, d'afficher la couverture d'album (cover art), et de créer des playlists. Il est conçu pour être simple d'utilisation grâce à des boutons et des fenêtres interactives.
+
+### 1. Choix du dossier à explorer
+
+- **But** : Sélectionner un dossier contenant des fichiers audio (MP3 et FLAC) sur votre ordinateur pour les analyser.
+- **Fonctionnement** : Un explorateur de fichiers s'ouvre pour naviguer et choisir le dossier. Les fichiers audio trouvés sont ensuite listés dans l'interface.
+- **Code associé** : La méthode `exploration_dossier()` ou `AZEexploration_dossier()` est utilisée pour parcourir le système de fichiers et charger les fichiers audio dans une Listbox.
+
+### 2. Affichage des fichiers audio détectés
+
+- **But** : Après avoir sélectionné un dossier, une liste de fichiers audio détectés (formats MP3 et FLAC) est affichée.
+- **Fonctionnalité additionnelle** : L'utilisateur peut sélectionner un fichier audio pour afficher ses métadonnées.
+- **Code associé** : La méthode `exploration_dossier()` peuple la Listbox avec les fichiers audio. La fonction `affiche_path_label()` extrait les informations du fichier sélectionné.
+
+### 3. Extraction et affichage des métadonnées
+
+- **But** : Afficher les métadonnées (titre, artiste, album, genre, etc.) des fichiers audio sélectionnés.
+- **Fonctionnement** : Lorsqu'un fichier est cliqué dans la liste, ses métadonnées sont extraites et affichées dans l'interface.
+- **Code associé** : La méthode `affiche_path_label()` appelle `extraction_et_afficher_tag()` pour extraire les métadonnées du fichier audio sélectionné.
+
+### 4. Affichage de la couverture (Cover Art)
+
+- **But** : Afficher l'image de couverture d'un fichier audio s'il en contient une.
+- **Fonctionnement** : Si une image de couverture est détectée dans le fichier audio, elle est affichée dans une zone dédiée. Sinon, une image par défaut est utilisée.
+- **Code associé** : La méthode `cover_image()` gère l'extraction et l'affichage de la couverture d'album.
+
+### 5. Création de playlists
+
+- **But** : Créer des playlists au format XSPF en sélectionnant plusieurs fichiers audio.
+- **Fonctionnalité** : L'utilisateur peut enregistrer la playlist sous un nom spécifique ou restaurer la liste par défaut.
+- **Code associé** : Les fonctions `open_new_fenetre()`, `par_defaut()`, et `specifier()` permettent la création, la spécification, et la réinitialisation des playlists. Le fichier est enregistré grâce à `gui_ecritureFichierxspf()`.
+
+### 6. Contrôle de lecture (Play/Pause/Next/Previous)
+
+- **But** : Contrôler la lecture des fichiers audio depuis l'interface.
+- **Fonctionnalité** :
+  - **Play/Pause** : Lire ou mettre en pause la chanson sélectionnée.
+  - **Next/Previous** : Passer à la piste suivante ou précédente.
+- **Code associé** :
+  - `lire_audio()` pour la lecture.
+  - `toggle_pause()` pour basculer entre pause et lecture.
+  - `next_audio()` et `prev_audio()` pour changer de piste.
+
+### 7. Navigation et interaction améliorée
+
+- **But** : Permettre une navigation fluide entre les fichiers audio.
+- **Fonctionnement** : Lorsqu'une nouvelle piste est sélectionnée, les informations affichées sont mises à jour, et les boutons "suivant" et "précédent" permettent de naviguer rapidement.
+- **Code associé** : Les méthodes `next_item()` et `prev_item()` gèrent les changements de sélection dans la Listbox.
+
 ## Prérequis
 
 Avant d'exécuter ce script, vous devez installer les bibliothèques suivantes :
 
 - [mutagen](https://mutagen.readthedocs.io/en/latest/installation.html) : Bibliothèque utilisée pour extraire les métadonnées des fichiers MP3 et FLAC.
 - [Pillow](https://python-pillow.org/) : Bibliothèque Python pour manipuler et afficher des images, utilisée ici pour afficher la couverture des fichiers audio.
+- [Pygame](https://www.pygame.org/) : Bibliothèque pour créer des jeux en Python et jouer des fichiers audio.
+- [Pydub](https://github.com/jiaaro/pydub) : Bibliothèque pour manipuler les fichiers audio.
 
 Pour installer les dépendances, exécutez la commande suivante dans votre terminal :
 
 ```bash
-pip install mutagen Pillow 
+pip install mutagen 
+pip install Pillow 
+pip install pygame
+pip install pydub
