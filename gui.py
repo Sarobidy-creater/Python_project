@@ -49,7 +49,7 @@ class Interface:
         self.panel1.pack(fill="both", expand=True)
 
         # Chargement et ajout de l'image dans le panel1
-        chem_image = os.path.abspath(r"Python_project/img/nn.webp")
+        chem_image = os.path.abspath(r"./Python_project/img/nn.webp")
         self.image = Image.open(chem_image)  # Remplace par le chemin de ton image
         self.image = self.image.resize((200, 200))  # Redimensionner si nécessaire
         self.image_tk = ImageTk.PhotoImage(self.image)
@@ -160,7 +160,7 @@ class Interface:
         self.sect3.grid(row=0, column=2, sticky='nsew',padx=2, pady=2)
 
         # Chargement et ajout de l'image dans le panel1
-        chem_im = os.path.abspath(r"Python_project/img/nn.webp")
+        chem_im = os.path.abspath(r"./Python_project/img/nn.webp")
         self.im = Image.open(chem_im)  # Remplace par le chemin de ton image
         self.im = self.im.resize((24, 24))  # Redimensionner si nécessaire
         self.im_tk = ImageTk.PhotoImage(self.im)
