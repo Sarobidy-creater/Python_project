@@ -535,9 +535,11 @@ class Interface:
         self.audio_lecture = True
         pygame.mixer.music.unpause()
 
+
     def rechercher(self):
         self.button2 = tk.Button(self.frame1, text="Retour", width=12, command=self.retour)
         self.button2.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
+
 
     def retour(self):  
         self.button2.pack_forget() 
