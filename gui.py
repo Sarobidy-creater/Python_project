@@ -44,6 +44,10 @@ class Interface:
         # Variable pour suivre l'état (en pause ou non)
         self.audio_lecture = False
 
+        self.lightyellow = "lightyellow"
+        self.dodgerblue = "dodgerblue"
+        self.antiquewhite = "antiquewhite"
+
         # Panel 1 - avec une image, un fond bleu ciel et un bouton
         self.panel1 = tk.Frame(self.master, bg="#87CEEB")
         self.panel1.pack(fill="both", expand=True)
@@ -61,12 +65,12 @@ class Interface:
         self.bouton_switch.pack(pady=10)
 
         # Panel 2 
-        self.panel2 = tk.Frame(self.master, bg="lightyellow")
+        self.panel2 = tk.Frame(self.master, bg=self.lightyellow)
 
         # Créer trois cadres avec des tailles différentes
-        self.frame1 = tk.Frame(self.panel2, bg="antiquewhite")
+        self.frame1 = tk.Frame(self.panel2, bg=self.antiquewhite)
         self.frame2 = tk.Frame(self.panel2, bg="gray")
-        self.frame3 = tk.Frame(self.panel2, bg="dodgerblue")
+        self.frame3 = tk.Frame(self.panel2, bg=self.dodgerblue)
 
         # Pack les cadres avec des tailles différentes
         self.frame1.pack(fill=tk.X, padx=5, pady=5)  # Cadre 1 : petit, remplit la largeur
@@ -94,17 +98,17 @@ class Interface:
         self.frame2.grid_rowconfigure(0, weight=1)  # Une seule ligne
 
         # Créer trois sous-sections dans frame2 (gauche, centre, droite) avec les mêmes dimensions
-        self.section1 = tk.Frame(self.frame2, bg="antiquewhite")
+        self.section1 = tk.Frame(self.frame2, bg=self.antiquewhite)
         self.section1.grid(row=0, column=0, sticky='nse', padx=5, pady=5)
 
-        self.section2 = tk.Frame(self.frame2, bg="lightyellow")
+        self.section2 = tk.Frame(self.frame2, bg=self.lightyellow)
         self.section2.grid(row=0, column=1, sticky='nsew', padx=5, pady=5)
 
-        self.section3 = tk.Frame(self.frame2, bg="lightyellow")
+        self.section3 = tk.Frame(self.frame2, bg=self.lightyellow)
         self.section3.grid(row=0, column=2, sticky='nsw', padx=2, pady=2)
 
         # Créer une liste pour afficher les fichiers MP3
-        self.song_listbox = Listbox(self.section1, width=80, height=10, bg="antiquewhite", selectbackground='dodgerblue')  # Ajuster la taille ici
+        self.song_listbox = Listbox(self.section1, width=80, height=10, bg=self.antiquewhite, selectbackground=self.dodgerblue)  # Ajuster la taille ici
         self.song_listbox.pack(side=tk.LEFT, fill='both', expand=True)
 
         # Lier le double-clic à la lecture et l'affichage du titre
@@ -119,27 +123,27 @@ class Interface:
         self.scrollbar.config(command=self.song_listbox.yview)
 
         # Label pour afficher le chemin complet du fichier sélectionné
-        self.path_label2 = Label(self.section2, text="", width=70, height=10, justify="left", bg="lightyellow")
+        self.path_label2 = Label(self.section2, text="", width=70, height=10, justify="left", bg=self.lightyellow)
         self.path_label2.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
 
         # Label pour afficher le chemin complet du fichier sélectionné
-        self.path_lab1 = Label(self.path_label2, text="", width=90, height=111, justify="left", bg="lightyellow")
+        self.path_lab1 = Label(self.path_label2, text="", width=90, height=111, justify="left", bg=self.lightyellow)
         self.path_lab1.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
 
         # Label pour afficher le chemin complet du fichier sélectionné, plus petit
-        self.path_lab2 = Label(self.path_label2, text="", width=30, height=1, justify="left", bg="lightyellow")
+        self.path_lab2 = Label(self.path_label2, text="", width=30, height=1, justify="left", bg=self.lightyellow)
         self.path_lab2.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
 
         # Label pour afficher le chemin complet du fichier sélectionné, plus petit
-        self.path_B = Label(self.path_lab2, text="", width=2, height=1, justify="left", bg="lightyellow")
+        self.path_B = Label(self.path_lab2, text="", width=2, height=1, justify="left", bg=self.lightyellow)
         self.path_B.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
 
         # Label pour afficher le chemin complet du fichier sélectionné
-        self.path_A = Label(self.path_lab2, text="", width=11, height=1, justify="left", bg="lightyellow")
+        self.path_A = Label(self.path_lab2, text="", width=11, height=1, justify="left", bg=self.lightyellow)
         self.path_A.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
 
         # Label pour afficher le chemin complet du fichier sélectionné
-        self.path_label3 = Label(self.section3, text="", width=70, height=10, justify="left", bg="lightyellow")
+        self.path_label3 = Label(self.section3, text="", width=70, height=10, justify="left", bg=self.lightyellow)
         self.path_label3.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
 
         # Cadre 3******************************************
@@ -150,13 +154,13 @@ class Interface:
 
         self.frame3.grid_rowconfigure(0, weight=1)  # Une seule ligne
 
-        self.sect1 = tk.Frame(self.frame3, bg="lightyellow", width=28)
+        self.sect1 = tk.Frame(self.frame3, bg=self.lightyellow, width=28)
         self.sect1.grid(row=0, column=0, sticky='nsew', padx=2, pady=2)
 
-        self.sect2 = tk.Frame(self.frame3, bg='dodgerblue')
+        self.sect2 = tk.Frame(self.frame3, bg=self.dodgerblue)
         self.sect2.grid(row=0, column=1, sticky='nsew',padx=2, pady=2)
 
-        self.sect3 = tk.Frame(self.frame3, bg='dodgerblue')
+        self.sect3 = tk.Frame(self.frame3, bg=self.dodgerblue)
         self.sect3.grid(row=0, column=2, sticky='nsew',padx=2, pady=2)
 
         # Chargement et ajout de l'image dans le panel1
@@ -164,7 +168,7 @@ class Interface:
         self.im = Image.open(chem_im)  # Remplace par le chemin de ton image
         self.im = self.im.resize((24, 24))  # Redimensionner si nécessaire
         self.im_tk = ImageTk.PhotoImage(self.im)
-        self.label_im = tk.Label(self.sect3, image=self.im_tk, bg="dodgerblue")
+        self.label_im = tk.Label(self.sect3, image=self.im_tk, bg=self.dodgerblue)
         self.label_im.pack(side=tk.RIGHT, padx=10, pady=10) 
 
         self.button3 = tk.Button(self.sect1, text="Exploration", command=self.exploration_dossier, width=13)
@@ -248,6 +252,7 @@ class Interface:
                     self.tailleListbox = self.song_listbox.size()
         self.song_listbox.selection_set(0)
         self.buttnext =0  
+
 
     def AZEexploration_dossier(self,path):
         """Ouvre une boîte de dialogue pour sélectionner un dossier contenant des fichiers audio."""
@@ -469,10 +474,7 @@ class Interface:
             # Récupère seulement le nom du fichier à partir du chemin
             nom_fichier = os.path.basename(audio_path)
             self.path_B.config(text=nom_fichier)
-
-            
-            
-            
+ 
             # Extraire et afficher les métadonnées de l'audio
             metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
             self.path_label3.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
@@ -535,16 +537,27 @@ class Interface:
         self.audio_lecture = True
         pygame.mixer.music.unpause()
 
-
     def rechercher(self):
         self.button2 = tk.Button(self.frame1, text="Retour", width=12, command=self.retour)
         self.button2.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
-
+        # Créer une liste pour afficher les fichiers MP3
+        self.path_label3.pack_forget()
 
     def retour(self):  
+        # Label pour afficher le chemin complet du fichier sélectionné
+        self.path_label3 = Label(self.section3, text="", width=70, height=10, justify="left", bg=self.lightyellow)
+        self.path_label3.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
+        # Obtenir le chemin du fichier audio sélectionné
+        varstr = str(self.buttnext)
+
+        audio_path = self.mon_dictionnaire[varstr]
+        
+        # Extraire et afficher les métadonnées de l'audio
+        metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+        self.path_label3.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
         self.button2.pack_forget() 
          
-
+ 
 
 # Création de la fenêtre principale
 if __name__ == "__main__":
