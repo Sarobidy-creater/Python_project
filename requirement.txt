@@ -1,0 +1,5 @@
+mutagen
+pygame
+Pillow
+pydub
+lxml
