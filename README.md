@@ -178,14 +178,43 @@ Pour utiliser le script depuis la ligne de commande, assurez-vous d'abord d'êtr
     python3 gui.py
     ```
 
+- **Ecouter un fichier audio donné** :
+  
+    ```bash
+    python3 cli.py -l -f music.mp3
+    ```
+
+    ou
+
+    ```bash
+    python3 cli.py --listen --file music.mp3
+    ```
+
+- **Ecouter un fichier audio en donnant un chemin spécifique** :
+  
+    ```bash
+    python3 cli.py -l -f "chemin\vers\la\musique\music.mp3"
+    ```
+
+    ou
+
+    ```bash
+    python3 cli.py --listen --file "chemin\vers\la\musique\music.mp3"
+    ```
+
 ## Prérequis
 
 Avant d'exécuter ce script, vous devez installer les bibliothèques suivantes :
 
 - [mutagen](https://mutagen.readthedocs.io/en/latest/installation.html) : Bibliothèque utilisée pour extraire les métadonnées des fichiers MP3 et FLAC.
 - [Pillow](https://python-pillow.org/) : Bibliothèque Python pour manipuler et afficher des images, utilisée ici pour afficher la couverture des fichiers audio.
+- [Pygame](https://www.pygame.org/) : Bibliothèque pour créer des jeux en Python et jouer des fichiers audio.
+- [Pydub](https://github.com/jiaaro/pydub) : Bibliothèque pour manipuler les fichiers audio.
 
 Pour installer les dépendances, exécutez la commande suivante dans votre terminal :
 
 ```bash
-pip install mutagen Pillow 
+pip install mutagen 
+pip install Pillow 
+pip install pygame
+pip install pydub
