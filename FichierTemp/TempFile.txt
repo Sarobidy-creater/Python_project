@@ -1,18 +1,14 @@
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Alanis' Interlude.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Ashley.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - clementine.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Dominic's Interlude.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Finally __ beautiful stranger.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Forever ... (is a long time).mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Graveyard.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - I HATE EVERYBODY.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - killing boys.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - More.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Still Learning.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - SUGA's Interlude.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - Without Me.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\Halsey - You should be sad.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\RERD.mp3
-C:/Users/nelly/Desktop/projet python/Python_project/music\sample2.flac
-C:/Users/nelly/Desktop/projet python/Python_project/music\sample4.flac
-C:/Users/nelly/Desktop/projet python/Python_project/music\Symphony No.6 (1st movement).flac
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\1 - NHB.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\10 - Couler.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\11 - Rumba.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\12 - OG.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\13 - Qui peut tester.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\14 - Jamais loin.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\2 - Plus pareil.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\3 - Attends.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\4 - Tijuana.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\5 - Mission.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\6 - Cavalier noir.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\7 - Valentine.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\8 - Sun Tzu.mp3
+C:/Users/nelly/card/musique audio/album musique/Benash - NHB\9 - Fumier en chef.mp3
