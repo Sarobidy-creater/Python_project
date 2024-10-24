@@ -298,4 +298,46 @@ class Extraction():
 
         except Exception as e:
             return f"Une erreur s'est produite lors de l'extraction des tags : {e}"
+
+
+
+    def convertir_ms_en_secondes(self, ms) -> int:
+        # Méthode qui convertit une durée en millisecondes en  secondes.
+
+
+        strsecondes = str(ms).split(".")[0]
+        intsecondes = int(strsecondes + "000")
+
+        return intsecondes   # Retourne un tuple contenant les minutes et les secondes. 
+          
+    def duree_audio(self, file_aud: str) -> int:
+
+        """Extrait et retourne les métadonnées d'un fichier audio sous forme de chaîne."""
+        
+        # Chemin temporaire du fichier audio
+        temp_chem = os.path.abspath(os.path.join("music", file_aud))
+
+        # Vérification de l'existence du fichier audio
+        if not os.path.isfile(temp_chem):
+            return f"Le fichier {file_aud} n'existe pas dans le répertoire 'music'."
+
+        fichier_audio = temp_chem
+        audio = None
+
+        try:
+            if fichier_audio.endswith('.mp3'):
+                audio = MP3(fichier_audio, ID3=EasyID3)
+            elif fichier_audio.endswith('.flac'):
+                audio = FLAC(fichier_audio)
+
+            if audio is None:
+                return "Le fichier n'est ni au format MP3 ni FLAC."
+
+            # Récupération de la durée de l'audio
+            duree = audio.info.length
+            temp = self.convertir_ms_en_secondes(duree)
+            return temp
+
+        except Exception as e:
+            return f"Une erreur s'est produite lors de l'extraction des tags : {e}"
         
