@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa7f2935-79b5-447b-8a6b-4c821bb3b538" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Playlist/maPlaylistfg.xspf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/interfaceGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/interfaceGUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FichierTemp/TempFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FichierTemp/TempFile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Playlist/maPlaylist.xspf" beforeDir="false" afterPath="$PROJECT_DIR$/Playlist/maPlaylist.xspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audioTagExtraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/audioTagExtraction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constitutionPlaylist.py" beforeDir="false" afterPath="$PROJECT_DIR$/constitutionPlaylist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecouterAudio.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecouterAudio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/explorationDossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/explorationDossier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +31,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Sarobidy-creater/Python_project.git",
+    "accountId": "7fec7b5e-2c8f-4884-9222-4dc079244ce8"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -40,7 +54,7 @@
     "Python.interfaceGUI.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "br/gui",
+    "git-widget-placeholder": "Merging fetch/api__data",
     "last_opened_file_path": "C:/Users/irint/Desktop/PYTHONPROJECT/Python_project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -112,8 +126,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-PY-242.21829.153" />
-        <option value="bundled-python-sdk-464836ebc622-b74155a9e76b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.21829.153" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23339.19" />
+        <option value="bundled-python-sdk-0029f7779945-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23339.19" />
       </set>
     </attachedChunks>
   </component>
@@ -137,6 +151,7 @@
       <workItem from="1728060576373" duration="6644000" />
       <workItem from="1728576533956" duration="521000" />
       <workItem from="1728829535895" duration="4953000" />
+      <workItem from="1729796391945" duration="377000" />
     </task>
     <servers />
   </component>

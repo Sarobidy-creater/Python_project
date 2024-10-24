@@ -204,7 +204,7 @@ class Playlist():
             # Vérifier si le dossier existe et le créer s'il n'existe pas
             if not os.path.exists(dossier):
                 os.makedirs(dossier)
-
+            fichier_name = f"{fichier_name}.xspf"
             # Spécifier le chemin complet du fichier
             chem = os.path.join(dossier, fichier_name) 
             nom = os.path.abspath(chem)  # Obtenir le chemin absolu
@@ -293,3 +293,4 @@ class Playlist():
         except Exception as e:
             # Gestion de toutes les autres erreurs inattendues
             print(f"Une erreur inattendue s'est produite : {e}")
+        return chemin_file

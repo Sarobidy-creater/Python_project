@@ -115,13 +115,7 @@ class Ecouter:  # Déclaration de la classe 'Ecouter', qui contient des méthode
         pygame.mixer.music.load(chemin)
         pygame.mixer.music.play()
     
-    def pause(self):
-        """Met en pause la lecture audio."""
-        pygame.mixer.music.pause()
 
-    def reprendre(self):
-        """Reprend la lecture audio en pause."""
-        pygame.mixer.music.unpause()
 
     
 
