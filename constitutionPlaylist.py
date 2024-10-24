@@ -293,3 +293,4 @@ class Playlist():
         except Exception as e:
             # Gestion de toutes les autres erreurs inattendues
             print(f"Une erreur inattendue s'est produite : {e}")
+        return chemin_file
