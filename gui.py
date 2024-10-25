@@ -119,7 +119,10 @@ class Interface:
         self.audio_listbox.pack(side=tk.LEFT, fill='both', expand=True)
 
         # Lier le double-clic à la lecture et l'affichage du titre
-        self.audio_listbox.bind("<Double-Button-1>", self.affiche_path_label)
+        self.audio_listbox.bind("<Button-1>", self.affiche_path_label)
+
+        # Lier le double-clic à la lecture et l'affichage du titre
+        self.audio_listbox.bind("<Double-Button-1>", self.ajoute_playlist)
 
         # Ajouter une barre de défilement
         self.scrollbarlistbox = Scrollbar(self.section1_gauche_liste)
@@ -552,8 +555,8 @@ class Interface:
 
     def rechercher(self):
         """Affiche les fichiers MP3 disponibles et ajoute un bouton pour revenir."""
-        self.butt_check_api = tk.Button(self.frame1_haut, text="Retour", width=12, command=self.retour)
-        self.butt_check_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
+        self.butt_retour_api = tk.Button(self.frame1_haut, text="Retour", width=12, command=self.retour)
+        self.butt_retour_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
         # Créer une liste pour afficher les fichiers MP3
         
         self.metaData_label.pack_forget()  # Cache le label des métadonnées
@@ -561,7 +564,7 @@ class Interface:
 
     def retour(self): 
         """Affiche les métadonnées du fichier audio sélectionné et cache le bouton de retour."""
-        # self.butt_check_api.pack_forget()  # Cache le bouton de retour
+        self.butt_retour_api.pack_forget()  # Cache le bouton de retour
         if self.reche == False: 
             # Label pour afficher le chemin complet du fichier sélectionné
             self.metaData_label = Label(self.section3_metaData, text="", width=70, height=10, justify="left", bg=self.lightyellow)
@@ -597,7 +600,31 @@ class Interface:
         close_button.pack(pady=(0, 10))  # Ajouter un peu d'espace en bas
         # messagebox.showinfo("Notification", f"Playlist crée dans ce dossier : {chemin_play}")
 
-
+    def ajoute_playlist(self,event):
+        print("Clic ajouter playlist non finie")
+        audio = None
+        
+        # Récupérer l'index du fichier sélectionné dans la Listbox
+        select_index = self.audio_listbox.curselection() 
+        self.buttnext = select_index[0] 
+        self.Varbutt = "1"  # Indique qu'un fichier a été sélectionné
+        
+        if select_index:
+            # Obtenir le chemin du fichier audio sélectionné
+            varstr = str(self.buttnext)
+            audio_path = self.mon_dictionnaire[varstr]
+            # Récupère seulement le nom du fichier à partir du chemin
+            nom_fichier = os.path.basename(audio_path)
+            self.B1_label_fichier_nom.config(text=nom_fichier)
+            
+            # Extraire et afficher les métadonnées de l'audio
+            metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+            self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+            
+            self.cover_image(audio_path)  # Affiche l'image de couverture
+            
+            if self.audio_lecture:  # Si un audio est déjà en lecture
+                self.lire_audio()  # Lit le fichier audio
 
 
 # Création de la fenêtre principale
