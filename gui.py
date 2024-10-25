@@ -18,7 +18,8 @@ from mutagen.mp3 import MP3  # Pour gérer les fichiers audio MP3 et accéder à
 from mutagen.id3 import ID3, APIC  # Pour manipuler les balises ID3 et gérer les images intégrées comme les couvertures d'album.
 from mutagen.flac import FLAC, Picture  # Pour travailler avec les fichiers audio FLAC et gérer les images intégrées.
 from PIL import Image  # Pour ouvrir, modifier et enregistrer des images dans divers formats.
-
+from fetcher import Fetcher  #importer la class qui recupère les infos
+from APIQueryType import APIQueryType
 
 
 class Interface:
@@ -27,7 +28,7 @@ class Interface:
         self.master = master
         self.master.title("Lecteur Audio")  # Titre de la fenêtre
         self.master.state("zoomed")  # Agrandir la fenêtre à l'écran
-
+        self.fetcher = Fetcher("45a8a345769d4ac0b91d95622d331f05", "1fc622291bbd48f487b2375179fcbc23")
         # Initialisation des variables
         self.mon_dictionnaire = {}  # Dictionnaire pour stocker les fichiers audio
         self.explo = Explorer()  # Instance de la classe Explorer pour parcourir les dossiers
@@ -88,11 +89,13 @@ class Interface:
         # self.button2 = tk.Button(self.frame1, text="Retour", width=12)
         # self.button2.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
 
+       # Champ de saisie
         self.entry_ecriture_haut = tk.Entry(self.frame1_haut, width=150)
         self.entry_ecriture_haut.pack(side=tk.LEFT, padx=5, pady=5)
 
+        # Bouton Check
         self.butt_check_api = tk.Button(self.frame1_haut, text="Check", width=12, command=self.rechercher)
-        self.butt_check_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
+        self.butt_check_api.pack(side=tk.LEFT, padx=10, pady=10)
 
         self.butt_modif_metaData = tk.Button(self.frame1_haut, text=":::", width=12)
         self.butt_modif_metaData.pack(side=tk.RIGHT, padx=10, pady=10) 
@@ -203,7 +206,8 @@ class Interface:
         self.butt_next = tk.Button(self.B2_label_bouton_manip, text="▶▶", command=self.next_audio, width=6)
         self.butt_next.pack(side=tk.RIGHT, padx=10, pady=10)  # Positionné à droite avec un espacement
 
-
+        self.api_result = tk.Text(self.section3_metaData, width=70, height=10, bg=self.lightyellow)
+        self.api_result.pack(pady=10, fill='both', expand=True)  # Label pour afficher les résultats de l'API
 
     def direct_Goto(self):
         """Passage au panneau 2 et chargement de la musique par défaut."""
@@ -551,13 +555,80 @@ class Interface:
         pygame.mixer.music.unpause()  # Reprend la musique
 
     def rechercher(self):
-        """Affiche les fichiers MP3 disponibles et ajoute un bouton pour revenir."""
-        self.butt_check_api = tk.Button(self.frame1_haut, text="Retour", width=12, command=self.retour)
-        self.butt_check_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
-        # Créer une liste pour afficher les fichiers MP3
-        
+        """Analyse l'entrée utilisateur et effectue une recherche sur Spotify."""
+        self.butt_retour_api = tk.Button(self.frame1_haut, text="Retour", width=12, command=self.retour)
+        self.butt_retour_api.pack(side=tk.LEFT, padx=10, pady=10)
+        query = self.entry_ecriture_haut.get().strip()  # Récupère le texte depuis entry_ecriture_haut
+        self.api_result.delete('1.0', tk.END)  # Efface les résultats précédents
         self.metaData_label.pack_forget()  # Cache le label des métadonnées
         self.reche = False
+    
+        if not query:
+            self.api_result.insert(tk.END, "Veuillez entrer une recherche.\n")
+            return
+
+        # Initialisation des variables pour la recherche
+        artist_name = None
+        album_name = None
+        track_name = None
+
+        # Normalisation de la chaîne de caractères pour éviter des problèmes de capitalisation
+        normalized_query = query.lower()
+
+        # Traitement de l'entrée utilisateur pour extraire les informations
+        components = normalized_query.split(",")  # Diviser par des virgules
+        for component in components:
+            component = component.strip()  # Supprimer les espaces
+            if component.startswith("artiste:"):
+                artist_name = component.split(":", 1)[1].strip().title()  # Mettre en majuscule le nom de l'artiste
+            elif component.startswith("album:"):
+             album_name = component.split(":", 1)[1].strip().title()  # Mettre en majuscule le nom de l'album
+            elif component.startswith("morceau:"):
+                track_name = component.split(":", 1)[1].strip().title()  # Mettre en majuscule le titre du morceau
+
+        # Si aucun artiste ou morceau n'est spécifié, rechercher par album par défaut
+        if not album_name and not artist_name and not track_name:
+            album_name = query.strip().title()  # Prendre tout le texte comme recherche d'album et mettre en majuscule
+
+        results = {}
+        try:
+            if artist_name:
+                results.update(self.fetcher.get_artist_info(artist_name))
+            if album_name:
+                results.update(self.fetcher.get_album_info(album_name))
+            if track_name:
+                results.update(self.fetcher.get_track_info(track_name))
+
+            self.display_results(results)
+        except Exception as e:
+            self.api_result.insert(tk.END, f"Erreur : {e}\n")
+
+
+    def display_results(self, results):
+        """Affiche les résultats de la recherche dans le label des résultats."""
+        self.api_result.delete('1.0', tk.END)  # Réinitialise le texte du label des résultats
+        if results:
+            for item_id, info in results.items():
+                if 'Artiste' in info:  # Pour les artistes
+                    self.api_result.insert(tk.END, f"Artiste: {info['Artiste']}\n")
+                
+                    # Utilisation de get() pour éviter les KeyErrors
+                    followers = info.get('Followers', 'Données non disponibles')
+                    self.api_result.insert(tk.END, f"Followers: {followers}\n")  # Corrigé ici
+                
+                    genres = info.get('Genres', ['Aucun genre disponible'])
+                    self.api_result.insert(tk.END, f"Genres: {', '.join(genres)}\n\n")
+                elif 'Album' in info:  # Pour les albums
+                    self.api_result.insert(tk.END, f"Album: {info['Album']}\n")
+                    self.api_result.insert(tk.END, f"Artiste: {info['Artiste']}\n")
+                    self.api_result.insert(tk.END, f"Date de sortie: {info['Date de sortie']}\n\n")
+                elif 'Titre' in info:  # Pour les titres
+                    self.api_result.insert(tk.END, f"Titre: {info['Titre']}\n")
+                    self.api_result.insert(tk.END, f"Artiste: {info['Artiste']}\n")
+                    self.api_result.insert(tk.END, f"Album: {info['Album']}\n\n")
+        else:
+            self.api_result.insert(tk.END, "Aucun résultat trouvé.\n")
+
 
     def retour(self): 
         """Affiche les métadonnées du fichier audio sélectionné et cache le bouton de retour."""
