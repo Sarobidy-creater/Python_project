@@ -1,0 +1,7 @@
+mutagen
+pygame
+Pillow
+pydub
+lxml
+spotipy
+requests
