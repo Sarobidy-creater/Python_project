@@ -11,6 +11,8 @@ from .explorationDossier import Explorer  # Importation de la classe Explorer po
 from .ecouterAudio import Ecouter # Importation de la classe Ecouter pour ecouter les dossiers de fichiers audio.
 from .gui import Interface # Importation de la
 from .cli import Console
+from .APIQueryType import APIQueryType
+from .fetcher import Fetcher
 # from .apiRequest import AudioPlayerApp # Importation de la
 
 # Variables ou constantes du package

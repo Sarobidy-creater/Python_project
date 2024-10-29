@@ -13,6 +13,7 @@ from ecouterAudio import Ecouter # Importe la classe Ecouter du module ecouterAu
 from explorationDossier import Explorer  # Importe la classe Explorer pour explorer les dossiers
 from constitutionPlaylist import Playlist  # Importe la classe Playlist du module constitutionPlaylist pour générer des playlists
 from audioTagExtraction import Extraction  # Importe la classe Extraction du module audioTagExtraction pour extraire les métadonnées audio
+from fetcher import Fetcher
 from mutagen.easyid3 import EasyID3  # Pour lire et écrire les métadonnées ID3 dans les fichiers MP3.
 from mutagen.mp3 import MP3  # Pour gérer les fichiers audio MP3 et accéder à leurs métadonnées.
 from mutagen.id3 import ID3, APIC  # Pour manipuler les balises ID3 et gérer les images intégrées comme les couvertures d'album.
@@ -34,6 +35,7 @@ class Interface:
         self.ecoute = Ecouter()  # Instance de la classe Ecouter pour lire les fichiers audio
         self.playlist = Playlist()  # Instance de la classe Playlist pour gérer les playlists
         self.extract = Extraction()  # Instance de la classe Extraction pour extraire les métadonnées audio
+        self.fetcher = Fetcher()
         self.varDirectory = ""  # Variable pour stocker le chemin du répertoire exploré
         self.valeur_par_defaut = "maPlaylist"  # Valeur par défaut de l'entrée de texte pour nommer la playlist
         self.is_paused = False  # Variable pour suivre si la lecture est en pause
@@ -201,7 +203,7 @@ class Interface:
         # Création d'un bouton pour mettre en pause ou reprendre la lecture du morceau audio
         self.butt_pause_reprendre = tk.Button(self.B2_label_bouton_manip, text="⏸", command=self.toggle_pause, width=10)
         self.butt_pause_reprendre.pack(side=tk.LEFT, padx=10, pady=10)  # Positionné à gauche avec un espacement
-
+        
         # Création d'un bouton pour passer au morceau audio suivant
         self.butt_next = tk.Button(self.B2_label_bouton_manip, text="▶▶", command=self.next_audio, width=6)
         self.butt_next.pack(side=tk.RIGHT, padx=10, pady=10)  # Positionné à droite avec un espacement
@@ -555,13 +557,51 @@ class Interface:
 
     def rechercher(self):
         """Affiche les fichiers MP3 disponibles et ajoute un bouton pour revenir."""
+        
+        # Si le label existe déjà, on le cache au lieu de le recréer
+        if hasattr(self, 'rechercher_label'):
+            self.rechercher_label.pack_forget()  # Cache le label précédent
+            self.scrollbar.pack_forget()  # Cache la scrollbar précédente
+            self.rechercher_frame.pack_forget()  # Cache le cadre précédent
+
+        # Crée et configure le bouton de retour
         self.butt_retour_api = tk.Button(self.frame1_haut, text="Retour", width=12, command=self.retour)
         self.butt_retour_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
-        # Créer une liste pour afficher les fichiers MP3
-        
-        self.metaData_label.pack_forget()  # Cache le label des métadonnées
+
+        # Cache le label des métadonnées
+        self.metaData_label.pack_forget()
         self.reche = False
 
+        # Créer un cadre pour le label et la scrollbar
+        self.rechercher_frame = tk.Frame(self.section3_metaData, bg=self.lightyellow)
+        self.rechercher_frame.pack(pady=10, fill='both', expand=True)
+
+        # Créer un canvas pour la scrollbar
+        self.canvas = tk.Canvas(self.rechercher_frame, bg=self.lightyellow)
+        self.scrollbar = tk.Scrollbar(self.rechercher_frame, orient="vertical", command=self.canvas.yview, bg=self.lightyellow)
+        self.scrollable_frame = tk.Frame(self.canvas)
+
+        self.scrollable_frame.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
+
+        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+
+        # Configurer la scrollbar
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+
+        # Pack le canvas et la scrollbar
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # Créer un label pour afficher le chemin complet du fichier sélectionné
+        self.rechercher_label = Label(self.scrollable_frame, text="", width=70, justify="left", bg=self.lightyellow)
+        self.rechercher_label.pack(pady=10, fill='both', expand=True)
+
+        # Récupérer et afficher les données API
+        data_api_affiche = self.fetcher_methode()
+        print(data_api_affiche) 
+        self.rechercher_label.config(text=data_api_affiche)  # Mettre à jour le texte du label formaté
+
+        
     def retour(self): 
         """Affiche les métadonnées du fichier audio sélectionné et cache le bouton de retour."""
         self.butt_retour_api.pack_forget()  # Cache le bouton de retour
@@ -578,6 +618,9 @@ class Interface:
             metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
             self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
             self.reche = True
+            self.rechercher_label.pack_forget() 
+            self.scrollable_frame.pack_forget()  # Cache le bouton de retour
+            self.rechercher_frame.pack_forget()  # Cache le bouton de retour
 
     def destroy_notification(self):
         notification.destroy()  
@@ -625,6 +668,37 @@ class Interface:
             
             if self.audio_lecture:  # Si un audio est déjà en lecture
                 self.lire_audio()  # Lit le fichier audio
+
+    def fetcher_methode(self)-> str:
+        # Récupérer la saisie de l'utilisateur, la nettoyer et la mettre en minuscules
+        saisie = self.entry_ecriture_haut.get().strip().lower()
+        
+        # Vérifier si la saisie commence par "artiste:", "album:", ou "music:"
+        if saisie.startswith("artiste:"):
+            # Extraire le nom de l'artiste après "artiste:"
+            artist_name = saisie[len("artiste:"):].strip()
+            self.fetcher.get_artist_info(artist_name)
+            auteur_saisie = self.fetcher.afficher_artiste_infos()
+            return auteur_saisie
+            
+        elif saisie.startswith("album:"):
+            # Extraire le nom de l'album après "album:"
+            album_name = saisie[len("album:"):].strip()
+            self.fetcher.get_album_info(album_name)
+            album_saisie = self.fetcher.afficher_album_infos()
+            return album_saisie
+
+            
+        elif saisie.startswith("music:"):
+            # Extraire le nom de la musique après "musique:"
+            track_name = saisie[len("music:"):].strip()
+            self.fetcher.get_track_info(track_name)
+            track_saisie = self.fetcher.afficher_track_infos()
+            return track_saisie
+        
+        else:
+            print("Commande non reconnue. Utilisez 'artiste:', 'album:', ou 'music:' pour effectuer une recherche.")
+
 
 
 # Création de la fenêtre principale
