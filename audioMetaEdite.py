@@ -24,7 +24,8 @@ class Editer:
             self._afficher_et_modifier_meta_flac(chemin_audio,meta_donnees,chemin_image)
         else:
             print("Format audio non pris en charge.")
-    
+
+
     def _afficher_et_modifier_meta_mp3(self, chemin_audio:str, meta_donnees:str, chemin_image:str):
         """Affiche et modifie les métadonnées d'un fichier MP3."""
         try:
@@ -63,6 +64,7 @@ class Editer:
         audio.save()
         print("\nNouvelles métadonnées MP3 mises à jour avec succès !\n")
 
+
     def _afficher_et_modifier_meta_flac(self, chemin_audio:str, meta_donnees:str, chemin_image:str):
         """Affiche et modifie les métadonnées d'un fichier FLAC."""
         audio = FLAC(chemin_audio)
@@ -94,25 +96,3 @@ class Editer:
         audio.save()
         print("\nNouvelles métadonnées FLAC mises à jour avec succès !\n")
 
-""" 
-    # Exemple d'utilisation de la classe AudioMetaManager
-    chemin_mp3 = r"c:\Users\nelly\Documents\L3-info\S5-2024-2025\S5\PYTHON\Imagine Dragons  Bad Liar.mp3"
-    chemin_flac = r"c:\Users\nelly\Documents\L3-info\S5-2024-2025\S5\PYTHON\sample4.flac"
-    chemin_image = r"c:\Users\nelly\Documents\L3-info\S5-2024-2025\S5\PYTHON\09 - RER D_cover.jpg"
-
-    # Nouvelles métadonnées
-    meta_donnees = {
-        "title": "Belle Chanson",
-        "artist": "Super Artiste",
-        "album": "Album A",
-        "genre": "Pop"
-    }
-
-    # Gérer le fichier MP3
-    manager_mp3 = Editer(chemin_mp3, meta_donnees, chemin_image)
-    manager_mp3.afficher_et_modifier_metadata()
-
-    # Gérer le fichier FLAC
-    manager_flac = Editer(chemin_flac, meta_donnees, chemin_image)
-    manager_flac.afficher_et_modifier_metadata()
-""" 

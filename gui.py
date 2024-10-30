@@ -14,7 +14,7 @@ from explorationDossier import Explorer  # Importe la classe Explorer pour explo
 from constitutionPlaylist import Playlist  # Importe la classe Playlist du module constitutionPlaylist pour générer des playlists
 from audioTagExtraction import Extraction  # Importe la classe Extraction du module audioTagExtraction pour extraire les métadonnées audio
 from fetcher import Fetcher
-# from audioMetaEdite import Editer
+from audioMetaEdite import Editer
 from mutagen.easyid3 import EasyID3  # Pour lire et écrire les métadonnées ID3 dans les fichiers MP3.
 from mutagen.mp3 import MP3  # Pour gérer les fichiers audio MP3 et accéder à leurs métadonnées.
 from mutagen.id3 import ID3, APIC  # Pour manipuler les balises ID3 et gérer les images intégrées comme les couvertures d'album.
@@ -37,7 +37,7 @@ class Interface:
         self.playlist = Playlist()  # Instance de la classe Playlist pour gérer les playlists
         self.extract = Extraction()  # Instance de la classe Extraction pour extraire les métadonnées audio
         self.fetcher = Fetcher()
-        # self.edite = Editer()
+        self.edite = Editer()
         self.varDirectory = ""  # Variable pour stocker le chemin du répertoire exploré
         self.valeur_par_defaut = "maPlaylist"  # Valeur par défaut de l'entrée de texte pour nommer la playlist
         self.is_paused = False  # Variable pour suivre si la lecture est en pause
@@ -50,6 +50,7 @@ class Interface:
         self.dodgerblue = "dodgerblue"  # Couleur de fond pour d'autres parties
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
         self.metadata_str = ""
+        self.chemin_audio = ""
 
         # Création des différents panneaux de l'interface
 
@@ -226,6 +227,7 @@ class Interface:
         self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
         self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
         self.cover_image(audio_path)  # Affiche l'image de couverture
+        self.chemin_audio = audio_path
         self.Varbutt = "0"
         self.buttnext = 0
         self.audio_listbox.selection_set(self.buttnext)  # Sélectionne le premier élément
@@ -342,6 +344,7 @@ class Interface:
             self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
             
             self.cover_image(audio_path)  # Affiche l'image de couverture
+            self.chemin_audio = audio_path
             
             if self.audio_lecture:  # Si un audio est déjà en lecture
                 self.lire_audio()  # Lit le fichier audio
@@ -499,6 +502,7 @@ class Interface:
                 self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
                 
                 self.cover_image(audio_path)  # Affiche l'image de couverture
+                self.chemin_audio = audio_path
                 self.Varbutt = "0"
                 if self.audio_lecture:  # Si un audio est déjà en lecture
                     self.lire_audio()  # Lit le fichier audio
@@ -535,6 +539,7 @@ class Interface:
             self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
             
             self.cover_image(audio_path)  # Affiche l'image de couverture
+            self.chemin_audio = audio_path
             self.Varbutt = "0"
             if self.audio_lecture:  # Si un audio est déjà en lecture
                 self.lire_audio()  # Lit le fichier audio
@@ -756,8 +761,7 @@ class Interface:
 
         button_pour_ok = tk.Button(self.frame2_modif_window, text="Ok", command=self.save_modification)
         button_pour_ok.pack(side=tk.LEFT, padx=10, pady=10)
-
-    
+  
     def but_cancel(self):
         """Ferme la fenêtre secondaire."""
         modif_window.destroy()  # Ferme la fenêtre secondaire
@@ -777,7 +781,25 @@ class Interface:
         return metadata_dict
 
     def save_modification(self):
-        return None
+        """Enregistre les modifications apportées aux métadonnées de la playlist."""
+        # Récupérer le chemin audio de l'attribut de la classe
+        chemin_audio = self.chemin_audio
+        chemin_image = None  # Ou vous pouvez définir un chemin d'image si nécessaire
+
+        # Récupérer les valeurs des champs de saisie
+        titre = self.entries["titre"].get()          # Récupère le titre
+        artiste = self.entries["artiste"].get()      # Récupère l'artiste
+        album = self.entries["album"].get()          # Récupère l'album
+        genre = self.entries["genre"].get()          # Récupère le genre
+        ladate = self.entries["date"].get()          # Récupère la date
+        organisation = self.entries["organisation"].get()  # Récupère l'organisation
+
+        # Appeler la méthode pour afficher et modifier les métadonnées
+        self.edite.afficher_et_modifier_metadata(chemin_audio, chemin_image, titre, artiste, album, genre, ladate, organisation)
+
+        # Fermer la fenêtre de modification
+        modif_window.destroy()
+
         
 # Création de la fenêtre principale
 if __name__ == "__main__":
