@@ -13,6 +13,7 @@ from .gui import Interface # Importation de la
 from .cli import Console
 from .APIQueryType import APIQueryType
 from .fetcher import Fetcher
+from .audioMetaEdite import Editer
 # from .apiRequest import AudioPlayerApp # Importation de la
 
 # Variables ou constantes du package

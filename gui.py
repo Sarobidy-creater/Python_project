@@ -14,6 +14,7 @@ from explorationDossier import Explorer  # Importe la classe Explorer pour explo
 from constitutionPlaylist import Playlist  # Importe la classe Playlist du module constitutionPlaylist pour générer des playlists
 from audioTagExtraction import Extraction  # Importe la classe Extraction du module audioTagExtraction pour extraire les métadonnées audio
 from fetcher import Fetcher
+# from audioMetaEdite import Editer
 from mutagen.easyid3 import EasyID3  # Pour lire et écrire les métadonnées ID3 dans les fichiers MP3.
 from mutagen.mp3 import MP3  # Pour gérer les fichiers audio MP3 et accéder à leurs métadonnées.
 from mutagen.id3 import ID3, APIC  # Pour manipuler les balises ID3 et gérer les images intégrées comme les couvertures d'album.
@@ -36,6 +37,7 @@ class Interface:
         self.playlist = Playlist()  # Instance de la classe Playlist pour gérer les playlists
         self.extract = Extraction()  # Instance de la classe Extraction pour extraire les métadonnées audio
         self.fetcher = Fetcher()
+        # self.edite = Editer()
         self.varDirectory = ""  # Variable pour stocker le chemin du répertoire exploré
         self.valeur_par_defaut = "maPlaylist"  # Valeur par défaut de l'entrée de texte pour nommer la playlist
         self.is_paused = False  # Variable pour suivre si la lecture est en pause
@@ -47,6 +49,7 @@ class Interface:
         self.lightyellow = "lightyellow"  # Couleur de fond pour certaines parties de l'interface
         self.dodgerblue = "dodgerblue"  # Couleur de fond pour d'autres parties
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
+        self.metadata_str = ""
 
         # Création des différents panneaux de l'interface
 
@@ -96,7 +99,7 @@ class Interface:
         self.butt_check_api = tk.Button(self.frame1_haut, text="Check", width=12, command=self.rechercher)
         self.butt_check_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
 
-        self.butt_modif_metaData = tk.Button(self.frame1_haut, text=":::", width=12)
+        self.butt_modif_metaData = tk.Button(self.frame1_haut, text=":::", width=12, command=self.modification_data)
         self.butt_modif_metaData.pack(side=tk.RIGHT, padx=10, pady=10) 
 
         # Cadre 2******************************************
@@ -220,8 +223,8 @@ class Interface:
         nom_fichier = os.path.basename(audio_path)
         self.B1_label_fichier_nom.config(text=nom_fichier)
         # Extraire et afficher les métadonnées de l'audio
-        metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-        self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+        self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+        self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
         self.cover_image(audio_path)  # Affiche l'image de couverture
         self.Varbutt = "0"
         self.buttnext = 0
@@ -316,6 +319,7 @@ class Interface:
                     # Insère le nom du fichier dans la Listbox
                     self.audio_listbox.insert(tk.END, nom_fichier)
 
+
     def affiche_path_label(self, event):
         """Affiche les détails du fichier audio sélectionné dans la Listbox."""
         audio = None
@@ -334,8 +338,8 @@ class Interface:
             self.B1_label_fichier_nom.config(text=nom_fichier)
             
             # Extraire et afficher les métadonnées de l'audio
-            metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-            self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+            self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+            self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
             
             self.cover_image(audio_path)  # Affiche l'image de couverture
             
@@ -491,8 +495,8 @@ class Interface:
                 self.B1_label_fichier_nom.config(text=nom_fichier)
                 
                 # Extraire et afficher les métadonnées de l'audio
-                metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-                self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+                self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+                self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
                 
                 self.cover_image(audio_path)  # Affiche l'image de couverture
                 self.Varbutt = "0"
@@ -527,8 +531,8 @@ class Interface:
             self.B1_label_fichier_nom.config(text=nom_fichier)
             
             # Extraire et afficher les métadonnées de l'audio
-            metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-            self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+            self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+            self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
             
             self.cover_image(audio_path)  # Affiche l'image de couverture
             self.Varbutt = "0"
@@ -615,8 +619,8 @@ class Interface:
             
             # Extraire et afficher les métadonnées de l'audio
             
-            metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-            self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+            self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+            self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
             self.reche = True
             self.rechercher_label.pack_forget() 
             self.scrollable_frame.pack_forget()  # Cache le bouton de retour
@@ -661,8 +665,8 @@ class Interface:
             self.B1_label_fichier_nom.config(text=nom_fichier)
             
             # Extraire et afficher les métadonnées de l'audio
-            metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-            self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+            self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+            self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
             
             self.cover_image(audio_path)  # Affiche l'image de couverture
             
@@ -699,8 +703,82 @@ class Interface:
         else:
             print("Commande non reconnue. Utilisez 'artiste:', 'album:', ou 'music:' pour effectuer une recherche.")
 
+    def modification_data(self):
+        """Ouvre une nouvelle fenêtre pour modifier les métadonnées de la playlist."""
+        global modif_window
+        modif_window = Toplevel(root)
+        modif_window.title("Modification de métadonnées")
+        modif_window.geometry("300x400")  # Taille de la fenêtre pour s'adapter aux zones de saisie
+        modif_window.resizable(False, False)  # Empêche la redimension de la fenêtre
 
+        # Créer deux cadres pour organiser la disposition
+        self.frame1_modif_window = tk.Frame(modif_window, bg=self.antiquewhite)
+        self.frame2_modif_window = tk.Frame(modif_window, bg="gray")
 
+        # Pack les cadres dans la fenêtre
+        self.frame1_modif_window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.frame2_modif_window.pack(fill=tk.X)
+        # print("self.metadata_str********************************************")
+        # print(self.metadata_str)
+        
+        dict_metadata_str = self.convertir_metadata_en_dict(self.metadata_str)
+        # print("tab_metadata_str********************************************")
+        # print(tab_metadata_str)
+        list_metadata_str = list(dict_metadata_str.values())
+        # print("list_metadata_str********************************************")
+        # print(list_metadata_str)
+
+        # Liste des champs et de leurs labels
+        labels_text = ["Titre", "Artiste", "Album", "Genre", "Date", "Organisation"]
+        self.entries = {}  # Dictionnaire pour stocker les entrées associées aux labels
+
+        # Création des labels et zones de saisie
+        i = 0
+        for label_text in labels_text:
+            # Label
+            label = tk.Label(self.frame1_modif_window, text=label_text, bg=self.antiquewhite)
+            label.pack(anchor="w", padx=5, pady=3)
+
+            # Zone de saisie
+            entry = tk.Entry(self.frame1_modif_window, width=30)
+            entry.pack(anchor="w", padx=5, pady=3)
+
+            # Ajouter l'entrée au dictionnaire avec le nom du champ en clé
+            self.entries[label_text.lower()] = entry
+
+            # Ajouter la valeur par défaut dans le champ de saisie
+            entry.insert(0,list_metadata_str[i])  # Insère la valeur par défaut
+            i += 1
+
+        # Boutons dans la deuxième section
+        button_cancel = tk.Button(self.frame2_modif_window, text="Annuler", command=self.but_cancel)
+        button_cancel.pack(side=tk.LEFT, padx=10, pady=10)
+
+        button_pour_ok = tk.Button(self.frame2_modif_window, text="Ok", command=self.save_modification)
+        button_pour_ok.pack(side=tk.LEFT, padx=10, pady=10)
+
+    
+    def but_cancel(self):
+        """Ferme la fenêtre secondaire."""
+        modif_window.destroy()  # Ferme la fenêtre secondaire
+
+    def convertir_metadata_en_dict(self,metadata_str: str) -> dict:
+        """Convertit une chaîne de métadonnées en un dictionnaire."""
+        metadata_dict = {}
+        
+        # Sépare la chaîne en lignes
+        lignes = metadata_str.strip().split("\n")
+        
+        for ligne in lignes:
+            if ':' in ligne:  # Vérifie si la ligne contient un deux-points
+                cle, valeur = ligne.split(':', 1)  # Sépare la clé et la valeur
+                metadata_dict[cle.strip()] = valeur.strip()  # Ajoute à la dict en supprimant les espaces
+
+        return metadata_dict
+
+    def save_modification(self):
+        return None
+        
 # Création de la fenêtre principale
 if __name__ == "__main__":
     root = tk.Tk()
