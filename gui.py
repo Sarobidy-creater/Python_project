@@ -51,7 +51,6 @@ class Interface:
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
         self.metadata_str = ""
         self.chemin_audio = ""
-        self.verif_lecture = False
         self.playlist_window = False
         self.affiche_window = False # Attribut pour suivre si la fenêtre de modification est ouverte
         # Variables pour gérer l'interface
@@ -326,7 +325,6 @@ class Interface:
 
     def affiche_path_label(self, event):
         """Affiche les détails du fichier audio sélectionné dans la Listbox."""
-        pygame.mixer.music.unload()
         audio = None
         self.verif_lecture = False
         
@@ -349,8 +347,6 @@ class Interface:
             
             self.cover_image(audio_path)  # Affiche l'image de couverture
             self.chemin_audio = audio_path
-            print("audio_pathùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùù")
-            print(audio_path)
             
             if self.audio_lecture:  # Si un audio est déjà en lecture
                 self.lire_audio()  # Lit le fichier audio
@@ -434,7 +430,6 @@ class Interface:
         self.is_paused = False
         self.butt_pause_reprendre.config(text="⏸")  # Met à jour le texte du bouton pour pause
         self.audio_lecture = True  # Indique que l'audio est en lecture
-        self.verif_lecture = True
         
     def toggle_pause(self):
         """Met en pause ou reprend la lecture de l'audio."""
@@ -583,7 +578,6 @@ class Interface:
                 self.Varbutt = "0"
                 if self.audio_lecture:  # Si un audio est déjà en lecture
                     self.lire_audio()  # Lit le fichier audio
-                    self.verif_lecture = True
         except IndexError:
             print("Erreur : Aucun audio suivant dans la liste.")
         except Exception as e:
@@ -620,7 +614,6 @@ class Interface:
             self.Varbutt = "0"
             if self.audio_lecture:  # Si un audio est déjà en lecture
                 self.lire_audio()  # Lit le fichier audio
-                self.verif_lecture = True
 
     def prev_item(self):
         """Sélectionne l'élément précédent dans la Listbox."""
@@ -846,8 +839,6 @@ class Interface:
         button_pour_ok.pack(side=tk.LEFT, padx=10, pady=10)
             # self.affiche_window = True
         chemin_audio = self.chemin_audio
-        print("chemin_audiorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
-        print(chemin_audio)
 
     def select_cover_image(self):
         """Ouvre une boîte de dialogue pour sélectionner une image de couverture."""
@@ -879,8 +870,6 @@ class Interface:
         pygame.mixer.music.unload()
         # Récupérer le chemin audio de l'attribut de la classe
         chemin_audio = self.chemin_audio
-        print("chemin_audioiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-        print(chemin_audio)
 
         # Récupérer les valeurs des champs de saisie
         titre = self.entries["titre"].get()
@@ -909,6 +898,7 @@ class Interface:
         self.chemin_audio = chemin_audio
         modif_window.destroy()
         # self.affiche_window = False
+        self.ecoute.lire_fichier_audio(chemin_audio)
 
 
         
