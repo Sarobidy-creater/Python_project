@@ -266,8 +266,6 @@ class Playlist():
                 fichier_lire_chemin = explorer.explorer_dossier_gui(dossier_save) 
             else:
                 path_che = os.path.abspath(r'python_project\FichierTemp\options_selectionnees.txt') 
-                # Vérifier si le dossier existe, sinon le créer
-                os.makedirs(path_che, exist_ok=True)
                 fichier_lire_chemin = path_che
 
             # Ouvrir le fichier pour lire les chemins des fichiers audio
