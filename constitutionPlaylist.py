@@ -259,7 +259,16 @@ class Playlist():
             dossier_save = d_save.replace("\\", "/")  # Remplacer les antislashs par des barres obliques
 
             # Obtenir le chemin du fichier à lire à partir de l'exploration du dossier
-            fichier_lire_chemin = explorer.explorer_dossier_gui(dossier_save) 
+            fichier_lire_chemin = None
+            
+            # Si aucun nom de fichier de sortie n'est donné, créer un fichier par défaut
+            if out_Fichier_nom is None: 
+                fichier_lire_chemin = explorer.explorer_dossier_gui(dossier_save) 
+            else:
+                path_che = os.path.abspath(r'python_project\FichierTemp\options_selectionnees.txt') 
+                # Vérifier si le dossier existe, sinon le créer
+                os.makedirs(path_che, exist_ok=True)
+                fichier_lire_chemin = path_che
 
             # Ouvrir le fichier pour lire les chemins des fichiers audio
             with open(fichier_lire_chemin, 'r', encoding='utf-8') as f:
