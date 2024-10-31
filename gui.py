@@ -51,6 +51,7 @@ class Interface:
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
         self.metadata_str = ""
         self.chemin_audio = ""
+        self.verif_lecture = False
         self.playlist_window = False
         self.affiche_window = False # Attribut pour suivre si la fenêtre de modification est ouverte
         # Variables pour gérer l'interface
@@ -326,6 +327,7 @@ class Interface:
     def affiche_path_label(self, event):
         """Affiche les détails du fichier audio sélectionné dans la Listbox."""
         audio = None
+        self.verif_lecture = False
         
         # Récupérer l'index du fichier sélectionné dans la Listbox
         select_index = self.audio_listbox.curselection() 
@@ -346,6 +348,8 @@ class Interface:
             
             self.cover_image(audio_path)  # Affiche l'image de couverture
             self.chemin_audio = audio_path
+            print("audio_pathùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùù")
+            print(audio_path)
             
             if self.audio_lecture:  # Si un audio est déjà en lecture
                 self.lire_audio()  # Lit le fichier audio
@@ -429,9 +433,11 @@ class Interface:
         self.is_paused = False
         self.butt_pause_reprendre.config(text="⏸")  # Met à jour le texte du bouton pour pause
         self.audio_lecture = True  # Indique que l'audio est en lecture
+        self.verif_lecture = True
         
     def toggle_pause(self):
         """Met en pause ou reprend la lecture de l'audio."""
+        self.verif_lecture = True
         if self.is_paused:
             self.reprendre()  # Reprend la lecture
             self.butt_pause_reprendre.config(text="⏸")  # Met à jour le texte du bouton
@@ -451,7 +457,7 @@ class Interface:
         self.entry.delete(0, tk.END)  # Efface le contenu de l'Entry
         self.entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut
         chemin_play = self.playlist.gui_ecritureFichierxspf(self.varDirectory, None)  # Enregistre la playlist  
-        self.afficher_notification(os.path.abspath(chemin_play))
+        self.afficher_notification(f"Playlist crée dans ce dossier : {os.path.abspath(chemin_play)}")
         self.new_window.destroy()  # Ferme la fenêtre secondaire
         # self.playlist_window = False
 
@@ -578,6 +584,7 @@ class Interface:
                 self.Varbutt = "0"
                 if self.audio_lecture:  # Si un audio est déjà en lecture
                     self.lire_audio()  # Lit le fichier audio
+                    self.verif_lecture = True
         except IndexError:
             print("Erreur : Aucun audio suivant dans la liste.")
         except Exception as e:
@@ -614,6 +621,7 @@ class Interface:
             self.Varbutt = "0"
             if self.audio_lecture:  # Si un audio est déjà en lecture
                 self.lire_audio()  # Lit le fichier audio
+                self.verif_lecture = True
 
     def prev_item(self):
         """Sélectionne l'élément précédent dans la Listbox."""
@@ -701,23 +709,22 @@ class Interface:
             self.rechercher_frame.pack_forget()  # Cache le bouton de retour
 
     def destroy_notification(self):
-        notification.destroy()  
-        self.new_window.destroy()  
+        self.notification.destroy()  
 
     def afficher_notification(self, chemin_play):
         """Affiche une notification"""
         global notification, label, entry
-        notification = Toplevel(root)
-        notification.title("Notification")  # Titre de la fenêtre
-        notification.geometry("700x100")  # Définir la taille de la fenêtre
-        notification.resizable(False, False)  # Empêcher le redimensionnement
+        self.notification = Toplevel(root)
+        self.notification.title("Notification")  # Titre de la fenêtre
+        self.notification.geometry("700x100")  # Définir la taille de la fenêtre
+        self.notification.resizable(False, False)  # Empêcher le redimensionnement
 
          # Créer un label pour afficher le message
-        message_label = tk.Label(notification, text=f"Playlist crée dans ce dossier : {chemin_play}", padx=20, pady=20)
+        message_label = tk.Label(self.notification, text=f"Message : {chemin_play}", padx=20, pady=20)
         message_label.pack()
 
         # Créer un bouton pour fermer la notification
-        close_button = tk.Button(notification, text="OK", command=self.destroy_notification)
+        close_button = tk.Button(self.notification, text="OK", command=self.destroy_notification)
         close_button.pack(pady=(0, 10))  # Ajouter un peu d'espace en bas
         # messagebox.showinfo("Notification", f"Playlist crée dans ce dossier : {chemin_play}")
 
@@ -839,6 +846,9 @@ class Interface:
         button_pour_ok = tk.Button(self.frame2_modif_window, text="Enregistrer", command=self.save_modification)
         button_pour_ok.pack(side=tk.LEFT, padx=10, pady=10)
             # self.affiche_window = True
+        chemin_audio = self.chemin_audio
+        print("chemin_audiorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+        print(chemin_audio)
 
     def select_cover_image(self):
         """Ouvre une boîte de dialogue pour sélectionner une image de couverture."""
@@ -867,36 +877,42 @@ class Interface:
 
     def save_modification(self):
         """Enregistre les modifications apportées aux métadonnées de la playlist."""
-        # Récupérer le chemin audio de l'attribut de la classe
-        chemin_audio = self.chemin_audio
+        if (self.verif_lecture == True):
+            message = "audio en cour ou en pause"
+            self.afficher_notification(message)
+        else:
+            # Récupérer le chemin audio de l'attribut de la classe
+            chemin_audio = self.chemin_audio
+            print("chemin_audioiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+            print(chemin_audio)
 
-        # Récupérer les valeurs des champs de saisie
-        titre = self.entries["titre"].get()
-        artiste = self.entries["artiste"].get()
-        album = self.entries["album"].get()
-        genre = self.entries["genre"].get()
-        ladate = self.entries["date"].get()
-        organisation = self.entries["organisation"].get()
-        
-        # Récupérer le chemin de l'image de cover (si sélectionnée)
-        chemin_image = self.cover_image_path if self.cover_image_path else None
+            # Récupérer les valeurs des champs de saisie
+            titre = self.entries["titre"].get()
+            artiste = self.entries["artiste"].get()
+            album = self.entries["album"].get()
+            genre = self.entries["genre"].get()
+            ladate = self.entries["date"].get()
+            organisation = self.entries["organisation"].get()
+            
+            # Récupérer le chemin de l'image de cover (si sélectionnée)
+            chemin_image = self.cover_image_path if self.cover_image_path else None
 
-        self.metaData_label.pack_forget() 
+            self.metaData_label.pack_forget() 
 
-        # Appeler la méthode pour afficher et modifier les métadonnées
-        self.edite.afficher_et_modifier_metadata(chemin_audio, chemin_image, titre, artiste, album, genre, ladate, organisation)
+            # Appeler la méthode pour afficher et modifier les métadonnées
+            self.edite.afficher_et_modifier_metadata(chemin_audio, chemin_image, titre, artiste, album, genre, ladate, organisation)
 
-        # Fermer la fenêtre de modification
-        self.metaData_label = Label(self.section3_metaData, text="", width=70, height=10, justify="left", bg=self.lightyellow)
-        self.metaData_label.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
+            # Fermer la fenêtre de modification
+            self.metaData_label = Label(self.section3_metaData, text="", width=70, height=10, justify="left", bg=self.lightyellow)
+            self.metaData_label.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
 
-        # Actualiser l'affichage des métadonnées
-        self.metadata_str = self.extract.extraction_et_afficher_tag(chemin_audio)
-        self.metaData_label.config(text=self.metadata_str)
-        self.cover_image(chemin_audio)  # Affiche l'image de couverture
-        self.chemin_audio = chemin_audio
-        modif_window.destroy()
-        # self.affiche_window = False
+            # Actualiser l'affichage des métadonnées
+            self.metadata_str = self.extract.extraction_et_afficher_tag(chemin_audio)
+            self.metaData_label.config(text=self.metadata_str)
+            self.cover_image(chemin_audio)  # Affiche l'image de couverture
+            self.chemin_audio = chemin_audio
+            modif_window.destroy()
+            # self.affiche_window = False
 
 
         
