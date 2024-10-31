@@ -326,6 +326,7 @@ class Interface:
 
     def affiche_path_label(self, event):
         """Affiche les détails du fichier audio sélectionné dans la Listbox."""
+        pygame.mixer.music.unload()
         audio = None
         self.verif_lecture = False
         
@@ -484,7 +485,6 @@ class Interface:
         self.entry.delete(0, tk.END)  
         self.new_window.destroy()  # Ferme la fenêtre secondaire
 
-
     def open_new_fenetre(self):
         """Ouvre une nouvelle fenêtre pour gérer la playlist."""
         # Création d'une nouvelle fenêtre
@@ -541,7 +541,6 @@ class Interface:
 
         button_specifier = tk.Button(frame2_open_window, text="Spécifier", command=self.specifier)
         button_specifier.pack(side=tk.LEFT, padx=10, pady=10)
-
 
     def options_fichier_lire(self, filename):
         """Charge des options à partir d'un fichier et crée des cases à cocher."""
@@ -876,43 +875,40 @@ class Interface:
         return metadata_dict
 
     def save_modification(self):
-        """Enregistre les modifications apportées aux métadonnées de la playlist."""
-        if (self.verif_lecture == True):
-            message = "audio en cour ou en pause"
-            self.afficher_notification(message)
-        else:
-            # Récupérer le chemin audio de l'attribut de la classe
-            chemin_audio = self.chemin_audio
-            print("chemin_audioiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-            print(chemin_audio)
+        pygame.mixer.music.stop
+        pygame.mixer.music.unload()
+        # Récupérer le chemin audio de l'attribut de la classe
+        chemin_audio = self.chemin_audio
+        print("chemin_audioiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+        print(chemin_audio)
 
-            # Récupérer les valeurs des champs de saisie
-            titre = self.entries["titre"].get()
-            artiste = self.entries["artiste"].get()
-            album = self.entries["album"].get()
-            genre = self.entries["genre"].get()
-            ladate = self.entries["date"].get()
-            organisation = self.entries["organisation"].get()
-            
-            # Récupérer le chemin de l'image de cover (si sélectionnée)
-            chemin_image = self.cover_image_path if self.cover_image_path else None
+        # Récupérer les valeurs des champs de saisie
+        titre = self.entries["titre"].get()
+        artiste = self.entries["artiste"].get()
+        album = self.entries["album"].get()
+        genre = self.entries["genre"].get()
+        ladate = self.entries["date"].get()
+        organisation = self.entries["organisation"].get()
+        
+        # Récupérer le chemin de l'image de cover (si sélectionnée)
+        chemin_image = self.cover_image_path if self.cover_image_path else None
 
-            self.metaData_label.pack_forget() 
+        self.metaData_label.pack_forget() 
 
-            # Appeler la méthode pour afficher et modifier les métadonnées
-            self.edite.afficher_et_modifier_metadata(chemin_audio, chemin_image, titre, artiste, album, genre, ladate, organisation)
+        # Appeler la méthode pour afficher et modifier les métadonnées
+        self.edite.afficher_et_modifier_metadata(chemin_audio, chemin_image, titre, artiste, album, genre, ladate, organisation)
 
-            # Fermer la fenêtre de modification
-            self.metaData_label = Label(self.section3_metaData, text="", width=70, height=10, justify="left", bg=self.lightyellow)
-            self.metaData_label.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
+        # Fermer la fenêtre de modification
+        self.metaData_label = Label(self.section3_metaData, text="", width=70, height=10, justify="left", bg=self.lightyellow)
+        self.metaData_label.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
 
-            # Actualiser l'affichage des métadonnées
-            self.metadata_str = self.extract.extraction_et_afficher_tag(chemin_audio)
-            self.metaData_label.config(text=self.metadata_str)
-            self.cover_image(chemin_audio)  # Affiche l'image de couverture
-            self.chemin_audio = chemin_audio
-            modif_window.destroy()
-            # self.affiche_window = False
+        # Actualiser l'affichage des métadonnées
+        self.metadata_str = self.extract.extraction_et_afficher_tag(chemin_audio)
+        self.metaData_label.config(text=self.metadata_str)
+        self.cover_image(chemin_audio)  # Affiche l'image de couverture
+        self.chemin_audio = chemin_audio
+        modif_window.destroy()
+        # self.affiche_window = False
 
 
         
