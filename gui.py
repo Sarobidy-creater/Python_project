@@ -97,11 +97,14 @@ class Interface:
         # self.button2 = tk.Button(self.frame1, text="Retour", width=12)
         # self.button2.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
 
-        self.entry_ecriture_haut = tk.Entry(self.frame1_haut, width=113)
+        self.entry_ecriture_haut = tk.Entry(self.frame1_haut, width=130)
         self.entry_ecriture_haut.pack(side=tk.LEFT, padx=5, pady=5)
 
         self.butt_check_api = tk.Button(self.frame1_haut, text="Check", width=12, command=self.rechercher)
         self.butt_check_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
+    
+        self.butt_retour_api = tk.Button(self.frame1_haut, text="Retour", width=12, command=self.retour)
+        self.butt_retour_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
 
         self.butt_modif_metaData = tk.Button(self.frame1_haut, text=":::", width=12, command=self.modification_data)
         self.butt_modif_metaData.pack(side=tk.RIGHT, padx=10, pady=10) 
@@ -650,9 +653,6 @@ class Interface:
             self.scrollbar.pack_forget()  # Cache la scrollbar précédente
             self.rechercher_frame.pack_forget()  # Cache le cadre précédent
 
-        # Crée et configure le bouton de retour
-        self.butt_retour_api = tk.Button(self.frame1_haut, text="Retour", width=12, command=self.retour)
-        self.butt_retour_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
 
         # Cache le label des métadonnées
         self.metaData_label.pack_forget()
@@ -688,7 +688,6 @@ class Interface:
      
     def retour(self): 
         """Affiche les métadonnées du fichier audio sélectionné et cache le bouton de retour."""
-        self.butt_retour_api.pack_forget()  # Cache le bouton de retour
         if self.reche == False: 
             # Label pour afficher le chemin complet du fichier sélectionné
             self.metaData_label = Label(self.section3_metaData, text="", width=70, height=10, justify="left", bg=self.lightyellow)
