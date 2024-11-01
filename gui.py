@@ -219,9 +219,17 @@ class Interface:
         self.butt_next = tk.Button(self.B2_label_bouton_manip, text="▶▶", command=self.next_audio, width=6)
         self.butt_next.pack(side=tk.RIGHT, padx=10, pady=10)  # Positionné à droite avec un espacement
 
+        # Liaison de la barre d'espace pour la pause/reprise
+        self.master.bind("<space>", self.toggle_pause)  # Appuyer sur la barre d'espace pour mettre en pause/reprendre
+
+        # Liaison des touches de direction pour les actions Précédent et Suivant
+        self.master.bind("<Left>", self.prev_audio)  # Flèche gauche pour le morceau précédent
+        self.master.bind("<Right>", self.next_audio)  # Flèche droite pour le morceau suivant
+
+        self.master.bind("<Return>", self.direct_Goto) 
 
 
-    def direct_Goto(self):
+    def direct_Goto(self, event=None):
         """Passage au panneau 2 et chargement de la musique par défaut."""
         self.switch_to_panel2() 
         chem = os.path.abspath(r"Python_project\music")
@@ -440,7 +448,7 @@ class Interface:
         self.butt_pause_reprendre.config(text="⏸")  # Met à jour le texte du bouton pour pause
         self.audio_lecture = True  # Indique que l'audio est en lecture
         
-    def toggle_pause(self):
+    def toggle_pause(self, event=None):
         """Met en pause ou reprend la lecture de l'audio."""
         self.verif_lecture = True
         if self.is_paused:
@@ -460,6 +468,7 @@ class Interface:
 
     def par_defaut(self):
         """Restaure la valeur par défaut dans l'Entry et affiche cette valeur dans le label."""
+        self.select_all
         self.entry.delete(0, tk.END)  # Efface le contenu de l'Entry
         self.entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut
         chemin_play = self.playlist.gui_ecritureFichierxspf(self.varDirectory, None)  # Enregistre la playlist  
@@ -475,8 +484,6 @@ class Interface:
 
         # Récupérer les chemins des options sélectionnées
         chemins_selectionnes = [path for var, path in zip(self.checkbox_vars, self.chemins_options) if var.get()]
-
- 
 
         # Écrire les chemins sélectionnés dans un fichier
         with open(self.file_path_chemins, 'w', encoding="utf-8") as f:
@@ -578,16 +585,16 @@ class Interface:
             print(f"Erreur : Le fichier '{filename}' n'a pas été trouvé.")
 
     def select_all(self):
-        # Cocher toutes les checkboxes
+        """Cocher toutes les checkboxes"""
         for var in self.checkbox_vars:
             var.set(True)
 
     def deselect_all(self):
-        # Décocher toutes les checkboxes
+        """Décocher toutes les checkboxes"""
         for var in self.checkbox_vars:
             var.set(False)
 
-    def next_audio(self):
+    def next_audio(self, event=None):
         """Passe à l'audio suivant dans la liste et met à jour l'affichage."""
         try:
             if self.tailleListbox > self.buttnext:  # Vérifie s'il y a un élément suivant
@@ -624,7 +631,7 @@ class Interface:
             self.audio_listbox.selection_set(next_index)  # Sélectionne le prochain élément
             self.audio_listbox.activate(next_index)  # Met le prochain élément en surbrillance
 
-    def prev_audio(self):  
+    def prev_audio(self, event=None):  
         """Passe à l'audio précédent dans la liste et met à jour l'affichage."""
         if 0 < self.buttnext:  # Vérifie s'il y a un élément précédent
             self.prev_item()  # Sélectionne l'élément précédent
@@ -740,6 +747,7 @@ class Interface:
             self.reche_retour = False
 
     def destroy_notification(self):
+        """Ferme la fenêtre secondaire."""
         self.notification.destroy()  
 
     def afficher_notification(self, chemin_play):
@@ -787,7 +795,7 @@ class Interface:
     """
 
     def fetcher_methode(self, saisie:str)-> str:
-
+        """Méthode pour traiter la saisie et effectuer des recherches basées sur artiste, album ou musique via un API."""
         # Vérifier si la saisie commence par "artiste:", "album:", ou "music:"
         if saisie.startswith("artiste:"):
             # Extraire le nom de l'artiste après "artiste:"
@@ -903,8 +911,12 @@ class Interface:
         return metadata_dict
 
     def save_modification(self):
-        pygame.mixer.music.stop
-        pygame.mixer.music.unload()
+        """ Enregistre les modifications des métadonnées et actualise l'affichage. """
+        if self.audio_lecture == True :
+            pygame.mixer.music.stop
+            pygame.mixer.music.unload()
+        else:
+            pygame.mixer.music.stop
         # Récupérer le chemin audio de l'attribut de la classe
         chemin_audio = self.chemin_audio
 
@@ -936,6 +948,7 @@ class Interface:
         modif_window.destroy()
         # self.affiche_window = False
         self.ecoute.lire_fichier_audio(chemin_audio)
+        self.audio_lecture = True
 
 
         
