@@ -316,12 +316,15 @@ Les résultats de la recherche (artistes, albums, morceaux) sont ensuite affich�
 En cliquant sur le bouton **Playlist**, une nouvelle fenêtre s'ouvrira avec les options suivantes :
 
 - **Annuler** :
+  - Bouton pour annuler toutes les opérations **Annuler**
   - Annule toutes les opérations en cours et ferme la fenêtre de playlist sans sauvegarder les modifications.
 
 - **Playlist par défaut** :
+  - Bouton pour créer la playlist par défaut **par défaut**
   - Crée la playlist par défaut qui contient une liste d'audio préétablie dans la Listbox affichée sur l'interface. Cette playlist peut être utilisée pour une lecture rapide sans nécessiter de configuration supplémentaire.
 
 - **Playlist spécifiée** :
+  - Bouton pour spécifier une playlist **spécifier**
   - Permet de spécifier une playlist par son nom et de sélectionner les audios à inclure dans cette playlist à l'aide de cases à cocher (checkbox). L'utilisateur peut cocher les fichiers audio qu'il souhaite ajouter à sa playlist personnalisée.
 
 ## 8. Fenêtre de Modification des Métadonnées
@@ -348,12 +351,15 @@ Ce bouton ouvre un explorateur de fichiers pour choisir une nouvelle image de co
 ### Boutons d'Action
 
 - **Annuler** :
+  - Bouton pour annuler toutes les opérations **Annuler**
   - Ferme la fenêtre sans effectuer d'opérations sur les métadonnées.
 
 - **Sélectionner une couverture** :
+  - Bouton pour sélectionner une couverture **Sélectionner une couverture**
   - Ouvre un explorateur de fichiers pour choisir une image de couverture pour l'audio.
 
 - **Enregistrer** :
+  - Bouton pour sauvegarde les métadonnées **Enregistrer**
   - Sauvegarde les métadonnées saisies dans les champs de texte et la couverture si elle a été modifiée.
 
 ## 9. Contrôle de lecture (Play/Pause/Next/Previous)
