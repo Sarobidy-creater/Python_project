@@ -202,7 +202,7 @@ Pour utiliser le script depuis la ligne de commande, assurez-vous d'abord d'êtr
     python3 cli.py --listen --file "chemin\vers\la\musique\music.mp3"
     ```
 
-# Interface de Gestion des Fichiers Audio
+## Interface de gestion des fichiers audio
 
 Ce projet est une interface graphique qui permet d'explorer des fichiers audio sur votre ordinateur, d'en extraire les métadonnées, d'afficher la couverture d'album (cover art), et de créer des playlists. Il est conçu pour être simple d'utilisation grâce à des boutons et des fenêtres interactives.
 
@@ -269,7 +269,7 @@ Cette application de gestion de musique vous permet de rechercher, lire, et gér
   
 - **Rechercher** :
   - Bouton pour utilise une API **Check**
-  - Utilisez ce bouton pour rechercher un artiste, un album, ou une musique en utilisant une API. 
+  - Utilisez ce bouton pour rechercher un artiste, un album, ou une musique en utilisant une API.
   - Entrez votre recherche dans le champ de saisie (Entry).
 
 ### Fonctionnalité de Recherche de Musique
@@ -296,7 +296,7 @@ L'API renvoie les résultats de la recherche sous forme de données structurées
 
 #### 4. Affichage des Résultats
 
-Les résultats de la recherche (artistes, albums, morceaux) sont ensuite affichés dans l'interface utilisateur. 
+Les résultats de la recherche (artistes, albums, morceaux) sont ensuite affichés dans l'interface utilisateur.
 
 ## 6. Création de playlists
 
@@ -326,6 +326,14 @@ En cliquant sur le bouton **Playlist**, une nouvelle fenêtre s'ouvrira avec les
 - **Playlist spécifiée** :
   - Bouton pour spécifier une playlist **spécifier**
   - Permet de spécifier une playlist par son nom et de sélectionner les audios à inclure dans cette playlist à l'aide de cases à cocher (checkbox). L'utilisateur peut cocher les fichiers audio qu'il souhaite ajouter à sa playlist personnalisée.
+  
+- **Sélectionner toutes les checkboxes** :
+  - Bouton pour sélectionner toutes les checkboxes **T-select**
+  - Lorsqu’on clique sur le bouton T-select, toutes les checkboxes de la liste sont cochées.
+  
+- **Désélectionner toutes les checkboxes** :
+  - Bouton pour désélectionner toutes les checkboxes **T-déselect**
+  - En cliquant sur T-déselect, toutes les checkboxes de la liste sont décochées.
 
 ## 8. Fenêtre de Modification des Métadonnées
 
