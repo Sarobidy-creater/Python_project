@@ -13,6 +13,8 @@ from ecouterAudio import Ecouter # Importe la classe Ecouter du module ecouterAu
 from explorationDossier import Explorer  # Importe la classe Explorer pour explorer les dossiers
 from constitutionPlaylist import Playlist  # Importe la classe Playlist du module constitutionPlaylist pour générer des playlists
 from audioTagExtraction import Extraction  # Importe la classe Extraction du module audioTagExtraction pour extraire les métadonnées audio
+from fetcher import Fetcher
+from audioMetaEdite import Editer
 from mutagen.easyid3 import EasyID3  # Pour lire et écrire les métadonnées ID3 dans les fichiers MP3.
 from mutagen.mp3 import MP3  # Pour gérer les fichiers audio MP3 et accéder à leurs métadonnées.
 from mutagen.id3 import ID3, APIC  # Pour manipuler les balises ID3 et gérer les images intégrées comme les couvertures d'album.
@@ -34,6 +36,8 @@ class Interface:
         self.ecoute = Ecouter()  # Instance de la classe Ecouter pour lire les fichiers audio
         self.playlist = Playlist()  # Instance de la classe Playlist pour gérer les playlists
         self.extract = Extraction()  # Instance de la classe Extraction pour extraire les métadonnées audio
+        self.fetcher = Fetcher()
+        self.edite = Editer()
         self.varDirectory = ""  # Variable pour stocker le chemin du répertoire exploré
         self.valeur_par_defaut = "maPlaylist"  # Valeur par défaut de l'entrée de texte pour nommer la playlist
         self.is_paused = False  # Variable pour suivre si la lecture est en pause
@@ -42,9 +46,19 @@ class Interface:
         self.tailleListbox = 0  # Taille de la liste des fichiers audio
         self.audio_lecture = False  # Statut de lecture de l'audio
         self.reche = False
+        self.reche_retour = False
         self.lightyellow = "lightyellow"  # Couleur de fond pour certaines parties de l'interface
         self.dodgerblue = "dodgerblue"  # Couleur de fond pour d'autres parties
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
+        self.metadata_str = ""
+        self.chemin_audio = ""
+        self._open_window  = False
+        self.playlist_window = False
+        self.affiche_window = False # Attribut pour suivre si la fenêtre de modification est ouverte
+        # Variables pour gérer l'interface
+        self.checkbox_vars = []  # Pour stocker les variables de cases à cocher
+        self.chemins_options = []  # Pour stocker les chemins des options
+        self.file_path_chemins = os.path.abspath(r'python_project\FichierTemp\options_selectionnees.txt')  # Chemin du fichier où écrire les options sélectionnées
 
         # Création des différents panneaux de l'interface
 
@@ -54,13 +68,9 @@ class Interface:
 
         # Obtenir le chemin absolu du répertoire actuel pour les images
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        print("base_dir")
-        print(base_dir)
 
         # Charger l'image depuis le répertoire du projet
         chem_image = os.path.join(base_dir, "img", "nn.webp")
-        print("chem_image")
-        print(base_dir)
         self.image = Image.open(chem_image)  # Charger l'image
         self.image = self.image.resize((200, 200))  # Redimensionner l'image
         self.image_tk = ImageTk.PhotoImage(self.image)  # Convertir pour l'utiliser avec tkinter
@@ -88,13 +98,16 @@ class Interface:
         # self.button2 = tk.Button(self.frame1, text="Retour", width=12)
         # self.button2.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
 
-        self.entry_ecriture_haut = tk.Entry(self.frame1_haut, width=150)
+        self.entry_ecriture_haut = tk.Entry(self.frame1_haut, width=130)
         self.entry_ecriture_haut.pack(side=tk.LEFT, padx=5, pady=5)
 
         self.butt_check_api = tk.Button(self.frame1_haut, text="Check", width=12, command=self.rechercher)
         self.butt_check_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
+    
+        self.butt_retour_api = tk.Button(self.frame1_haut, text="Retour", width=12, command=self.retour)
+        self.butt_retour_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
 
-        self.butt_modif_metaData = tk.Button(self.frame1_haut, text=":::", width=12)
+        self.butt_modif_metaData = tk.Button(self.frame1_haut, text=":::", width=12, command=self.modification_data)
         self.butt_modif_metaData.pack(side=tk.RIGHT, padx=10, pady=10) 
 
         # Cadre 2******************************************
@@ -120,6 +133,9 @@ class Interface:
 
         # Lier le double-clic à la lecture et l'affichage du titre
         self.audio_listbox.bind("<Double-Button-1>", self.affiche_path_label)
+
+        # Lier le double-clic à la lecture et l'affichage du titre
+        # self.audio_listbox.bind("<Double-Button-1>", self.ajoute_playlist)
 
         # Ajouter une barre de défilement
         self.scrollbarlistbox = Scrollbar(self.section1_gauche_liste)
@@ -198,14 +214,22 @@ class Interface:
         # Création d'un bouton pour mettre en pause ou reprendre la lecture du morceau audio
         self.butt_pause_reprendre = tk.Button(self.B2_label_bouton_manip, text="⏸", command=self.toggle_pause, width=10)
         self.butt_pause_reprendre.pack(side=tk.LEFT, padx=10, pady=10)  # Positionné à gauche avec un espacement
-
+        
         # Création d'un bouton pour passer au morceau audio suivant
         self.butt_next = tk.Button(self.B2_label_bouton_manip, text="▶▶", command=self.next_audio, width=6)
         self.butt_next.pack(side=tk.RIGHT, padx=10, pady=10)  # Positionné à droite avec un espacement
 
+        # Liaison de la barre d'espace pour la pause/reprise
+        self.master.bind("<space>", self.toggle_pause)  # Appuyer sur la barre d'espace pour mettre en pause/reprendre
+
+        # Liaison des touches de direction pour les actions Précédent et Suivant
+        self.master.bind("<Left>", self.prev_audio)  # Flèche gauche pour le morceau précédent
+        self.master.bind("<Right>", self.next_audio)  # Flèche droite pour le morceau suivant
+
+        self.master.bind("<Return>", self.direct_Goto) 
 
 
-    def direct_Goto(self):
+    def direct_Goto(self, event=None):
         """Passage au panneau 2 et chargement de la musique par défaut."""
         self.switch_to_panel2() 
         chem = os.path.abspath(r"Python_project\music")
@@ -215,19 +239,21 @@ class Interface:
         nom_fichier = os.path.basename(audio_path)
         self.B1_label_fichier_nom.config(text=nom_fichier)
         # Extraire et afficher les métadonnées de l'audio
-        metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-        self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+        self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+        self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
         self.cover_image(audio_path)  # Affiche l'image de couverture
+        self.chemin_audio = audio_path
         self.Varbutt = "0"
         self.buttnext = 0
         self.audio_listbox.selection_set(self.buttnext)  # Sélectionne le premier élément
 
     def exploration_dossier(self):
         """Ouvre un dossier pour explorer et charger des fichiers audio."""
+          
+        if(self._open_window  == True):
+            self.annuler()
         # Ouvre une boîte de dialogue pour sélectionner un dossier et stocke le chemin dans 'dossier'.
-        self.mon_dictionnaire.clear()
-        dossier = filedialog.askdirectory()  
-        
+        dossier = filedialog.askdirectory()
         # Vérifie si un dossier a été sélectionné
         if dossier:
             # Efface le contenu actuel de la Listbox pour éviter les doublons
@@ -242,6 +268,8 @@ class Interface:
             
             # Ouvre le fichier contenant les chemins des fichiers audio en mode lecture
             i = 0
+            
+            self.mon_dictionnaire.clear()
             with open(full_path, 'r', encoding='utf-8') as f:
                 # Lit chaque ligne du fichier
                 for ligne in f:
@@ -256,6 +284,7 @@ class Interface:
                     # Récupère seulement le nom du fichier à partir du chemin
                     nom_fichier = os.path.basename(cheminVar)
                     # Ajouter une nouvelle paire clé-valeur
+                    
                     varchar = str(i)
                     self.mon_dictionnaire[varchar] = f"{cheminVar}"
                     i += 1  # Incrémenter le compteur pour les clés du dictionnaire
@@ -314,6 +343,7 @@ class Interface:
     def affiche_path_label(self, event):
         """Affiche les détails du fichier audio sélectionné dans la Listbox."""
         audio = None
+        self.verif_lecture = False
         
         # Récupérer l'index du fichier sélectionné dans la Listbox
         select_index = self.audio_listbox.curselection() 
@@ -329,10 +359,11 @@ class Interface:
             self.B1_label_fichier_nom.config(text=nom_fichier)
             
             # Extraire et afficher les métadonnées de l'audio
-            metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-            self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+            self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+            self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
             
             self.cover_image(audio_path)  # Affiche l'image de couverture
+            self.chemin_audio = audio_path
             
             if self.audio_lecture:  # Si un audio est déjà en lecture
                 self.lire_audio()  # Lit le fichier audio
@@ -371,7 +402,6 @@ class Interface:
             else:
                 # Charger l'image par défaut si aucune couverture n'est trouvée
                 image_path = os.path.abspath(r"Python_project\img\images.jpeg")
-                print("Chemin de l'image par défaut :", image_path)
                 
                 try:
                     image = Image.open(image_path)  # Ouvre l'image par défaut
@@ -418,10 +448,9 @@ class Interface:
         self.butt_pause_reprendre.config(text="⏸")  # Met à jour le texte du bouton pour pause
         self.audio_lecture = True  # Indique que l'audio est en lecture
         
-
-
-    def toggle_pause(self):
+    def toggle_pause(self, event=None):
         """Met en pause ou reprend la lecture de l'audio."""
+        self.verif_lecture = True
         if self.is_paused:
             self.reprendre()  # Reprend la lecture
             self.butt_pause_reprendre.config(text="⏸")  # Met à jour le texte du bouton
@@ -433,46 +462,139 @@ class Interface:
 
     def annuler(self):
         """Ferme la fenêtre secondaire."""
-        new_window.destroy()  # Ferme la fenêtre secondaire
+        self.new_window.destroy()  # Ferme la fenêtre secondaire
+        self._open_window  = False
+        # self.playlist_window = False
 
     def par_defaut(self):
         """Restaure la valeur par défaut dans l'Entry et affiche cette valeur dans le label."""
-        entry.delete(0, tk.END)  # Efface le contenu de l'Entry
-        entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut
+        self.select_all
+        self.entry.delete(0, tk.END)  # Efface le contenu de l'Entry
+        self.entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut
         chemin_play = self.playlist.gui_ecritureFichierxspf(self.varDirectory, None)  # Enregistre la playlist  
-        self.afficher_notification(os.path.abspath(chemin_play))
+        self.afficher_notification(f"Playlist crée dans ce dossier : {os.path.abspath(chemin_play)}")
+        self._open_window  = False
+        self.new_window.destroy()  # Ferme la fenêtre secondaire
+        # self.playlist_window = False
 
     def specifier(self):
-        """Récupère le texte saisi et l'affiche dans le label."""
-        texte_saisi = entry.get()  # Récupère le texte saisi dans l'Entry
-        chemin_play = self.playlist.gui_ecritureFichierxspf(self.varDirectory, texte_saisi)  # Enregistre la playlist avec le texte saisi
+        """Récupère le texte saisi et les options cochées, puis les écrit dans un fichier."""
+        texte_saisi = self.entry.get()  # Récupère le texte saisi dans l'Entry
+        print(texte_saisi)
+
+        # Récupérer les chemins des options sélectionnées
+        chemins_selectionnes = [path for var, path in zip(self.checkbox_vars, self.chemins_options) if var.get()]
+
+        # Écrire les chemins sélectionnés dans un fichier
+        with open(self.file_path_chemins, 'w', encoding="utf-8") as f:
+            for chemin in chemins_selectionnes:
+                f.write(f"{chemin}\n")  # Écrire chaque chemin dans le fichier, suivi d'une nouvelle ligne
+
+        # Afficher la notification avec le chemin enregistré
+        chemin_play = self.playlist.gui_ecritureFichierxspf(self.file_path_chemins, texte_saisi)  # Enregistre la playlist avec le texte saisi
         self.afficher_notification(os.path.abspath(chemin_play))
-        entry.delete(0, tk.END)  # Efface le contenu de l'Entry après avoir spécifié
+
+        # Efface le contenu de l'Entry après avoir spécifié
+        self.entry.delete(0, tk.END)  
+        self._open_window  = False
+        self.new_window.destroy()  # Ferme la fenêtre secondaire
 
     def open_new_fenetre(self):
         """Ouvre une nouvelle fenêtre pour gérer la playlist."""
-        global new_window, label, entry
-        new_window = Toplevel(root)
-        new_window.title("fenêtre Playlist")
-        new_window.geometry("250x150")  # Taille réduite de la fenêtre
-        new_window.resizable(False, False)  # Empêche la redimension de la fenêtre (horizontal, vertical)
+        # Création d'une nouvelle fenêtre
+        self.new_window = tk.Toplevel(root)
+        self.new_window.title("Fenêtre Playlist")
+        self.new_window.geometry("450x420")  # Taille de la fenêtre
+        self.new_window.resizable(True, False)  # Empêche la redimension de la fenêtre
+        self._open_window  = True
+        # Créer les cadres
+        frame1_open_window = tk.Frame(self.new_window, bg=self.antiquewhite)
+        frame2_open_window = tk.Frame(self.new_window, bg="gray")
+        frame3_open_window = tk.Frame(self.new_window)  # Cadre général pour le canvas et la scrollbar
+
+        frame1_open_window.pack(fill=tk.BOTH, expand=False, padx=10, pady=10)
+        frame3_open_window.pack(fill=tk.BOTH, expand=False, padx=10, pady=10)
+        frame2_open_window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
         # Zone de saisie (entrée de texte) avec valeur par défaut
-        entry = tk.Entry(new_window, width=30)
-        entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut dans l'Entry
-        entry.pack(pady=10)
+        self.entry = tk.Entry(frame1_open_window, width=30)
+        self.entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut dans l'Entry
+        self.entry.pack(side=tk.LEFT, padx=10, pady=10)
+
+        # Bouton pour désélectionner toutes les checkboxes
+        self.deselect_all_btn = tk.Button(frame1_open_window, text="T-déselect", command=self.deselect_all)
+        self.deselect_all_btn.pack(side=tk.RIGHT, padx=10, pady=10)
+
+        # Bouton pour sélectionner toutes les checkboxes
+        self.select_all_btn = tk.Button(frame1_open_window, text="T-select", command=self.select_all)
+        self.select_all_btn.pack(side=tk.RIGHT, padx=10, pady=10)
+
+        # Création de la liste pour stocker les variables de case à cocher et les chemins
+        self.checkbox_vars = []
+        self.chemins_options = []
+
+        # Créer un canvas
+        self.canvas = tk.Canvas(frame3_open_window, bg="white")
+        self.scrollbar = tk.Scrollbar(frame3_open_window, orient="vertical", command=self.canvas.yview)
+        self.scrollable_frame = tk.Frame(self.canvas, bg="white")
+
+        # Configuration du canvas
+        self.scrollable_frame.bind(
+            "<Configure>",
+            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        )
+
+        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+
+        # Pack le canvas et la scrollbar
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # Lire le fichier et créer des cases à cocher
+        fichier_lire = os.path.abspath(r'python_project\FichierTemp\TempFile.txt')  
+        self.options_fichier_lire(fichier_lire)
 
         # Création des boutons dans la nouvelle fenêtre
-        button_annuler = tk.Button(new_window, text="Annuler", command=self.annuler)
+        button_annuler = tk.Button(frame2_open_window, text="Annuler", command=self.annuler)
         button_annuler.pack(side=tk.LEFT, padx=10, pady=10)
 
-        button_par_defaut = tk.Button(new_window, text="Par défaut", command=self.par_defaut)
+        button_par_defaut = tk.Button(frame2_open_window, text="Par défaut", command=self.par_defaut)
         button_par_defaut.pack(side=tk.LEFT, padx=10, pady=10)
 
-        button_specifier = tk.Button(new_window, text="Spécifier", command=self.specifier)
+        button_specifier = tk.Button(frame2_open_window, text="Spécifier", command=self.specifier)
         button_specifier.pack(side=tk.LEFT, padx=10, pady=10)
 
-    def next_audio(self):
+    def options_fichier_lire(self, filename):
+        """Charge des options à partir d'un fichier et crée des cases à cocher."""
+        try:
+            with open(filename, 'r', encoding="utf-8") as file:
+                for line in file:
+                    option = line.strip()  # Supprime les espaces autour
+                    absolute_path = os.path.abspath(option)  # Obtenir le chemin absolu
+
+                    # Créer une variable pour la case à cocher
+                    var = tk.BooleanVar()
+                    self.checkbox_vars.append(var)  # Ajouter la variable à la liste des variables de cases
+                    self.chemins_options.append(absolute_path)  # Ajouter le chemin à la liste des chemins
+
+                    # Créer la case à cocher dans le cadre défilant
+                    checkbox = tk.Checkbutton(self.scrollable_frame, text=os.path.basename(option), variable=var, bg="white")
+                    checkbox.pack(anchor=tk.W)  # Ancre à gauche
+        except FileNotFoundError:
+            print(f"Erreur : Le fichier '{filename}' n'a pas été trouvé.")
+
+    def select_all(self):
+        """Cocher toutes les checkboxes"""
+        for var in self.checkbox_vars:
+            var.set(True)
+
+    def deselect_all(self):
+        """Décocher toutes les checkboxes"""
+        for var in self.checkbox_vars:
+            var.set(False)
+
+    def next_audio(self, event=None):
         """Passe à l'audio suivant dans la liste et met à jour l'affichage."""
         try:
             if self.tailleListbox > self.buttnext:  # Vérifie s'il y a un élément suivant
@@ -486,10 +608,11 @@ class Interface:
                 self.B1_label_fichier_nom.config(text=nom_fichier)
                 
                 # Extraire et afficher les métadonnées de l'audio
-                metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-                self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+                self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+                self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
                 
                 self.cover_image(audio_path)  # Affiche l'image de couverture
+                self.chemin_audio = audio_path
                 self.Varbutt = "0"
                 if self.audio_lecture:  # Si un audio est déjà en lecture
                     self.lire_audio()  # Lit le fichier audio
@@ -497,7 +620,6 @@ class Interface:
             print("Erreur : Aucun audio suivant dans la liste.")
         except Exception as e:
             print("Erreur lors de la lecture de l'audio suivant :", e)
-
 
     def next_item(self):
         """Sélectionne l'élément suivant dans la Listbox."""
@@ -509,7 +631,7 @@ class Interface:
             self.audio_listbox.selection_set(next_index)  # Sélectionne le prochain élément
             self.audio_listbox.activate(next_index)  # Met le prochain élément en surbrillance
 
-    def prev_audio(self):  
+    def prev_audio(self, event=None):  
         """Passe à l'audio précédent dans la liste et met à jour l'affichage."""
         if 0 < self.buttnext:  # Vérifie s'il y a un élément précédent
             self.prev_item()  # Sélectionne l'élément précédent
@@ -522,10 +644,11 @@ class Interface:
             self.B1_label_fichier_nom.config(text=nom_fichier)
             
             # Extraire et afficher les métadonnées de l'audio
-            metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-            self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+            self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+            self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
             
             self.cover_image(audio_path)  # Affiche l'image de couverture
+            self.chemin_audio = audio_path
             self.Varbutt = "0"
             if self.audio_lecture:  # Si un audio est déjà en lecture
                 self.lire_audio()  # Lit le fichier audio
@@ -552,17 +675,59 @@ class Interface:
 
     def rechercher(self):
         """Affiche les fichiers MP3 disponibles et ajoute un bouton pour revenir."""
-        self.butt_check_api = tk.Button(self.frame1_haut, text="Retour", width=12, command=self.retour)
-        self.butt_check_api.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
-        # Créer une liste pour afficher les fichiers MP3
+        # Récupérer la saisie de l'utilisateur, la nettoyer et la mettre en minuscules
+        saisie = self.entry_ecriture_haut.get().strip().lower()
+
+        if saisie == "":
+            message = "la saisie de l'utilisateur est vide"
+            self.afficher_notification(message)
+            return ""
         
-        self.metaData_label.pack_forget()  # Cache le label des métadonnées
+        # Si le label existe déjà, on le cache au lieu de le recréer
+        if hasattr(self, 'rechercher_label'):
+            self.rechercher_label.pack_forget()  # Cache le label précédent
+            self.scrollbar.pack_forget()  # Cache la scrollbar précédente
+            self.rechercher_frame.pack_forget()  # Cache le cadre précédent
+
+
+        # Cache le label des métadonnées
+        self.metaData_label.pack_forget()
         self.reche = False
 
+        # Créer un cadre pour le label et la scrollbar
+        self.rechercher_frame = tk.Frame(self.section3_metaData, bg=self.lightyellow)
+        self.rechercher_frame.pack(pady=10, fill='both', expand=True)
+
+        # Créer un canvas pour la scrollbar
+        self.canvas = tk.Canvas(self.rechercher_frame, bg=self.lightyellow)
+        self.scrollbar = tk.Scrollbar(self.rechercher_frame, orient="vertical", command=self.canvas.yview, bg=self.lightyellow)
+        self.scrollable_frame = tk.Frame(self.canvas)
+
+        self.scrollable_frame.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
+
+        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+
+        # Configurer la scrollbar
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+
+        # Pack le canvas et la scrollbar
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # Créer un label pour afficher le chemin complet du fichier sélectionné
+        self.rechercher_label = Label(self.scrollable_frame, text="", width=70, justify="left", bg=self.lightyellow)
+        self.rechercher_label.pack(pady=10, fill='both', expand=True)
+        
+
+        # Récupérer et afficher les données API
+        data_api_affiche = self.fetcher_methode(saisie)
+        self.rechercher_label.config(text=data_api_affiche)  # Mettre à jour le texte du label formaté
+        
+        self.reche_retour = True
+     
     def retour(self): 
         """Affiche les métadonnées du fichier audio sélectionné et cache le bouton de retour."""
-        # self.butt_check_api.pack_forget()  # Cache le bouton de retour
-        if self.reche == False: 
+        if self.reche == False and self.reche_retour == True :
             # Label pour afficher le chemin complet du fichier sélectionné
             self.metaData_label = Label(self.section3_metaData, text="", width=70, height=10, justify="left", bg=self.lightyellow)
             self.metaData_label.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
@@ -572,34 +737,217 @@ class Interface:
             
             # Extraire et afficher les métadonnées de l'audio
             
-            metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-            self.metaData_label.config(text=metadata_str)  # Afficher les métadonnées dans path_label3
+
+            self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+            self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
             self.reche = True
+            self.rechercher_label.pack_forget() 
+            self.scrollable_frame.pack_forget()  # Cache le bouton de retour
+            self.rechercher_frame.pack_forget()  # Cache le bouton de retour
+            self.reche_retour = False
 
     def destroy_notification(self):
-        notification.destroy()  
-        new_window.destroy()  
+        """Ferme la fenêtre secondaire."""
+        self.notification.destroy()  
 
     def afficher_notification(self, chemin_play):
         """Affiche une notification"""
         global notification, label, entry
-        notification = Toplevel(root)
-        notification.title("Notification")  # Titre de la fenêtre
-        notification.geometry("700x100")  # Définir la taille de la fenêtre
-        notification.resizable(False, False)  # Empêcher le redimensionnement
+        self.notification = Toplevel(root)
+        self.notification.title("Notification")  # Titre de la fenêtre
+        self.notification.geometry("700x100")  # Définir la taille de la fenêtre
+        self.notification.resizable(False, False)  # Empêcher le redimensionnement
 
          # Créer un label pour afficher le message
-        message_label = tk.Label(notification, text=f"Playlist crée dans ce dossier : {chemin_play}", padx=20, pady=20)
+        message_label = tk.Label(self.notification, text=f"Message : {chemin_play}", padx=20, pady=20)
         message_label.pack()
 
         # Créer un bouton pour fermer la notification
-        close_button = tk.Button(notification, text="OK", command=self.destroy_notification)
+        close_button = tk.Button(self.notification, text="OK", command=self.destroy_notification)
         close_button.pack(pady=(0, 10))  # Ajouter un peu d'espace en bas
         # messagebox.showinfo("Notification", f"Playlist crée dans ce dossier : {chemin_play}")
 
+    """    
+    def ajoute_playlist(self,event):
+        audio = None
+        
+        # Récupérer l'index du fichier sélectionné dans la Listbox
+        select_index = self.audio_listbox.curselection() 
+        self.buttnext = select_index[0] 
+        self.Varbutt = "1"  # Indique qu'un fichier a été sélectionné
+        
+        if select_index:
+            # Obtenir le chemin du fichier audio sélectionné
+            varstr = str(self.buttnext)
+            audio_path = self.mon_dictionnaire[varstr]
+            # Récupère seulement le nom du fichier à partir du chemin
+            nom_fichier = os.path.basename(audio_path)
+            self.B1_label_fichier_nom.config(text=nom_fichier)
+            
+            # Extraire et afficher les métadonnées de l'audio
+            self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+            self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
+            
+            self.cover_image(audio_path)  # Affiche l'image de couverture
+            
+            if self.audio_lecture:  # Si un audio est déjà en lecture
+                self.lire_audio()  # Lit le fichier audio
+    """
+
+    def fetcher_methode(self, saisie:str)-> str:
+        """Méthode pour traiter la saisie et effectuer des recherches basées sur artiste, album ou musique via un API."""
+        # Vérifier si la saisie commence par "artiste:", "album:", ou "music:"
+        if saisie.startswith("artiste:"):
+            # Extraire le nom de l'artiste après "artiste:"
+            artist_name = saisie[len("artiste:"):].strip()
+            self.fetcher.get_artist_info(artist_name)
+            auteur_saisie = self.fetcher.afficher_artiste_infos()
+            return auteur_saisie
+            
+        elif saisie.startswith("album:"):
+            # Extraire le nom de l'album après "album:"
+            album_name = saisie[len("album:"):].strip()
+            self.fetcher.get_album_info(album_name)
+            album_saisie = self.fetcher.afficher_album_infos()
+            return album_saisie
+
+            
+        elif saisie.startswith("music:"):
+            # Extraire le nom de la musique après "musique:"
+            track_name = saisie[len("music:"):].strip()
+            self.fetcher.get_track_info(track_name)
+            track_saisie = self.fetcher.afficher_track_infos()
+            return track_saisie
+        
+        else:
+            print("Commande non reconnue. Utilisez 'artiste:', 'album:', ou 'music:' pour effectuer une recherche.")
+
+    def modification_data(self):
+        """Ouvre une nouvelle fenêtre pour modifier les métadonnées de la playlist."""
+        # if self.affiche_window == False:
+        global modif_window
+        modif_window = Toplevel(root)
+        modif_window.title("Modification de métadonnées")
+        modif_window.geometry("300x500")  # Augmenter la taille de la fenêtre pour inclure la couverture
+        modif_window.resizable(False, False)  # Empêche la redimension de la fenêtre
+        
+
+        # Créer deux cadres pour organiser la disposition
+        self.frame1_modif_window = tk.Frame(modif_window, bg=self.antiquewhite)
+        self.frame2_modif_window = tk.Frame(modif_window, bg="gray")
+
+        # Pack les cadres dans la fenêtre
+        self.frame1_modif_window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.frame2_modif_window.pack(fill=tk.X)
+        
+        dict_metadata_str = self.convertir_metadata_en_dict(self.metadata_str)
+        list_metadata_str = list(dict_metadata_str.values())
+
+        # Liste des champs et de leurs labels
+        labels_text = ["Titre", "Artiste", "Album", "Genre", "Date", "Organisation"]
+        self.entries = {}  # Dictionnaire pour stocker les entrées associées aux labels
+
+        # Création des labels et zones de saisie
+        i = 0
+        for label_text in labels_text:
+            # Label
+            label = tk.Label(self.frame1_modif_window, text=label_text, bg=self.antiquewhite)
+            label.pack(anchor="w", padx=5, pady=3)
+
+            # Zone de saisie
+            entry = tk.Entry(self.frame1_modif_window, width=30)
+            entry.pack(anchor="w", padx=5, pady=3)
+
+            # Ajouter l'entrée au dictionnaire avec le nom du champ en clé
+            self.entries[label_text.lower()] = entry
+
+            # Ajouter la valeur par défaut dans le champ de saisie
+            entry.insert(0, list_metadata_str[i])  # Insère la valeur par défaut
+            i += 1
+
+        # Ajout de la sélection de cover
+        cover_label = tk.Label(self.frame1_modif_window, text="Cover", bg=self.antiquewhite)
+        cover_label.pack(anchor="w", padx=5, pady=3)
+
+        # Afficher une image de prévisualisation de la cover
+        self.cover_image_path = None
+
+        # Bouton pour sélectionner une image de couverture
+        select_cover_button = tk.Button(self.frame1_modif_window, text="Sélectionner une couverture", command=self.select_cover_image)
+        select_cover_button.pack(anchor="w", padx=5, pady=3)
+
+        # Boutons dans la deuxième section
+        button_cancel = tk.Button(self.frame2_modif_window, text="Annuler", command=self.but_cancel)
+        button_cancel.pack(side=tk.LEFT, padx=10, pady=10)
+
+        button_pour_ok = tk.Button(self.frame2_modif_window, text="Enregistrer", command=self.save_modification)
+        button_pour_ok.pack(side=tk.LEFT, padx=10, pady=10)
+            # self.affiche_window = True
+        chemin_audio = self.chemin_audio
+
+    def select_cover_image(self):
+        """Ouvre une boîte de dialogue pour sélectionner une image de couverture."""
+        file_path = filedialog.askopenfilename(title="Sélectionner une couverture", filetypes=[("Images", "*.png;*.jpg;*.jpeg")])
+        if file_path:
+            self.cover_image_path = file_path
+ 
+    def but_cancel(self):
+        """Ferme la fenêtre secondaire."""
+        modif_window.destroy()  # Ferme la fenêtre secondaire
+        # self.affiche_window = False
+
+    def convertir_metadata_en_dict(self,metadata_str: str) -> dict:
+        """Convertit une chaîne de métadonnées en un dictionnaire."""
+        metadata_dict = {}
+        
+        # Sépare la chaîne en lignes
+        lignes = metadata_str.strip().split("\n")
+        
+        for ligne in lignes:
+            if ':' in ligne:  # Vérifie si la ligne contient un deux-points
+                cle, valeur = ligne.split(':', 1)  # Sépare la clé et la valeur
+                metadata_dict[cle.strip()] = valeur.strip()  # Ajoute à la dict en supprimant les espaces
+
+        return metadata_dict
+
+    def save_modification(self):
+        """ Enregistre les modifications des métadonnées et actualise l'affichage. """
+        pygame.mixer.music.stop
+        pygame.mixer.music.unload()
+        # Récupérer le chemin audio de l'attribut de la classe
+        chemin_audio = self.chemin_audio
+
+        # Récupérer les valeurs des champs de saisie
+        titre = self.entries["titre"].get()
+        artiste = self.entries["artiste"].get()
+        album = self.entries["album"].get()
+        genre = self.entries["genre"].get()
+        ladate = self.entries["date"].get()
+        organisation = self.entries["organisation"].get()
+        
+        # Récupérer le chemin de l'image de cover (si sélectionnée)
+        chemin_image = self.cover_image_path if self.cover_image_path else None
+
+        self.metaData_label.pack_forget() 
+
+        # Appeler la méthode pour afficher et modifier les métadonnées
+        self.edite.afficher_et_modifier_metadata(chemin_audio, chemin_image, titre, artiste, album, genre, ladate, organisation)
+
+        # Fermer la fenêtre de modification
+        self.metaData_label = Label(self.section3_metaData, text="", width=70, height=10, justify="left", bg=self.lightyellow)
+        self.metaData_label.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
+
+        # Actualiser l'affichage des métadonnées
+        self.metadata_str = self.extract.extraction_et_afficher_tag(chemin_audio)
+        self.metaData_label.config(text=self.metadata_str)
+        self.cover_image(chemin_audio)  # Affiche l'image de couverture
+        self.chemin_audio = chemin_audio
+        modif_window.destroy()
+        # self.affiche_window = False
+        self.ecoute.lire_fichier_audio(chemin_audio)
 
 
-
+        
 # Création de la fenêtre principale
 if __name__ == "__main__":
     root = tk.Tk()
