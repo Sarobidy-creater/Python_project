@@ -244,7 +244,6 @@ class Interface:
         if(self._open_window  == True):
             self.annuler()
         # Ouvre une boîte de dialogue pour sélectionner un dossier et stocke le chemin dans 'dossier'.
-        self.mon_dictionnaire.clear()
         dossier = filedialog.askdirectory()
         # Vérifie si un dossier a été sélectionné
         if dossier:
@@ -260,6 +259,8 @@ class Interface:
             
             # Ouvre le fichier contenant les chemins des fichiers audio en mode lecture
             i = 0
+            
+            self.mon_dictionnaire.clear()
             with open(full_path, 'r', encoding='utf-8') as f:
                 # Lit chaque ligne du fichier
                 for ligne in f:
@@ -274,6 +275,7 @@ class Interface:
                     # Récupère seulement le nom du fichier à partir du chemin
                     nom_fichier = os.path.basename(cheminVar)
                     # Ajouter une nouvelle paire clé-valeur
+                    
                     varchar = str(i)
                     self.mon_dictionnaire[varchar] = f"{cheminVar}"
                     i += 1  # Incrémenter le compteur pour les clés du dictionnaire
