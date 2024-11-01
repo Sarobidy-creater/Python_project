@@ -46,6 +46,7 @@ class Interface:
         self.tailleListbox = 0  # Taille de la liste des fichiers audio
         self.audio_lecture = False  # Statut de lecture de l'audio
         self.reche = False
+        self.reche_retour = False
         self.lightyellow = "lightyellow"  # Couleur de fond pour certaines parties de l'interface
         self.dodgerblue = "dodgerblue"  # Couleur de fond pour d'autres parties
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
@@ -496,7 +497,8 @@ class Interface:
         # Création d'une nouvelle fenêtre
         self.new_window = tk.Toplevel(root)
         self.new_window.title("Fenêtre Playlist")
-        self.new_window.geometry("450x450")  # Taille de la fenêtre
+        self.new_window.geometry("450x420")  # Taille de la fenêtre
+        self.new_window.resizable(True, False)  # Empêche la redimension de la fenêtre
         self._open_window  = True
         # Créer les cadres
         frame1_open_window = tk.Frame(self.new_window, bg=self.antiquewhite)
@@ -510,7 +512,15 @@ class Interface:
         # Zone de saisie (entrée de texte) avec valeur par défaut
         self.entry = tk.Entry(frame1_open_window, width=30)
         self.entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut dans l'Entry
-        self.entry.pack(pady=10)
+        self.entry.pack(side=tk.LEFT, padx=10, pady=10)
+
+        # Bouton pour désélectionner toutes les checkboxes
+        self.deselect_all_btn = tk.Button(frame1_open_window, text="T-déselect", command=self.deselect_all)
+        self.deselect_all_btn.pack(side=tk.RIGHT, padx=10, pady=10)
+
+        # Bouton pour sélectionner toutes les checkboxes
+        self.select_all_btn = tk.Button(frame1_open_window, text="T-select", command=self.select_all)
+        self.select_all_btn.pack(side=tk.RIGHT, padx=10, pady=10)
 
         # Création de la liste pour stocker les variables de case à cocher et les chemins
         self.checkbox_vars = []
@@ -566,7 +576,17 @@ class Interface:
                     checkbox.pack(anchor=tk.W)  # Ancre à gauche
         except FileNotFoundError:
             print(f"Erreur : Le fichier '{filename}' n'a pas été trouvé.")
-    
+
+    def select_all(self):
+        # Cocher toutes les checkboxes
+        for var in self.checkbox_vars:
+            var.set(True)
+
+    def deselect_all(self):
+        # Décocher toutes les checkboxes
+        for var in self.checkbox_vars:
+            var.set(False)
+
     def next_audio(self):
         """Passe à l'audio suivant dans la liste et met à jour l'affichage."""
         try:
@@ -648,6 +668,13 @@ class Interface:
 
     def rechercher(self):
         """Affiche les fichiers MP3 disponibles et ajoute un bouton pour revenir."""
+        # Récupérer la saisie de l'utilisateur, la nettoyer et la mettre en minuscules
+        saisie = self.entry_ecriture_haut.get().strip().lower()
+
+        if saisie == "":
+            message = "la saisie de l'utilisateur est vide"
+            self.afficher_notification(message)
+            return ""
         
         # Si le label existe déjà, on le cache au lieu de le recréer
         if hasattr(self, 'rechercher_label'):
@@ -683,14 +710,17 @@ class Interface:
         # Créer un label pour afficher le chemin complet du fichier sélectionné
         self.rechercher_label = Label(self.scrollable_frame, text="", width=70, justify="left", bg=self.lightyellow)
         self.rechercher_label.pack(pady=10, fill='both', expand=True)
+        
 
         # Récupérer et afficher les données API
-        data_api_affiche = self.fetcher_methode()
+        data_api_affiche = self.fetcher_methode(saisie)
         self.rechercher_label.config(text=data_api_affiche)  # Mettre à jour le texte du label formaté
+        
+        self.reche_retour = True
      
     def retour(self): 
         """Affiche les métadonnées du fichier audio sélectionné et cache le bouton de retour."""
-        if self.reche == False: 
+        if self.reche == False and self.reche_retour == True :
             # Label pour afficher le chemin complet du fichier sélectionné
             self.metaData_label = Label(self.section3_metaData, text="", width=70, height=10, justify="left", bg=self.lightyellow)
             self.metaData_label.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
@@ -700,12 +730,14 @@ class Interface:
             
             # Extraire et afficher les métadonnées de l'audio
             
+
             self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
             self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
             self.reche = True
             self.rechercher_label.pack_forget() 
             self.scrollable_frame.pack_forget()  # Cache le bouton de retour
             self.rechercher_frame.pack_forget()  # Cache le bouton de retour
+            self.reche_retour = False
 
     def destroy_notification(self):
         self.notification.destroy()  
@@ -754,10 +786,8 @@ class Interface:
                 self.lire_audio()  # Lit le fichier audio
     """
 
-    def fetcher_methode(self)-> str:
-        # Récupérer la saisie de l'utilisateur, la nettoyer et la mettre en minuscules
-        saisie = self.entry_ecriture_haut.get().strip().lower()
-        
+    def fetcher_methode(self, saisie:str)-> str:
+
         # Vérifier si la saisie commence par "artiste:", "album:", ou "music:"
         if saisie.startswith("artiste:"):
             # Extraire le nom de l'artiste après "artiste:"
