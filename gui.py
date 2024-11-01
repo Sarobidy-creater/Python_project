@@ -51,6 +51,7 @@ class Interface:
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
         self.metadata_str = ""
         self.chemin_audio = ""
+        self._open_window  = False
         self.playlist_window = False
         self.affiche_window = False # Attribut pour suivre si la fenêtre de modification est ouverte
         # Variables pour gérer l'interface
@@ -96,7 +97,7 @@ class Interface:
         # self.button2 = tk.Button(self.frame1, text="Retour", width=12)
         # self.button2.pack(side=tk.LEFT, padx=10, pady=10)  # Aligné à droite
 
-        self.entry_ecriture_haut = tk.Entry(self.frame1_haut, width=150)
+        self.entry_ecriture_haut = tk.Entry(self.frame1_haut, width=113)
         self.entry_ecriture_haut.pack(side=tk.LEFT, padx=5, pady=5)
 
         self.butt_check_api = tk.Button(self.frame1_haut, text="Check", width=12, command=self.rechercher)
@@ -236,10 +237,12 @@ class Interface:
 
     def exploration_dossier(self):
         """Ouvre un dossier pour explorer et charger des fichiers audio."""
+          
+        if(self._open_window  == True):
+            self.annuler()
         # Ouvre une boîte de dialogue pour sélectionner un dossier et stocke le chemin dans 'dossier'.
         self.mon_dictionnaire.clear()
-        dossier = filedialog.askdirectory()  
-        
+        dossier = filedialog.askdirectory()
         # Vérifie si un dossier a été sélectionné
         if dossier:
             # Efface le contenu actuel de la Listbox pour éviter les doublons
@@ -446,6 +449,7 @@ class Interface:
     def annuler(self):
         """Ferme la fenêtre secondaire."""
         self.new_window.destroy()  # Ferme la fenêtre secondaire
+        self._open_window  = False
         # self.playlist_window = False
 
     def par_defaut(self):
@@ -454,6 +458,7 @@ class Interface:
         self.entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut
         chemin_play = self.playlist.gui_ecritureFichierxspf(self.varDirectory, None)  # Enregistre la playlist  
         self.afficher_notification(f"Playlist crée dans ce dossier : {os.path.abspath(chemin_play)}")
+        self._open_window  = False
         self.new_window.destroy()  # Ferme la fenêtre secondaire
         # self.playlist_window = False
 
@@ -468,7 +473,7 @@ class Interface:
  
 
         # Écrire les chemins sélectionnés dans un fichier
-        with open(self.file_path_chemins, 'w') as f:
+        with open(self.file_path_chemins, 'w', encoding="utf-8") as f:
             for chemin in chemins_selectionnes:
                 f.write(f"{chemin}\n")  # Écrire chaque chemin dans le fichier, suivi d'une nouvelle ligne
 
@@ -478,6 +483,7 @@ class Interface:
 
         # Efface le contenu de l'Entry après avoir spécifié
         self.entry.delete(0, tk.END)  
+        self._open_window  = False
         self.new_window.destroy()  # Ferme la fenêtre secondaire
 
     def open_new_fenetre(self):
@@ -486,7 +492,7 @@ class Interface:
         self.new_window = tk.Toplevel(root)
         self.new_window.title("Fenêtre Playlist")
         self.new_window.geometry("450x450")  # Taille de la fenêtre
-
+        self._open_window  = True
         # Créer les cadres
         frame1_open_window = tk.Frame(self.new_window, bg=self.antiquewhite)
         frame2_open_window = tk.Frame(self.new_window, bg="gray")
@@ -540,7 +546,7 @@ class Interface:
     def options_fichier_lire(self, filename):
         """Charge des options à partir d'un fichier et crée des cases à cocher."""
         try:
-            with open(filename, 'r') as file:
+            with open(filename, 'r', encoding="utf-8") as file:
                 for line in file:
                     option = line.strip()  # Supprime les espaces autour
                     absolute_path = os.path.abspath(option)  # Obtenir le chemin absolu
