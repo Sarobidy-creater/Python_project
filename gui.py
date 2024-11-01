@@ -52,6 +52,7 @@ class Interface:
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
         self.metadata_str = ""
         self.chemin_audio = ""
+        self.final_lecture = False
         self._open_window  = False
         self.playlist_window = False
         self.affiche_window = False # Attribut pour suivre si la fenêtre de modification est ouverte
@@ -447,6 +448,7 @@ class Interface:
         self.is_paused = False
         self.butt_pause_reprendre.config(text="⏸")  # Met à jour le texte du bouton pour pause
         self.audio_lecture = True  # Indique que l'audio est en lecture
+        self.final_lecture = True
         
     def toggle_pause(self, event=None):
         """Met en pause ou reprend la lecture de l'audio."""
@@ -666,11 +668,13 @@ class Interface:
     def pause(self):
         """Met en pause la lecture audio."""
         self.audio_lecture = False  # Met à jour l'état audio
+        self.final_lecture = True
         pygame.mixer.music.pause()  # Met en pause la musique
 
     def reprendre(self):
         """Reprend la lecture audio en pause."""
         self.audio_lecture = True  # Met à jour l'état audio
+        self.final_lecture = True
         pygame.mixer.music.unpause()  # Reprend la musique
 
     def rechercher(self):
@@ -912,7 +916,7 @@ class Interface:
 
     def save_modification(self):
         """ Enregistre les modifications des métadonnées et actualise l'affichage. """
-        if self.audio_lecture == True :
+        if self.final_lecture == True :
             pygame.mixer.music.stop
             pygame.mixer.music.unload()
         else:
@@ -948,7 +952,7 @@ class Interface:
         modif_window.destroy()
         # self.affiche_window = False
         self.ecoute.lire_fichier_audio(chemin_audio)
-        self.audio_lecture = True
+        self.final_lecture = True
 
 
         
