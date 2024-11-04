@@ -1,0 +1,759 @@
+{
+    "album_type": "album",
+    "total_tracks": 17,
+    "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+    "external_urls": {
+      "spotify": "https://open.spotify.com/album/41GuZcammIkupMPKH2OJ6I"
+    },
+    "href": "https://api.spotify.com/v1/albums/41GuZcammIkupMPKH2OJ6I?locale=fr-FR%2Cfr%3Bq%3D0.9%2Cen-CA%3Bq%3D0.8%2Cen-MG%3Bq%3D0.7%2Cen-US%3Bq%3D0.6%2Cen%3Bq%3D0.5",
+    "id": "41GuZcammIkupMPKH2OJ6I",
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab67616d0000b273072e9faef2ef7b6db63834a3",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00001e02072e9faef2ef7b6db63834a3",
+        "height": 300,
+        "width": 300
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00004851072e9faef2ef7b6db63834a3",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "name": "ASTROWORLD",
+    "release_date": "2018-08-03",
+    "release_date_precision": "day",
+    "type": "album",
+    "uri": "spotify:album:41GuZcammIkupMPKH2OJ6I",
+    "artists": [
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+        },
+        "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+        "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+        "name": "Travis Scott",
+        "type": "artist",
+        "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+      }
+    ],
+    "tracks": {
+      "href": "https://api.spotify.com/v1/albums/41GuZcammIkupMPKH2OJ6I/tracks?offset=0&limit=50&locale=fr-FR,fr;q%3D0.9,en-CA;q%3D0.8,en-MG;q%3D0.7,en-US;q%3D0.6,en;q%3D0.5",
+      "limit": 50,
+      "next": null,
+      "offset": 0,
+      "previous": null,
+      "total": 17,
+      "items": [
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 270714,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7wBJfHzpfI3032CSD7CE2m"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7wBJfHzpfI3032CSD7CE2m",
+          "id": "7wBJfHzpfI3032CSD7CE2m",
+          "name": "STARGAZING",
+          "preview_url": "https://p.scdn.co/mp3-preview/dbc5f9d87513fb6049a9f43c00a0e1b6cb90a256?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:7wBJfHzpfI3032CSD7CE2m",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 180182,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7KZ5MMVgBVox9ycroB2UrI"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7KZ5MMVgBVox9ycroB2UrI",
+          "id": "7KZ5MMVgBVox9ycroB2UrI",
+          "name": "CAROUSEL",
+          "preview_url": "https://p.scdn.co/mp3-preview/1d0d1d66e1fff4aefd1e7a3cd2a79337af24a9e8?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 2,
+          "type": "track",
+          "uri": "spotify:track:7KZ5MMVgBVox9ycroB2UrI",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 312820,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/2xLMifQCjDGFmkHkpNLD9h"
+          },
+          "href": "https://api.spotify.com/v1/tracks/2xLMifQCjDGFmkHkpNLD9h",
+          "id": "2xLMifQCjDGFmkHkpNLD9h",
+          "name": "SICKO MODE",
+          "preview_url": "https://p.scdn.co/mp3-preview/8229545ded5cacf393f62b17af653dfc8171fc85?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 3,
+          "type": "track",
+          "uri": "spotify:track:2xLMifQCjDGFmkHkpNLD9h",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 185610,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/4SZepBIPDRwPaHIjAKwRDb"
+          },
+          "href": "https://api.spotify.com/v1/tracks/4SZepBIPDRwPaHIjAKwRDb",
+          "id": "4SZepBIPDRwPaHIjAKwRDb",
+          "name": "R.I.P. SCREW",
+          "preview_url": "https://p.scdn.co/mp3-preview/0e3a544cd2e1875b1ccd086d3d460e27817fdb19?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 4,
+          "type": "track",
+          "uri": "spotify:track:4SZepBIPDRwPaHIjAKwRDb",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 338438,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/1xYpVRspgaLxdJLOTQkTjg"
+          },
+          "href": "https://api.spotify.com/v1/tracks/1xYpVRspgaLxdJLOTQkTjg",
+          "id": "1xYpVRspgaLxdJLOTQkTjg",
+          "name": "STOP TRYING TO BE GOD",
+          "preview_url": "https://p.scdn.co/mp3-preview/94d1a277b4b8b4598f8f1b5737a6389239c456d8?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 5,
+          "type": "track",
+          "uri": "spotify:track:1xYpVRspgaLxdJLOTQkTjg",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 218283,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/6OaVWaGfhXn70ZJfdVcabn"
+          },
+          "href": "https://api.spotify.com/v1/tracks/6OaVWaGfhXn70ZJfdVcabn",
+          "id": "6OaVWaGfhXn70ZJfdVcabn",
+          "name": "NO BYSTANDERS",
+          "preview_url": "https://p.scdn.co/mp3-preview/70bd42f5912cd79fcb026418dffb99bc57f45b14?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 6,
+          "type": "track",
+          "uri": "spotify:track:6OaVWaGfhXn70ZJfdVcabn",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 145588,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/6NMtzpDQBTOfJwMzgMX0zl"
+          },
+          "href": "https://api.spotify.com/v1/tracks/6NMtzpDQBTOfJwMzgMX0zl",
+          "id": "6NMtzpDQBTOfJwMzgMX0zl",
+          "name": "SKELETONS",
+          "preview_url": "https://p.scdn.co/mp3-preview/5384b3223cc750b8fcf1e546600189c43d4821db?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 7,
+          "type": "track",
+          "uri": "spotify:track:6NMtzpDQBTOfJwMzgMX0zl",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 231963,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/20MuVazoNMv6xjKPnRFOxG"
+          },
+          "href": "https://api.spotify.com/v1/tracks/20MuVazoNMv6xjKPnRFOxG",
+          "id": "20MuVazoNMv6xjKPnRFOxG",
+          "name": "WAKE UP",
+          "preview_url": "https://p.scdn.co/mp3-preview/aba2af9b263620f0ffcc2b32b80489c73a9daa47?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 8,
+          "type": "track",
+          "uri": "spotify:track:20MuVazoNMv6xjKPnRFOxG",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 196138,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/11kDth1aKUEUMq9r1pqyds"
+          },
+          "href": "https://api.spotify.com/v1/tracks/11kDth1aKUEUMq9r1pqyds",
+          "id": "11kDth1aKUEUMq9r1pqyds",
+          "name": "5% TINT",
+          "preview_url": "https://p.scdn.co/mp3-preview/c1bcb779bca4da7d1dd96c378c42297fd410678a?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 9,
+          "type": "track",
+          "uri": "spotify:track:11kDth1aKUEUMq9r1pqyds",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 156885,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/6BJbOXDlgVAXSaq6wYFYT2"
+          },
+          "href": "https://api.spotify.com/v1/tracks/6BJbOXDlgVAXSaq6wYFYT2",
+          "id": "6BJbOXDlgVAXSaq6wYFYT2",
+          "name": "NC-17",
+          "preview_url": "https://p.scdn.co/mp3-preview/61775f698136ec38081614a03acba609b1e45285?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 10,
+          "type": "track",
+          "uri": "spotify:track:6BJbOXDlgVAXSaq6wYFYT2",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 142969,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/4MXhiYIRDMGAuvZc5IFTwC"
+          },
+          "href": "https://api.spotify.com/v1/tracks/4MXhiYIRDMGAuvZc5IFTwC",
+          "id": "4MXhiYIRDMGAuvZc5IFTwC",
+          "name": "ASTROTHUNDER",
+          "preview_url": "https://p.scdn.co/mp3-preview/7400069aa1157e71455bf45fcbf29d897287b2a2?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 11,
+          "type": "track",
+          "uri": "spotify:track:4MXhiYIRDMGAuvZc5IFTwC",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 150043,
+          "explicit": false,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7lAK3oHbfEnvUQWosrMMpR"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7lAK3oHbfEnvUQWosrMMpR",
+          "id": "7lAK3oHbfEnvUQWosrMMpR",
+          "name": "YOSEMITE",
+          "preview_url": "https://p.scdn.co/mp3-preview/90c323740d95766d36556cec063997d18cfb5026?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 12,
+          "type": "track",
+          "uri": "spotify:track:7lAK3oHbfEnvUQWosrMMpR",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 198408,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/27a1mYSG5tYg7dmEjWBcmL"
+          },
+          "href": "https://api.spotify.com/v1/tracks/27a1mYSG5tYg7dmEjWBcmL",
+          "id": "27a1mYSG5tYg7dmEjWBcmL",
+          "name": "CAN'T SAY",
+          "preview_url": "https://p.scdn.co/mp3-preview/4b3564ac8a8363c105fbc651062e2a466076c69c?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 13,
+          "type": "track",
+          "uri": "spotify:track:27a1mYSG5tYg7dmEjWBcmL",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 176720,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/4KYS9GK68yeuUJ8vJfPxrq"
+          },
+          "href": "https://api.spotify.com/v1/tracks/4KYS9GK68yeuUJ8vJfPxrq",
+          "id": "4KYS9GK68yeuUJ8vJfPxrq",
+          "name": "WHO? WHAT!",
+          "preview_url": "https://p.scdn.co/mp3-preview/2dbb11f0b30231653d4073c9a0009463ee17402c?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 14,
+          "type": "track",
+          "uri": "spotify:track:4KYS9GK68yeuUJ8vJfPxrq",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 190557,
+          "explicit": false,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/2cYqizR4lgvp4Qu6IQ3qGN"
+          },
+          "href": "https://api.spotify.com/v1/tracks/2cYqizR4lgvp4Qu6IQ3qGN",
+          "id": "2cYqizR4lgvp4Qu6IQ3qGN",
+          "name": "BUTTERFLY EFFECT",
+          "preview_url": "https://p.scdn.co/mp3-preview/68cba40a7199c972c7a2ad0df063c4d1f5e3dc73?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 15,
+          "type": "track",
+          "uri": "spotify:track:2cYqizR4lgvp4Qu6IQ3qGN",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 217828,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/58TaFP5j5i9swOf584yon2"
+          },
+          "href": "https://api.spotify.com/v1/tracks/58TaFP5j5i9swOf584yon2",
+          "id": "58TaFP5j5i9swOf584yon2",
+          "name": "HOUSTONFORNICATION",
+          "preview_url": "https://p.scdn.co/mp3-preview/3c903f4be7d5a311734bb11e610a2a455d15cbe8?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 16,
+          "type": "track",
+          "uri": "spotify:track:58TaFP5j5i9swOf584yon2",
+          "is_local": false
+        },
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y5tJX1MQlPlqiwlOH1tJY"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y5tJX1MQlPlqiwlOH1tJY",
+              "id": "0Y5tJX1MQlPlqiwlOH1tJY",
+              "name": "Travis Scott",
+              "type": "artist",
+              "uri": "spotify:artist:0Y5tJX1MQlPlqiwlOH1tJY"
+            }
+          ],
+          "available_markets": ["AR", "AU", "AT", "BE", "BO", "BR", "BG", "CA", "CL", "CO", "CR", "CY", "CZ", "DK", "DO", "DE", "EC", "EE", "SV", "FI", "FR", "GR", "GT", "HN", "HK", "HU", "IS", "IE", "IT", "LV", "LT", "LU", "MY", "MT", "MX", "NL", "NZ", "NI", "NO", "PA", "PY", "PE", "PH", "PL", "PT", "SG", "SK", "ES", "SE", "CH", "TW", "TR", "UY", "US", "GB", "AD", "LI", "MC", "ID", "JP", "TH", "VN", "RO", "IL", "ZA", "SA", "AE", "BH", "QA", "OM", "KW", "EG", "MA", "DZ", "TN", "LB", "JO", "PS", "IN", "BY", "KZ", "MD", "UA", "AL", "BA", "HR", "ME", "MK", "RS", "SI", "KR", "BD", "PK", "LK", "GH", "KE", "NG", "TZ", "UG", "AG", "AM", "BS", "BB", "BZ", "BT", "BW", "BF", "CV", "CW", "DM", "FJ", "GM", "GE", "GD", "GW", "GY", "HT", "JM", "KI", "LS", "LR", "MW", "MV", "ML", "MH", "FM", "NA", "NR", "NE", "PW", "PG", "PR", "WS", "SM", "ST", "SN", "SC", "SL", "SB", "KN", "LC", "VC", "SR", "TL", "TO", "TT", "TV", "VU", "AZ", "BN", "BI", "KH", "CM", "TD", "KM", "GQ", "SZ", "GA", "GN", "KG", "LA", "MO", "MR", "MN", "NP", "RW", "TG", "UZ", "ZW", "BJ", "MG", "MU", "MZ", "AO", "CI", "DJ", "ZM", "CD", "CG", "IQ", "LY", "TJ", "VE", "ET", "XK"],
+          "disc_number": 1,
+          "duration_ms": 209115,
+          "explicit": true,
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/6vnfObZ4Ys70SBAtti1xZ9"
+          },
+          "href": "https://api.spotify.com/v1/tracks/6vnfObZ4Ys70SBAtti1xZ9",
+          "id": "6vnfObZ4Ys70SBAtti1xZ9",
+          "name": "COFFEE BEAN",
+          "preview_url": "https://p.scdn.co/mp3-preview/28847ddbe5dc809ebd71dacdc3174fd21cd7e84f?cid=cfe923b2d660439caf2b557b21f31221",
+          "track_number": 17,
+          "type": "track",
+          "uri": "spotify:track:6vnfObZ4Ys70SBAtti1xZ9",
+          "is_local": false
+        }
+      ]
+    },
+    "copyrights": [
+      {
+        "text": "(P) 2018 Cactus Jack Records, LLC under exclusive licensed to Epic Records, a division of Sony Music Entertainment",
+        "type": "P"
+      }
+    ],
+    "external_ids": {
+      "upc": "886447227169"
+    },
+    "genres": [],
+    "label": "Cactus Jack / Epic",
+    "popularity": 89
+}
+
+
+{
+    "3Q0kSmKpkffn4aWkYkWwet": 
+    {
+        "Titre": "Without Me", 
+        "Artiste": "Eminem", 
+        "Album": "The Eminem Show (Edited Version)"
+    }, 
+    "7lQ8MOhq6IN2w8EYcFNSUk": 
+    {
+        "Titre": "Without Me", 
+        "Artiste": "Eminem", 
+        "Album": "The Eminem Show"
+    }, 
+    "6FZDfxM3a3UCqtzo5pxSLZ": 
+    {
+        "Titre": "Without Me", 
+        "Artiste": "Halsey", 
+        "Album": "Manic"
+    }, 
+    "0w9YTapeo8WSqMnUFRM6fO": 
+    {
+        "Titre": "WITHOUT ME", 
+        "Artiste": "h3hyeon", 
+        "Album": "HESITATING"
+    }, 
+    "5p7ujcrUXASCNwRaWNHR1C": 
+    {
+        "Titre": "Without Me", 
+        "Artiste": "Halsey", 
+        "Album": "Without Me"
+    }, 
+    "5K17WcyVoqa4lugxn5RcxP": 
+    {
+        "Titre": "WITHOUT ME", 
+        "Artiste": "Graham Carter", 
+        "Album": "WITHOUT ME"
+    }, 
+    "7oGCVuPEyp6m6DhXkU5Pfs": 
+    {
+        "Titre": "Without Me", 
+        "Artiste": "Dayseeker", 
+        "Album": "Dark Sun"
+    }, 
+    "1vmvtY3Q2p0e118Xg8VbAc": 
+    {
+        "Titre": "WITHOUT ME", 
+        "Artiste": "Maktivity", 
+        "Album": "WITHOUT ME"
+    }, 
+    "54SvbpFPrwWucUVKSFRdW7": 
+    {
+        "Titre": "Without Me", 
+        "Artiste": "Wind Walkers", 
+        "Album": "Without Me"
+    }, 
+    "37rEu0ghf3SLHAzHMpXHIK": 
+    {
+        "Titre": "WITHOUT ME", 
+        "Artiste": "RAIZHELL", 
+        "Album": "WITHOUT ME"
+    }, 
+    "7MhNCT34oaLIxwAsZlZd67": 
+    {
+        "Titre": "Without Me", 
+        "Artiste": "Halsey", 
+        "Album": "Manic"
+    }, 
+    "7e7NSsFTCW17PD2h8dbaGo": 
+    {
+        "Titre": "WITHOUT ME", 
+        "Artiste": "RAIZHELL", 
+        "Album": "PHONKED"
+    }, 
+    "0MUuR9j0ymUTi6SxWboCet": 
+    {
+        "Titre": "Without Me", 
+        "Artiste": "Fame on Fire", 
+        "Album": "Without Me"
+    }, 
+    "5CJ7Hlw5s8WxlD85DeZQBe": 
+    {
+        "Titre": "WITHOUT ME", 
+        "Artiste": "triplesixdelete", 
+        "Album": "THE MOST UNKNOWN MIXTAPE"
+    }, 
+    "6WnUsimNw0LNzCK8jCXZL5": 
+    {
+        "Titre": "WITHOUT ME", 
+        "Artiste": "CHILLAF", 
+        "Album": "THE THROWBACK TAPE"
+    }, 
+    "5qaM8LJZw7Xy0yyrxpOelX": 
+    {
+        "Titre": "Without Me", 
+        "Artiste": "Mac DeMarco", 
+        "Album": "Another One"
+    }, 
+    "7qV9Qwxim6UYc5YP27sKFA": 
+    {
+        "Titre": "WITHOUT ME", 
+        "Artiste": "TEEZ", 
+        "Album": "AWAY FROM HERE EP"
+    }, 
+    "0i9FoWlPPKxvkUNHzRIv6t": 
+    {
+        "Titre": "Without Me", 
+        "Artiste": "Cut Through Noise", 
+        "Album": "Without Me"
+    }
+} 
+
+{
+    "7dGJo4pcD2V6oG8kP0tJRR": 
+    {
+        "Artiste": "Eminem", 
+        "Followers": 91968048, 
+        "Genres": ["detroit hip hop", "hip hop", "rap"]
+    }, 
+    "1xf78CuQDGycin9tUxQTEr": 
+    {
+        "Artiste": "Eminem", 
+        "Followers": 309, 
+        "Genres": []
+    }
+}
+
+{
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/7dGJo4pcD2V6oG8kP0tJRR"
+    },
+    "followers": {
+      "href": null,
+      "total": 91968048
+    },
+    "genres": ["detroit hip hop", "hip hop", "rap"],
+    "href": "https://api.spotify.com/v1/artists/7dGJo4pcD2V6oG8kP0tJRR?locale=fr-FR%2Cfr%3Bq%3D0.9%2Cen-CA%3Bq%3D0.8%2Cen-MG%3Bq%3D0.7%2Cen-US%3Bq%3D0.6%2Cen%3Bq%3D0.5",
+    "id": "7dGJo4pcD2V6oG8kP0tJRR",
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eba00b11c129b27a88fc72f36b",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174a00b11c129b27a88fc72f36b",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178a00b11c129b27a88fc72f36b",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "name": "Eminem",
+    "popularity": 93,
+    "type": "artist",
+    "uri": "spotify:artist:7dGJo4pcD2V6oG8kP0tJRR"
+  }
+
+
+  {
+    "7dGJo4pcD2V6oG8kP0tJRR": 
+    {
+        "Artiste": "Eminem", 
+        "popularity": 93, 
+        "type": "artist", 
+        "Followers": 91968048, 
+        "Genres": ["detroit hip hop", "hip hop", "rap"]
+    }, 
+    "1xf78CuQDGycin9tUxQTEr": 
+    {
+        "Artiste": "Eminem", 
+        "popularity": 0, 
+        "type": "artist", 
+        "Followers": 309, 
+        "Genres": []
+    }
+}
+
+
+{
+    "41GuZcammIkupMPKH2OJ6I": 
+    {
+        "Album": "ASTROWORLD", 
+        "Artiste": "Travis Scott", 
+        "Date de sortie": "2018-08-03"
+    }, 
+    "2q6orXkt7LVUjYSUEo0N4M": 
+    {
+        "Album": "ASTROWORLD", 
+        "Artiste": "K.Kash", 
+        "Date de sortie": "2023-11-03"
+    }, 
+    "4sG2uSYhsDSK6YH4DMlAUI": 
+    {
+        "Album": "ASTROWORLD", 
+        "Artiste": "Jasmit Kamal", "Date de sortie": "2024-07-12"}, "1CT2ulUX6wFSE5S2js79kj": {"Album": "Astroworld", "Artiste": "Minthaze", "Date de sortie": "2018-03-16"}, "6WAARyhzbThPEvvF01wIPH": {"Album": "ASTROWORLD", "Artiste": "SXIBXTBEATZ", "Date de sortie": "2023-12-02"}, "3CkWayqJjqvuGS5RjMdEIu": {"Album": "Astroworld", "Artiste": "Various Artists", "Date de sortie": "2016-09-11"}, "3dS6D6thU1ONeKe7LQmh6x": {"Album": "ASTROWORLD", "Artiste": "1karu", "Date de sortie": "2020-05-01"}, "60gTWXzyzWSN85vrddpuUx": {"Album": "Astroworld", "Artiste": "Ten Days Of Chaos", "Date de sortie": "2021-12-31"}, "205FDsvq0tmYIOpuO5sDxq": {"Album": "ASTROWORLD", "Artiste": "indubitablytj", "Date de sortie": "2024-08-25"}, "2MTR5ADCYJTFeqj3jqZe6C": {"Album": "ASTROWORLD", "Artiste": "The King of Bass", "Date de sortie": "2024-04-19"}, "05ltourZjBYodnhetlGKOK": {"Album": "Astroworld", "Artiste": "T-Shaina", "Date de sortie": "2020-04-28"}, "2TDjpPLmpIyMOYsFIGRWBD": {"Album": "ASTROWORLD", "Artiste": "Big Spazzo RGE", "Date de sortie": "2023-02-17"}}

@@ -31,7 +31,8 @@ class Explorer():
             with open(out_dir, 'w', encoding='utf-8') as f:  # Ouvre le fichier de sortie en mode écriture.
                 for racine, sous_dossiers, fichiers in os.walk(chemin):  # Parcours les fichiers dans le répertoire.
                     for fichier in fichiers:
-                        chemin_complet = os.path.join(racine, fichier)  # Construit le chemin complet du fichier.
+                        chemin_coplt = os.path.join(racine, fichier)  # Construit le chemin complet du fichier.
+                        chemin_complet = chemin_coplt.replace("\\", "/")
                         audio = None  # Initialise une variable audio à None.
 
                         # Vérifie l'extension du fichier pour le traitement audio.

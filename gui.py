@@ -52,6 +52,7 @@ class Interface:
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
         self.metadata_str = ""
         self.chemin_audio = ""
+        self.final_lecture = False
         self._open_window  = False
         self.playlist_window = False
         self.affiche_window = False # Attribut pour suivre si la fenêtre de modification est ouverte
@@ -447,6 +448,7 @@ class Interface:
         self.is_paused = False
         self.butt_pause_reprendre.config(text="⏸")  # Met à jour le texte du bouton pour pause
         self.audio_lecture = True  # Indique que l'audio est en lecture
+        self.final_lecture = True
         
     def toggle_pause(self, event=None):
         """Met en pause ou reprend la lecture de l'audio."""
@@ -666,11 +668,13 @@ class Interface:
     def pause(self):
         """Met en pause la lecture audio."""
         self.audio_lecture = False  # Met à jour l'état audio
+        self.final_lecture = True
         pygame.mixer.music.pause()  # Met en pause la musique
 
     def reprendre(self):
         """Reprend la lecture audio en pause."""
         self.audio_lecture = True  # Met à jour l'état audio
+        self.final_lecture = True
         pygame.mixer.music.unpause()  # Reprend la musique
 
     def rechercher(self):
@@ -912,6 +916,145 @@ class Interface:
 
     def save_modification(self):
         """ Enregistre les modifications des métadonnées et actualise l'affichage. """
+        if self.final_lecture == True :
+            pygame.mixer.music.stop
+            pygame.mixer.music.unload()
+        else:
+            pygame.mixer.music.stop
+        # Récupérer le chemin audio de l'attribut de la classe
+        chemin_audio = self.chemin_audio
+
+        # Récupérer les valeurs des champs de saisie
+        titre = self.entries["titre"].get()
+        artiste = self.entries["artiste"].get()
+        album = self.entries["album"].get()
+        genre = self.entries["genre"].get()
+        ladate = self.entries["date"].get()
+        organisation = self.entries["organisation"].get()
+        
+        # Récupérer le chemin de l'image de cover (si sélectionnée)
+        chemin_image = self.cover_image_path if self.cover_image_path else None
+
+        self.metaData_label.pack_forget() 
+
+        # Appeler la méthode pour afficher et modifier les métadonnées
+        self.edite.afficher_et_modifier_metadata(chemin_audio, chemin_image, titre, artiste, album, genre, ladate, organisation)
+
+        # Fermer la fenêtre de modification
+        self.metaData_label = Label(self.section3_metaData, text="", width=70, height=10, justify="left", bg=self.lightyellow)
+        self.metaData_label.pack(pady=10, fill='both', expand=True)  # Utiliser fill='both' et expand=True pour agrandir
+
+        # Actualiser l'affichage des métadonnées
+        self.metadata_str = self.extract.extraction_et_afficher_tag(chemin_audio)
+        self.metaData_label.config(text=self.metadata_str)
+        self.cover_image(chemin_audio)  # Affiche l'image de couverture
+        self.chemin_audio = chemin_audio
+        modif_window.destroy()
+        # self.affiche_window = False
+        self.ecoute.lire_fichier_audio(chemin_audio)
+        self.final_lecture = True
+
+            
+        elif saisie.startswith("music:"):
+            # Extraire le nom de la musique après "musique:"
+            track_name = saisie[len("music:"):].strip()
+            self.fetcher.get_track_info(track_name)
+            track_saisie = self.fetcher.afficher_track_infos()
+            return track_saisie
+        
+        else:
+            print("Commande non reconnue. Utilisez 'artiste:', 'album:', ou 'music:' pour effectuer une recherche.")
+
+    def modification_data(self):
+        """Ouvre une nouvelle fenêtre pour modifier les métadonnées de la playlist."""
+        # if self.affiche_window == False:
+        global modif_window
+        modif_window = Toplevel(root)
+        modif_window.title("Modification de métadonnées")
+        modif_window.geometry("300x500")  # Augmenter la taille de la fenêtre pour inclure la couverture
+        modif_window.resizable(False, False)  # Empêche la redimension de la fenêtre
+        
+
+        # Créer deux cadres pour organiser la disposition
+        self.frame1_modif_window = tk.Frame(modif_window, bg=self.antiquewhite)
+        self.frame2_modif_window = tk.Frame(modif_window, bg="gray")
+
+        # Pack les cadres dans la fenêtre
+        self.frame1_modif_window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.frame2_modif_window.pack(fill=tk.X)
+        
+        dict_metadata_str = self.convertir_metadata_en_dict(self.metadata_str)
+        list_metadata_str = list(dict_metadata_str.values())
+
+        # Liste des champs et de leurs labels
+        labels_text = ["Titre", "Artiste", "Album", "Genre", "Date", "Organisation"]
+        self.entries = {}  # Dictionnaire pour stocker les entrées associées aux labels
+
+        # Création des labels et zones de saisie
+        i = 0
+        for label_text in labels_text:
+            # Label
+            label = tk.Label(self.frame1_modif_window, text=label_text, bg=self.antiquewhite)
+            label.pack(anchor="w", padx=5, pady=3)
+
+            # Zone de saisie
+            entry = tk.Entry(self.frame1_modif_window, width=30)
+            entry.pack(anchor="w", padx=5, pady=3)
+
+            # Ajouter l'entrée au dictionnaire avec le nom du champ en clé
+            self.entries[label_text.lower()] = entry
+
+            # Ajouter la valeur par défaut dans le champ de saisie
+            entry.insert(0, list_metadata_str[i])  # Insère la valeur par défaut
+            i += 1
+
+        # Ajout de la sélection de cover
+        cover_label = tk.Label(self.frame1_modif_window, text="Cover", bg=self.antiquewhite)
+        cover_label.pack(anchor="w", padx=5, pady=3)
+
+        # Afficher une image de prévisualisation de la cover
+        self.cover_image_path = None
+
+        # Bouton pour sélectionner une image de couverture
+        select_cover_button = tk.Button(self.frame1_modif_window, text="Sélectionner une couverture", command=self.select_cover_image)
+        select_cover_button.pack(anchor="w", padx=5, pady=3)
+
+        # Boutons dans la deuxième section
+        button_cancel = tk.Button(self.frame2_modif_window, text="Annuler", command=self.but_cancel)
+        button_cancel.pack(side=tk.LEFT, padx=10, pady=10)
+
+        button_pour_ok = tk.Button(self.frame2_modif_window, text="Enregistrer", command=self.save_modification)
+        button_pour_ok.pack(side=tk.LEFT, padx=10, pady=10)
+            # self.affiche_window = True
+        chemin_audio = self.chemin_audio
+
+    def select_cover_image(self):
+        """Ouvre une boîte de dialogue pour sélectionner une image de couverture."""
+        file_path = filedialog.askopenfilename(title="Sélectionner une couverture", filetypes=[("Images", "*.png;*.jpg;*.jpeg")])
+        if file_path:
+            self.cover_image_path = file_path
+ 
+    def but_cancel(self):
+        """Ferme la fenêtre secondaire."""
+        modif_window.destroy()  # Ferme la fenêtre secondaire
+        # self.affiche_window = False
+
+    def convertir_metadata_en_dict(self,metadata_str: str) -> dict:
+        """Convertit une chaîne de métadonnées en un dictionnaire."""
+        metadata_dict = {}
+        
+        # Sépare la chaîne en lignes
+        lignes = metadata_str.strip().split("\n")
+        
+        for ligne in lignes:
+            if ':' in ligne:  # Vérifie si la ligne contient un deux-points
+                cle, valeur = ligne.split(':', 1)  # Sépare la clé et la valeur
+                metadata_dict[cle.strip()] = valeur.strip()  # Ajoute à la dict en supprimant les espaces
+
+        return metadata_dict
+
+    def save_modification(self):
+        """ Enregistre les modifications des métadonnées et actualise l'affichage. """
         pygame.mixer.music.stop
         pygame.mixer.music.unload()
         # Récupérer le chemin audio de l'attribut de la classe
@@ -945,7 +1088,6 @@ class Interface:
         modif_window.destroy()
         # self.affiche_window = False
         self.ecoute.lire_fichier_audio(chemin_audio)
-
 
         
 # Création de la fenêtre principale

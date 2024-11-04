@@ -202,41 +202,175 @@ Pour utiliser le script depuis la ligne de commande, assurez-vous d'abord d'êtr
     python3 cli.py --listen --file "chemin\vers\la\musique\music.mp3"
     ```
 
-## Interface de Gestion des Fichiers Audio
+## Interface de gestion des fichiers audio
 
 Ce projet est une interface graphique qui permet d'explorer des fichiers audio sur votre ordinateur, d'en extraire les métadonnées, d'afficher la couverture d'album (cover art), et de créer des playlists. Il est conçu pour être simple d'utilisation grâce à des boutons et des fenêtres interactives.
 
-### 1. Choix du dossier à explorer
+## Introduction
+
+Cette application de gestion de musique vous permet de rechercher, lire, et gérer vos fichiers audio de manière efficace. Ce document explique les différentes fenêtres et boutons de l'interface utilisateur.
+
+## 1. Choix du dossier à explorer
 
 - **But** : Sélectionner un dossier contenant des fichiers audio (MP3 et FLAC) sur votre ordinateur pour les analyser.
 - **Fonctionnement** : Un explorateur de fichiers s'ouvre pour naviguer et choisir le dossier. Les fichiers audio trouvés sont ensuite listés dans l'interface.
 - **Code associé** : La méthode `exploration_dossier()` ou `AZEexploration_dossier()` est utilisée pour parcourir le système de fichiers et charger les fichiers audio dans une Listbox.
 
-### 2. Affichage des fichiers audio détectés
+## 2. Affichage des fichiers audio détectés
 
 - **But** : Après avoir sélectionné un dossier, une liste de fichiers audio détectés (formats MP3 et FLAC) est affichée.
 - **Fonctionnalité additionnelle** : L'utilisateur peut sélectionner un fichier audio pour afficher ses métadonnées.
 - **Code associé** : La méthode `exploration_dossier()` peuple la Listbox avec les fichiers audio. La fonction `affiche_path_label()` extrait les informations du fichier sélectionné.
 
-### 3. Extraction et affichage des métadonnées
+## 3. Extraction et affichage des métadonnées
 
 - **But** : Afficher les métadonnées (titre, artiste, album, genre, etc.) des fichiers audio sélectionnés.
 - **Fonctionnement** : Lorsqu'un fichier est cliqué dans la liste, ses métadonnées sont extraites et affichées dans l'interface.
 - **Code associé** : La méthode `affiche_path_label()` appelle `extraction_et_afficher_tag()` pour extraire les métadonnées du fichier audio sélectionné.
 
-### 4. Affichage de la couverture (Cover Art)
+## 4. Affichage de la couverture (Cover Art)
 
 - **But** : Afficher l'image de couverture d'un fichier audio s'il en contient une.
 - **Fonctionnement** : Si une image de couverture est détectée dans le fichier audio, elle est affichée dans une zone dédiée. Sinon, une image par défaut est utilisée.
 - **Code associé** : La méthode `cover_image()` gère l'extraction et l'affichage de la couverture d'album.
 
-### 5. Création de playlists
+## 5. Fenêtre Principale
 
-- **But** : Créer des playlists au format XSPF en sélectionnant plusieurs fichiers audio.
-- **Fonctionnalité** : L'utilisateur peut enregistrer la playlist sous un nom spécifique ou restaurer la liste par défaut.
+À l'ouverture de l'application, vous verrez la fenêtre principale qui contient plusieurs sections et boutons. Voici les boutons disponibles :
+
+- **Jouer** :
+  - Bouton pour lire l'audio **▶**
+  - Cliquez sur ce bouton pour lire l'audio sélectionné.
+
+- **Pause / Reprendre** :
+  - Bouton pour faire pause l'audio **⏸**
+  - Bouton pour reprendre la lecture l'audio **■**
+  - Utilisez ces boutons pour mettre en pause la lecture de l'audio ou reprendre la lecture après une pause.
+
+- **Playlist** :
+  - Bouton pour créer ou gérer vos playlists **Playlist**
+  - Ce bouton ouvre une nouvelle fenêtre pour créer ou gérer vos playlists.
+
+- **Parcourir** :
+  - Bouton pour parcourir un dossier et ses sous-dossiers **Parcourir**
+  - Permet de parcourir un dossier et ses sous-dossiers pour sélectionner des fichiers audio.
+
+- **Next** :
+  - Bouton pour l'audio suivant **▶▶**
+  - Passe à l'audio suivant dans la liste.
+
+- **Prev** :
+  - Bouton pour l'audio précédent **◀◀**
+  - Revient à l'audio précédent dans la liste.
+
+- **Modifier Métadonnées (:::)** :
+  - Bouton pour modifier les métadonnées **:::**
+  - Ouvre une fenêtre pour modifier les métadonnées d'un fichier audio.
+  
+- **Rechercher** :
+  - Bouton pour utilise une API **Check**
+  - Utilisez ce bouton pour rechercher un artiste, un album, ou une musique en utilisant une API.
+  - Entrez votre recherche dans le champ de saisie (Entry).
+
+### Fonctionnalité de Recherche de Musique
+
+L'application utilise une API tierce pour effectuer des recherches de musique. Voici comment cela fonctionne :
+
+#### 1. Saisie de la Recherche
+
+L'utilisateur entre une commande dans le champ de recherche. Les commandes acceptées incluent :
+
+- **artiste** : `artiste: Nom de l'artiste`
+- **album** : `album: Nom de l'album`
+- **music** : `music: Nom de la musique`
+
+Ces commandes permettent à l'utilisateur de spécifier exactement ce qu'il recherche, facilitant ainsi l'accès aux résultats souhaités.
+
+#### 2. Envoi de la Requête
+
+Lorsque l'utilisateur clique sur le bouton **Check**, l'application envoie une requête à l'API avec les paramètres spécifiés. Cette requête est généralement formulée en utilisant une méthode HTTP (comme GET ou POST) pour récupérer des données. Cela permet à l'application d'interroger efficacement l'API et de récupérer des informations pertinentes sur la musique.
+
+#### 3. Réception des Résultats
+
+L'API renvoie les résultats de la recherche sous forme de données structurées, en format JSON. L'application traite ces données pour extraire les informations pertinentes, telles que les titres des morceaux, les noms des artistes et les albums associés.
+
+#### 4. Affichage des Résultats
+
+Les résultats de la recherche (artistes, albums, morceaux) sont ensuite affichés dans l'interface utilisateur.
+
+## 6. Création de playlists
+
+### 6.1 Playlist par défaut
+
+- **But** : Créer une playlist par défaut qui contient une liste d'audio préétablie dans la Listbox.
+- **Fonctionnalité** : Lors de l'initialisation de l'application, une playlist par défaut est chargée et affichée, permettant à l'utilisateur d'écouter facilement une sélection prédéfinie de fichiers audio.
+
+### 6.2 Playlist spécifiée
+
+- **But** : Permettre à l'utilisateur de spécifier une playlist par son nom et de sélectionner les audios à inclure dans cette playlist.
+- **Fonctionnalité** : Une interface avec des cases à cocher est fournie pour que l'utilisateur puisse sélectionner les fichiers audio souhaités et les inclure dans une playlist personnalisée. L'utilisateur peut sauvegarder cette playlist sous un nom spécifique.
 - **Code associé** : Les fonctions `open_new_fenetre()`, `par_defaut()`, et `specifier()` permettent la création, la spécification, et la réinitialisation des playlists. Le fichier est enregistré grâce à `gui_ecritureFichierxspf()`.
 
-### 6. Contrôle de lecture (Play/Pause/Next/Previous)
+## 7. Fenêtre de Playlist
+
+En cliquant sur le bouton **Playlist**, une nouvelle fenêtre s'ouvrira avec les options suivantes :
+
+- **Annuler** :
+  - Bouton pour annuler toutes les opérations **Annuler**
+  - Annule toutes les opérations en cours et ferme la fenêtre de playlist sans sauvegarder les modifications.
+
+- **Playlist par défaut** :
+  - Bouton pour créer la playlist par défaut **par défaut**
+  - Crée la playlist par défaut qui contient une liste d'audio préétablie dans la Listbox affichée sur l'interface. Cette playlist peut être utilisée pour une lecture rapide sans nécessiter de configuration supplémentaire.
+
+- **Playlist spécifiée** :
+  - Bouton pour spécifier une playlist **spécifier**
+  - Permet de spécifier une playlist par son nom et de sélectionner les audios à inclure dans cette playlist à l'aide de cases à cocher (checkbox). L'utilisateur peut cocher les fichiers audio qu'il souhaite ajouter à sa playlist personnalisée.
+  
+- **Sélectionner toutes les checkboxes** :
+  - Bouton pour sélectionner toutes les checkboxes **T-select**
+  - Lorsqu’on clique sur le bouton T-select, toutes les checkboxes de la liste sont cochées.
+  
+- **Désélectionner toutes les checkboxes** :
+  - Bouton pour désélectionner toutes les checkboxes **T-déselect**
+  - En cliquant sur T-déselect, toutes les checkboxes de la liste sont décochées.
+
+## 8. Fenêtre de Modification des Métadonnées
+
+En cliquant sur le bouton **Modifier Métadonnées (:::)**, une nouvelle fenêtre apparaîtra, permettant à l'utilisateur de modifier les informations d'un fichier audio. Cette fenêtre est équipée de plusieurs champs et boutons pour faciliter la gestion des métadonnées.
+
+### Labels et Zones de Saisie
+
+La fenêtre de modification contient les champs suivants, chacun associé à un label explicite :
+
+- **Titre** : Champ pour saisir ou modifier le titre de la piste audio.
+- **Artiste** : Champ pour saisir ou modifier le nom de l'artiste.
+- **Album** : Champ pour saisir ou modifier le nom de l'album.
+- **Genre** : Champ pour saisir ou modifier le genre musical.
+- **Date** : Champ pour saisir ou modifier la date de sortie.
+- **Organisation** : Champ pour saisir ou modifier l'organisation ou le label musical.
+
+Chaque champ contient par défaut les valeurs actuelles des métadonnées, facilitant ainsi la modification. Cela permet à l'utilisateur de garder les informations existantes tout en offrant la possibilité de les mettre à jour rapidement.
+
+### Bouton Modifier la Couverture
+
+Ce bouton ouvre un explorateur de fichiers pour choisir une nouvelle image de couverture pour l'audio. La couverture sélectionnée sera associée au fichier audio et affichée dans l'interface.
+
+### Boutons d'Action
+
+- **Annuler** :
+  - Bouton pour annuler toutes les opérations **Annuler**
+  - Ferme la fenêtre sans effectuer d'opérations sur les métadonnées.
+
+- **Sélectionner une couverture** :
+  - Bouton pour sélectionner une couverture **Sélectionner une couverture**
+  - Ouvre un explorateur de fichiers pour choisir une image de couverture pour l'audio.
+
+- **Enregistrer** :
+  - Bouton pour sauvegarde les métadonnées **Enregistrer**
+  - Sauvegarde les métadonnées saisies dans les champs de texte et la couverture si elle a été modifiée.
+
+## 9. Contrôle de lecture (Play/Pause/Next/Previous)
 
 - **But** : Contrôler la lecture des fichiers audio depuis l'interface.
 - **Fonctionnalité** :
@@ -247,11 +381,33 @@ Ce projet est une interface graphique qui permet d'explorer des fichiers audio s
   - `toggle_pause()` pour basculer entre pause et lecture.
   - `next_audio()` et `prev_audio()` pour changer de piste.
 
-### 7. Navigation et interaction améliorée
+## 10. Navigation et interaction améliorée
 
 - **But** : Permettre une navigation fluide entre les fichiers audio.
 - **Fonctionnement** : Lorsqu'une nouvelle piste est sélectionnée, les informations affichées sont mises à jour, et les boutons "suivant" et "précédent" permettent de naviguer rapidement.
 - **Code associé** : Les méthodes `next_item()` et `prev_item()` gèrent les changements de sélection dans la Listbox.
+
+## Utilisation Générale
+
+- **Lancer une recherche** :
+  - Entrez une commande dans le champ de recherche et cliquez sur le bouton "Rechercher".
+  - Les résultats s'afficheront en fonction de votre saisie.
+
+- **Lire de la musique** :
+  - Sélectionnez un morceau dans la liste et cliquez sur "Jouer" pour commencer la lecture.
+  - Utilisez "Pause" pour mettre la musique en pause et "Reprendre" pour continuer la lecture.
+
+- **Gérer les playlists** :
+  - Cliquez sur le bouton "Playlist" pour ouvrir la fenêtre de gestion des playlists.
+  - Vous pourrez y ajouter, supprimer ou modifier votre playlist.
+
+- **Modifier les métadonnées** :
+  - Cliquez sur "Modifier Métadonnées" pour ouvrir la fenêtre de modification.
+  - Apportez vos changements, sélectionnez une couverture si besoin, puis cliquez sur "Enregistrer" pour sauvegarder.
+
+## Conclusion
+
+Cette application vous offre une interface simple et efficace pour gérer votre collection musicale. N'hésitez pas à explorer toutes les fonctionnalités disponibles et à personnaliser votre expérience.
 
 ## Prérequis
 
