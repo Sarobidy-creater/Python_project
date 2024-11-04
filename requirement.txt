@@ -5,3 +5,4 @@ pydub
 lxml
 spotipy
 requests
+lxml

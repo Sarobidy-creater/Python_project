@@ -417,6 +417,7 @@ Avant d'exécuter ce script, vous devez installer les bibliothèques suivantes :
 - [Pillow](https://python-pillow.org/) : Bibliothèque Python pour manipuler et afficher des images, utilisée ici pour afficher la couverture des fichiers audio.
 - [Pygame](https://www.pygame.org/) : Bibliothèque pour créer des jeux en Python et jouer des fichiers audio.
 - [Pydub](https://github.com/jiaaro/pydub) : Bibliothèque pour manipuler les fichiers audio.
+- [lxml](https://lxml.de/) : Bibliothèque pour traiter les fichiers XML et HTML, souvent utilisée avec Pydub pour gérer les métadonnées.
 
 Pour installer les dépendances, exécutez la commande suivante dans votre terminal :
 
@@ -425,3 +426,4 @@ pip install mutagen
 pip install Pillow 
 pip install pygame
 pip install pydub
+pip install lxml
