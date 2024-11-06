@@ -703,8 +703,16 @@ class Interface:
         # Récupérer la saisie de l'utilisateur, la nettoyer et la mettre en minuscules
         saisie = self.entry_ecriture_haut.get().strip().lower()
 
-        if saisie == "":
+        if saisie == "" :
             message = "la saisie de l'utilisateur est vide"
+            self.afficher_notification(message)
+            return ""
+        if saisie == "album:" or saisie == "artiste:" or saisie == "music:" :
+            message = "la saisie de l'utilisateur est non complète"
+            self.afficher_notification(message)
+            return ""
+        if not (saisie.startswith("album:") or saisie.startswith("artiste:") or saisie.startswith("music:")):
+            message = "la saisie de l'utilisateur incorrect \n Ecrivez: \"album:nom_album\" ou \"artiste:nom_artiste\" ou \"music:titre_music\""
             self.afficher_notification(message)
             return ""
         
