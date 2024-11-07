@@ -92,6 +92,9 @@ class Playlist():
         - None : Cette méthode n'a pas de retour, elle effectue des opérations d'écriture dans un fichier.
     """
     def ecritureFichierxspf(self, dossier_music: str, out_Fichier_nom: str):
+        print("dossier_music**********************************************************************")
+        print(dossier_music)
+        print("**********************************************************************")
         try:
             chemin_file = None  # Initialisation de la variable pour le chemin du fichier
             # Si aucun nom de fichier de sortie n'est donné, créer un fichier par défaut
@@ -115,10 +118,15 @@ class Playlist():
             explorer = Explorer()  # Créer une instance de la classe Explorer
             d_save = os.path.abspath(dossier_music)  # Obtenir le chemin absolu du dossier de musique
             dossier_save = d_save.replace("\\", "/")  # Remplacer les antislashs par des barres obliques
-            
+            print("dossier_save**********************************************************************")
+            print(dossier_save)
+            print("**********************************************************************")
 
             # Obtenir le chemin du fichier à lire à partir de l'exploration du dossier
             fichier_lire_chemin = explorer.explorer_dossier_interface(dossier_save)
+            print("fichier_lire_chemin**********************************************************************")
+            print(fichier_lire_chemin)
+            print("**********************************************************************")
 
             # Ouvrir le fichier pour lire les chemins des fichiers audio
             with open(fichier_lire_chemin, 'r', encoding='utf-8') as f:
