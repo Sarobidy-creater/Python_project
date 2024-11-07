@@ -9,12 +9,12 @@ import pygame  # Bibliothèque pour gérer les fonctionnalités multimédias com
 from tkinter import *
 from tkinter import filedialog, Listbox, Scrollbar, Label, PhotoImage, messagebox
 from PIL import Image, ImageTk  # Pour gérer les images avec Pillow
-from ecouterAudio import Ecouter # Importe la classe Ecouter du module ecouterAudio pour lire un fichier audio mp3 ou flac dans la console
-from explorationDossier import Explorer  # Importe la classe Explorer pour explorer les dossiers
-from constitutionPlaylist import Playlist  # Importe la classe Playlist du module constitutionPlaylist pour générer des playlists
-from audioTagExtraction import Extraction  # Importe la classe Extraction du module audioTagExtraction pour extraire les métadonnées audio
-from fetcher import Fetcher
-from audioMetaEdite import Editer
+from library.ecouterAudio import Ecouter # Importe la classe Ecouter du module ecouterAudio pour lire un fichier audio mp3 ou flac dans la console
+from library.explorationDossier import Explorer  # Importe la classe Explorer pour explorer les dossiers
+from library.constitutionPlaylist import Playlist  # Importe la classe Playlist du module constitutionPlaylist pour générer des playlists
+from library.audioTagExtraction import Extraction  # Importe la classe Extraction du module audioTagExtraction pour extraire les métadonnées audio
+from library.fetcher import Fetcher
+from library.audioMetaEdite import Editer
 from mutagen.easyid3 import EasyID3  # Pour lire et écrire les métadonnées ID3 dans les fichiers MP3.
 from mutagen.mp3 import MP3  # Pour gérer les fichiers audio MP3 et accéder à leurs métadonnées.
 from mutagen.id3 import ID3, APIC  # Pour manipuler les balises ID3 et gérer les images intégrées comme les couvertures d'album.
@@ -59,7 +59,7 @@ class Interface:
         # Variables pour gérer l'interface
         self.checkbox_vars = []  # Pour stocker les variables de cases à cocher
         self.chemins_options = []  # Pour stocker les chemins des options
-        self.file_path_chemins = os.path.abspath(r'python_project\FichierTemp\options_selectionnees.txt')  # Chemin du fichier où écrire les options sélectionnées
+        self.file_path_chemins = os.path.abspath(r'Python_project-DataAudio\FichierTemp\options_selectionnees.txt')  # Chemin du fichier où écrire les options sélectionnées
 
         # Création des différents panneaux de l'interface
 
@@ -191,7 +191,7 @@ class Interface:
         self.zone_petit_logo.grid(row=0, column=2, sticky='nsew',padx=2, pady=2)
 
         # logo image 
-        chem_im = os.path.abspath(r"Python_project/img/nn.webp")
+        chem_im = os.path.abspath(r"Python_project-DataAudio/img/nn.webp")
         self.im = Image.open(chem_im)  # Remplace par le chemin de ton image
         self.im = self.im.resize((24, 24))  # Redimensionner si nécessaire
         self.im_tk = ImageTk.PhotoImage(self.im)
@@ -223,15 +223,12 @@ class Interface:
         self.butt_next = tk.Button(self.B2_label_bouton_manip, text="▶▶", command=self.next_audio, width=6)
         self.butt_next.pack(side=tk.RIGHT, padx=10, pady=10)  # Positionné à droite avec un espacement
 
-
         self.master.bind("<Return>", self.direct_Goto) 
         
-
-
     def direct_Goto(self, event=None):
         """Passage au panneau 2 et chargement de la musique par défaut."""
         self.switch_to_panel2() 
-        chem = os.path.abspath(r"Python_project\music")
+        chem = os.path.abspath(r"Python_project-DataAudio\music")
         self.AZEexploration_dossier(chem) 
         audio_path = self.mon_dictionnaire["0"]
         # Récupère seulement le nom du fichier à partir du chemin
@@ -412,7 +409,7 @@ class Interface:
                 image_album = image_alb  
             else:
                 # Charger l'image par défaut si aucune couverture n'est trouvée
-                image_path = os.path.abspath(r"Python_project\img\images.jpeg")
+                image_path = os.path.abspath(r"Python_project-DataAudio\img\images.jpeg")
                 
                 try:
                     image = Image.open(image_path)  # Ouvre l'image par défaut
@@ -575,7 +572,7 @@ class Interface:
         self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
         # Lire le fichier et créer des cases à cocher
-        fichier_lire = os.path.abspath(r'python_project\FichierTemp\TempFile.txt')  
+        fichier_lire = os.path.abspath(r'Python_project-DataAudio\FichierTemp\TempFile.txt')  
         self.options_fichier_lire(fichier_lire)
 
         # Création des boutons dans la nouvelle fenêtre
@@ -910,6 +907,7 @@ class Interface:
         select_cover_button = tk.Button(self.frame1_modif_window, text="Sélectionner une couverture", command=self.select_cover_image)
         select_cover_button.pack(anchor="w", padx=5, pady=3)
 
+
         # Boutons dans la deuxième section
         button_cancel = tk.Button(self.frame2_modif_window, text="Annuler", command=self.but_cancel)
         button_cancel.pack(side=tk.LEFT, padx=10, pady=10)
@@ -946,11 +944,15 @@ class Interface:
 
     def save_modification(self):
         """ Enregistre les modifications des métadonnées et actualise l'affichage. """
+        self.remettre_music = False
         if self.final_lecture == True :
             pygame.mixer.music.stop
             pygame.mixer.music.unload()
+            if self.audio_lecture == True:
+                self.remettre_music = True
         else:
             pygame.mixer.music.stop
+            self.remettre_music = False
         # Récupérer le chemin audio de l'attribut de la classe
         chemin_audio = self.chemin_audio
 
@@ -981,11 +983,10 @@ class Interface:
         self.chemin_audio = chemin_audio
         modif_window.destroy()
         # self.affiche_window = False
-        self.ecoute.lire_fichier_audio(chemin_audio)
-        self.final_lecture = True
+        if self.remettre_music == True:
+            self.ecoute.lire_fichier_audio(chemin_audio)
+            self.final_lecture = True
 
-
-        
 # Création de la fenêtre principale
 if __name__ == "__main__":
     root = tk.Tk()
