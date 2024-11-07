@@ -94,7 +94,11 @@ class Explorer():
         Retourne :
         - str : Le chemin du fichier temporaire contenant les chemins des fichiers audio, ou None en cas d'erreur.
         """
-        fichier_sortie = os.path.abspath(r'Python_project-DataAudio\FichierTemp\TempFile.txt')  
+        fichier_sortie = os.path.abspath(r'FichierTemp\TempFile.txt')
+        print("fichier_sortie**********************************************************************")
+        print(fichier_sortie)
+        print("**********************************************************************") 
+         
         return self._explorer_dossier_audio(chemin, fichier_sortie)  # Appelle la méthode d'exploration des fichiers audio.
 
     def explorer_dossier(self, chemin_name):

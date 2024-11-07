@@ -1,5 +1,14 @@
-C:/Users/nelly/card/musique audio/jul/01 - Aghju capitu.mp3
-C:/Users/nelly/card/musique audio/jul/05 - Love de moi.mp3
-C:/Users/nelly/card/musique audio/jul/ALP - BLOODS (feat. Freeze Corleone).mp3
-C:/Users/nelly/card/musique audio/jul/Freeze Corleone - Règne sur le monde.mp3
-C:/Users/nelly/card/musique audio/jul/Jul - Ma Casio.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/02 - Overtime.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/03 - Under The Influence.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/08 - belle.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/1 - Hollywood's Bleeding.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/1-2 - Balance ton quoi.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/1-3 - Jalousie.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/1-4 - Tout oublier.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/2 - Saint-Tropez.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/Aries (YuGo) Part 2 ft. Quavo, Pharrell.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/Imagine Dragons  Bad Liar.mp3
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/Imagine-Dragons-Bad-Liar.flac
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/sample2.flac
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/sample4.flac
+C:/Users/nelly/Desktop/CodeFinal/Python_project-DataAudio/music/Symphony No.6 (1st movement).flac
