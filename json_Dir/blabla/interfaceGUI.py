@@ -1,51 +1,58 @@
-import tkinter as tk
-from tkinter import messagebox
+import time
+import random
 
-class AudioPlayerApp:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Lecteur Audio")
+class Trombone:
+    def __init__(self, id):
+        self.id = id  # Identifiant unique du trombone
+        self.est_fabrique = False  # Indique si le trombone est fabriqué
 
-        # Créer une Listbox pour afficher les fichiers audio
-        self.audio_listbox = tk.Listbox(root)
-        self.audio_listbox.pack(padx=20, pady=20)
+    def __repr__(self):
+        return f"Trombone(id={self.id}, est_fabrique={self.est_fabrique})"
 
-        # Ajouter des fichiers audio à la Listbox (exemple)
-        self.audio_files = ["chanson1.mp3", "chanson2.mp3", "chanson3.mp3"]
-        for audio_file in self.audio_files:
-            self.audio_listbox.insert(tk.END, audio_file)
 
-        # Lier le double-clic à la lecture et à l'affichage du titre
-        self.audio_listbox.bind("<Double-Button-1>", self.affiche_path_label)
+class UsineTrombones:
+    def __init__(self, capacite_production):
+        self.capacite_production = capacite_production  # Nombre de trombones que l'usine peut produire à la fois
+        self.stock_materiaux = 1000  # Stock initial de matériaux pour fabriquer des trombones
+        self.production = []  # Liste pour stocker les trombones produits
 
-        # Lier le clic droit à l'ajout dans une playlist
-        self.audio_listbox.bind("<Button-3>", self.ajouter_playlist)
+    def produire_trombones(self, quantite):
+        if quantite > self.capacite_production:
+            print(f"Erreur: La capacité de production maximale est de {self.capacite_production} trombones.")
+            return
+        if quantite > self.stock_materiaux:
+            print("Erreur: Pas assez de matériaux pour produire cette quantité de trombones.")
+            return
 
-    def affiche_path_label(self, event):
-        # Récupérer l'index de l'élément sélectionné
-        selected_index = self.audio_listbox.curselection()
-        if selected_index:
-            # Récupérer le nom du fichier sélectionné
-            selected_audio = self.audio_listbox.get(selected_index)
-            # Afficher le nom du fichier (ou jouer le fichier audio)
-            messagebox.showinfo("Lecture", f"Lecture du fichier : {selected_audio}")
-            # Vous pouvez ajouter ici le code pour jouer le fichier audio
+        print(f"Production de {quantite} trombones en cours...")
+        for i in range(quantite):
+            trombone = Trombone(id=len(self.production) + 1)
+            trombone.est_fabrique = True  # Marque le trombone comme fabriqué
+            self.production.append(trombone)
+            self.stock_materiaux -= 1
+            time.sleep(0.1)  # Pause pour simuler le temps de fabrication
+            print(f"Trombone {trombone.id} fabriqué.")
+        
+        print(f"{quantite} trombones ont été produits avec succès.")
+        print(f"Matériaux restants : {self.stock_materiaux}")
 
-    def ajouter_playlist(self, event):
-        # Récupérer l'index de l'élément sélectionné
-        selected_index = self.audio_listbox.curselection()
-        if selected_index:
-            # Récupérer le nom du fichier sélectionné
-            selected_audio = self.audio_listbox.get(selected_index)
-            # Ajouter le fichier à une playlist (affichage d'un message par exemple)
-            messagebox.showinfo("Ajout", f"Ajout de {selected_audio} à la playlist")
-            # Vous pouvez ajouter ici le code pour gérer la playlist
+    def afficher_production(self):
+        print("Liste des trombones produits :")
+        for trombone in self.production:
+            print(trombone)
 
-# Créer la fenêtre principale
-root = tk.Tk()
 
-# Créer l'application
-app = AudioPlayerApp(root)
+# Exemple d'utilisation
+usine = UsineTrombones(capacite_production=10)
 
-# Lancer l'application
-root.mainloop()
+# Produire 5 trombones
+usine.produire_trombones(5)
+
+# Afficher la production actuelle
+usine.afficher_production()
+
+# Produire une autre série de trombones
+usine.produire_trombones(7)
+
+# Afficher la production finale
+usine.afficher_production()

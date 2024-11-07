@@ -4,10 +4,10 @@
 # Importation des modules nécessaires
 import argparse  # Importe la bibliothèque argparse pour gérer les arguments en ligne de commande
 import os  # Importe la bibliothèque os pour interagir avec le système de fichiers
-from audioTagExtraction import Extraction  # Importe la classe Extraction du module audioTagExtraction pour extraire les métadonnées audio
-from constitutionPlaylist import Playlist  # Importe la classe Playlist du module constitutionPlaylist pour générer des playlists
-from explorationDossier import Explorer  # Importe la classe Explorer du module explorationDossier pour explorer les dossiers
-from ecouterAudio import Ecouter # Importe la classe Ecouter du module ecouterAudio pour lire un fichier audio mp3 ou flac dans la console
+from library.audioTagExtraction import Extraction  # Importe la classe Extraction du module audioTagExtraction pour extraire les métadonnées audio
+from library.constitutionPlaylist import Playlist  # Importe la classe Playlist du module constitutionPlaylist pour générer des playlists
+from library.explorationDossier import Explorer  # Importe la classe Explorer du module explorationDossier pour explorer les dossiers
+from library.ecouterAudio import Ecouter # Importe la classe Ecouter du module ecouterAudio pour lire un fichier audio mp3 ou flac dans la console
 
 
 """
