@@ -8,6 +8,7 @@ from mutagen.id3 import ID3, APIC  # Pour manipuler les balises ID3 et gérer le
 from mutagen.flac import FLAC, Picture  # Pour travailler avec les fichiers audio FLAC et gérer les images intégrées.
 import mimetypes  # Pour déterminer le type MIME des fichiers en fonction de leur extension.
 import os  # Pour interagir avec le système de fichiers.
+import xml.etree.ElementTree as ET
 
 
 class Explorer():
@@ -33,23 +34,9 @@ class Explorer():
                     for fichier in fichiers:
                         chemin_coplt = os.path.join(racine, fichier)  # Construit le chemin complet du fichier.
                         chemin_complet = chemin_coplt.replace("\\", "/")
-                        audio = None  # Initialise une variable audio à None.
-
-                        # Vérifie l'extension du fichier pour le traitement audio.
-                        if chemin_complet.endswith('.mp3'):
-                            try:
-                                audio = MP3(chemin_complet, ID3=EasyID3)  # Crée un objet MP3 pour lire le fichier.
-                            except Exception as e:
-                                print(f"Erreur lors de la lecture du fichier MP3 {chemin_complet}: {e}")
-
-                        elif chemin_complet.endswith('.flac'):
-                            try:
-                                audio = FLAC(chemin_complet)  # Crée un objet FLAC pour lire le fichier.
-                            except Exception as e:
-                                print(f"Erreur lors de la lecture du fichier FLAC {chemin_complet}: {e}")
-
-                        # Vérifie que l'audio a été chargé correctement.
-                        if audio:
+                        nom = os.path.basename(chemin_complet)  # Récupère le nom du fichier.
+                        # Vérifie si le nom du fichier se termine par '.mp3' ou '.flac'.
+                        if nom.endswith(".mp3") or nom.endswith(".flac"):
                             type_mime, _ = mimetypes.guess_type(chemin_complet)  # Détermine le type MIME du fichier.
                             if type_mime in ['audio/mpeg', 'audio/x-flac']:  # Vérifie que le type MIME est valide.
                                 f.write(f"{chemin_complet}\n")  # Écrit le chemin du fichier dans le fichier de sortie.
@@ -70,6 +57,7 @@ class Explorer():
         - None : Cette méthode n'a pas de retour, elle affiche les chemins dans la console.
         """
         try:
+            # os.getcwd() : Cette fonction renvoie le répertoire de travail actuel (current working directory)
             chemin = os.getcwd() if chemin_name == "." else os.path.abspath(chemin_name)  # Définit le chemin à explorer.
             for racine, sous_dossiers, fichiers in os.walk(chemin):  # Parcours les fichiers dans le répertoire.
                 for fichier in fichiers:
@@ -95,9 +83,9 @@ class Explorer():
         - str : Le chemin du fichier temporaire contenant les chemins des fichiers audio, ou None en cas d'erreur.
         """
         fichier_sortie = os.path.abspath(r'FichierTemp\TempFile.txt')
-        print("fichier_sortie**********************************************************************")
-        print(fichier_sortie)
-        print("**********************************************************************") 
+        # print("fichier_sortie**********************************************************************")
+        # print(fichier_sortie)
+        # print("**********************************************************************") 
          
         return self._explorer_dossier_audio(chemin, fichier_sortie)  # Appelle la méthode d'exploration des fichiers audio.
 
@@ -137,5 +125,63 @@ class Explorer():
         Retourne :
         - str : Le chemin du fichier temporaire contenant les chemins des fichiers audio, ou None en cas d'erreur.
         """
-        fichier_sortie = os.path.abspath(r'Python_project-DataAudio\FichierTemp\TempFile.txt')  
+        fichier_sortie = os.path.abspath(r'Python_project\FichierTemp\TempFile.txt')  
         return self._explorer_dossier_audio(chemin, fichier_sortie)  # Appelle la méthode d'exploration des fichiers audio.
+
+    def explorer_Playlist(self):
+        """Recherche les fichiers de playlist .xspf dans le répertoire courant."""
+        tableau_playlist = []
+        chemin = os.getcwd()
+
+        # Parcourt tous les fichiers dans le répertoire
+        for racine, sous_dossiers, fichiers in os.walk(chemin):
+            for fichier in fichiers:
+                chemin_complet = os.path.join(racine, fichier)
+                nom = os.path.basename(chemin_complet)
+
+                # Vérifie si le fichier est une playlist .xspf
+                if nom.endswith(".xspf"):
+                    tableau_playlist.append(chemin_complet)
+
+        return tableau_playlist
+    
+    def extraire_pistes_de_playlist(self, chemin_complet):
+        """Extrait les chemins audio d'une playlist .xspf donnée."""
+        print(f"Chemin du fichier : {chemin_complet}")
+
+        try:
+            list_chemin_absolu = []  # Liste pour stocker les chemins audio
+            tree = ET.parse(chemin_complet)
+            root = tree.getroot()
+
+            # Définir les espaces de noms
+            namespaces = {'xspf': 'http://xspf.org/ns/0/'}
+
+            # Parcours les éléments <track> dans <trackList>
+            for track in root.findall(".//xspf:trackList/xspf:track", namespaces):
+                location_elem = track.find('xspf:location', namespaces)
+
+                # Vérifie si l'élément 'location' existe et contient du texte
+                if location_elem is not None and location_elem.text:
+                    chemin_absolu = location_elem.text.strip()
+
+                    # Si le chemin commence par 'file://', on le nettoie pour obtenir un chemin standard
+                    if chemin_absolu.startswith("file:///"):
+                        chemin_absolu = chemin_absolu[8:]  # Supprimer le préfixe 'file://'
+
+                    # Vérifie si le fichier existe avant d'ajouter le chemin
+                    if os.path.exists(chemin_absolu):
+                        list_chemin_absolu.append(chemin_absolu)
+                    else:
+                        print(f"Attention : le fichier {chemin_absolu} n'existe pas.")
+                else:
+                    print(f"Attention : une piste sans chemin 'location' dans {chemin_complet}")
+            return list_chemin_absolu
+        
+        except ET.ParseError as e:
+            print(f"Erreur lors du parsing du fichier XML {chemin_complet} : {e}")
+        except FileNotFoundError:
+            print(f"Erreur : le fichier {chemin_complet} est introuvable.")
+        except Exception as e:
+            print(f"Erreur inconnue pour le fichier {chemin_complet} : {e}")
+
