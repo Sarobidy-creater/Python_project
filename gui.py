@@ -32,6 +32,7 @@ class Interface:
 
         # Initialisation des variables
         self.mon_dictionnaire = {}  # Dictionnaire pour stocker les fichiers audio
+        self.tab_play = {} # Dictionnaire pour stocker les playlist et fichier
         self.explo = Explorer()  # Instance de la classe Explorer pour parcourir les dossiers
         self.ecoute = Ecouter()  # Instance de la classe Ecouter pour lire les fichiers audio
         self.playlist = Playlist()  # Instance de la classe Playlist pour gérer les playlists
@@ -40,13 +41,17 @@ class Interface:
         self.edite = Editer()
         self.varDirectory = ""  # Variable pour stocker le chemin du répertoire exploré
         self.valeur_par_defaut = "maPlaylist"  # Valeur par défaut de l'entrée de texte pour nommer la playlist
+        self.playlist_defaut = ""
         self.is_paused = False  # Variable pour suivre si la lecture est en pause
-        self.Varbutt = ""  # Variable pour suivre l'élément audio actuellement joué
+        self.is_playlist = False 
+        self.Varbutt = None  # Variable pour suivre l'élément audio actuellement joué
         self.buttnext = 0  # Variable pour naviguer entre les fichiers audio
         self.tailleListbox = 0  # Taille de la liste des fichiers audio
         self.audio_lecture = False  # Statut de lecture de l'audio
         self.reche = False
+        self.exist_play = False
         self.reche_retour = False
+        self.modification_fichier_play= True
         self.lightyellow = "lightyellow"  # Couleur de fond pour certaines parties de l'interface
         self.dodgerblue = "dodgerblue"  # Couleur de fond pour d'autres parties
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
@@ -55,11 +60,15 @@ class Interface:
         self.final_lecture = False
         self._open_window  = False
         self.playlist_window = False
+        self._specifier = False
         self.affiche_window = False # Attribut pour suivre si la fenêtre de modification est ouverte
+        self.max_length = 78 
+        self.max_length_milieu  = 38 
         # Variables pour gérer l'interface
         self.checkbox_vars = []  # Pour stocker les variables de cases à cocher
         self.chemins_options = []  # Pour stocker les chemins des options
-        self.file_path_chemins = os.path.abspath(r'Python_project-DataAudio\FichierTemp\options_selectionnees.txt')  # Chemin du fichier où écrire les options sélectionnées
+        self.file_path_chemins = os.path.abspath(r'python_project-DataAudio\FichierTemp\options_selectionnees.txt')  # Chemin du fichier où écrire les options sélectionnées
+        self.fichier_lire = os.path.abspath(r'python_project-DataAudio\FichierTemp\TempFile.txt')  
 
         # Création des différents panneaux de l'interface
 
@@ -130,7 +139,7 @@ class Interface:
 
         self.section3_metaData = tk.Frame(self.frame2_centre, bg=self.lightyellow)
         self.section3_metaData.grid(row=0, column=2, sticky='nsw', padx=2, pady=2)
-
+        
         # Créer une liste pour afficher les fichiers MP3
         self.audio_listbox = Listbox(self.section1_gauche_liste, width=80, height=10, bg=self.antiquewhite, selectbackground=self.dodgerblue)  # Ajuster la taille ici
         self.audio_listbox.pack(side=tk.LEFT, fill='both', expand=True)
@@ -176,8 +185,8 @@ class Interface:
         # Cadre 3******************************************
         # Configurer le grid pour 3 colonnes de taille égale
         self.frame3_bas.grid_columnconfigure(0, weight=1)  # Sect1
-        self.frame3_bas.grid_columnconfigure(1, weight=2)  # Sect2 (plus large)
-        self.frame3_bas.grid_columnconfigure(2, weight=1)  # Sect3
+        self.frame3_bas.grid_columnconfigure(1, weight=3)  # Sect2 (plus large)
+        self.frame3_bas.grid_columnconfigure(2, weight=3)  # Sect3
 
         self.frame3_bas.grid_rowconfigure(0, weight=1)  # Une seule ligne
 
@@ -202,10 +211,15 @@ class Interface:
         # Création d'un bouton pour explorer les dossiers audio
         self.butt_exploration = tk.Button(self.explo_playlist_boutton, text="Exploration", command=self.exploration_dossier, width=13)
         self.butt_exploration.pack(side=tk.LEFT, padx=10, pady=10)  # Positionné à gauche avec un espacement horizontal et vertical
+        
+        # Création d'un bouton pour écouter une playlist
+        self.butt_playlist = tk.Button(self.explo_playlist_boutton, text="Ecouter", command=self.ecouter_playlist, width=13)
+        self.butt_playlist.pack(side=tk.RIGHT, padx=10, pady=10)  # Positionné à droite avec un espacement horizontal et vertical
 
         # Création d'un bouton pour ouvrir la fenêtre de playlist
         self.butt_playlist = tk.Button(self.explo_playlist_boutton, text="Playlist", command=self.open_new_fenetre, width=13)
         self.butt_playlist.pack(side=tk.RIGHT, padx=10, pady=10)  # Positionné à droite avec un espacement horizontal et vertical
+
 
         # Création d'un bouton pour revenir au morceau audio précédent
         self.butt_next = tk.Button(self.B2_label_bouton_manip, text="◀◀", command=self.prev_audio, width=2)
@@ -230,18 +244,23 @@ class Interface:
         self.switch_to_panel2() 
         chem = os.path.abspath(r"Python_project-DataAudio\music")
         self.AZEexploration_dossier(chem) 
+        
         audio_path = self.mon_dictionnaire["0"]
         # Récupère seulement le nom du fichier à partir du chemin
-        nom_fichier = os.path.basename(audio_path)
+        chemin_nom_fichier = os.path.basename(audio_path)
+        nom_fichier =self.verifier_et_couper_nom_Milieu(chemin_nom_fichier)
         self.B1_label_fichier_nom.config(text=nom_fichier)
         # Extraire et afficher les métadonnées de l'audio
         self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
         self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
         self.cover_image(audio_path)  # Affiche l'image de couverture
         self.chemin_audio = audio_path
-        self.Varbutt = "0"
+        self.Varbutt = True
         self.buttnext = 0
         self.audio_listbox.selection_set(self.buttnext)  # Sélectionne le premier élément
+        self.is_playlist = False
+        self.tab_play.clear() 
+        self.tab_play = self.explo.explorer_Playlist()
 
     def exploration_dossier(self):
         """Ouvre un dossier pour explorer et charger des fichiers audio."""
@@ -288,7 +307,8 @@ class Interface:
                         cheminVar = cheminAudio.replace("\\", "/") 
 
                         # Récupère seulement le nom du fichier à partir du chemin
-                        nom_fichier = os.path.basename(cheminVar)
+                        nom_cheminVar= os.path.basename(cheminVar)
+                        nom_fichier =self.verifier_et_couper_nom_fichier(nom_cheminVar)
                         # Ajouter une nouvelle paire clé-valeur
                         
                         varchar = str(i)
@@ -300,6 +320,7 @@ class Interface:
                         self.tailleListbox = self.audio_listbox.size()
             self.audio_listbox.selection_set(0)  # Sélectionne le premier élément
             self.buttnext = 0  
+            self.is_playlist = False
 
     def AZEexploration_dossier(self, path):
         """Ouvre un dossier pour explorer et charger des fichiers audio à partir d'un chemin donné."""
@@ -336,7 +357,8 @@ class Interface:
                     cheminVar = cheminAudio.replace("\\", "/") 
 
                     # Récupère seulement le nom du fichier à partir du chemin
-                    nom_fichier = os.path.basename(cheminVar)
+                    nom_cheminVar = os.path.basename(cheminVar)
+                    nom_fichier =self.verifier_et_couper_nom_fichier(nom_cheminVar)
                     # Ajouter une nouvelle paire clé-valeur
                     varchar = str(i)
                     self.mon_dictionnaire[varchar] = f"{cheminVar}"
@@ -350,31 +372,33 @@ class Interface:
         """Affiche les détails du fichier audio sélectionné dans la Listbox."""
         audio = None
         self.verif_lecture = False
-        
-        # Récupérer l'index du fichier sélectionné dans la Listbox
-        select_index = self.audio_listbox.curselection() 
-        self.buttnext = select_index[0] 
-        self.Varbutt = "1"  # Indique qu'un fichier a été sélectionné
-        
-        if select_index:
-            # Obtenir le chemin du fichier audio sélectionné
-            varstr = str(self.buttnext)
-            audio_path = self.mon_dictionnaire[varstr]
-            # Récupère seulement le nom du fichier à partir du chemin
-            nom_fichier = os.path.basename(audio_path)
-            self.B1_label_fichier_nom.config(text=nom_fichier)
+        if self.tailleListbox > 0: 
+            # Récupérer l'index du fichier sélectionné dans la Listbox
+            select_index = self.audio_listbox.curselection() 
+            if select_index:
+                self.buttnext = select_index[0] 
+                
+                self.Varbutt = False  # Indique qu'un fichier a été sélectionné
+            
+                # Obtenir le chemin du fichier audio sélectionné
+                varstr = str(self.buttnext)
+                audio_path = self.mon_dictionnaire[varstr]
+                # Récupère seulement le nom du fichier à partir du chemin
+                chemin_nom_fichier = os.path.basename(audio_path)
+                nom_fichier =self.verifier_et_couper_nom_Milieu(chemin_nom_fichier)
+                self.B1_label_fichier_nom.config(text=nom_fichier)
 
-            
-            
-            # Extraire et afficher les métadonnées de l'audio
-            self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-            self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
-            
-            self.cover_image(audio_path)  # Affiche l'image de couverture
-            self.chemin_audio = audio_path
-            
-            if self.audio_lecture:  # Si un audio est déjà en lecture
-                self.lire_audio()  # Lit le fichier audio
+                
+                
+                # Extraire et afficher les métadonnées de l'audio
+                self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
+                self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
+                
+                self.cover_image(audio_path)  # Affiche l'image de couverture
+                self.chemin_audio = audio_path
+                
+                if self.audio_lecture:  # Si un audio est déjà en lecture
+                    self.lire_audio()  # Lit le fichier audio
 
     def cover_image(self, audio_path):
         """Affiche la couverture de l'album pour le fichier audio sélectionné."""
@@ -438,17 +462,18 @@ class Interface:
         """Lance la lecture du fichier audio sélectionné."""
         select_index = self.audio_listbox.curselection()  
         varstr = ""  
-        if self.Varbutt == "0":
+        if self.Varbutt == True:
             # Obtenir le chemin du fichier audio sélectionné
             varstr = str(self.buttnext)     
-        elif self.Varbutt == "1":
+        elif self.Varbutt == False:
             # Obtenir le chemin du fichier audio sélectionné
             varstr = str(select_index[0])
          # i = int(varstr)
          # while True:
         audio_path = self.mon_dictionnaire[varstr]
         # Récupère seulement le nom du fichier à partir du chemin
-        nom_fichier = os.path.basename(audio_path)
+        chemin_nom_fichier = os.path.basename(audio_path)
+        nom_fichier =self.verifier_et_couper_nom_Milieu(chemin_nom_fichier)
         self.B1_label_fichier_nom.config(text=nom_fichier)
         self.ecoute.lire_fichier_audio(audio_path)  # Joue le fichier audio
         # Assurer que l'état est "lecture" et non "pause"
@@ -485,10 +510,17 @@ class Interface:
 
     def par_defaut(self):
         """Restaure la valeur par défaut dans l'Entry et affiche cette valeur dans le label."""
+        
         self.select_all
         self.entry.delete(0, tk.END)  # Efface le contenu de l'Entry
-        self.entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut
-        chemin_play = self.playlist.gui_ecritureFichierxspf(self.varDirectory, None)  # Enregistre la playlist  
+        chemin_play = ""
+        if self.is_playlist == False:
+            self.entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut
+            chemin_play = self.playlist.gui_ecritureFichierxspf(self.varDirectory, None)  # Enregistre la playlist
+        else:
+            self.entry.insert(0, self.playlist_defaut)
+            self.entry.config(state="readonly") 
+            chemin_play = self.playlist.gui_ecritureFichierxspf(self.varDirectory, self.playlist_defaut)  # Enregistre la playlist  
         self.afficher_notification(f"Playlist crée dans ce dossier : {os.path.abspath(chemin_play)}")
         self._open_window  = False
         self.new_window.destroy()  # Ferme la fenêtre secondaire
@@ -497,8 +529,16 @@ class Interface:
     def specifier(self):
         """Récupère le texte saisi et les options cochées, puis les écrit dans un fichier."""
         texte_saisi = self.entry.get()  # Récupère le texte saisi dans l'Entry
-        print(texte_saisi)
+        self._specifier = True
+        chemin_audio = os.path.abspath(fr"Python_project-DataAudio/Playlist/{texte_saisi}.xspf")
+        self.verification_playlist(chemin_audio)
 
+        if self.modification_fichier_play == True :
+            self.suite_specifier()
+
+    def suite_specifier(self):
+        texte_saisi = self.entry.get()
+        
         # Récupérer les chemins des options sélectionnées
         chemins_selectionnes = [path for var, path in zip(self.checkbox_vars, self.chemins_options) if var.get()]
 
@@ -509,12 +549,14 @@ class Interface:
 
         # Afficher la notification avec le chemin enregistré
         chemin_play = self.playlist.gui_ecritureFichierxspf(self.file_path_chemins, texte_saisi)  # Enregistre la playlist avec le texte saisi
+        self.exist_play = False
         self.afficher_notification(os.path.abspath(chemin_play))
 
         # Efface le contenu de l'Entry après avoir spécifié
         self.entry.delete(0, tk.END)  
         self._open_window  = False
         self.new_window.destroy()  # Ferme la fenêtre secondaire
+        self._specifier = False
 
     def open_new_fenetre(self):
         """Ouvre une nouvelle fenêtre pour gérer la playlist."""
@@ -538,7 +580,11 @@ class Interface:
 
         # Zone de saisie (entrée de texte) avec valeur par défaut
         self.entry = tk.Entry(frame1_open_window, width=30)
-        self.entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut dans l'Entry
+        if self.is_playlist == False:
+            self.entry.insert(0, self.valeur_par_defaut)  # Insère la valeur par défaut
+        else:
+            # Définir l'Entry en mode readonly pour empêcher la modification
+            self.entry.insert(0, self.playlist_defaut) 
         self.entry.pack(side=tk.LEFT, padx=10, pady=10)
 
         # Bouton pour désélectionner toutes les checkboxes
@@ -572,8 +618,8 @@ class Interface:
         self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
         # Lire le fichier et créer des cases à cocher
-        fichier_lire = os.path.abspath(r'Python_project-DataAudio\FichierTemp\TempFile.txt')  
-        self.options_fichier_lire(fichier_lire)
+        
+        self.options_fichier_lire(self.fichier_lire)
 
         # Création des boutons dans la nouvelle fenêtre
         button_annuler = tk.Button(frame2_open_window, text="Annuler", command=self.annuler)
@@ -624,7 +670,8 @@ class Interface:
 
                 audio_path = self.mon_dictionnaire[varstr]  # Récupère le chemin de l'audio suivant
                 # Récupère seulement le nom du fichier à partir du chemin
-                nom_fichier = os.path.basename(audio_path)
+                chemin_nom_fichier = os.path.basename(audio_path)
+                nom_fichier =self.verifier_et_couper_nom_Milieu(chemin_nom_fichier)
                 self.B1_label_fichier_nom.config(text=nom_fichier)
                 
                 # Extraire et afficher les métadonnées de l'audio
@@ -633,7 +680,7 @@ class Interface:
                 
                 self.cover_image(audio_path)  # Affiche l'image de couverture
                 self.chemin_audio = audio_path
-                self.Varbutt = "0"
+                self.Varbutt = True
                 if self.audio_lecture:  # Si un audio est déjà en lecture
                     self.lire_audio()  # Lit le fichier audio
         except IndexError:
@@ -660,7 +707,8 @@ class Interface:
 
             audio_path = self.mon_dictionnaire[varstr]  # Récupère le chemin de l'audio précédent
             # Récupère seulement le nom du fichier à partir du chemin
-            nom_fichier = os.path.basename(audio_path)
+            chemin_nom_fichier = os.path.basename(audio_path)
+            nom_fichier =self.verifier_et_couper_nom_Milieu(chemin_nom_fichier)
             self.B1_label_fichier_nom.config(text=nom_fichier)
             
             # Extraire et afficher les métadonnées de l'audio
@@ -669,7 +717,7 @@ class Interface:
             
             self.cover_image(audio_path)  # Affiche l'image de couverture
             self.chemin_audio = audio_path
-            self.Varbutt = "0"
+            self.Varbutt = True
             if self.audio_lecture:  # Si un audio est déjà en lecture
                 self.lire_audio()  # Lit le fichier audio
 
@@ -685,75 +733,81 @@ class Interface:
 
     def pause(self):
         """Met en pause la lecture audio."""
-        self.audio_lecture = False  # Met à jour l'état audio
-        self.final_lecture = True
-        pygame.mixer.music.pause()  # Met en pause la musique
+        if self.final_lecture == True and self.audio_lecture == True:
+            self.audio_lecture = False  # Met à jour l'état audio
+            self.final_lecture = True
+            pygame.mixer.music.pause()  # Met en pause la musique
 
     def reprendre(self):
         """Reprend la lecture audio en pause."""
-        self.audio_lecture = True  # Met à jour l'état audio
-        self.final_lecture = True
-        pygame.mixer.music.unpause()  # Reprend la musique
+        if self.final_lecture == True and self.audio_lecture == False:
+            self.audio_lecture = True  # Met à jour l'état audio
+            self.final_lecture = True
+            pygame.mixer.music.unpause()  # Reprend la musique
 
     def rechercher(self):
         """Affiche les fichiers MP3 disponibles et ajoute un bouton pour revenir."""
         # Récupérer la saisie de l'utilisateur, la nettoyer et la mettre en minuscules
-        saisie = self.entry_ecriture_haut.get().strip().lower()
+        if self.fetcher.is_internet_available() == True :
+            saisie = self.entry_ecriture_haut.get().strip().lower()
 
-        if saisie == "" :
-            message = "la saisie de l'utilisateur est vide"
+            if saisie == "" :
+                message = "la saisie de l'utilisateur est vide"
+                self.afficher_notification(message)
+                return ""
+            if saisie == "album:" or saisie == "artiste:" or saisie == "music:" :
+                message = "la saisie de l'utilisateur est non complète"
+                self.afficher_notification(message)
+                return ""
+            if not (saisie.startswith("album:") or saisie.startswith("artiste:") or saisie.startswith("music:")):
+                message = "la saisie de l'utilisateur incorrect \n Ecrivez: \"album:nom_album\" ou \"artiste:nom_artiste\" ou \"music:titre_music\""
+                self.afficher_notification(message)
+                return ""
+            
+            # Si le label existe déjà, on le cache au lieu de le recréer
+            if hasattr(self, 'rechercher_label'):
+                self.rechercher_label.pack_forget()  # Cache le label précédent
+                self.scrollbar.pack_forget()  # Cache la scrollbar précédente
+                self.rechercher_frame.pack_forget()  # Cache le cadre précédent
+
+
+            # Cache le label des métadonnées
+            self.metaData_label.pack_forget()
+            self.reche = False
+
+            # Créer un cadre pour le label et la scrollbar
+            self.rechercher_frame = tk.Frame(self.section3_metaData, bg=self.lightyellow)
+            self.rechercher_frame.pack(pady=10, fill='both', expand=True)
+
+            # Créer un canvas pour la scrollbar
+            self.canvas = tk.Canvas(self.rechercher_frame, bg=self.lightyellow)
+            self.scrollbar = tk.Scrollbar(self.rechercher_frame, orient="vertical", command=self.canvas.yview, bg=self.lightyellow)
+            self.scrollable_frame = tk.Frame(self.canvas)
+
+            self.scrollable_frame.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
+
+            self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+
+            # Configurer la scrollbar
+            self.canvas.configure(yscrollcommand=self.scrollbar.set)
+
+            # Pack le canvas et la scrollbar
+            self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+            self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+            # Créer un label pour afficher le chemin complet du fichier sélectionné
+            self.rechercher_label = Label(self.scrollable_frame, text="", width=70, justify="left", bg=self.lightyellow)
+            self.rechercher_label.pack(pady=10, fill='both', expand=True)
+            
+
+            # Récupérer et afficher les données API
+            data_api_affiche = self.fetcher_methode(saisie)
+            self.rechercher_label.config(text=data_api_affiche)  # Mettre à jour le texte du label formaté
+            
+            self.reche_retour = True
+        else: 
+            message = "Aucune connexion Internet. L'accès à l'API Spotify est limité"
             self.afficher_notification(message)
-            return ""
-        if saisie == "album:" or saisie == "artiste:" or saisie == "music:" :
-            message = "la saisie de l'utilisateur est non complète"
-            self.afficher_notification(message)
-            return ""
-        if not (saisie.startswith("album:") or saisie.startswith("artiste:") or saisie.startswith("music:")):
-            message = "la saisie de l'utilisateur incorrect \n Ecrivez: \"album:nom_album\" ou \"artiste:nom_artiste\" ou \"music:titre_music\""
-            self.afficher_notification(message)
-            return ""
-        
-        # Si le label existe déjà, on le cache au lieu de le recréer
-        if hasattr(self, 'rechercher_label'):
-            self.rechercher_label.pack_forget()  # Cache le label précédent
-            self.scrollbar.pack_forget()  # Cache la scrollbar précédente
-            self.rechercher_frame.pack_forget()  # Cache le cadre précédent
-
-
-        # Cache le label des métadonnées
-        self.metaData_label.pack_forget()
-        self.reche = False
-
-        # Créer un cadre pour le label et la scrollbar
-        self.rechercher_frame = tk.Frame(self.section3_metaData, bg=self.lightyellow)
-        self.rechercher_frame.pack(pady=10, fill='both', expand=True)
-
-        # Créer un canvas pour la scrollbar
-        self.canvas = tk.Canvas(self.rechercher_frame, bg=self.lightyellow)
-        self.scrollbar = tk.Scrollbar(self.rechercher_frame, orient="vertical", command=self.canvas.yview, bg=self.lightyellow)
-        self.scrollable_frame = tk.Frame(self.canvas)
-
-        self.scrollable_frame.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
-
-        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
-
-        # Configurer la scrollbar
-        self.canvas.configure(yscrollcommand=self.scrollbar.set)
-
-        # Pack le canvas et la scrollbar
-        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-        # Créer un label pour afficher le chemin complet du fichier sélectionné
-        self.rechercher_label = Label(self.scrollable_frame, text="", width=70, justify="left", bg=self.lightyellow)
-        self.rechercher_label.pack(pady=10, fill='both', expand=True)
-        
-
-        # Récupérer et afficher les données API
-        data_api_affiche = self.fetcher_methode(saisie)
-        self.rechercher_label.config(text=data_api_affiche)  # Mettre à jour le texte du label formaté
-        
-        self.reche_retour = True
      
     def retour(self): 
         """Affiche les métadonnées du fichier audio sélectionné et cache le bouton de retour."""
@@ -780,6 +834,17 @@ class Interface:
         """Ferme la fenêtre secondaire."""
         self.notification.destroy()  
 
+    def clo_notification(self):
+        """Ferme la fenêtre secondaire."""
+        self.modification_fichier_play = False
+        self.notification.destroy()  
+
+    def Modifier_play_name(self):
+        """Ouvre une fenêtre secondaire pour modifier le nom du fichier audio"""
+        self.modification_fichier_play = True
+        self.notification.destroy()  
+        self.suite_specifier()
+
     def afficher_notification(self, chemin_play):
         """Affiche une notification"""
         global notification, label, entry
@@ -791,38 +856,17 @@ class Interface:
          # Créer un label pour afficher le message
         message_label = tk.Label(self.notification, text=f"Message : {chemin_play}", padx=20, pady=20)
         message_label.pack()
+        if self.exist_play == True:
+            # Si `self.exist_play` est True, ajouter les boutons pour annuler et modifier
+            cancel_button = tk.Button(self.notification, text="Annuler", command=self.clo_notification)
+            cancel_button.pack(side=tk.LEFT, padx=10, pady=10)
 
-        # Créer un bouton pour fermer la notification
-        close_button = tk.Button(self.notification, text="OK", command=self.destroy_notification)
-        close_button.pack(pady=(0, 10))  # Ajouter un peu d'espace en bas
-        # messagebox.showinfo("Notification", f"Playlist crée dans ce dossier : {chemin_play}")
-
-    """    
-    def ajoute_playlist(self,event):
-        audio = None
-        
-        # Récupérer l'index du fichier sélectionné dans la Listbox
-        select_index = self.audio_listbox.curselection() 
-        self.buttnext = select_index[0] 
-        self.Varbutt = "1"  # Indique qu'un fichier a été sélectionné
-        
-        if select_index:
-            # Obtenir le chemin du fichier audio sélectionné
-            varstr = str(self.buttnext)
-            audio_path = self.mon_dictionnaire[varstr]
-            # Récupère seulement le nom du fichier à partir du chemin
-            nom_fichier = os.path.basename(audio_path)
-            self.B1_label_fichier_nom.config(text=nom_fichier)
-            
-            # Extraire et afficher les métadonnées de l'audio
-            self.metadata_str = self.extract.extraction_et_afficher_tag(audio_path)
-            self.metaData_label.config(text=self.metadata_str)  # Afficher les métadonnées dans path_label3
-            
-            self.cover_image(audio_path)  # Affiche l'image de couverture
-            
-            if self.audio_lecture:  # Si un audio est déjà en lecture
-                self.lire_audio()  # Lit le fichier audio
-    """
+            modify_button = tk.Button(self.notification, text="Modifier", command=self.Modifier_play_name)
+            modify_button.pack(side=tk.RIGHT, padx=10, pady=10)
+        else:
+            # Si `self.exist_play` est False, seulement un bouton pour fermer
+            close_button = tk.Button(self.notification, text="OK", command=self.destroy_notification)
+            close_button.pack(pady=(0, 10))  # Ajouter un peu d'espace en bas
 
     def fetcher_methode(self, saisie:str)-> str:
         """Méthode pour traiter la saisie et effectuer des recherches basées sur artiste, album ou musique via un API."""
@@ -857,7 +901,7 @@ class Interface:
         # if self.affiche_window == False:
         global modif_window
         modif_window = Toplevel(root)
-        modif_window.title("Modification de métadonnées")
+        modif_window.title("Modification")
         modif_window.geometry("300x500")  # Augmenter la taille de la fenêtre pour inclure la couverture
         modif_window.resizable(False, False)  # Empêche la redimension de la fenêtre
         
@@ -986,6 +1030,154 @@ class Interface:
         if self.remettre_music == True:
             self.ecoute.lire_fichier_audio(chemin_audio)
             self.final_lecture = True
+
+    def ecouter_playlist(self):
+        """Ouvre une fenêtre secondaire pour écouter une playlist."""
+        self.playlist_window = tk.Toplevel(self.master)
+        self.playlist_window.title("Playlist")
+        self.playlist_window.geometry("510x448")
+        self.playlist_window.resizable(False, False)
+
+        # Créer les cadres
+        frame1_playlist_window = tk.Frame(self.playlist_window, bg=self.antiquewhite)
+        frame2_playlist_window = tk.Frame(self.playlist_window, bg="gray")
+        frame3_playlist_window = tk.Frame(self.playlist_window)
+
+        frame1_playlist_window.pack(fill=tk.BOTH, expand=False, padx=10, pady=10)
+        frame3_playlist_window.pack(fill=tk.BOTH, expand=False, padx=10, pady=10)
+        frame2_playlist_window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        self.label_name = tk.Label(frame1_playlist_window, text="Toutes vos Playlists", bg=self.antiquewhite)
+        self.label_name.pack(side=tk.LEFT, padx=10, pady=10)
+
+
+
+        # Créer un canvas pour la liste des playlists avec scrollbar
+        self.canvas = tk.Canvas(frame3_playlist_window, bg="white")
+        self.scrollbar = tk.Scrollbar(frame3_playlist_window, orient="vertical", command=self.canvas.yview)
+        self.scrollable_frame = tk.Frame(self.canvas, bg="white")
+
+        # Configuration du canvas
+        self.scrollable_frame.bind(
+            "<Configure>",
+            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        )
+        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # Liste des playlists
+        self.tab_play.clear() 
+        self.tab_play = self.explo.explorer_Playlist()
+        liste_play_str = list(self.tab_play)
+        self.selected_playlist = tk.IntVar()
+
+        for i, line in enumerate(liste_play_str):
+            radio_button = tk.Radiobutton(
+                self.scrollable_frame,
+                text=os.path.basename(line),
+                variable=self.selected_playlist,
+                value=i,
+                bg="white"
+            )
+            radio_button.pack(anchor=tk.W)
+            
+        nombre_play = len(liste_play_str)
+
+        self.label_number_entry = tk.Entry(frame1_playlist_window, width=5)
+        self.label_number_entry.pack(side=tk.RIGHT, padx=8, pady=8)
+
+        self.label_number_entry.insert(0,nombre_play) 
+        self.label_number_entry.config(state="readonly") 
+
+        self.label_Liste_play= tk.Label(frame1_playlist_window, text="Listes :", bg=self.antiquewhite)
+        self.label_Liste_play.pack(side=tk.RIGHT, padx=10, pady=10)
+
+        # Boutons dans la nouvelle fenêtre
+        button_annuler = tk.Button(frame2_playlist_window, text="Annuler", command=self.annuleroPeration)
+        button_annuler.pack(side=tk.LEFT, padx=10, pady=10)
+
+        button_choisir = tk.Button(
+            frame2_playlist_window, 
+            text="Choisir", 
+            command=lambda: self.playlistChoisir(self.tab_play [self.selected_playlist.get()])
+        )
+        button_choisir.pack(side=tk.RIGHT, padx=10, pady=10)
+
+    def annuleroPeration(self):
+        """Ferme la fenêtre secondaire."""
+        self.playlist_window.destroy()
+
+    def playlistChoisir(self, chemin_complet):
+        """Choisit une playlist et ferme la fenêtre secondaire."""
+        chansons = self.explo.extraire_pistes_de_playlist(chemin_complet) 
+        self.audio_listbox.delete(0, tk.END)
+        self.mon_dictionnaire.clear()
+        
+        for i, chan in enumerate(chansons):
+            cheminAudio = chan.strip().replace("\\", "/")
+            nom_cheminVar = os.path.basename(cheminAudio)
+            self.mon_dictionnaire[str(i)] = str(cheminAudio)
+            nom_fichier =self.verifier_et_couper_nom_fichier(nom_cheminVar)
+            self.audio_listbox.insert(tk.END, nom_fichier)
+            self.tailleListbox = self.audio_listbox.size()
+        self.annuleroPeration()
+        self.audio_listbox.selection_set(0)  # Sélectionne le premier élément
+        self.buttnext = 0  
+        self.vider_fichier(self.fichier_lire)
+        self.playlistModif(chansons)
+        # Extraire le nom du fichier à partir du chemin complet
+        nom_fichier = os.path.basename(chemin_complet)
+
+        # Trouver la position du dernier ".xspf"
+        position = nom_fichier.rfind('.xspf')
+
+        # Extraire le nom de fichier sans l'extension ".xspf"
+        resultat = nom_fichier[:position]
+
+        # Affecter à playlist_defaut le nom sans extension
+        self.playlist_defaut = resultat
+        self.is_playlist = True
+
+    def playlistModif(self, chansons):
+        # Ouvrir un fichier en mode écriture
+        with open(self.fichier_lire, "w", encoding="utf-8") as fichier:
+            for chan in chansons:
+                # Écrire chaque chanson dans le fichier
+                fichier.write(f"{chan}\n")
+            
+    def vider_fichier(self,nom_fichier):
+        # Ouvrir le fichier en mode écriture, ce qui écrase tout son contenu
+        with open(nom_fichier, "w", encoding="utf-8") as fichier:
+            pass  # Ne rien écrire dans le fichier
+    
+    def verification_playlist(self,f_name):
+        # Vérifier si l'élément 3 est dans le tableau
+        if f_name in self.tab_play:
+            self.exist_play = True
+            self.modification_fichier_play = False 
+            message = f"Modifié la liste des audios dans la Playlist : {f_name} ?"
+            self.afficher_notification(message)
+        
+    def verifier_et_couper_nom_fichier(self,nom_fichier):
+        max_length = self.max_length
+        # Vérifier si la longueur du nom de fichier dépasse la limite
+        if len(nom_fichier) > max_length:
+            # Couper le nom de fichier à la longueur maximale et ajouter des points de suspension
+            nom_fichier = nom_fichier[:max_length] + "..."
+        
+        return nom_fichier
+    
+    def verifier_et_couper_nom_Milieu(self,nom_fichier):
+        max_length = self.max_length_milieu
+        # Vérifier si la longueur du nom de fichier dépasse la limite
+        if len(nom_fichier) > max_length:
+            # Couper le nom de fichier à la longueur maximale et ajouter des points de suspension
+            nom_fichier = nom_fichier[:max_length] + "..."
+        
+        return nom_fichier
 
 # Création de la fenêtre principale
 if __name__ == "__main__":
