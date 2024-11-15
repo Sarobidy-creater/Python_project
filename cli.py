@@ -14,6 +14,13 @@ from library.ecouterAudio import Ecouter # Importe la classe Ecouter du module e
     Une classe qui gère les interactions en ligne de commande pour la gestion des fichiers musicaux.
 """
 class Console:
+    def __init__(self):
+        """Initialisation du mode console"""
+        # Création des instances des classes Extraction, Explorer, et Playlist nécessaires pour les différentes fonctionnalités
+        self.extraction = Extraction()  # Instance pour l'extraction des métadonnées audio
+        self.explorer = Explorer()  # Instance pour explorer les dossiers
+        self.playlist = Playlist()  # Instance pour générer une playlist
+        self.ecouter = Ecouter() # Instance pour ecouter les audios mp3 et flac
     
 
     """
@@ -62,11 +69,6 @@ class Console:
         # Analyse les arguments fournis par l'utilisateur
         args = parser.parse_args()
 
-        # Création des instances des classes Extraction, Explorer, et Playlist nécessaires pour les différentes fonctionnalités
-        extraction = Extraction()  # Instance pour l'extraction des métadonnées audio
-        explorer = Explorer()  # Instance pour explorer les dossiers
-        playlist = Playlist()  # Instance pour générer une playlist
-        ecouter = Ecouter() # Instance pour ecouter les audios mp3 et flac
 
         # Vérification si aucun argument n'a été fourni (valeurs None ou vides)
         if not any(vars(args).values()):
@@ -86,22 +88,22 @@ class Console:
                     # Si le dossier n'existe pas, lever une exception
                     raise FileNotFoundError(f"Le dossier '{args.directory}' n'existe pas ou n'est pas accessible.")
                 print(f"Analyse du dossier : {args.directory}")  # Afficher le message indiquant l'analyse du dossier
-                explorer.explorer_dossier_console(args.directory)  # Appel de la méthode pour explorer le dossier
+                self.explorer.explorer_dossier_console(args.directory)  # Appel de la méthode pour explorer le dossier
 
             # Si un fichier est fourni, extraire et afficher ses métadonnées
             if args.file:
                 print(f"Affichage des métadonnées pour le fichier : {args.file}")  # Message indiquant le fichier analysé
-                extraction.audio_extraire_et_afficher_tag(args.file)  # Extraire et afficher les métadonnées du fichier
+                self.extraction.audio_extraire_et_afficher_tag(args.file)  # Extraire et afficher les métadonnées du fichier
             
             # Lire le fichier MP3 si l'argument -l est présent
             if args.file and args.listen:
                 print(f"Lire le fichier : {args.file}")  # Message indiquant le fichier analysé
-                ecouter.lire_fichier_mp3(args.file)
+                self.ecouter.lire_tout_audio(args.file)
 
             # Si un dossier et un fichier de sortie sont fournis, générer une playlist
             if args.directory and args.output:
                 print(f"Génération de la playlist dans le fichier : {args.output}")  # Message indiquant la génération de la playlist
-                playlist.ecritureFichierxspf(args.directory, args.output)  # Appel de la méthode pour écrire la playlist dans le fichier
+                self.playlist.ecritureFichierxspf(args.directory, args.output)  # Appel de la méthode pour écrire la playlist dans le fichier
 
         # Gestion des exceptions si le fichier ou dossier n'existe pas
         except FileNotFoundError as e:
@@ -110,6 +112,9 @@ class Console:
         # Gestion des erreurs de permission lors de l'accès à des fichiers ou dossiers
         except PermissionError as e:
             print(f"Erreur de permission: {e}")  # Affiche un message si l'utilisateur n'a pas les permissions nécessaires
+        
+        except KeyboardInterrupt:
+            print("\nLecture audio interrompue par Ctrl+C.")
 
         # Gestion d'autres erreurs imprévues
         except Exception as e:
