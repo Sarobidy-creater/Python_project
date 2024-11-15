@@ -3,6 +3,7 @@
 import base64
 import json
 import os
+import time
 import requests
 from library.APIQueryType import APIQueryType
 from urllib.parse import urlencode
@@ -23,66 +24,95 @@ class Fetcher:
         self.token_url = 'https://accounts.spotify.com/api/token'
         self.spotify_api_url = 'https://api.spotify.com/v1'
 
-        self.authorize_client()
-        self.chemin_artist_json = os.path.abspath(r"Python_project-DataAudio\\json_Dir\\artist_json.json")
-        self.chemin_album_json = os.path.abspath(r"Python_project-DataAudio\\json_Dir\\album_json.json")
-        self.chemin_track_json = os.path.abspath(r"Python_project-DataAudio\\json_Dir\\track_json.json")
+        # Chemins vers les fichiers JSON où les données seront sauvegardées
+        self.chemin_artist_json = os.path.abspath(r"Python_project\\json_Dir\\artist_json.json")
+        self.chemin_album_json = os.path.abspath(r"Python_project\\json_Dir\\album_json.json")
+        self.chemin_track_json = os.path.abspath(r"Python_project\\json_Dir\\track_json.json")
 
+        # Vérification si la connexion Internet est disponible au démarrage
+        self.check_internet_and_authorize()
+
+    def check_internet_and_authorize(self):
+        """
+        Vérifie si une connexion Internet est disponible et tente d'obtenir un jeton d'authentification si possible.
+        """
+        if self.is_internet_available():
+            print("Connexion Internet détectée. Tentative d'autorisation...")
+            self.authorize_client()
+        else:
+            print("Aucune connexion Internet. Impossible d'accéder à l'API Spotify.")
+    
+    def is_internet_available(self):
+        """
+        Vérifie si une connexion Internet est disponible en envoyant une requête à Google.
+        """
+        try:
+            response = requests.get("https://www.google.com", timeout=5)
+            return True
+        except requests.ConnectionError:
+            return False
 
     def authorize_client(self) -> bool:
         """
-            Récupère un jeton d'authentification et autorise l'accès à l'API Spotify.
-            Retourne un booléen indiquant si l'authentification a réussi.
-
-            :return: True si le client est autorisé, False en cas d'échec.
+        Récupère un jeton d'authentification et autorise l'accès à l'API Spotify.
+        Retourne un booléen indiquant si l'authentification a réussi.
         """
-        # Création des identifiants client encodés en base64
+        if self.authorization_token and self.token_is_valid():
+            print("Token déjà valide")
+            return True
+
         client_credentials = f'{self.client_id}:{self.client_secret}'
         client_credentials_b64 = base64.b64encode(client_credentials.encode())
 
-        # Données et en-têtes pour la requête d'authentification
         token_data = {'grant_type': 'client_credentials'}
         token_headers = {'Authorization': f'Basic {client_credentials_b64.decode()}'}
 
-        # Envoi de la requête pour obtenir le jeton d'accès
         request = requests.post(url=self.token_url, data=token_data, headers=token_headers)
 
-        # Vérification du statut de la réponse
         if request.status_code not in range(200, 299):
             raise Exception(f'Échec de l’authentification : code {request.status_code}')
 
-        # Stockage du jeton d'accès
         token_response_data = request.json()
         self.authorization_token = token_response_data['access_token']
+        self.token_expiry_time = time.time() + token_response_data['expires_in']  # Store expiry time
         print(f'Client autorisé avec succès !')
         return True
+
+    def token_is_valid(self):
+        return time.time() < self.token_expiry_time
 
 
     def search(self, query: str, query_type: APIQueryType) -> dict:
         """
-            Effectue une recherche dans l'API Spotify selon le type de requête.
-
-            :param query: La chaîne de recherche (artiste, album ou titre).
-            :param query_type: Le type de recherche {'artist', 'album', 'track'}.
-            :return: Les résultats de la recherche au format JSON.
+        Effectue une recherche dans l'API Spotify selon le type de requête.
+        Gère les erreurs de connexion et réessaie si nécessaire.
         """
         if not isinstance(query_type, APIQueryType):
             raise Exception('Type de requête invalide !')
 
-        # Configuration de la requête avec les en-têtes d’autorisation
+        if not self.authorization_token:
+            print("Erreur : Client non autorisé. Impossible de récupérer les informations.")
+            return {}
+
         headers = {'Authorization': f'Bearer {self.authorization_token}'}
         endpoint = self.spotify_api_url + '/search?'
         data = urlencode({'q': query, 'type': query_type.value})
         search_url = f'{endpoint}{data}'
 
-        # Envoi de la requête et retour des résultats en JSON
-        request = requests.get(search_url, headers=headers)
-        if request.status_code not in range(200, 299):
-            raise Exception(f'Requête échouée avec le code : {request.status_code}')
+        try:
+            request = requests.get(search_url, headers=headers)
+            request.raise_for_status()  # Lève une exception pour les codes d'erreur HTTP
+        except requests.RequestException as e:
+            print(f"Erreur réseau : {e}")
+            if not self.is_internet_available():
+                print("Aucune connexion Internet. Impossible de poursuivre la recherche.")
+            else:
+                print("Tentative de réessayer après une courte pause...")
+                time.sleep(5)  # Attente avant réessayer
+                return self.search(query, query_type)  # Réessayer la recherche
 
         return request.json()
     
-
     def save_to_json(self, data: dict, filename: str) -> None:
         """
         Enregistre les données dans un fichier JSON.
@@ -93,7 +123,6 @@ class Fetcher:
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
         print(f"Données enregistrées dans le fichier {filename}")
-
 
     def get_artist_info(self, artist_name: str) :
         """
@@ -132,7 +161,6 @@ class Fetcher:
         self.save_to_json(artist_data,self.chemin_artist_json)
         # return varArtist
 
-
     def get_album_info(self, album_name: str):
         """
             Récupère les informations d’un album via l'API Spotify.
@@ -166,7 +194,6 @@ class Fetcher:
         # varAlbum = str(album_data).replace("'", "\"")
         self.save_to_json(album_data,self.chemin_album_json)
         # return varAlbum
-
 
     def get_track_info(self, track_name: str):
         """
@@ -202,7 +229,6 @@ class Fetcher:
         self.save_to_json(track_data,self.chemin_track_json)
         # return varTrack
 
-
     def lire_fichier_json(self, filename: str) -> dict:
         """
         Lit les données d'un fichier JSON et les retourne sous forme de dictionnaire.
@@ -216,7 +242,6 @@ class Fetcher:
             data = json.load(f)
         print(f"Données chargées depuis le fichier {filename}")
         return data
-
 
     def afficher_artiste_infos(self) -> str:
         """
@@ -259,8 +284,6 @@ class Fetcher:
         except json.JSONDecodeError:
             return "Erreur : Le fichier JSON est corrompu ou mal formaté."
 
-
-
     def afficher_album_infos(self) -> str:
         """
         Récupère et retourne les informations sur les albums depuis un fichier JSON.
@@ -295,7 +318,6 @@ class Fetcher:
             return f"Erreur : {str(e)}"
         except json.JSONDecodeError:
             return "Erreur : Le fichier JSON est corrompu ou mal formaté."
-
 
     def afficher_track_infos(self) -> str:
         """
@@ -332,7 +354,7 @@ class Fetcher:
         except json.JSONDecodeError:
             return "Erreur : Le fichier JSON est corrompu ou mal formaté."
 
-
+"""
 if __name__ == "__main__":
     # Exemple d’utilisation : création d’une instance et appel de méthodes
     fetcher = Fetcher()
@@ -349,3 +371,5 @@ if __name__ == "__main__":
     fetcher.afficher_track_infos()
     print("********************************************************************")
 
+
+"""
