@@ -3,7 +3,9 @@
 from enum import Enum
 
 class APIQueryType(Enum):
-    """Enumeration des differentes types de reqûete api"""
+    """
+        Enumeration des differentes types de reqûete api
+    """
     ARTIST = 'artist'
     ALBUM = 'album'
     TRACK = 'track'

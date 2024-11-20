@@ -2,7 +2,15 @@ import requests
 
 
 def get_acces_token(self):
-    """Fonction get_acess_token renvoie un string qui correspondra au jeton de l'api pour faire les requêtes valable 1h"""
+    """
+        Fonction get_acess_token renvoie un string qui correspondra au jeton de l'api pour faire les requêtes valable 1h
+
+        Paramètre :
+        - None : Aucune valeur en paramètre.
+
+        Retourne :
+        - str : Renvoie le jeton d'authentification.
+    """
 
     url = 'https://accounts.spotify.com/api/token' #url d'entrée pour la requête
     data = {'grant_type': 'client_credentials', 'client_id' : '45a8a345769d4ac0b91d95622d331f05', 'client_secret' : '1fc622291bbd48f487b2375179fcbc23'} #paramêtres de la requête

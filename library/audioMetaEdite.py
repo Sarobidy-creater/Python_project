@@ -7,6 +7,20 @@ import mimetypes
 class Editer:
 
     def creation_meta_donnees(self, titre:str, artiste:str, album:str, genre:str, ladate:int, organisation:str):
+        """
+            Fonction qui créer la méta donnée d'un fichier audio.
+
+            Paramètre :
+            - titre : str : Le titre du fichier audio.
+            - artiste : str : Le nom de l'artiste.
+            - album : str : Le nom de l'album.
+            - genre : str : Le genre de la musique.
+            - ladate : int : La date du fichier audio.
+            - organisation : str : L' organisation ou le label.
+
+            Retour :
+            - Dict : renvoie une dictionaire de données.
+        """
         meta_donnees = {
             "title": titre,
             "artist": artiste,
@@ -17,9 +31,21 @@ class Editer:
         }
         return meta_donnees
 
-
     def afficher_et_modifier_metadata(self, chemin_audio:str, chemin_image:str, titre:str, artiste:str, album:str, genre:str, ladate:int, organisation:str):
-        """Détecte le format du fichier et gère l'affichage et la modification des métadonnées."""
+        """
+            Fonction qui détecte le format du fichier et gère l'affichage et la modification des métadonnées.
+
+            Paramètre :
+            - titre : str : Le titre du fichier audio.
+            - artiste : str : Le nom de l'artiste.
+            - album : str : Le nom de l'album.
+            - genre : str : Le genre de la musique.
+            - ladate : int : La date du fichier audio.
+            - organisation : str : L' organisation ou le label.
+
+            Retour :
+            - None : Aucune valeur de retour.
+        """
         meta_donnees = self.creation_meta_donnees(titre, artiste, album, genre, ladate, organisation)
         if chemin_audio.endswith(".mp3"):
             if meta_donnees != None:
@@ -31,9 +57,17 @@ class Editer:
         else:
             print("Format audio non pris en charge.")
 
-
     def _afficher_et_modifier_meta_mp3(self, chemin_audio:str, meta_donnees:dict):
-        """Affiche et modifie les métadonnées d'un fichier MP3."""
+        """
+            Fonction qui affiche et modifie les métadonnées d'un fichier MP3.
+
+            Paramètre :
+            - chemin_audio : str : Le chemin du dossier contenant le fichier audio.
+            - meta_donnees : dict : Dictionnaire de méta donnée.
+
+            Retour :
+            - None : Aucune valeur de retour.
+        """
         try:
             audio = MP3(chemin_audio, ID3=EasyID3)
         except ID3NoHeaderError:
@@ -62,9 +96,17 @@ class Editer:
         audio.save()
         print("\nNouvelles métadonnées MP3 mises à jour avec succès !\n")
 
-
     def modify_mp3_cover(self,chemin_audio:str, cover_image_path:str):
-        """Modifie la couverture d'un fichier MP3."""
+        """
+            Fonction qui modifie la couverture d'un fichier MP3.
+
+            Paramètre :
+            - chemin_audio : str : Le chemin du dossier contenant le fichier audio.
+            - cover_image_path : str : Le chemin du cover pour remplacer l'ancien.
+
+            Retour :
+            - None : Aucune valeur de retour.
+        """
         # Charger le fichier MP3
         audio_cover = MP3(chemin_audio, ID3=ID3)
 
@@ -90,9 +132,18 @@ class Editer:
             # Sauvegarder les modifications dans le fichier MP3
             audio_cover.save()
 
-
     def _afficher_et_modifier_meta_flac(self, chemin_audio:str, meta_donnees:dict, chemin_image:str):
-        """Affiche et modifie les métadonnées d'un fichier FLAC."""
+        """
+            Fonction qui affiche et modifie les métadonnées d'un fichier FLAC.
+
+            Paramètre :
+            - chemin_audio : str : Le chemin du dossier contenant le fichier audio.
+            - meta_donnees : dict : Dictionnaire de méta donnée.
+            - chemin_image : str : Le chemin du cover pour remplacer l'ancien.
+
+            Retour :
+            - None : Aucune valeur de retour.
+        """
         audio = FLAC(chemin_audio)
 
         # Afficher les métadonnées existantes
