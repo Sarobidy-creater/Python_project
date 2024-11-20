@@ -12,12 +12,9 @@ from library.ecouterAudio import Ecouter # Importe la classe Ecouter du module e
 
 
 class Console:
-<<<<<<< HEAD
     """
         Une classe qui gère les interactions en ligne de commande pour la gestion des fichiers musicaux.
     """
-=======
->>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
     def __init__(self):
         """Initialisation du mode console"""
         # Création des instances des classes Extraction, Explorer, et Playlist nécessaires pour les différentes fonctionnalités
