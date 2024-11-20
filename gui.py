@@ -68,11 +68,16 @@ class Interface:
         # Variables pour gérer l'interface
         self.checkbox_vars = []  # Pour stocker les variables de cases à cocher
         self.chemins_options = []  # Pour stocker les chemins des options
+<<<<<<< HEAD
         self.file_path_chemins = os.path.abspath(r'python_project\FichierTemp\options_selectionnees.txt')  # Chemin du fichier où écrire les options sélectionnées
         self.fichier_lire = os.path.abspath(r'python_project\FichierTemp\TempFile.txt')
         self.chem_im = os.path.abspath(r"Python_project/img/nn.webp")  
         self.chem__music = os.path.abspath(r"Python_project\music")
         self.image_path = os.path.abspath(r"Python_project\img\images.jpeg")
+=======
+        self.file_path_chemins = os.path.abspath(r'python_project-DataAudio\FichierTemp\options_selectionnees.txt')  # Chemin du fichier où écrire les options sélectionnées
+        self.fichier_lire = os.path.abspath(r'python_project-DataAudio\FichierTemp\TempFile.txt')  
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
 
         # Création des différents panneaux de l'interface
 
@@ -224,6 +229,7 @@ class Interface:
         # Création d'un bouton pour ouvrir la fenêtre de playlist
         self.butt_playlist = tk.Button(self.explo_playlist_boutton, text="Playlist", command=self.open_new_fenetre, width=13)
         self.butt_playlist.pack(side=tk.RIGHT, padx=10, pady=10)  # Positionné à droite avec un espacement horizontal et vertical
+
 
         # Création d'un bouton pour revenir au morceau audio précédent
         self.butt_next = tk.Button(self.B2_label_bouton_manip, text="◀◀", command=self.prev_audio, width=2)
@@ -586,6 +592,7 @@ class Interface:
         # self.playlist_window = False
 
     def par_defaut(self):
+<<<<<<< HEAD
         """
             Fonction pour créer une playlist par défaut parmi la liste dans la listbox.
             
@@ -597,6 +604,11 @@ class Interface:
         """
         
         self.select_all()
+=======
+        """Restaure la valeur par défaut dans l'Entry et affiche cette valeur dans le label."""
+        
+        self.select_all
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         self.entry.delete(0, tk.END)  # Efface le contenu de l'Entry
         chemin_play = ""
         if self.is_playlist == False:
@@ -612,6 +624,7 @@ class Interface:
         # self.playlist_window = False
 
     def specifier(self):
+<<<<<<< HEAD
         """
             Fonction pour créer une playlist en spécifiant le nom de la playlist et son nom.
             
@@ -626,10 +639,19 @@ class Interface:
         chemin_audio = os.path.abspath(fr"Python_project/Playlist/{texte_saisi}.xspf")
         self.verification_playlist(chemin_audio)
 
+=======
+        """Récupère le texte saisi et les options cochées, puis les écrit dans un fichier."""
+        texte_saisi = self.entry.get()  # Récupère le texte saisi dans l'Entry
+        self._specifier = True
+        chemin_audio = os.path.abspath(fr"Python_project-DataAudio/Playlist/{texte_saisi}.xspf")
+        self.verification_playlist(chemin_audio)
+
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         if self.modification_fichier_play == True :
             self.suite_specifier()
 
     def suite_specifier(self):
+<<<<<<< HEAD
         """
             Fonction suite pour la création d'une playlist spécifiée.
             
@@ -639,6 +661,8 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         texte_saisi = self.entry.get()
         
         # Récupérer les chemins des options sélectionnées
@@ -898,6 +922,7 @@ class Interface:
             self.audio_listbox.activate(prev_index)  # Met le précédent élément en surbrillance
 
     def pause(self):
+<<<<<<< HEAD
         """
             Fonction pour mettre en pause la lecture audio.
             
@@ -907,12 +932,16 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+        """Met en pause la lecture audio."""
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         if self.final_lecture == True and self.audio_lecture == True:
             self.audio_lecture = False  # Met à jour l'état audio
             self.final_lecture = True
             pygame.mixer.music.pause()  # Met en pause la musique
 
     def reprendre(self):
+<<<<<<< HEAD
         """
             Fonction pour reprend la lecture audio en pause.
             
@@ -922,6 +951,9 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+        """Reprend la lecture audio en pause."""
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         if self.final_lecture == True and self.audio_lecture == False:
             self.audio_lecture = True  # Met à jour l'état audio
             self.final_lecture = True
@@ -938,7 +970,11 @@ class Interface:
             - None : Aucune valeur de retour.
         """
         # Récupérer la saisie de l'utilisateur, la nettoyer et la mettre en minuscules
+<<<<<<< HEAD
         if self.fetcher.check_internet_and_authorize() == True :
+=======
+        if self.fetcher.is_internet_available() == True :
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
             saisie = self.entry_ecriture_haut.get().strip().lower()
 
             if saisie == "" :
@@ -966,7 +1002,11 @@ class Interface:
             self.reche = False
 
             # Créer un cadre pour le label et la scrollbar
+<<<<<<< HEAD
             self.rechercher_frame = tk.Frame(self.section3_metaData, width=270, height=10, bg=self.lightyellow)
+=======
+            self.rechercher_frame = tk.Frame(self.section3_metaData, bg=self.lightyellow)
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
             self.rechercher_frame.pack(pady=10, fill='both', expand=True)
 
             # Créer un canvas pour la scrollbar
@@ -1040,6 +1080,7 @@ class Interface:
         """
         self.notification.destroy()  
 
+<<<<<<< HEAD
     def clo_notification(self): 
         """
             Fonction pour fermer la fenêtre secondaire de notification.
@@ -1050,10 +1091,15 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+    def clo_notification(self):
+        """Ferme la fenêtre secondaire."""
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         self.modification_fichier_play = False
         self.notification.destroy()  
 
     def Modifier_play_name(self):
+<<<<<<< HEAD
         """
             Fonction pour modifier le nom d'une playlist.
             
@@ -1063,10 +1109,14 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+        """Ouvre une fenêtre secondaire pour modifier le nom du fichier audio"""
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         self.modification_fichier_play = True
         self.notification.destroy()  
         self.suite_specifier()
 
+<<<<<<< HEAD
     def afficher_notification(self, chemin_play:str):
         """
             Fonction qui créer une fenetre pour afficher une notification.
@@ -1077,6 +1127,10 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+    def afficher_notification(self, chemin_play):
+        """Affiche une notification"""
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         global notification, label, entry
         self.notification = Toplevel(root)
         self.notification.title("Notification")  # Titre de la fenêtre
@@ -1310,6 +1364,7 @@ class Interface:
             self.final_lecture = True
 
     def ecouter_playlist(self):
+<<<<<<< HEAD
         """
             Fonction qui ouvre une fenêtre secondaire pour écouter une playlist.
             
@@ -1319,6 +1374,9 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+        """Ouvre une fenêtre secondaire pour écouter une playlist."""
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         self.playlist_window = tk.Toplevel(self.master)
         self.playlist_window.title("Playlist")
         self.playlist_window.geometry("510x448")
@@ -1363,7 +1421,11 @@ class Interface:
         for i, line in enumerate(liste_play_str):
             radio_button = tk.Radiobutton(
                 self.scrollable_frame,
+<<<<<<< HEAD
                 text=self.align_date_in_string(line),
+=======
+                text=os.path.basename(line),
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
                 variable=self.selected_playlist,
                 value=i,
                 bg="white"
@@ -1393,6 +1455,7 @@ class Interface:
         button_choisir.pack(side=tk.RIGHT, padx=10, pady=10)
 
     def annuleroPeration(self):
+<<<<<<< HEAD
         """
             Fonction pour fermer la fenêtre secondaire pour écouter une playlist.
             
@@ -1414,6 +1477,13 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+        """Ferme la fenêtre secondaire."""
+        self.playlist_window.destroy()
+
+    def playlistChoisir(self, chemin_complet):
+        """Choisit une playlist et ferme la fenêtre secondaire."""
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         chansons = self.explo.extraire_pistes_de_playlist(chemin_complet) 
         self.audio_listbox.delete(0, tk.END)
         self.mon_dictionnaire.clear()
@@ -1443,6 +1513,7 @@ class Interface:
         self.playlist_defaut = resultat
         self.is_playlist = True
 
+<<<<<<< HEAD
     def playlistModif(self, chansons: str): 
         """
             Fonction qui  modifie les chansons dans la playlist.
@@ -1453,12 +1524,16 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+    def playlistModif(self, chansons):
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         # Ouvrir un fichier en mode écriture
         with open(self.fichier_lire, "w", encoding="utf-8") as fichier:
             for chan in chansons:
                 # Écrire chaque chanson dans le fichier
                 fichier.write(f"{chan}\n")
             
+<<<<<<< HEAD
     def vider_fichier(self,nom_fichier: str ):  
         """
             Fonction qui vide un fichier donné.
@@ -1469,10 +1544,14 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+    def vider_fichier(self,nom_fichier):
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         # Ouvrir le fichier en mode écriture, ce qui écrase tout son contenu
         with open(nom_fichier, "w", encoding="utf-8") as fichier:
             pass  # Ne rien écrire dans le fichier
     
+<<<<<<< HEAD
     def verification_playlist(self,f_name: str ):   
         """
             Fonction qui vérifie la mise a jour d'une playlist
@@ -1483,6 +1562,9 @@ class Interface:
             Retourne :
             - None : Aucune valeur de retour.
         """
+=======
+    def verification_playlist(self,f_name):
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         # Vérifier si l'élément 3 est dans le tableau
         if f_name in self.tab_play:
             self.exist_play = True
@@ -1490,6 +1572,7 @@ class Interface:
             message = f"Modifié la liste des audios dans la Playlist : {f_name} ?"
             self.afficher_notification(message)
         
+<<<<<<< HEAD
     def verifier_et_couper_nom_fichier(self,nom_fichier: str ):   
         """
             Fonction qui couper l'affichage du nom de l'audio dans la listebox.
@@ -1500,6 +1583,9 @@ class Interface:
             Retourne :
             - str : Renvoie le le nom du fichier coupé lors de l'affichage dans la listbox.
         """
+=======
+    def verifier_et_couper_nom_fichier(self,nom_fichier):
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         max_length = self.max_length
         # Vérifier si la longueur du nom de fichier dépasse la limite
         if len(nom_fichier) > max_length:
@@ -1508,6 +1594,7 @@ class Interface:
         
         return nom_fichier
     
+<<<<<<< HEAD
     def verifier_et_couper_nom_Milieu(self,nom_fichier: str):   
         """
             Fonction qui couper l'affichage du nom de l'audio une fois séléctioné.
@@ -1518,6 +1605,9 @@ class Interface:
             Retourne :
             - str : Renvoie le le nom du fichier coupé sous la cover.
         """
+=======
+    def verifier_et_couper_nom_Milieu(self,nom_fichier):
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         max_length = self.max_length_milieu
         # Vérifier si la longueur du nom de fichier dépasse la limite
         if len(nom_fichier) > max_length:
@@ -1526,6 +1616,7 @@ class Interface:
         
         return nom_fichier
 
+<<<<<<< HEAD
     def get_date_from_xml(self, xspf_string: str) -> str:
         """
             Fonction qui donne la date de la création d'une playlist.
@@ -1581,6 +1672,8 @@ class Interface:
         # Définir une largeur fixe pour le nom du fichier (par exemple 50 caractères) et pour la date (par exemple 20 caractères)
         return f"{file_name}         {date}"
 
+=======
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
 # Création de la fenêtre principale
 if __name__ == "__main__":
     root = tk.Tk()

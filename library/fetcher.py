@@ -23,12 +23,20 @@ class Fetcher:
         self.token_url = 'https://accounts.spotify.com/api/token'  # URL pour obtenir le token d'accès
         self.spotify_api_url = 'https://api.spotify.com/v1'  # URL de base pour interagir avec l'API Spotify
 
+<<<<<<< HEAD
         # Chemins vers les fichiers JSON où les résultats de l'API seront sauvegardés localement
+=======
+        # Chemins vers les fichiers JSON où les données seront sauvegardées
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         self.chemin_artist_json = os.path.abspath(r"Python_project\\json_Dir\\artist_json.json")
         self.chemin_album_json = os.path.abspath(r"Python_project\\json_Dir\\album_json.json")
         self.chemin_track_json = os.path.abspath(r"Python_project\\json_Dir\\track_json.json")
 
+<<<<<<< HEAD
         # Appel à la fonction pour vérifier la connexion Internet et tenter l'autorisation
+=======
+        # Vérification si la connexion Internet est disponible au démarrage
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         self.check_internet_and_authorize()
 
     def check_internet_and_authorize(self):
@@ -37,17 +45,24 @@ class Fetcher:
         """
         if self.is_internet_available():
             print("Connexion Internet détectée. Tentative d'autorisation...")
+<<<<<<< HEAD
             self.authorize_client()  # Si Internet est disponible, tente d'obtenir un token d'autorisation
             return True
         else:
             print("Aucune connexion Internet. Impossible d'accéder à l'API Spotify.")
             return False
+=======
+            self.authorize_client()
+        else:
+            print("Aucune connexion Internet. Impossible d'accéder à l'API Spotify.")
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
     
     def is_internet_available(self):
         """
         Vérifie si une connexion Internet est disponible en envoyant une requête à Google.
         """
         try:
+<<<<<<< HEAD
             # Envoi d'une requête HTTP GET vers Google pour tester la connexion
             response = requests.get("https://www.google.com", timeout=5)
             return True  # Si la requête réussit, l'Internet est disponible
@@ -71,20 +86,45 @@ class Fetcher:
             return True
 
         # Encodage des identifiants client en base64 pour l'authentification
+=======
+            response = requests.get("https://www.google.com", timeout=5)
+            return True
+        except requests.ConnectionError:
+            return False
+
+    def authorize_client(self) -> bool:
+        """
+        Récupère un jeton d'authentification et autorise l'accès à l'API Spotify.
+        Retourne un booléen indiquant si l'authentification a réussi.
+        """
+        if self.authorization_token and self.token_is_valid():
+            print("Token déjà valide")
+            return True
+
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         client_credentials = f'{self.client_id}:{self.client_secret}'
         client_credentials_b64 = base64.b64encode(client_credentials.encode())  # Encode l'ID et le secret
 
+<<<<<<< HEAD
         # Paramètres nécessaires pour la requête de token (grant_type = client_credentials)
+=======
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         token_data = {'grant_type': 'client_credentials'}
         token_headers = {'Authorization': f'Basic {client_credentials_b64.decode()}'}  # Ajout du header d'authentification
 
+<<<<<<< HEAD
         # Envoi de la requête POST pour obtenir le jeton d'accès
         request = requests.post(url=self.token_url, data=token_data, headers=token_headers)
 
         # Vérification si la requête a échoué (code de statut HTTP en dehors de la plage 200-299)
+=======
+        request = requests.post(url=self.token_url, data=token_data, headers=token_headers)
+
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         if request.status_code not in range(200, 299):
             raise Exception(f'Échec de l’authentification : code {request.status_code}')  # Si l'authentification échoue, une exception est levée
 
+<<<<<<< HEAD
         # Traitement de la réponse JSON contenant le token et le temps d'expiration
         token_response_data = request.json()
         self.authorization_token = token_response_data['access_token']  # Récupère le token d'accès
@@ -114,17 +154,39 @@ class Fetcher:
             
             Retour :
             - dict : 
+=======
+        token_response_data = request.json()
+        self.authorization_token = token_response_data['access_token']
+        self.token_expiry_time = time.time() + token_response_data['expires_in']  # Store expiry time
+        print(f'Client autorisé avec succès !')
+        return True
+
+    def token_is_valid(self):
+        return time.time() < self.token_expiry_time
+
+
+    def search(self, query: str, query_type: APIQueryType) -> dict:
+        """
+        Effectue une recherche dans l'API Spotify selon le type de requête.
+        Gère les erreurs de connexion et réessaie si nécessaire.
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         """
         # Vérifie que le type de requête est valide en s'assurant qu'il s'agit d'un objet de type APIQueryType
         if not isinstance(query_type, APIQueryType):
             raise Exception('Type de requête invalide !')
 
+<<<<<<< HEAD
         # Vérifie si un token d'autorisation est disponible, sinon l'accès à l'API échoue
+=======
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         if not self.authorization_token:
             print("Erreur : Client non autorisé. Impossible de récupérer les informations.")
             return {}
 
+<<<<<<< HEAD
         # Création des headers pour l'authentification avec le token d'autorisation
+=======
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         headers = {'Authorization': f'Bearer {self.authorization_token}'}
         # Définition de l'URL de l'API pour effectuer une recherche
         endpoint = self.spotify_api_url + '/search?'
@@ -134,19 +196,30 @@ class Fetcher:
         search_url = f'{endpoint}{data}'
 
         try:
+<<<<<<< HEAD
             # Envoi de la requête GET à l'API Spotify pour effectuer la recherche
             request = requests.get(search_url, headers=headers)
             # Vérifie que la requête s'est bien déroulée (code HTTP entre 200 et 299)
             request.raise_for_status()  # Lève une exception si le code HTTP indique une erreur
         except requests.RequestException as e:
             # Gestion des erreurs réseau ou autres exceptions
+=======
+            request = requests.get(search_url, headers=headers)
+            request.raise_for_status()  # Lève une exception pour les codes d'erreur HTTP
+        except requests.RequestException as e:
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
             print(f"Erreur réseau : {e}")
             if not self.is_internet_available():
                 print("Aucune connexion Internet. Impossible de poursuivre la recherche.")
             else:
                 print("Tentative de réessayer après une courte pause...")
+<<<<<<< HEAD
                 time.sleep(5)  # Attente de 5 secondes avant de réessayer la requête
                 return self.search(query, query_type)  # Appel récursif pour réessayer la recherche
+=======
+                time.sleep(5)  # Attente avant réessayer
+                return self.search(query, query_type)  # Réessayer la recherche
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
 
         # Retourne les résultats de la recherche sous forme de dictionnaire JSON
         return request.json()
@@ -169,7 +242,11 @@ class Fetcher:
             json.dump(data, f, ensure_ascii=False, indent=4)  # Sérialisation des données en JSON
         print(f"Données enregistrées dans le fichier {filename}")  # Affiche un message de confirmation
 
+<<<<<<< HEAD
     def get_artist_info(self, artist_name: str):
+=======
+    def get_artist_info(self, artist_name: str) :
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
         """
             Fonction qui récupère les informations d’un artiste via l'API Spotify.
 
@@ -210,9 +287,12 @@ class Fetcher:
             print('Aucune donnée sur cet artiste n’a été trouvée sur Spotify.')
             return {}
 
+<<<<<<< HEAD
         # Sauvegarde des informations de l'artiste dans un fichier JSON
         self.save_to_json(artist_data, self.chemin_artist_json)
 
+=======
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
     def get_album_info(self, album_name: str):
         """
             Fonction qui récupère les informations d’un album via l'API Spotify.
@@ -251,9 +331,12 @@ class Fetcher:
             print('Aucune donnée sur cet album n’a été trouvée sur Spotify.')
             return {}
 
+<<<<<<< HEAD
         # Sauvegarde des informations de l'album dans un fichier JSON
         self.save_to_json(album_data, self.chemin_album_json)
 
+=======
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
     def get_track_info(self, track_name: str):
         """
             Fonction qui récupère les informations d’un titre via l'API Spotify.
@@ -292,9 +375,12 @@ class Fetcher:
             print('Aucune donnée sur ce titre n’a été trouvée sur Spotify.')
             return {}
 
+<<<<<<< HEAD
         # Sauvegarde des informations du titre dans un fichier JSON
         self.save_to_json(track_data, self.chemin_track_json)
 
+=======
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
     def lire_fichier_json(self, filename: str) -> dict:
         """
             Fonction qui lit les données d'un fichier JSON et les retourne sous forme de dictionnaire.
@@ -436,3 +522,25 @@ class Fetcher:
         except json.JSONDecodeError:
             return "Erreur : Le fichier JSON est corrompu ou mal formaté."
 
+<<<<<<< HEAD
+=======
+"""
+if __name__ == "__main__":
+    # Exemple d’utilisation : création d’une instance et appel de méthodes
+    fetcher = Fetcher()
+
+    # Récupération d’informations sur un artiste (par exemple)
+    # artist_info = fetcher.get_artist_info("DRAKE")
+    # album_info = fetcher.get_album_info("ASTROWORLD")
+    track_info = fetcher.get_track_info("WITHOUT ME")
+    print("********************************************************************")
+    # fetcher.afficher_Artiste_infos()
+    # print("********************************************************************")
+    # fetcher.afficher_Album_infos()
+    # print("********************************************************************")
+    fetcher.afficher_track_infos()
+    print("********************************************************************")
+
+
+"""
+>>>>>>> 20bb3b0b8fdfea8269c507d90a58cbab3a595a8c
