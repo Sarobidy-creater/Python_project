@@ -224,4 +224,76 @@ class Playlist():
             print(f"Une erreur inattendue s'est produite : {e}")
         return chemin_file
  
- 
+    """
+    def ecritureFichierxspf(self, dossier_music: str, out_Fichier_nom: str):
+        
+            Fonction qui écrit les informations d'une playlist dans un fichier XSPF.
+
+            Paramètre :
+            - dossier_music : str : Le chemin du dossier contenant les fichiers musicaux.
+            - out_Fichier_nom : str : Le nom du fichier de sortie XSPF (peut être None pour un fichier par défaut).
+
+            Retour :
+            - None : Aucune valeur de retour.
+        
+        try:
+            chemin_file = None  # Initialisation de la variable pour le chemin du fichier
+            # Si aucun nom de fichier de sortie n'est donné, créer un fichier par défaut
+            if out_Fichier_nom is None: 
+                chemin_file = self.creerUnFichierxspf()
+            else:
+                chemin_file = self.creation_specifique_fichier_xspf(out_Fichier_nom)
+            
+
+            # Charger et analyser le fichier XML à partir du chemin donné
+            tree = etree.parse(chemin_file)  # Parser le fichier XML
+            root = tree.getroot()  # Récupérer l'élément racine du document XML (la balise <playlist>)
+            
+            # Créer un élément <date> pour indiquer la date actuelle
+            date = etree.Element("date") 
+            date.text = datetime.datetime.today().strftime('%d-%m-%y %H:%M:%S')  # Définir le texte de la date
+            root.append(date)  # Ajouter l'élément <date> à l'élément racine
+
+            # Créer un nouvel élément <trackList> pour contenir les pistes
+            tracklist = etree.Element("trackList") 
+            explorer = Explorer()  # Créer une instance de la classe Explorer
+            d_save = os.path.abspath(dossier_music)  # Obtenir le chemin absolu du dossier de musique
+            dossier_save = d_save.replace("\\", "/")  # Remplacer les antislashs par des barres obliques
+
+            # Obtenir le chemin du fichier à lire à partir de l'exploration du dossier
+            fichier_lire_chemin = explorer.explorer_dossier_interface(dossier_save)
+
+            # Ouvrir le fichier pour lire les chemins des fichiers audio
+            with open(fichier_lire_chemin, 'r', encoding='utf-8') as f:
+                for ligne in f:
+                    chemin_Audi = ligne.strip()  # Supprimer les espaces autour du chemin
+                    track = etree.Element("track")  # Créer un nouvel élément <track> pour chaque piste
+                    location = etree.Element("location")  # Créer un élément <location> pour spécifier l'emplacement
+                    cheminAudio = os.path.abspath(chemin_Audi)  # Obtenir le chemin absolu du fichier audio
+                    cheminVar = cheminAudio.replace("\\", "/")  # Remplacer les antislashs par des barres obliques
+                    location.text = f"file:///{cheminVar}"  # Définir l'URL ou le chemin du fichier audio
+                    track.append(location)  # Ajouter l'élément <location> à <track>
+                    tracklist.append(track)  # Ajouter l'élément <track> à <trackList> 
+
+            # Ajouter la liste de pistes à l'élément racine <playlist>
+            root.append(tracklist)  
+
+            # Ouvrir le fichier en mode binaire pour l'écriture
+            with open(chemin_file, 'wb') as f:  
+                # Écrire le contenu XML dans le fichier avec un formatage lisible, la déclaration XML et un encodage UTF-8
+                f.write(etree.tostring(tree, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
+        
+        except etree.XMLSyntaxError as e:
+            # Gestion des erreurs de parsing XML
+            print(f"Erreur de parsing XML : {e}")
+        except FileNotFoundError as e:
+            # Gestion des erreurs d'ouverture de fichier non trouvé
+            print(f"Erreur lors de l'ouverture du fichier : {e}")
+        except OSError as e:
+            # Gestion des erreurs lors de l'écriture dans le fichier
+            print(f"Erreur lors de l'écriture dans le fichier : {e}")
+        except Exception as e:
+            # Gestion de toutes les autres erreurs inattendues
+            print(f"Une erreur inattendue s'est produite : {e}")
+    """
+    
