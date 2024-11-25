@@ -2,66 +2,157 @@
 
 Ce projet est un script Python permettant d'explorer des dossiers à la recherche de fichiers audio (MP3 et FLAC), d'en extraire les métadonnées (titre, artiste, album, etc.) et d'afficher la couverture (cover art) si elle est présente. C'est un outil utile pour analyser et organiser des fichiers audio, notamment dans des collections musicales ou des bibliothèques audio.
 
-## Fonctionnalités
-
-### 1. **Exploration d'un dossier pour détecter les fichiers audio (MP3 et FLAC)**
-
-- **But** : Parcourir un dossier et ses sous-dossiers pour rechercher et identifier les fichiers audio au format MP3 et FLAC.
-- **Validation** : Le script vérifie non seulement l'extension du fichier (.mp3 ou .flac), mais aussi son type MIME, garantissant que seuls les fichiers réellement audio sont détectés.
-
-### 2. **Extraction et affichage des métadonnées audio**
-
-- **But** : Extraire et afficher les informations clés d'un fichier audio :
-  - Titre
-  - Artiste
-  - Album
-  - Genre
-  - Date de sortie
-  - Organisation (le label ou la maison de disque)
-  - Durée du fichier (en minutes et secondes)
-
-### 3. **Affichage de la couverture (Cover Art)**
-
-- **But** : Si une couverture (cover art) est incluse dans le fichier audio (MP3 ou FLAC), elle est extraite et affichée dans une fenêtre. La couverture peut être une image de type JPEG ou PNG intégrée dans les métadonnées du fichier.
-
-### 4. **Création de playlists au format XSPF**
-
-- **But** : Le script permet également de créer et de gérer des playlists au format XSPF (XML Shareable Playlist Format). Ce format est largement utilisé pour décrire des listes de lecture audio.
-- **Fonctionnalités** :
-  - **Création d'un fichier playlist** : Le script génère un fichier XSPF vide dans un dossier spécifié.
-  - **Ajout de pistes audio** : L'utilisateur peut ajouter des fichiers audio à la playlist en fournissant le chemin du fichier et le titre de la piste. Le script crée un élément `<track>` dans le fichier XSPF pour chaque piste ajoutée.
-  - **Gestion des fichiers** : Il inclut des fonctions pour supprimer un fichier XSPF si nécessaire.
-
-### 5. **Utilisation de la fonctionnalité de playlist**
-
-1. **Créer un fichier playlist** : La fonction `creerUnFichierxspf` crée un fichier XSPF vide dans le dossier `Python_project/Playlist`. Si le dossier n'existe pas, il est créé automatiquement.
-2. **Ajouter des pistes** : L'utilisateur peut ajouter des pistes audio à la playlist en appelant la fonction `ecritureFichierxspf` et en spécifiant le chemin du fichier audio et le titre de la piste.
-3. **Supprimer une playlist** : Utilisez la fonction `delete_un_fichier_xspf` pour supprimer une playlist existante en spécifiant le chemin du fichier.
-
 ## Classes du projet
 
-### 1. **Explorer**
+## 1. Éditeur de Métadonnées Audio : Classe Editer()
 
-La classe `Explorer` est responsable de l'exploration des dossiers pour détecter les fichiers audio. Elle contient trois méthodes principales :
+Cette bibliothèque Python permet de créer, afficher, et modifier les métadonnées des fichiers audio au format **MP3** et **FLAC**. Elle offre également la possibilité d'ajouter ou de remplacer une image de couverture pour ces fichiers.
 
-- **`explorer_dossier_console(self, chemin_name)`** : Parcourt un dossier et affiche les chemins des fichiers audio dans la console.
-- **`explorer_dossier_interface(self, chemin) -> str`** : Explore un dossier et écrit les chemins des fichiers audio dans un fichier temporaire.
-- **`explorer_dossier(self, chemin_name)`** : Retourne le chemin complet du premier fichier audio trouvé dans le dossier.
+## 1.a Principales fonctionnalités
 
-### 2. **Extraction**
+1. **Création de métadonnées** :
+   - Génération d'un dictionnaire contenant des métadonnées comme le titre, l'artiste, l'album, etc.
 
-La classe `Extraction` est chargée de l'extraction des métadonnées des fichiers audio. Elle contient :
+2. **Modification des métadonnées** :
+   - Ajout ou modification des métadonnées existantes dans les fichiers MP3 et FLAC.
 
-- **`audio_extraire_et_afficher_tag(self, fichier)`** : Extrait les métadonnées d'un fichier audio donné et les affiche à l'utilisateur.
+3. **Gestion des images de couverture** :
+   - Ajout ou remplacement de l'image de couverture des fichiers MP3 et FLAC.
 
-### 3. **Playlist**
+4. **Affichage des métadonnées existantes** :
+   - Lecture et affichage des métadonnées présentes dans les fichiers audio.
 
-La classe `Playlist` est responsable de la création et de la gestion des playlists. Ses méthodes comprennent :
+---
 
-- **`creerUnFichierxspf(self)`** : Crée un fichier XSPF vide.
-- **`ecritureFichierxspf(self, dossier_music: str, out_Fichier_nom: str)`** : Écrit les informations audio dans un fichier XSPF en utilisant les chemins de fichiers d'un dossier donné.
+## 2. Extraction des Métadonnées Audio : Classe Extraction()
 
-### 4. **Console**
+Cette classe Python permet d'extraire, d'afficher et de formater les métadonnées des fichiers audio au format **MP3** et **FLAC**. Elle gère également l'extraction des couvertures d'album.
+
+## 2.a Principales fonctionnalités
+
+1. **Extraction des métadonnées** :
+   - Titre, Artiste, Album, Genre, Date, Organisation.
+   - Format MP3 et FLAC pris en charge.
+
+2. **Durée audio** :
+   - Conversion et affichage de la durée en minutes et secondes.
+
+3. **Gestion des fichiers audio** :
+   - Validation des chemins des fichiers audio.
+   - Gestion des erreurs pour les fichiers manquants ou les formats non pris en charge.
+
+---
+
+## 3. Documentation : Fonction `get_acces_token`
+
+La fonction `get_acces_token` permet de récupérer un jeton d'authentification auprès de l'API Spotify. Ce jeton est requis pour effectuer des requêtes authentifiées et a une durée de validité d'une heure.
+
+## 3.a Fonctionnalité
+
+- **Objectif** : Obtenir un jeton d'accès (access token) pour l'API Spotify en utilisant le mécanisme d'authentification OAuth 2.0 basé sur les **client credentials**.
+- **Durée de validité** : Le jeton est valide pendant **1 heure**.
+
+---
+
+## 4. Gestion des Playlists en Python : Classe Playlist()
+
+Ce projet Python fournit une classe `Playlist` pour créer et gérer des fichiers de playlists au format XSPF. Il offre des fonctionnalités permettant :
+
+- De créer des fichiers de playlists par défaut ou personnalisés.
+- D'ajouter des pistes à partir d'un dossier ou d'une sélection de fichiers.
+- D'intégrer des informations supplémentaires comme la date de création.
+
+Le script utilise des bibliothèques standard et tierces pour manipuler les fichiers XML et interagir avec le système de fichiers.
+
+## 4.a Principales fonctionnalités
+
+1. **Créer un fichier par défaut** :
+   - Crée un fichier `maPlaylist.xspf` dans le répertoire `Python_project/Playlist`.
+   - Inclut une structure XML minimale.
+
+2. **Créer un fichier spécifique** :
+   - Permet de définir un nom personnalisé pour le fichier XSPF.
+   - Le fichier est enregistré dans le répertoire `Python_project/Playlist`.
+
+3. **Ajouter des pistes à une playlist** :
+   - Ajoute une liste de pistes provenant d'un dossier ou d'une sélection manuelle.
+   - Les pistes sont ajoutées avec leurs emplacements respectifs au format `file:///`.
+
+## 2.b Manipulation de fichiers XML
+
+- Utilise `lxml` pour créer et mettre à jour la structure XML des playlists.
+- Ajoute des éléments comme `<date>` et `<trackList>` au fichier XSPF.
+
+---
+
+## 5. Lecteur Audio Polyvalent : Classe Ecouter()
+
+Ce projet est une classe Python permettant de lire divers formats de fichiers audio tels que **MP3**, **FLAC**, et **WAV**. Elle utilise la bibliothèque **Pygame** pour la lecture audio et **Pydub** pour la conversion des fichiers FLAC en WAV afin de les rendre compatibles avec Pygame.
+
+## 5.a Principales fonctionnalités  
+
+1. **Lecture de fichiers MP3** :
+   - Chargement et lecture directe des fichiers MP3.
+
+2. **Lecture de fichiers FLAC** :
+   - Conversion des fichiers FLAC en WAV temporaire pour permettre leur lecture.
+
+3. **Lecture de fichiers WAV** :
+   - Lecture directe des fichiers WAV.
+
+4. **Gestion intelligente des fichiers audio** :
+   - Identifie automatiquement le type de fichier audio basé sur son extension et appelle la méthode correspondante.
+
+---
+
+## 6. Explorateur de Fichiers Audio : Classe Explorer()
+
+Ce projet fournit une classe Python pour explorer des dossiers, identifier les fichiers audio au format **MP3**, **FLAC**, et gérer des playlists au format **XSPF**. Il offre des fonctionnalités permettant de lister les fichiers dans la console, de créer des fichiers de sortie avec les chemins audio et d'extraire les pistes des playlists.
+
+## 6.a Principales fonctionnalités  
+
+1. **Exploration de dossiers audio** :
+   - Identifie les fichiers MP3 et FLAC dans un répertoire donné.
+   - Stocke les chemins des fichiers trouvés dans un fichier texte ou les affiche dans la console.
+
+2. **Support des playlists XSPF** :
+   - Recherche les fichiers de playlist **.xspf**.
+   - Extrait les chemins des pistes des playlists.
+
+3. **Gestion des fichiers temporaires** :
+   - Génère des fichiers temporaires contenant les résultats d'exploration.
+
+---
+
+## 7. Spotify API Fetcher : Classe Fetcher()
+
+Ce script permet de récupérer des informations sur des artistes, des albums et des pistes à partir de l'API Spotify, en utilisant un client autorisé via un token d'accès. Le script interagit avec l'API Spotify pour effectuer des recherches par nom d'artiste, album ou piste, puis sauvegarde les résultats sous forme de fichiers JSON. Il inclut également des fonctionnalités pour vérifier la connexion Internet et gérer les erreurs de connexion.
+
+## 7.a Principales fonctionnalités  
+
+1. **Vérification de la connexion Internet**
+
+   - Avant d'interagir avec l'API Spotify, le script vérifie si une connexion Internet est disponible en    envoyant une requête à Google. Si la connexion échoue, l'accès à l'API Spotify sera impossible.
+
+2. **Authentification via l'API Spotify**
+
+   - Le script utilise le mécanisme d'authentification par client `client_credentials` de Spotify. Il encodera les identifiants du client en Base64 et enverra une requête à l'API pour obtenir un jeton d'accès. Ce jeton est utilisé pour authentifier les requêtes ultérieures vers l'API Spotify.
+
+3. **Recherche sur l'API Spotify**
+
+   - Le script permet de rechercher des artistes, des albums et des pistes via l'API Spotify. Vous pouvez effectuer une recherche en utilisant un terme de recherche, et spécifier si vous recherchez un artiste, un album ou une piste. Le type de requête est défini à l'aide de l'énumération `APIQueryType`.
+
+4. **Sauvegarde des résultats dans un fichier JSON**
+
+   - Une fois les données récupérées, elles sont sauvegardées dans des fichiers JSON locaux. Ces fichiers contiennent des informations sur les artistes, albums ou pistes, et peuvent être lus plus tard pour afficher ou analyser les données.
+
+5. **Lecture et affichage des données JSON**
+
+   - Les données enregistrées dans les fichiers JSON peuvent être lues et affichées de manière formatée. Le script fournit des méthodes pour afficher les informations sur les artistes, albums et pistes de manière lisible. Si un fichier JSON est manquant ou mal formaté, une erreur est renvoyée.
+
+---
+
+## 8. **Console** : Classe Console()
 
 La classe `Console` sert d'interface utilisateur pour interagir avec le programme via la ligne de commande. Elle gère les options fournies par l'utilisateur et coordonne l'utilisation des autres classes :
 
@@ -202,7 +293,9 @@ Pour utiliser le script depuis la ligne de commande, assurez-vous d'abord d'êtr
     python3 cli.py --listen --file "chemin\vers\la\musique\music.mp3"
     ```
 
-## Interface de gestion des fichiers audio
+---
+
+## 9. **Interface de gestion des fichiers audio** : Classe Interface()
 
 Ce projet est une interface graphique qui permet d'explorer des fichiers audio sur votre ordinateur, d'en extraire les métadonnées, d'afficher la couverture d'album (cover art), et de créer des playlists. Il est conçu pour être simple d'utilisation grâce à des boutons et des fenêtres interactives.
 
@@ -255,6 +348,10 @@ Cette application de gestion de musique vous permet de rechercher, lire, et gér
   - Bouton pour parcourir un dossier et ses sous-dossiers **Parcourir**
   - Permet de parcourir un dossier et ses sous-dossiers pour sélectionner des fichiers audio.
 
+- **Ecouter** :
+  - Bouton pour écouter une playlist sélectionée **Ecouter**
+  - Permet la lecture des fichiers audio dans une playlist sélectionée.
+  
 - **Next** :
   - Bouton pour l'audio suivant **▶▶**
   - Passe à l'audio suivant dans la liste.
@@ -414,9 +511,10 @@ Cette application vous offre une interface simple et efficace pour gérer votre 
 Avant d'exécuter ce script, vous devez installer les bibliothèques suivantes :
 
 - [mutagen](https://mutagen.readthedocs.io/en/latest/installation.html) : Bibliothèque utilisée pour extraire les métadonnées des fichiers MP3 et FLAC.
-- [Pillow](https://python-pillow.org/) : Bibliothèque Python pour manipuler et afficher des images, utilisée ici pour afficher la couverture des fichiers audio.
+- [Pillow](https://python-pillow.org/) : Bibliothèque Python pour manipuler et afficher des images.
 - [Pygame](https://www.pygame.org/) : Bibliothèque pour créer des jeux en Python et jouer des fichiers audio.
 - [Pydub](https://github.com/jiaaro/pydub) : Bibliothèque pour manipuler les fichiers audio.
+- [lxml](https://...) : Bibliothèque pour...
 
 Pour installer les dépendances, exécutez la commande suivante dans votre terminal :
 
@@ -425,3 +523,4 @@ pip install mutagen
 pip install Pillow 
 pip install pygame
 pip install pydub
+pip install lxml
