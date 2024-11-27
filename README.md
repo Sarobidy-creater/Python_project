@@ -514,7 +514,9 @@ Avant d'exécuter ce script, vous devez installer les bibliothèques suivantes :
 - [Pillow](https://python-pillow.org/) : Bibliothèque Python pour manipuler et afficher des images.
 - [Pygame](https://www.pygame.org/) : Bibliothèque pour créer des jeux en Python et jouer des fichiers audio.
 - [Pydub](https://github.com/jiaaro/pydub) : Bibliothèque pour manipuler les fichiers audio.
-- [lxml](https://...) : Bibliothèque pour...
+- [lxml](https://lxml.de/) : Bibliothèque pour le traitement des documents XML et HTML.
+- [spotipy](https://spotipy.readthedocs.io/en/2.22.1/) : Bibliothèque client pour accéder à l'API Web de Spotify.
+- [requests](https://docs.python-requests.org/en/latest/): Bibliothèque pour envoyer des requêtes HTTP en Python..
 
 Pour installer les dépendances, exécutez la commande suivante dans votre terminal :
 
@@ -524,3 +526,5 @@ pip install Pillow
 pip install pygame
 pip install pydub
 pip install lxml
+pip install spotipy
+pip install requests

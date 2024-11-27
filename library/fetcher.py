@@ -16,37 +16,49 @@ class Fetcher:
         Initialise la classe avec l'ID client et le secret client.
         Puis tente d'autoriser le client avec l'API Spotify.
         """
-        # Identifiants du client Spotify (nécessaires pour l'authentification)
-        self.client_id = "45a8a345769d4ac0b91d95622d331f05"
-        self.client_secret = "1fc622291bbd48f487b2375179fcbc23"
-        self.authorization_token = None  # Token d'authentification pour accéder à l'API
-        self.token_url = 'https://accounts.spotify.com/api/token'  # URL pour obtenir le token d'accès
-        self.spotify_api_url = 'https://api.spotify.com/v1'  # URL de base pour interagir avec l'API Spotify
+        # Initialisation des identifiants nécessaires à l'authentification Spotify
+        self.client_id = "45a8a345769d4ac0b91d95622d331f05"  # Identifiant client fourni par Spotify
+        self.client_secret = "1fc622291bbd48f487b2375179fcbc23"  # Secret client associé à l'ID client
+        self.authorization_token = None  # Initialisation du token d'autorisation comme non défini
+        self.token_url = 'https://accounts.spotify.com/api/token'  # URL pour obtenir un jeton d'accès
+        self.spotify_api_url = 'https://api.spotify.com/v1'  # URL de base pour les requêtes vers l'API Spotify
 
-        # Chemins vers les fichiers JSON où les résultats de l'API seront sauvegardés localement
-        self.chemin_artist_json = os.path.abspath(r"Python_project\\json_Dir\\artist_json.json")
-        self.chemin_album_json = os.path.abspath(r"Python_project\\json_Dir\\album_json.json")
-        self.chemin_track_json = os.path.abspath(r"Python_project\\json_Dir\\track_json.json")
+        # Chemins des fichiers JSON pour sauvegarder les données des artistes, albums et titres
+        self.chemin_artist_json = os.path.abspath(r"Python_project\\json_Dir\\artist_json.json")  # Chemin complet du fichier JSON pour les artistes
+        self.chemin_album_json = os.path.abspath(r"Python_project\\json_Dir\\album_json.json")  # Chemin complet du fichier JSON pour les albums
+        self.chemin_track_json = os.path.abspath(r"Python_project\\json_Dir\\track_json.json")  # Chemin complet du fichier JSON pour les titres
 
-        # Appel à la fonction pour vérifier la connexion Internet et tenter l'autorisation
-        self.check_internet_and_authorize()
+        # Vérifie la connexion Internet et effectue l'autorisation
+        self.check_internet_and_authorize()  # Appelle une méthode pour vérifier Internet et obtenir un jeton
 
-    def check_internet_and_authorize(self):
+    def check_internet_and_authorize(self) -> bool: 
         """
-        Vérifie si une connexion Internet est disponible et tente d'obtenir un jeton d'authentification si possible.
-        """
-        if self.is_internet_available():
-            print("Connexion Internet détectée. Tentative d'autorisation...")
-            self.authorize_client()  # Si Internet est disponible, tente d'obtenir un token d'autorisation
-            return True
+            Fonction qui vérifie si une connexion Internet est disponible et tente d'obtenir un jeton d'authentification si possible.
+            
+            Paramètre :
+            - None : Aucune valeur en paramètre.
+            
+            Retour :
+            - bool : Retourne vrai si l'autorisation est réussie faux sinon.
+        """ 
+        if self.is_internet_available():  # Vérifie si une connexion Internet est active
+            print("Connexion Internet détectée. Tentative d'autorisation...")  # Message d'information
+            self.authorize_client()  # Appelle la méthode pour autoriser le client
+            return True  # Retourne vrai si l'autorisation est réussie
         else:
-            print("Aucune connexion Internet. Impossible d'accéder à l'API Spotify.")
-            return False
+            print("Aucune connexion Internet. Impossible d'accéder à l'API Spotify.")  # Message d'erreur
+            return False  # Retourne faux si aucune connexion n'est disponible
     
-    def is_internet_available(self):
+    def is_internet_available(self) -> bool:  
         """
-        Vérifie si une connexion Internet est disponible en envoyant une requête à Google.
-        """
+            Fonction qui vérifie si une connexion Internet est disponible en envoyant une requête à Google.
+            
+            Paramètre :
+            - None : Aucune valeur en paramètre.
+            
+            Retour :
+            - bool : la requête réussit ou pas, l'Internet est disponible ou pas.
+        """ 
         try:
             # Envoi d'une requête HTTP GET vers Google pour tester la connexion
             response = requests.get("https://www.google.com", timeout=5)
@@ -57,13 +69,12 @@ class Fetcher:
     def authorize_client(self) -> bool:
         """
             Fonction qui récupère un jeton d'authentification et autorise l'accès à l'API Spotify.
-            Retourne un booléen indiquant si l'authentification a réussi.
             
             Paramètre :
-            - 
+            - None : Aucune valeur en paramètre.
             
             Retour :
-            - bool : 
+            - bool : Renvoie si l'authentification a réussi ou non.
         """
         # Vérifie si un token valide est déjà en place (pas expiré)
         if self.authorization_token and self.token_is_valid():
@@ -92,14 +103,14 @@ class Fetcher:
         print(f'Client autorisé avec succès !')  # Affiche un message confirmant l'authentification
         return True  # Retourne True si l'authentification a réussi
 
-    def token_is_valid(self):
+    def token_is_valid(self) -> int:  
         """
-            Fonction qui 
+            Fonction qui vérifie si le jeton d'authentification est encore valide.
 
             Paramètre :
-            - 
+            - None : Aucune valeur en paramètre.
             
-            Retour :
+            Retour : Renvoie vrai si l'heure actuelle est avant l'heure d'expiration du token.
             -  : 
         """
         return time.time() < self.token_expiry_time   # Retourne True si l'heure actuelle est avant l'heure d'expiration du token
@@ -107,13 +118,13 @@ class Fetcher:
     def search(self, query: str, query_type: APIQueryType) -> dict:
         """
             Fonction qui effectue une recherche dans l'API Spotify selon le type de requête.
-            Gère les erreurs de connexion et réessaie si nécessaire.
 
             Paramètre :
-            - 
-            
+            - query : str : La chaîne de recherche à envoyer à l'API Spotify.
+            - query_type : APIQueryType : Enum spécifiant le type de recherche (artiste, album ou morceau).
+
             Retour :
-            - dict : 
+            - dict : Résultat de la recherche renvoyé par l'API Spotify sous forme de dictionnaire JSON.
         """
         # Vérifie que le type de requête est valide en s'assurant qu'il s'agit d'un objet de type APIQueryType
         if not isinstance(query_type, APIQueryType):
@@ -155,11 +166,12 @@ class Fetcher:
         """
             Fonction qui enregistre les données dans un fichier JSON.
 
-            Paramètre :
-            - 
-            
+            Paramètres :
+            - data : dict : Dictionnaire contenant les données à sauvegarder.
+            - filename : str : Chemin du fichier dans lequel les données seront enregistrées. 
+
             Retour :
-            - None : 
+            - None : Aucune valeur de retour.
         """
         # Vérifie si le dossier contenant le fichier existe, et le crée si nécessaire
         os.makedirs(os.path.dirname(filename), exist_ok=True)
@@ -169,7 +181,7 @@ class Fetcher:
             json.dump(data, f, ensure_ascii=False, indent=4)  # Sérialisation des données en JSON
         print(f"Données enregistrées dans le fichier {filename}")  # Affiche un message de confirmation
 
-    def get_artist_info(self, artist_name: str):
+    def get_artist_info(self, artist_name: str) -> dict:  
         """
             Fonction qui récupère les informations d’un artiste via l'API Spotify.
 
@@ -213,7 +225,7 @@ class Fetcher:
         # Sauvegarde des informations de l'artiste dans un fichier JSON
         self.save_to_json(artist_data, self.chemin_artist_json)
 
-    def get_album_info(self, album_name: str):
+    def get_album_info(self, album_name: str)-> dict: 
         """
             Fonction qui récupère les informations d’un album via l'API Spotify.
 
@@ -254,7 +266,7 @@ class Fetcher:
         # Sauvegarde des informations de l'album dans un fichier JSON
         self.save_to_json(album_data, self.chemin_album_json)
 
-    def get_track_info(self, track_name: str):
+    def get_track_info(self, track_name: str)-> dict: 
         """
             Fonction qui récupère les informations d’un titre via l'API Spotify.
 
@@ -318,7 +330,7 @@ class Fetcher:
             Fonction qui récupère et retourne les informations sur les artistes depuis un fichier JSON.
 
             Paramètre :
-            - 
+            - None : Aucune valeur en paramètre.
 
             Retour :
             - str : Une chaîne contenant les informations des artistes ou un message d'erreur.
@@ -363,7 +375,7 @@ class Fetcher:
             Fonction qui récupère et retourne les informations sur les albums depuis un fichier JSON.
 
             Paramètre :
-            - 
+            - None : Aucune valeur en paramètre.
 
             Retour :
             - str : Une chaîne contenant les informations des albums ou un message d'erreur.
@@ -402,7 +414,7 @@ class Fetcher:
             Fonction qui récupère et retourne les informations sur les pistes depuis un fichier JSON.
 
             Paramètre :
-            - 
+            - None : Aucune valeur en paramètre.
 
             Retour :
             - str : Une chaîne contenant les informations des pistes ou un message d'erreur.
@@ -436,22 +448,3 @@ class Fetcher:
         except json.JSONDecodeError:
             return "Erreur : Le fichier JSON est corrompu ou mal formaté."
 
-"""
-if __name__ == "__main__":
-    # Exemple d’utilisation : création d’une instance et appel de méthodes
-    fetcher = Fetcher()
-
-    # Récupération d’informations sur un artiste (par exemple)
-    # artist_info = fetcher.get_artist_info("DRAKE")
-    # album_info = fetcher.get_album_info("ASTROWORLD")
-    track_info = fetcher.get_track_info("WITHOUT ME")
-    print("********************************************************************")
-    # fetcher.afficher_Artiste_infos()
-    # print("********************************************************************")
-    # fetcher.afficher_Album_infos()
-    # print("********************************************************************")
-    fetcher.afficher_track_infos()
-    print("********************************************************************")
-
-
-"""

@@ -52,7 +52,7 @@ class Interface:
         self.reche = False # Variable pour indiquer qu'on a fait une recherche  (quand on veut creer ou modifier une playlist)
         self.exist_play = False  # Variable pour indiquer si la playlist existe ou pas
         self.reche_retour = False # Variable pour indiquer qu'on a fait un retour après avoir fait une recherche
-        self.modification_fichier_play= True
+        self.modification_fichier_play= True # Indique si les fichiers playlist peuvent être modifiés
         self.lightyellow = "lightyellow"  # Couleur de fond pour certaines parties de l'interface
         self.dodgerblue = "dodgerblue"  # Couleur de fond pour d'autres parties
         self.antiquewhite = "antiquewhite"  # Autre couleur de fond
@@ -68,11 +68,23 @@ class Interface:
         self.max_length_milieu  = 38 # Variable pour la taille de l'affichage sous la cover
         self.checkbox_vars = []  # Pour stocker les variables de cases à cocher
         self.chemins_options = []  # Pour stocker les chemins des options
-        self.file_path_chemins = os.path.abspath(r'python_project\FichierTemp\options_selectionnees.txt')  # Chemin du fichier où écrire les options sélectionnées
-        self.fichier_lire = os.path.abspath(r'python_project\FichierTemp\TempFile.txt')
-        self.chem_im = os.path.abspath(r"Python_project/img/nn.webp")  
-        self.chem__music = os.path.abspath(r"Python_project\music")
-        self.image_path = os.path.abspath(r"Python_project\img\images.jpeg")
+        self.file_path_chemins = os.path.abspath(r'python_project\FichierTemp\options_selectionnees.txt')  # Chemin du fichier pour écrire les options sélectionnées
+        self.fichier_lire = os.path.abspath(r'python_project\FichierTemp\TempFile.txt')  # Fichier temporaire pour lecture de données
+        self.chem_im = os.path.abspath(r"Python_project/img/nn.webp")  # Chemin de l'image par défaut pour l'interface
+        self.chem__music = os.path.abspath(r"Python_project\music")  # Répertoire par défaut pour les fichiers musicaux
+        self.image_path = os.path.abspath(r"Python_project\img\images.jpeg")  # Image par défaut pour la couverture d'album
+        self.creation_interface() 
+         
+    def creation_interface(self) -> None:  
+        """
+            Fonction qui efféctue la création et structuration de l'interface.
+
+            Paramètre :
+            - None : Aucune valeur en paramètre.
+
+            Retourne :
+            - None : Aucune valeur de retour.
+        """
 
         # **************************************************************************
         # Création des différents panneaux de l'interface
@@ -253,7 +265,7 @@ class Interface:
 
         # Fonctionnalité pour mettre le lien entre la fonction direct_goto au bouton du clavier retourner a la ligne
         self.master.bind("<Return>", self.direct_Goto) 
-        
+
     def direct_Goto(self, event=None) -> None:  
         """
             Fonction qui efféctue le passage au panneau 2 et chargement de la musique par défaut.
@@ -641,7 +653,7 @@ class Interface:
         # Vérifier périodiquement si la musique est terminée et passer à la suivante
         self.master.after(100, self.check_audio_finish)
 
-    def check_audio_finish(self):   
+    def check_audio_finish(self) -> None:   
         """
             Fonction qui lance la lecture du fichier audio suivant
 
@@ -712,7 +724,7 @@ class Interface:
             self.entry.insert(0, self.playlist_defaut)
             self.entry.config(state="readonly") 
             chemin_play = self.playlist.gui_ecritureFichierxspf(self.varDirectory, self.playlist_defaut)  # Enregistre la playlist  
-        self.afficher_notification(f"Playlist crée dans ce dossier : {os.path.abspath(chemin_play)}")
+        self.afficher_notification(f"Votre playlist est crée dans ce dossier : \n\n Chemin : {os.path.abspath(chemin_play)}")
         self._open_window  = False
         self.new_window.destroy()  # Ferme la fenêtre secondaire
         # self.playlist_window = False
@@ -758,7 +770,7 @@ class Interface:
         # Afficher la notification avec le chemin enregistré
         chemin_play = self.playlist.gui_ecritureFichierxspf(self.file_path_chemins, texte_saisi)  # Enregistre la playlist avec le texte saisi
         self.exist_play = False
-        self.afficher_notification(os.path.abspath(chemin_play))
+        self.afficher_notification(f"Votre playlist est crée dans ce dossier : \n\n Chemin : {os.path.abspath(chemin_play)}")
 
         # Efface le contenu de l'Entry après avoir spécifié
         self.entry.delete(0, tk.END)  
@@ -1048,15 +1060,15 @@ class Interface:
             saisie = self.entry_ecriture_haut.get().strip().lower()
 
             if saisie == "" :
-                message = "la saisie de l'utilisateur est vide"
+                message = "La saisie de l'utilisateur est vide"
                 self.afficher_notification(message)
                 return ""
             if saisie == "album:" or saisie == "artiste:" or saisie == "music:" :
-                message = "la saisie de l'utilisateur est non complète"
+                message = "La saisie de l'utilisateur est non complète"
                 self.afficher_notification(message)
                 return ""
             if not (saisie.startswith("album:") or saisie.startswith("artiste:") or saisie.startswith("music:")):
-                message = "la saisie de l'utilisateur incorrect \n Ecrivez: \"album:nom_album\" ou \"artiste:nom_artiste\" ou \"music:titre_music\""
+                message = "La saisie de l'utilisateur incorrect \n Ecrivez: \"album:nom_album\" ou \"artiste:nom_artiste\" ou \"music:titre_music\""
                 self.afficher_notification(message)
                 return ""
             
@@ -1186,7 +1198,7 @@ class Interface:
         global notification, label, entry
         self.notification = Toplevel(root)
         self.notification.title("Notification")  # Titre de la fenêtre
-        self.notification.geometry("700x100")  # Définir la taille de la fenêtre
+        self.notification.geometry("700x180")  # Définir la taille de la fenêtre
         self.notification.resizable(False, False)  # Empêcher le redimensionnement
 
          # Créer un label pour afficher le message
@@ -1596,7 +1608,7 @@ class Interface:
             # Aucune modification n'est en cours pour cette playlist
             self.modification_fichier_play = False
             # Message à afficher pour informer l'utilisateur de la modification possible de la playlist
-            message = f"Modifié la liste des audios dans la Playlist : {f_name} ?"
+            message = f"Voulez vous modifié la liste des audios dans cette playlist : {os.path.basename(f_name)}  \n\n Chemin : {f_name} ?"
             # Affiche la notification avec le message préparé
             self.afficher_notification(message)
 
