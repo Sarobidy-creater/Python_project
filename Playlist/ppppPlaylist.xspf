@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <playlist xmlns="http://xspf.org/ns/0/" version="1">
-  <date>01-11-24 16:00:36</date>
+  <date>25-11-24 18:02:33</date>
   <trackList>
     <track>
       <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/08 - Elle me demande.mp3</location>
@@ -9,40 +9,7 @@
       <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/09 - Piqûre de rappel.mp3</location>
     </track>
     <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/09 - Technology.mp3</location>
-    </track>
-    <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/1-6 - Nombreux.mp3</location>
-    </track>
-    <track>
       <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/1-7 - Victime des réseaux.mp3</location>
-    </track>
-    <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/1-8 - Les matins.mp3</location>
-    </track>
-    <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/10 - Tell Me How You Feel.mp3</location>
-    </track>
-    <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/10 - Tout ou rien du tout (feat. Ocevne).mp3</location>
-    </track>
-    <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/11 - Indigo.mp3</location>
-    </track>
-    <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/Creepy Nuts - Otonoke.flac</location>
-    </track>
-    <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/RERD.mp3</location>
-    </track>
-    <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/sample2.flac</location>
-    </track>
-    <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/sample4.flac</location>
-    </track>
-    <track>
-      <location>file:///C:/Users/nelly/Desktop/Final/Python_project/music/Symphony No.6 (1st movement).flac</location>
     </track>
   </trackList>
 </playlist>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<playlist xmlns="http://xspf.org/ns/0/" version="1">
+  <date>27-11-24 19:20:13</date>
+  <trackList>
+    <track>
+      <location>file:///C:/Users/nelly/card/musique audio/album musique/CJ/01 - Politics.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/card/musique audio/album musique/CJ/02 - Set.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/card/musique audio/album musique/CJ/03 - BOP.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/card/musique audio/album musique/CJ/04 - Whoopty.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/card/musique audio/album musique/CJ/05 - I'm Lit (feat. French Montana).mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/card/musique audio/album musique/CJ/06 - Goin’ UP.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/card/musique audio/album musique/CJ/07 - Real One.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/card/musique audio/album musique/CJ/08 - Outro (Blessings).mp3</location>
+    </track>
+  </trackList>
+</playlist>

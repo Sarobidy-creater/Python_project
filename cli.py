@@ -23,7 +23,7 @@ class Console:
         self.playlist = Playlist()  # Instance pour générer une playlist
         self.ecouter = Ecouter() # Instance pour ecouter les audios mp3 et flac
     
-    def afficher_aide(self):
+    def afficher_aide(self) -> None:
         """
             Fonction qui affiche les instructions d'utilisation du programme.
 
@@ -44,7 +44,7 @@ class Console:
         """
         print(aide)  # Affiche le texte d'aide défini ci-dessus
 
-    def main(self):    
+    def main(self) -> None:    
         """
             Fonction principale qui gère l'analyse des arguments en ligne de commande et exécute les opérations appropriées.
 

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<playlist xmlns="http://xspf.org/ns/0/" version="1">
+  <date>27-11-24 19:57:10</date>
+  <trackList>
+    <track>
+      <location>file:///C:/Users/nelly/card/musique audio/album musique/Ninho/Ninho - Bali.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/card/musique audio/album musique/Ninho/Ninho - C'était le rap.mp3</location>
+    </track>
+  </trackList>
+</playlist>

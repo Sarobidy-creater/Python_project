@@ -1,0 +1,586 @@
+\chapter{Audio Metadata Extractor}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{Audio Metadata Extractor@{Audio Metadata Extractor}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+ Ce projet est un script Python permettant d\textquotesingle{}explorer des dossiers à la recherche de fichiers audio (MP3 et FLAC), d\textquotesingle{}en extraire les métadonnées (titre, artiste, album, etc.) et d\textquotesingle{}afficher la couverture (cover art) si elle est présente. C\textquotesingle{}est un outil utile pour analyser et organiser des fichiers audio, notamment dans des collections musicales ou des bibliothèques audio.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{\texorpdfstring{Classes du projet}{Classes du projet}}\label{md__r_e_a_d_m_e_autotoc_md1}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{\texorpdfstring{1. Éditeur de Métadonnées Audio \+: Classe Editer()}{1. Éditeur de Métadonnées Audio \+: Classe Editer()}}\label{md__r_e_a_d_m_e_autotoc_md2}
+Cette bibliothèque Python permet de créer, afficher, et modifier les métadonnées des fichiers audio au format {\bfseries{MP3}} et {\bfseries{FLAC}}. Elle offre également la possibilité d\textquotesingle{}ajouter ou de remplacer une image de couverture pour ces fichiers.\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{\texorpdfstring{1.\+a Principales fonctionnalités}{1.\+a Principales fonctionnalités}}\label{md__r_e_a_d_m_e_autotoc_md3}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Création de métadonnées}} \+:
+\begin{DoxyItemize}
+\item Génération d\textquotesingle{}un dictionnaire contenant des métadonnées comme le titre, l\textquotesingle{}artiste, l\textquotesingle{}album, etc.
+\end{DoxyItemize}
+\item {\bfseries{Modification des métadonnées}} \+:
+\begin{DoxyItemize}
+\item Ajout ou modification des métadonnées existantes dans les fichiers MP3 et FLAC.
+\end{DoxyItemize}
+\item {\bfseries{Gestion des images de couverture}} \+:
+\begin{DoxyItemize}
+\item Ajout ou remplacement de l\textquotesingle{}image de couverture des fichiers MP3 et FLAC.
+\end{DoxyItemize}
+\item {\bfseries{Affichage des métadonnées existantes}} \+:
+\begin{DoxyItemize}
+\item Lecture et affichage des métadonnées présentes dans les fichiers audio.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysection{\texorpdfstring{2. Extraction des Métadonnées Audio \+: Classe Extraction()}{2. Extraction des Métadonnées Audio \+: Classe Extraction()}}\label{md__r_e_a_d_m_e_autotoc_md5}
+Cette classe Python permet d\textquotesingle{}extraire, d\textquotesingle{}afficher et de formater les métadonnées des fichiers audio au format {\bfseries{MP3}} et {\bfseries{FLAC}}. Elle gère également l\textquotesingle{}extraction des couvertures d\textquotesingle{}album.\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysection{\texorpdfstring{2.\+a Principales fonctionnalités}{2.\+a Principales fonctionnalités}}\label{md__r_e_a_d_m_e_autotoc_md6}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Extraction des métadonnées}} \+:
+\begin{DoxyItemize}
+\item Titre, Artiste, Album, Genre, Date, Organisation.
+\item Format MP3 et FLAC pris en charge.
+\end{DoxyItemize}
+\item {\bfseries{Durée audio}} \+:
+\begin{DoxyItemize}
+\item Conversion et affichage de la durée en minutes et secondes.
+\end{DoxyItemize}
+\item {\bfseries{Gestion des fichiers audio}} \+:
+\begin{DoxyItemize}
+\item Validation des chemins des fichiers audio.
+\item Gestion des erreurs pour les fichiers manquants ou les formats non pris en charge.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{\texorpdfstring{3. Documentation \+: Fonction {\ttfamily get\+\_\+acces\+\_\+token}}{3. Documentation \+: Fonction {\ttfamily get\+\_\+acces\+\_\+token}}}\label{md__r_e_a_d_m_e_autotoc_md8}
+La fonction {\ttfamily get\+\_\+acces\+\_\+token} permet de récupérer un jeton d\textquotesingle{}authentification auprès de l\textquotesingle{}API Spotify. Ce jeton est requis pour effectuer des requêtes authentifiées et a une durée de validité d\textquotesingle{}une heure.\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysection{\texorpdfstring{3.\+a Fonctionnalité}{3.\+a Fonctionnalité}}\label{md__r_e_a_d_m_e_autotoc_md9}
+
+\begin{DoxyItemize}
+\item {\bfseries{Objectif}} \+: Obtenir un jeton d\textquotesingle{}accès (access token) pour l\textquotesingle{}API Spotify en utilisant le mécanisme d\textquotesingle{}authentification OAuth 2.\+0 basé sur les {\bfseries{client credentials}}.
+\item {\bfseries{Durée de validité}} \+: Le jeton est valide pendant {\bfseries{1 heure}}.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysection{\texorpdfstring{4. Gestion des Playlists en Python \+: Classe Playlist()}{4. Gestion des Playlists en Python \+: Classe Playlist()}}\label{md__r_e_a_d_m_e_autotoc_md11}
+Ce projet Python fournit une classe {\ttfamily Playlist} pour créer et gérer des fichiers de playlists au format XSPF. Il offre des fonctionnalités permettant \+:
+
+
+\begin{DoxyItemize}
+\item De créer des fichiers de playlists par défaut ou personnalisés.
+\item D\textquotesingle{}ajouter des pistes à partir d\textquotesingle{}un dossier ou d\textquotesingle{}une sélection de fichiers.
+\item D\textquotesingle{}intégrer des informations supplémentaires comme la date de création.
+\end{DoxyItemize}
+
+Le script utilise des bibliothèques standard et tierces pour manipuler les fichiers XML et interagir avec le système de fichiers.\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysection{\texorpdfstring{4.\+a Principales fonctionnalités}{4.\+a Principales fonctionnalités}}\label{md__r_e_a_d_m_e_autotoc_md12}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Créer un fichier par défaut}} \+:
+\begin{DoxyItemize}
+\item Crée un fichier {\ttfamily ma\+Playlist.\+xspf} dans le répertoire {\ttfamily Python\+\_\+project/\+Playlist}.
+\item Inclut une structure XML minimale.
+\end{DoxyItemize}
+\item {\bfseries{Créer un fichier spécifique}} \+:
+\begin{DoxyItemize}
+\item Permet de définir un nom personnalisé pour le fichier XSPF.
+\item Le fichier est enregistré dans le répertoire {\ttfamily Python\+\_\+project/\+Playlist}.
+\end{DoxyItemize}
+\item {\bfseries{Ajouter des pistes à une playlist}} \+:
+\begin{DoxyItemize}
+\item Ajoute une liste de pistes provenant d\textquotesingle{}un dossier ou d\textquotesingle{}une sélection manuelle.
+\item Les pistes sont ajoutées avec leurs emplacements respectifs au format {\ttfamily \href{file:///}{\texttt{ file\+:///}}}.
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysection{\texorpdfstring{2.\+b Manipulation de fichiers XML}{2.\+b Manipulation de fichiers XML}}\label{md__r_e_a_d_m_e_autotoc_md13}
+
+\begin{DoxyItemize}
+\item Utilise {\ttfamily lxml} pour créer et mettre à jour la structure XML des playlists.
+\item Ajoute des éléments comme {\ttfamily \texorpdfstring{$<$}{<}date\texorpdfstring{$>$}{>}} et {\ttfamily \texorpdfstring{$<$}{<}track\+List\texorpdfstring{$>$}{>}} au fichier XSPF.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md15}{}\doxysection{\texorpdfstring{5. Lecteur Audio Polyvalent \+: Classe Ecouter()}{5. Lecteur Audio Polyvalent \+: Classe Ecouter()}}\label{md__r_e_a_d_m_e_autotoc_md15}
+Ce projet est une classe Python permettant de lire divers formats de fichiers audio tels que {\bfseries{MP3}}, {\bfseries{FLAC}}, et {\bfseries{WAV}}. Elle utilise la bibliothèque {\bfseries{Pygame}} pour la lecture audio et {\bfseries{Pydub}} pour la conversion des fichiers FLAC en WAV afin de les rendre compatibles avec Pygame.\hypertarget{md__r_e_a_d_m_e_autotoc_md16}{}\doxysection{\texorpdfstring{5.\+a Principales fonctionnalités}{5.\+a Principales fonctionnalités}}\label{md__r_e_a_d_m_e_autotoc_md16}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Lecture de fichiers MP3}} \+:
+\begin{DoxyItemize}
+\item Chargement et lecture directe des fichiers MP3.
+\end{DoxyItemize}
+\item {\bfseries{Lecture de fichiers FLAC}} \+:
+\begin{DoxyItemize}
+\item Conversion des fichiers FLAC en WAV temporaire pour permettre leur lecture.
+\end{DoxyItemize}
+\item {\bfseries{Lecture de fichiers WAV}} \+:
+\begin{DoxyItemize}
+\item Lecture directe des fichiers WAV.
+\end{DoxyItemize}
+\item {\bfseries{Gestion intelligente des fichiers audio}} \+:
+\begin{DoxyItemize}
+\item Identifie automatiquement le type de fichier audio basé sur son extension et appelle la méthode correspondante.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md18}{}\doxysection{\texorpdfstring{6. Explorateur de Fichiers Audio \+: Classe Explorer()}{6. Explorateur de Fichiers Audio \+: Classe Explorer()}}\label{md__r_e_a_d_m_e_autotoc_md18}
+Ce projet fournit une classe Python pour explorer des dossiers, identifier les fichiers audio au format {\bfseries{MP3}}, {\bfseries{FLAC}}, et gérer des playlists au format {\bfseries{XSPF}}. Il offre des fonctionnalités permettant de lister les fichiers dans la console, de créer des fichiers de sortie avec les chemins audio et d\textquotesingle{}extraire les pistes des playlists.\hypertarget{md__r_e_a_d_m_e_autotoc_md19}{}\doxysection{\texorpdfstring{6.\+a Principales fonctionnalités}{6.\+a Principales fonctionnalités}}\label{md__r_e_a_d_m_e_autotoc_md19}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Exploration de dossiers audio}} \+:
+\begin{DoxyItemize}
+\item Identifie les fichiers MP3 et FLAC dans un répertoire donné.
+\item Stocke les chemins des fichiers trouvés dans un fichier texte ou les affiche dans la console.
+\end{DoxyItemize}
+\item {\bfseries{Support des playlists XSPF}} \+:
+\begin{DoxyItemize}
+\item Recherche les fichiers de playlist \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}.xspf\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}.
+\item Extrait les chemins des pistes des playlists.
+\end{DoxyItemize}
+\item {\bfseries{Gestion des fichiers temporaires}} \+:
+\begin{DoxyItemize}
+\item Génère des fichiers temporaires contenant les résultats d\textquotesingle{}exploration.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md21}{}\doxysection{\texorpdfstring{7. Spotify API Fetcher \+: Classe Fetcher()}{7. Spotify API Fetcher \+: Classe Fetcher()}}\label{md__r_e_a_d_m_e_autotoc_md21}
+Ce script permet de récupérer des informations sur des artistes, des albums et des pistes à partir de l\textquotesingle{}API Spotify, en utilisant un client autorisé via un token d\textquotesingle{}accès. Le script interagit avec l\textquotesingle{}API Spotify pour effectuer des recherches par nom d\textquotesingle{}artiste, album ou piste, puis sauvegarde les résultats sous forme de fichiers JSON. Il inclut également des fonctionnalités pour vérifier la connexion Internet et gérer les erreurs de connexion.\hypertarget{md__r_e_a_d_m_e_autotoc_md22}{}\doxysection{\texorpdfstring{7.\+a Principales fonctionnalités}{7.\+a Principales fonctionnalités}}\label{md__r_e_a_d_m_e_autotoc_md22}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Vérification de la connexion Internet}}
+\begin{DoxyItemize}
+\item Avant d\textquotesingle{}interagir avec l\textquotesingle{}API Spotify, le script vérifie si une connexion Internet est disponible en envoyant une requête à Google. Si la connexion échoue, l\textquotesingle{}accès à l\textquotesingle{}API Spotify sera impossible.
+\end{DoxyItemize}
+\item {\bfseries{Authentification via l\textquotesingle{}API Spotify}}
+\begin{DoxyItemize}
+\item Le script utilise le mécanisme d\textquotesingle{}authentification par client {\ttfamily client\+\_\+credentials} de Spotify. Il encodera les identifiants du client en Base64 et enverra une requête à l\textquotesingle{}API pour obtenir un jeton d\textquotesingle{}accès. Ce jeton est utilisé pour authentifier les requêtes ultérieures vers l\textquotesingle{}API Spotify.
+\end{DoxyItemize}
+\item {\bfseries{Recherche sur l\textquotesingle{}API Spotify}}
+\begin{DoxyItemize}
+\item Le script permet de rechercher des artistes, des albums et des pistes via l\textquotesingle{}API Spotify. Vous pouvez effectuer une recherche en utilisant un terme de recherche, et spécifier si vous recherchez un artiste, un album ou une piste. Le type de requête est défini à l\textquotesingle{}aide de l\textquotesingle{}énumération {\ttfamily APIQuery\+Type}.
+\end{DoxyItemize}
+\item {\bfseries{Sauvegarde des résultats dans un fichier JSON}}
+\begin{DoxyItemize}
+\item Une fois les données récupérées, elles sont sauvegardées dans des fichiers JSON locaux. Ces fichiers contiennent des informations sur les artistes, albums ou pistes, et peuvent être lus plus tard pour afficher ou analyser les données.
+\end{DoxyItemize}
+\item {\bfseries{Lecture et affichage des données JSON}}
+\begin{DoxyItemize}
+\item Les données enregistrées dans les fichiers JSON peuvent être lues et affichées de manière formatée. Le script fournit des méthodes pour afficher les informations sur les artistes, albums et pistes de manière lisible. Si un fichier JSON est manquant ou mal formaté, une erreur est renvoyée.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md24}{}\doxysection{\texorpdfstring{8. {\bfseries{Console}} \+: Classe Console()}{8. {\bfseries{Console}} \+: Classe Console()}}\label{md__r_e_a_d_m_e_autotoc_md24}
+La classe {\ttfamily Console} sert d\textquotesingle{}interface utilisateur pour interagir avec le programme via la ligne de commande. Elle gère les options fournies par l\textquotesingle{}utilisateur et coordonne l\textquotesingle{}utilisation des autres classes \+:
+
+
+\begin{DoxyItemize}
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}{\ttfamily afficher\+\_\+aide(self)}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \+: Affiche un message d\textquotesingle{}aide sur l\textquotesingle{}utilisation du programme.
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}{\ttfamily main(self)}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \+: Analyse les arguments de ligne de commande et appelle les méthodes appropriées des classes {\ttfamily Explorer}, {\ttfamily Extraction}, et {\ttfamily Playlist}.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md25}{}\doxysection{\texorpdfstring{Importations}{Importations}}\label{md__r_e_a_d_m_e_autotoc_md25}
+Le fichier {\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+.\+py} initialise le package {\ttfamily Python\+\_\+project}. Il importe les classes suivantes pour un accès facile \+:
+
+
+\begin{DoxyItemize}
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}{\ttfamily Extraction}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \+: Importée depuis le module {\ttfamily audio\+Tag\+Extraction}, elle permet d\textquotesingle{}extraire et d\textquotesingle{}afficher les métadonnées des fichiers audio.
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}{\ttfamily Playlist}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \+: Importée depuis le module {\ttfamily constitution\+Playlist}, elle gère la création et la modification des playlists au format XSPF.
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}{\ttfamily Explorer}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \+: Importée depuis le module {\ttfamily exploration\+Dossier}, elle permet d\textquotesingle{}explorer les dossiers à la recherche de fichiers audio.
+\end{DoxyItemize}
+
+Les variables et constantes définies dans le fichier peuvent inclure la version du package, facilitant la gestion des mises à jour.\hypertarget{md__r_e_a_d_m_e_autotoc_md26}{}\doxysection{\texorpdfstring{Utilisation de la Console}{Utilisation de la Console}}\label{md__r_e_a_d_m_e_autotoc_md26}
+Pour utiliser le script depuis la ligne de commande, assurez-\/vous d\textquotesingle{}abord d\textquotesingle{}être dans le dossier contenant le fichier {\ttfamily cli.\+py}. Ensuite, vous pouvez suivre les exemples ci-\/dessous \+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Exécuter le script}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py}
+
+\end{DoxyCode}
+
+\item {\bfseries{Afficher l\textquotesingle{}aide}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/h}
+
+\end{DoxyCode}
+
+
+ou
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/-\/help}
+
+\end{DoxyCode}
+
+\item {\bfseries{Explorer le dossier courant}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/d\ .}
+
+\end{DoxyCode}
+
+
+ou
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/-\/directory\ .}
+
+\end{DoxyCode}
+
+\item {\bfseries{Explorer un dossier spécifique}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/d\ "{}chemin\(\backslash\)vers\(\backslash\)un\(\backslash\)dossier"{}}
+
+\end{DoxyCode}
+
+
+ou
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/-\/directory\ "{}chemin\(\backslash\)vers\(\backslash\)un\(\backslash\)dossier"{}}
+
+\end{DoxyCode}
+
+\item {\bfseries{Extraire les métadonnées d\textquotesingle{}un fichier audio dans le dossier music éxistant}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/f\ music.mp3}
+
+\end{DoxyCode}
+
+
+ou
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/-\/file\ music.mp3}
+
+\end{DoxyCode}
+
+\item {\bfseries{Extraire les métadonnées d\textquotesingle{}un fichier audio en donnant un chemin spécifique}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/f\ "{}chemin\(\backslash\)vers\(\backslash\)la\(\backslash\)musique\(\backslash\)music.mp3"{}}
+
+\end{DoxyCode}
+
+
+ou
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/-\/file\ "{}chemin\(\backslash\)vers\(\backslash\)la\(\backslash\)musique\(\backslash\)music.mp3"{}}
+
+\end{DoxyCode}
+
+\item {\bfseries{Générer une playlist à partir d\textquotesingle{}un dossier music éxistant et en spécifiant le nom de la playlist}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/d\ ./music/\ -\/o\ nom\_de\_votre\_playlist.xspf}
+
+\end{DoxyCode}
+
+
+ou
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/-\/directory\ ./music/\ -\/-\/output\ nom\_de\_votre\_playlist.xspf}
+
+\end{DoxyCode}
+
+\item {\bfseries{Générer une playlist à partir d\textquotesingle{}un dossier spécifique et en spécifiant le nom de la playlist}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/d\ "{}chemin\(\backslash\)vers\(\backslash\)un\(\backslash\)dossier"{}\ -\/o\ nom\_de\_votre\_playlist.xspf}
+
+\end{DoxyCode}
+
+
+ou
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/-\/directory\ "{}chemin\(\backslash\)vers\(\backslash\)un\(\backslash\)dossier"{}\ -\/-\/output\ nom\_de\_votre\_playlist.xspf}
+
+\end{DoxyCode}
+
+\item {\bfseries{Lancer l\textquotesingle{}interface graphique (si disponible)}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ gui.py}
+
+\end{DoxyCode}
+
+\item {\bfseries{Ecouter un fichier audio donné}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/l\ -\/f\ music.mp3}
+
+\end{DoxyCode}
+
+
+ou
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/-\/listen\ -\/-\/file\ music.mp3}
+
+\end{DoxyCode}
+
+\item {\bfseries{Ecouter un fichier audio en donnant un chemin spécifique}} \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/l\ -\/f\ "{}chemin\(\backslash\)vers\(\backslash\)la\(\backslash\)musique\(\backslash\)music.mp3"{}}
+
+\end{DoxyCode}
+
+
+ou
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ cli.py\ -\/-\/listen\ -\/-\/file\ "{}chemin\(\backslash\)vers\(\backslash\)la\(\backslash\)musique\(\backslash\)music.mp3"{}}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md28}{}\doxysection{\texorpdfstring{9. {\bfseries{Interface de gestion des fichiers audio}} \+: Classe Interface()}{9. {\bfseries{Interface de gestion des fichiers audio}} \+: Classe Interface()}}\label{md__r_e_a_d_m_e_autotoc_md28}
+Ce projet est une interface graphique qui permet d\textquotesingle{}explorer des fichiers audio sur votre ordinateur, d\textquotesingle{}en extraire les métadonnées, d\textquotesingle{}afficher la couverture d\textquotesingle{}album (cover art), et de créer des playlists. Il est conçu pour être simple d\textquotesingle{}utilisation grâce à des boutons et des fenêtres interactives.\hypertarget{md__r_e_a_d_m_e_autotoc_md29}{}\doxysection{\texorpdfstring{Introduction}{Introduction}}\label{md__r_e_a_d_m_e_autotoc_md29}
+Cette application de gestion de musique vous permet de rechercher, lire, et gérer vos fichiers audio de manière efficace. Ce document explique les différentes fenêtres et boutons de l\textquotesingle{}interface utilisateur.\hypertarget{md__r_e_a_d_m_e_autotoc_md30}{}\doxysection{\texorpdfstring{1. Choix du dossier à explorer}{1. Choix du dossier à explorer}}\label{md__r_e_a_d_m_e_autotoc_md30}
+
+\begin{DoxyItemize}
+\item {\bfseries{But}} \+: Sélectionner un dossier contenant des fichiers audio (MP3 et FLAC) sur votre ordinateur pour les analyser.
+\item {\bfseries{Fonctionnement}} \+: Un explorateur de fichiers s\textquotesingle{}ouvre pour naviguer et choisir le dossier. Les fichiers audio trouvés sont ensuite listés dans l\textquotesingle{}interface.
+\item {\bfseries{Code associé}} \+: La méthode {\ttfamily exploration\+\_\+dossier()} ou {\ttfamily AZEexploration\+\_\+dossier()} est utilisée pour parcourir le système de fichiers et charger les fichiers audio dans une Listbox.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md31}{}\doxysection{\texorpdfstring{2. Affichage des fichiers audio détectés}{2. Affichage des fichiers audio détectés}}\label{md__r_e_a_d_m_e_autotoc_md31}
+
+\begin{DoxyItemize}
+\item {\bfseries{But}} \+: Après avoir sélectionné un dossier, une liste de fichiers audio détectés (formats MP3 et FLAC) est affichée.
+\item {\bfseries{Fonctionnalité additionnelle}} \+: L\textquotesingle{}utilisateur peut sélectionner un fichier audio pour afficher ses métadonnées.
+\item {\bfseries{Code associé}} \+: La méthode {\ttfamily exploration\+\_\+dossier()} peuple la Listbox avec les fichiers audio. La fonction {\ttfamily affiche\+\_\+path\+\_\+label()} extrait les informations du fichier sélectionné.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md32}{}\doxysection{\texorpdfstring{3. Extraction et affichage des métadonnées}{3. Extraction et affichage des métadonnées}}\label{md__r_e_a_d_m_e_autotoc_md32}
+
+\begin{DoxyItemize}
+\item {\bfseries{But}} \+: Afficher les métadonnées (titre, artiste, album, genre, etc.) des fichiers audio sélectionnés.
+\item {\bfseries{Fonctionnement}} \+: Lorsqu\textquotesingle{}un fichier est cliqué dans la liste, ses métadonnées sont extraites et affichées dans l\textquotesingle{}interface.
+\item {\bfseries{Code associé}} \+: La méthode {\ttfamily affiche\+\_\+path\+\_\+label()} appelle {\ttfamily extraction\+\_\+et\+\_\+afficher\+\_\+tag()} pour extraire les métadonnées du fichier audio sélectionné.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md33}{}\doxysection{\texorpdfstring{4. Affichage de la couverture (Cover Art)}{4. Affichage de la couverture (Cover Art)}}\label{md__r_e_a_d_m_e_autotoc_md33}
+
+\begin{DoxyItemize}
+\item {\bfseries{But}} \+: Afficher l\textquotesingle{}image de couverture d\textquotesingle{}un fichier audio s\textquotesingle{}il en contient une.
+\item {\bfseries{Fonctionnement}} \+: Si une image de couverture est détectée dans le fichier audio, elle est affichée dans une zone dédiée. Sinon, une image par défaut est utilisée.
+\item {\bfseries{Code associé}} \+: La méthode {\ttfamily cover\+\_\+image()} gère l\textquotesingle{}extraction et l\textquotesingle{}affichage de la couverture d\textquotesingle{}album.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md34}{}\doxysection{\texorpdfstring{5. Fenêtre Principale}{5. Fenêtre Principale}}\label{md__r_e_a_d_m_e_autotoc_md34}
+À l\textquotesingle{}ouverture de l\textquotesingle{}application, vous verrez la fenêtre principale qui contient plusieurs sections et boutons. Voici les boutons disponibles \+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Jouer}} \+:
+\begin{DoxyItemize}
+\item Bouton pour lire l\textquotesingle{}audio {\bfseries{▶}}
+\item Cliquez sur ce bouton pour lire l\textquotesingle{}audio sélectionné.
+\end{DoxyItemize}
+\item {\bfseries{Pause / Reprendre}} \+:
+\begin{DoxyItemize}
+\item Bouton pour faire pause l\textquotesingle{}audio {\bfseries{⏸}}
+\item Bouton pour reprendre la lecture l\textquotesingle{}audio {\bfseries{■}}
+\item Utilisez ces boutons pour mettre en pause la lecture de l\textquotesingle{}audio ou reprendre la lecture après une pause.
+\end{DoxyItemize}
+\item {\bfseries{Playlist}} \+:
+\begin{DoxyItemize}
+\item Bouton pour créer ou gérer vos playlists {\bfseries{Playlist}}
+\item Ce bouton ouvre une nouvelle fenêtre pour créer ou gérer vos playlists.
+\end{DoxyItemize}
+\item {\bfseries{Parcourir}} \+:
+\begin{DoxyItemize}
+\item Bouton pour parcourir un dossier et ses sous-\/dossiers {\bfseries{Parcourir}}
+\item Permet de parcourir un dossier et ses sous-\/dossiers pour sélectionner des fichiers audio.
+\end{DoxyItemize}
+\item {\bfseries{Ecouter}} \+:
+\begin{DoxyItemize}
+\item Bouton pour écouter une playlist sélectionée {\bfseries{Ecouter}}
+\item Permet la lecture des fichiers audio dans une playlist sélectionée.
+\end{DoxyItemize}
+\item {\bfseries{Next}} \+:
+\begin{DoxyItemize}
+\item Bouton pour l\textquotesingle{}audio suivant {\bfseries{▶▶}}
+\item Passe à l\textquotesingle{}audio suivant dans la liste.
+\end{DoxyItemize}
+\item {\bfseries{Prev}} \+:
+\begin{DoxyItemize}
+\item Bouton pour l\textquotesingle{}audio précédent {\bfseries{◀◀}}
+\item Revient à l\textquotesingle{}audio précédent dans la liste.
+\end{DoxyItemize}
+\item {\bfseries{Modifier Métadonnées (\+::\+:)}} \+:
+\begin{DoxyItemize}
+\item Bouton pour modifier les métadonnées \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\+::\+:\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}
+\item Ouvre une fenêtre pour modifier les métadonnées d\textquotesingle{}un fichier audio.
+\end{DoxyItemize}
+\item {\bfseries{Rechercher}} \+:
+\begin{DoxyItemize}
+\item Bouton pour utilise une API {\bfseries{Check}}
+\item Utilisez ce bouton pour rechercher un artiste, un album, ou une musique en utilisant une API.
+\item Entrez votre recherche dans le champ de saisie (Entry).
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md35}{}\doxysubsection{\texorpdfstring{Fonctionnalité de Recherche de Musique}{Fonctionnalité de Recherche de Musique}}\label{md__r_e_a_d_m_e_autotoc_md35}
+L\textquotesingle{}application utilise une API tierce pour effectuer des recherches de musique. Voici comment cela fonctionne \+:\hypertarget{md__r_e_a_d_m_e_autotoc_md36}{}\doxysubsubsection{\texorpdfstring{1. Saisie de la Recherche}{1. Saisie de la Recherche}}\label{md__r_e_a_d_m_e_autotoc_md36}
+L\textquotesingle{}utilisateur entre une commande dans le champ de recherche. Les commandes acceptées incluent \+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{artiste}} \+: {\ttfamily artiste\+: Nom de l\textquotesingle{}artiste}
+\item {\bfseries{album}} \+: {\ttfamily album\+: Nom de l\textquotesingle{}album}
+\item {\bfseries{music}} \+: {\ttfamily music\+: Nom de la musique}
+\end{DoxyItemize}
+
+Ces commandes permettent à l\textquotesingle{}utilisateur de spécifier exactement ce qu\textquotesingle{}il recherche, facilitant ainsi l\textquotesingle{}accès aux résultats souhaités.\hypertarget{md__r_e_a_d_m_e_autotoc_md37}{}\doxysubsubsection{\texorpdfstring{2. Envoi de la Requête}{2. Envoi de la Requête}}\label{md__r_e_a_d_m_e_autotoc_md37}
+Lorsque l\textquotesingle{}utilisateur clique sur le bouton {\bfseries{Check}}, l\textquotesingle{}application envoie une requête à l\textquotesingle{}API avec les paramètres spécifiés. Cette requête est généralement formulée en utilisant une méthode HTTP (comme GET ou POST) pour récupérer des données. Cela permet à l\textquotesingle{}application d\textquotesingle{}interroger efficacement l\textquotesingle{}API et de récupérer des informations pertinentes sur la musique.\hypertarget{md__r_e_a_d_m_e_autotoc_md38}{}\doxysubsubsection{\texorpdfstring{3. Réception des Résultats}{3. Réception des Résultats}}\label{md__r_e_a_d_m_e_autotoc_md38}
+L\textquotesingle{}API renvoie les résultats de la recherche sous forme de données structurées, en format JSON. L\textquotesingle{}application traite ces données pour extraire les informations pertinentes, telles que les titres des morceaux, les noms des artistes et les albums associés.\hypertarget{md__r_e_a_d_m_e_autotoc_md39}{}\doxysubsubsection{\texorpdfstring{4. Affichage des Résultats}{4. Affichage des Résultats}}\label{md__r_e_a_d_m_e_autotoc_md39}
+Les résultats de la recherche (artistes, albums, morceaux) sont ensuite affichés dans l\textquotesingle{}interface utilisateur.\hypertarget{md__r_e_a_d_m_e_autotoc_md40}{}\doxysection{\texorpdfstring{6. Création de playlists}{6. Création de playlists}}\label{md__r_e_a_d_m_e_autotoc_md40}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md41}{}\doxysubsection{\texorpdfstring{6.\+1 Playlist par défaut}{6.\+1 Playlist par défaut}}\label{md__r_e_a_d_m_e_autotoc_md41}
+
+\begin{DoxyItemize}
+\item {\bfseries{But}} \+: Créer une playlist par défaut qui contient une liste d\textquotesingle{}audio préétablie dans la Listbox.
+\item {\bfseries{Fonctionnalité}} \+: Lors de l\textquotesingle{}initialisation de l\textquotesingle{}application, une playlist par défaut est chargée et affichée, permettant à l\textquotesingle{}utilisateur d\textquotesingle{}écouter facilement une sélection prédéfinie de fichiers audio.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md42}{}\doxysubsection{\texorpdfstring{6.\+2 Playlist spécifiée}{6.\+2 Playlist spécifiée}}\label{md__r_e_a_d_m_e_autotoc_md42}
+
+\begin{DoxyItemize}
+\item {\bfseries{But}} \+: Permettre à l\textquotesingle{}utilisateur de spécifier une playlist par son nom et de sélectionner les audios à inclure dans cette playlist.
+\item {\bfseries{Fonctionnalité}} \+: Une interface avec des cases à cocher est fournie pour que l\textquotesingle{}utilisateur puisse sélectionner les fichiers audio souhaités et les inclure dans une playlist personnalisée. L\textquotesingle{}utilisateur peut sauvegarder cette playlist sous un nom spécifique.
+\item {\bfseries{Code associé}} \+: Les fonctions {\ttfamily open\+\_\+new\+\_\+fenetre()}, {\ttfamily par\+\_\+defaut()}, et {\ttfamily specifier()} permettent la création, la spécification, et la réinitialisation des playlists. Le fichier est enregistré grâce à {\ttfamily gui\+\_\+ecriture\+Fichierxspf()}.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md43}{}\doxysection{\texorpdfstring{7. Fenêtre de Playlist}{7. Fenêtre de Playlist}}\label{md__r_e_a_d_m_e_autotoc_md43}
+En cliquant sur le bouton {\bfseries{Playlist}}, une nouvelle fenêtre s\textquotesingle{}ouvrira avec les options suivantes \+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Annuler}} \+:
+\begin{DoxyItemize}
+\item Bouton pour annuler toutes les opérations {\bfseries{Annuler}}
+\item Annule toutes les opérations en cours et ferme la fenêtre de playlist sans sauvegarder les modifications.
+\end{DoxyItemize}
+\item {\bfseries{Playlist par défaut}} \+:
+\begin{DoxyItemize}
+\item Bouton pour créer la playlist par défaut {\bfseries{par défaut}}
+\item Crée la playlist par défaut qui contient une liste d\textquotesingle{}audio préétablie dans la Listbox affichée sur l\textquotesingle{}interface. Cette playlist peut être utilisée pour une lecture rapide sans nécessiter de configuration supplémentaire.
+\end{DoxyItemize}
+\item {\bfseries{Playlist spécifiée}} \+:
+\begin{DoxyItemize}
+\item Bouton pour spécifier une playlist {\bfseries{spécifier}}
+\item Permet de spécifier une playlist par son nom et de sélectionner les audios à inclure dans cette playlist à l\textquotesingle{}aide de cases à cocher (checkbox). L\textquotesingle{}utilisateur peut cocher les fichiers audio qu\textquotesingle{}il souhaite ajouter à sa playlist personnalisée.
+\end{DoxyItemize}
+\item {\bfseries{Sélectionner toutes les checkboxes}} \+:
+\begin{DoxyItemize}
+\item Bouton pour sélectionner toutes les checkboxes {\bfseries{T-\/select}}
+\item Lorsqu’on clique sur le bouton T-\/select, toutes les checkboxes de la liste sont cochées.
+\end{DoxyItemize}
+\item {\bfseries{Désélectionner toutes les checkboxes}} \+:
+\begin{DoxyItemize}
+\item Bouton pour désélectionner toutes les checkboxes {\bfseries{T-\/déselect}}
+\item En cliquant sur T-\/déselect, toutes les checkboxes de la liste sont décochées.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md44}{}\doxysection{\texorpdfstring{8. Fenêtre de Modification des Métadonnées}{8. Fenêtre de Modification des Métadonnées}}\label{md__r_e_a_d_m_e_autotoc_md44}
+En cliquant sur le bouton {\bfseries{Modifier Métadonnées (\+::\+:)}}, une nouvelle fenêtre apparaîtra, permettant à l\textquotesingle{}utilisateur de modifier les informations d\textquotesingle{}un fichier audio. Cette fenêtre est équipée de plusieurs champs et boutons pour faciliter la gestion des métadonnées.\hypertarget{md__r_e_a_d_m_e_autotoc_md45}{}\doxysubsection{\texorpdfstring{Labels et Zones de Saisie}{Labels et Zones de Saisie}}\label{md__r_e_a_d_m_e_autotoc_md45}
+La fenêtre de modification contient les champs suivants, chacun associé à un label explicite \+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Titre}} \+: Champ pour saisir ou modifier le titre de la piste audio.
+\item {\bfseries{Artiste}} \+: Champ pour saisir ou modifier le nom de l\textquotesingle{}artiste.
+\item {\bfseries{Album}} \+: Champ pour saisir ou modifier le nom de l\textquotesingle{}album.
+\item {\bfseries{Genre}} \+: Champ pour saisir ou modifier le genre musical.
+\item {\bfseries{Date}} \+: Champ pour saisir ou modifier la date de sortie.
+\item {\bfseries{Organisation}} \+: Champ pour saisir ou modifier l\textquotesingle{}organisation ou le label musical.
+\end{DoxyItemize}
+
+Chaque champ contient par défaut les valeurs actuelles des métadonnées, facilitant ainsi la modification. Cela permet à l\textquotesingle{}utilisateur de garder les informations existantes tout en offrant la possibilité de les mettre à jour rapidement.\hypertarget{md__r_e_a_d_m_e_autotoc_md46}{}\doxysubsection{\texorpdfstring{Bouton Modifier la Couverture}{Bouton Modifier la Couverture}}\label{md__r_e_a_d_m_e_autotoc_md46}
+Ce bouton ouvre un explorateur de fichiers pour choisir une nouvelle image de couverture pour l\textquotesingle{}audio. La couverture sélectionnée sera associée au fichier audio et affichée dans l\textquotesingle{}interface.\hypertarget{md__r_e_a_d_m_e_autotoc_md47}{}\doxysubsection{\texorpdfstring{Boutons d\textquotesingle{}Action}{Boutons d\textquotesingle{}Action}}\label{md__r_e_a_d_m_e_autotoc_md47}
+
+\begin{DoxyItemize}
+\item {\bfseries{Annuler}} \+:
+\begin{DoxyItemize}
+\item Bouton pour annuler toutes les opérations {\bfseries{Annuler}}
+\item Ferme la fenêtre sans effectuer d\textquotesingle{}opérations sur les métadonnées.
+\end{DoxyItemize}
+\item {\bfseries{Sélectionner une couverture}} \+:
+\begin{DoxyItemize}
+\item Bouton pour sélectionner une couverture {\bfseries{Sélectionner une couverture}}
+\item Ouvre un explorateur de fichiers pour choisir une image de couverture pour l\textquotesingle{}audio.
+\end{DoxyItemize}
+\item {\bfseries{Enregistrer}} \+:
+\begin{DoxyItemize}
+\item Bouton pour sauvegarde les métadonnées {\bfseries{Enregistrer}}
+\item Sauvegarde les métadonnées saisies dans les champs de texte et la couverture si elle a été modifiée.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md48}{}\doxysection{\texorpdfstring{9. Contrôle de lecture (Play/\+Pause/\+Next/\+Previous)}{9. Contrôle de lecture (Play/\+Pause/\+Next/\+Previous)}}\label{md__r_e_a_d_m_e_autotoc_md48}
+
+\begin{DoxyItemize}
+\item {\bfseries{But}} \+: Contrôler la lecture des fichiers audio depuis l\textquotesingle{}interface.
+\item {\bfseries{Fonctionnalité}} \+:
+\begin{DoxyItemize}
+\item {\bfseries{Play/\+Pause}} \+: Lire ou mettre en pause la chanson sélectionnée.
+\item {\bfseries{Next/\+Previous}} \+: Passer à la piste suivante ou précédente.
+\end{DoxyItemize}
+\item {\bfseries{Code associé}} \+:
+\begin{DoxyItemize}
+\item {\ttfamily lire\+\_\+audio()} pour la lecture.
+\item {\ttfamily toggle\+\_\+pause()} pour basculer entre pause et lecture.
+\item {\ttfamily next\+\_\+audio()} et {\ttfamily prev\+\_\+audio()} pour changer de piste.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md49}{}\doxysection{\texorpdfstring{10. Navigation et interaction améliorée}{10. Navigation et interaction améliorée}}\label{md__r_e_a_d_m_e_autotoc_md49}
+
+\begin{DoxyItemize}
+\item {\bfseries{But}} \+: Permettre une navigation fluide entre les fichiers audio.
+\item {\bfseries{Fonctionnement}} \+: Lorsqu\textquotesingle{}une nouvelle piste est sélectionnée, les informations affichées sont mises à jour, et les boutons "{}suivant"{} et "{}précédent"{} permettent de naviguer rapidement.
+\item {\bfseries{Code associé}} \+: Les méthodes {\ttfamily next\+\_\+item()} et {\ttfamily prev\+\_\+item()} gèrent les changements de sélection dans la Listbox.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md50}{}\doxysection{\texorpdfstring{Utilisation Générale}{Utilisation Générale}}\label{md__r_e_a_d_m_e_autotoc_md50}
+
+\begin{DoxyItemize}
+\item {\bfseries{Lancer une recherche}} \+:
+\begin{DoxyItemize}
+\item Entrez une commande dans le champ de recherche et cliquez sur le bouton "{}\+Rechercher"{}.
+\item Les résultats s\textquotesingle{}afficheront en fonction de votre saisie.
+\end{DoxyItemize}
+\item {\bfseries{Lire de la musique}} \+:
+\begin{DoxyItemize}
+\item Sélectionnez un morceau dans la liste et cliquez sur "{}\+Jouer"{} pour commencer la lecture.
+\item Utilisez "{}\+Pause"{} pour mettre la musique en pause et "{}\+Reprendre"{} pour continuer la lecture.
+\end{DoxyItemize}
+\item {\bfseries{Gérer les playlists}} \+:
+\begin{DoxyItemize}
+\item Cliquez sur le bouton "{}\+Playlist"{} pour ouvrir la fenêtre de gestion des playlists.
+\item Vous pourrez y ajouter, supprimer ou modifier votre playlist.
+\end{DoxyItemize}
+\item {\bfseries{Modifier les métadonnées}} \+:
+\begin{DoxyItemize}
+\item Cliquez sur "{}\+Modifier Métadonnées"{} pour ouvrir la fenêtre de modification.
+\item Apportez vos changements, sélectionnez une couverture si besoin, puis cliquez sur "{}\+Enregistrer"{} pour sauvegarder.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md51}{}\doxysection{\texorpdfstring{Conclusion}{Conclusion}}\label{md__r_e_a_d_m_e_autotoc_md51}
+Cette application vous offre une interface simple et efficace pour gérer votre collection musicale. N\textquotesingle{}hésitez pas à explorer toutes les fonctionnalités disponibles et à personnaliser votre expérience.\hypertarget{md__r_e_a_d_m_e_autotoc_md52}{}\doxysection{\texorpdfstring{Prérequis}{Prérequis}}\label{md__r_e_a_d_m_e_autotoc_md52}
+Avant d\textquotesingle{}exécuter ce script, vous devez installer les bibliothèques suivantes \+:
+
+
+\begin{DoxyItemize}
+\item \href{https://mutagen.readthedocs.io/en/latest/installation.html}{\texttt{ mutagen}} \+: Bibliothèque utilisée pour extraire les métadonnées des fichiers MP3 et FLAC.
+\item \href{https://python-pillow.org/}{\texttt{ Pillow}} \+: Bibliothèque Python pour manipuler et afficher des images.
+\item \href{https://www.pygame.org/}{\texttt{ Pygame}} \+: Bibliothèque pour créer des jeux en Python et jouer des fichiers audio.
+\item \href{https://github.com/jiaaro/pydub}{\texttt{ Pydub}} \+: Bibliothèque pour manipuler les fichiers audio.
+\item \href{https://...}{\texttt{ lxml}} \+: Bibliothèque pour...
+\end{DoxyItemize}
+
+Pour installer les dépendances, exécutez la commande suivante dans votre terminal \+:
+
+\`{}\`{}\`{}bash pip install mutagen pip install Pillow pip install pygame pip install pydub pip install lxml 
