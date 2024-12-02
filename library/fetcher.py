@@ -24,12 +24,16 @@ class Fetcher:
         self.spotify_api_url = 'https://api.spotify.com/v1'  # URL de base pour les requêtes vers l'API Spotify
 
         # Chemins des fichiers JSON pour sauvegarder les données des artistes, albums et titres
-        self.chemin_artist_json = os.path.abspath(r"Python_project\\json_Dir\\artist_json.json")  # Chemin complet du fichier JSON pour les artistes
-        self.chemin_album_json = os.path.abspath(r"Python_project\\json_Dir\\album_json.json")  # Chemin complet du fichier JSON pour les albums
-        self.chemin_track_json = os.path.abspath(r"Python_project\\json_Dir\\track_json.json")  # Chemin complet du fichier JSON pour les titres
+        self.chemin_artist_json = os.path.abspath(r"json_Dir\\artist_json.json")  # Chemin complet du fichier JSON pour les artistes
+        self.chemin_album_json = os.path.abspath(r"json_Dir\\album_json.json")  # Chemin complet du fichier JSON pour les albums
+        self.chemin_track_json = os.path.abspath(r"json_Dir\\track_json.json")  # Chemin complet du fichier JSON pour les titres
+        self.chemin_python_project = os.path.join(os.getcwd(), "")  # Obtenir le chemin complet du dossier Python_project
+
+        self.creation_json() 
 
         # Vérifie la connexion Internet et effectue l'autorisation
         self.check_internet_and_authorize()  # Appelle une méthode pour vérifier Internet et obtenir un jeton
+
 
     def check_internet_and_authorize(self) -> bool: 
         """
@@ -448,3 +452,30 @@ class Fetcher:
         except json.JSONDecodeError:
             return "Erreur : Le fichier JSON est corrompu ou mal formaté."
 
+    def creation_json(self) -> None: 
+        # Nom du dossier à vérifier/créer
+        dossier_nom = "json_Dir"
+
+        # Créer le chemin complet du dossier FichierTemp
+        chemin_complet = os.path.join(self.chemin_python_project, dossier_nom)
+
+        # Vérifier si le dossier FichierTemp existe déjà
+        if not os.path.exists(chemin_complet):
+            # Créer le dossier
+            os.makedirs(chemin_complet)
+            print(f"Le dossier '{dossier_nom}' a été créé dans '{self.chemin_python_project}'.")
+        else:
+            print(f"Le dossier '{dossier_nom}' existe déjà dans '{self.chemin_python_project}'.")
+        # 
+        if not os.path.exists(self.chemin_artist_json):
+            # Créer le fichier json
+            artist_j = open(self.chemin_artist_json, 'w', encoding='utf-8') 
+            artist_j.close()
+        if not os.path.exists(self.chemin_album_json):
+            # Créer le fichier json
+            album_j = open(self.chemin_album_json, 'w', encoding='utf-8') 
+            album_j.close() 
+        if not os.path.exists(self.chemin_track_json):
+            # Créer le fichier json
+            track_j = open(self.chemin_track_json, 'w', encoding='utf-8')  
+            track_j.close()

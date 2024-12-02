@@ -1,0 +1,68 @@
+\doxysection{audio\+Tag\+Extraction.\+Extraction Class Reference}
+\hypertarget{classaudio_tag_extraction_1_1_extraction}{}\label{classaudio_tag_extraction_1_1_extraction}\index{audioTagExtraction.Extraction@{audioTagExtraction.Extraction}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classaudio_tag_extraction_1_1_extraction_a4379518d12b93f165c9bf603223c31b1}{convertir\+\_\+ms\+\_\+en\+\_\+minutes\+\_\+secondes}} (self, ms)
+\item 
+None \mbox{\hyperlink{classaudio_tag_extraction_1_1_extraction_afea9e3c9f87b2c1df77d35f46a1c8d2d}{audio\+\_\+extraire\+\_\+et\+\_\+afficher\+\_\+tag}} (self, str file\+\_\+aud)
+\item 
+str \mbox{\hyperlink{classaudio_tag_extraction_1_1_extraction_a632d72dc2d40ffea1795876612317cc4}{extraction\+\_\+et\+\_\+afficher\+\_\+tag}} (self, str file\+\_\+aud)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}    Une classe qui gère l'extraction et l'affichage des métadonnées
+    des fichiers audio au format MP3 et FLAC, ainsi que l'affichage
+    de leurs couvertures.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classaudio_tag_extraction_1_1_extraction_afea9e3c9f87b2c1df77d35f46a1c8d2d}\label{classaudio_tag_extraction_1_1_extraction_afea9e3c9f87b2c1df77d35f46a1c8d2d} 
+\index{audioTagExtraction.Extraction@{audioTagExtraction.Extraction}!audio\_extraire\_et\_afficher\_tag@{audio\_extraire\_et\_afficher\_tag}}
+\index{audio\_extraire\_et\_afficher\_tag@{audio\_extraire\_et\_afficher\_tag}!audioTagExtraction.Extraction@{audioTagExtraction.Extraction}}
+\doxysubsubsection{\texorpdfstring{audio\_extraire\_et\_afficher\_tag()}{audio\_extraire\_et\_afficher\_tag()}}
+{\footnotesize\ttfamily  None audio\+Tag\+Extraction.\+Extraction.\+audio\+\_\+extraire\+\_\+et\+\_\+afficher\+\_\+tag (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{file\+\_\+aud }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Méthode qui extrait et affiche les métadonnées d'un fichier audio.
+
+    Paramètre :
+    - file_aud : str : Le nom du fichier audio dont les métadonnées doivent être extraites.
+
+    Retour :
+    - None : Aucune valeur de retour.
+\end{DoxyVerb}
+ \Hypertarget{classaudio_tag_extraction_1_1_extraction_a4379518d12b93f165c9bf603223c31b1}\label{classaudio_tag_extraction_1_1_extraction_a4379518d12b93f165c9bf603223c31b1} 
+\index{audioTagExtraction.Extraction@{audioTagExtraction.Extraction}!convertir\_ms\_en\_minutes\_secondes@{convertir\_ms\_en\_minutes\_secondes}}
+\index{convertir\_ms\_en\_minutes\_secondes@{convertir\_ms\_en\_minutes\_secondes}!audioTagExtraction.Extraction@{audioTagExtraction.Extraction}}
+\doxysubsubsection{\texorpdfstring{convertir\_ms\_en\_minutes\_secondes()}{convertir\_ms\_en\_minutes\_secondes()}}
+{\footnotesize\ttfamily  int audio\+Tag\+Extraction.\+Extraction.\+convertir\+\_\+ms\+\_\+en\+\_\+minutes\+\_\+secondes (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{ms }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui convertit une durée en millisecondes en minutes et secondes.
+
+    Paramètre :
+    - ms : str : La durée en millisecondes à convertir.
+
+    Retour :
+    - tuple : Un tuple contenant le nombre de minutes et de secondes.
+\end{DoxyVerb}
+ \Hypertarget{classaudio_tag_extraction_1_1_extraction_a632d72dc2d40ffea1795876612317cc4}\label{classaudio_tag_extraction_1_1_extraction_a632d72dc2d40ffea1795876612317cc4} 
+\index{audioTagExtraction.Extraction@{audioTagExtraction.Extraction}!extraction\_et\_afficher\_tag@{extraction\_et\_afficher\_tag}}
+\index{extraction\_et\_afficher\_tag@{extraction\_et\_afficher\_tag}!audioTagExtraction.Extraction@{audioTagExtraction.Extraction}}
+\doxysubsubsection{\texorpdfstring{extraction\_et\_afficher\_tag()}{extraction\_et\_afficher\_tag()}}
+{\footnotesize\ttfamily  str audio\+Tag\+Extraction.\+Extraction.\+extraction\+\_\+et\+\_\+afficher\+\_\+tag (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{file\+\_\+aud }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Méthode qui extrait et retourne les métadonnées d'un fichier audio sous forme de chaîne.
+
+    Paramètre :
+    - file_aud : str : Le nom du fichier audio dont les métadonnées doivent être extraites.
+
+    Retour :
+    - str : Métadonnées d'un fichier audio sous forme de chaîne.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+audio\+Tag\+Extraction.\+py\end{DoxyCompactItemize}

@@ -14,8 +14,9 @@ class Playlist():
     """
     def __init__(self):
         """Initialisation de la création et l'écriture de fichiers de playlist au format XSPF"""
-        self.dossier = 'Python_project/Playlist'  # Définition du chemin du dossier où le fichier sera créé
-        self.path_che = os.path.abspath(r'python_project\FichierTemp\options_selectionnees.txt') 
+        self.dossier = 'Playlist'  # Définition du chemin du dossier où le fichier sera créé
+        self.path_che = os.path.abspath(r'FichierTemp\options_selectionnees.txt') 
+        self.chemin_python_project = os.path.join(os.getcwd(), "")  # Obtenir le chemin complet du dossier Python_project
 
     def creerUnFichierxspf(self) -> str:  
         """
@@ -125,7 +126,7 @@ class Playlist():
             - str : Le chemin du fichier XSPF créé, ou None en cas d'erreur.
         """
         # Utilisation du chemin absolu pour le dossier
-        dossier = os.path.abspath('Python_project/Playlist')  
+        dossier = os.path.abspath('Playlist')  
         
         try:
             # Vérifier si le dossier existe et le créer s'il n'existe pas
@@ -161,6 +162,20 @@ class Playlist():
             Retour :
             - None : Aucune valeur de retour.
         """
+        # Nom du dossier à vérifier/créer
+        dossier_nom = "Playlist"
+
+        # Créer le chemin complet du dossier FichierTemp
+        chemin_complet = os.path.join(self.chemin_python_project, dossier_nom)
+
+        # Vérifier si le dossier FichierTemp existe déjà
+        if not os.path.exists(chemin_complet):
+            # Créer le dossier
+            os.makedirs(chemin_complet)
+            print(f"Le dossier '{dossier_nom}' a été créé dans '{self.chemin_python_project}'.")
+        else:
+            print(f"Le dossier '{dossier_nom}' existe déjà dans '{self.chemin_python_project}'.")
+
         chemin_file = None  # Initialisation de la variable pour le chemin du fichier
         try:
             # Si aucun nom de fichier de sortie n'est donné, créer un fichier par défaut
