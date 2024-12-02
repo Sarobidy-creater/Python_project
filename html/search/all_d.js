@@ -21,5 +21,6 @@ var searchData=
   ['couverture_20cover_20art_18',['4. Affichage de la couverture (Cover Art)',['../md__r_e_a_d_m_e.html#autotoc_md33',1,'']]],
   ['cover_20art_19',['4. Affichage de la couverture (Cover Art)',['../md__r_e_a_d_m_e.html#autotoc_md33',1,'']]],
   ['cover_5fimage_20',['cover_image',['../class_python__project_1_1gui_1_1_interface.html#a190e5df1aec733315546c9676d066bfd',1,'Python_project::gui::Interface']]],
-  ['création_20de_20playlists_21',['6. Création de playlists',['../md__r_e_a_d_m_e.html#autotoc_md40',1,'']]]
+  ['création_20de_20playlists_21',['6. Création de playlists',['../md__r_e_a_d_m_e.html#autotoc_md40',1,'']]],
+  ['creation_5finterface_22',['creation_interface',['../class_python__project_1_1gui_1_1_interface.html#acb6446e0f2bf3764ecd4778174b2d1ab',1,'Python_project::gui::Interface']]]
 ];

@@ -68,11 +68,11 @@ class Interface:
         self.max_length_milieu  = 38 # Variable pour la taille de l'affichage sous la cover
         self.checkbox_vars = []  # Pour stocker les variables de cases à cocher
         self.chemins_options = []  # Pour stocker les chemins des options
-        self.file_path_chemins = os.path.abspath(r'python_project\FichierTemp\options_selectionnees.txt')  # Chemin du fichier pour écrire les options sélectionnées
-        self.fichier_lire = os.path.abspath(r'python_project\FichierTemp\TempFile.txt')  # Fichier temporaire pour lecture de données
-        self.chem_im = os.path.abspath(r"Python_project/img/nn.webp")  # Chemin de l'image par défaut pour l'interface
-        self.chem__music = os.path.abspath(r"Python_project\music")  # Répertoire par défaut pour les fichiers musicaux
-        self.image_path = os.path.abspath(r"Python_project\img\images.jpeg")  # Image par défaut pour la couverture d'album
+        self.file_path_chemins = os.path.abspath(r'FichierTemp\options_selectionnees.txt')  # Chemin du fichier pour écrire les options sélectionnées
+        self.fichier_lire = os.path.abspath(r'FichierTemp\TempFile.txt')  # Fichier temporaire pour lecture de données
+        self.chem_im = os.path.abspath(r"img/nn.webp")  # Chemin de l'image par défaut pour l'interface
+        self.chem__music = os.path.abspath(r"music")  # Répertoire par défaut pour les fichiers musicaux
+        self.image_path = os.path.abspath(r"img\images.jpeg")  # Image par défaut pour la couverture d'album
         self.creation_interface() 
          
     def creation_interface(self) -> None:  
@@ -741,7 +741,7 @@ class Interface:
         """
         texte_saisi = self.entry.get()  # Récupère le texte saisi dans l'Entry
          # self._specifier = True
-        chemin_audio = os.path.abspath(fr"Python_project/Playlist/{texte_saisi}.xspf")
+        chemin_audio = os.path.abspath(fr"Playlist/{texte_saisi}.xspf")
         self.verification_playlist(chemin_audio)
 
         if self.modification_fichier_play == True :

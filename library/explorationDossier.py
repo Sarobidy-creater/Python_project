@@ -18,8 +18,8 @@ class Explorer():
     def __init__(self):
         """Initialisation de l'exploration des dossiers et de gérer les fichiers audio"""
 
-        self.fichier_sortie = os.path.abspath(r'Python_project\FichierTemp\TempFile.txt')  
-        self.chemin_python_project = os.path.join(os.getcwd(), "Python_project")  # Obtenir le chemin complet du dossier Python_project
+        self.fichier_sortie = os.path.abspath(r'FichierTemp\TempFile.txt')  
+        self.chemin_python_project = os.path.join(os.getcwd(), "")  # Obtenir le chemin complet du dossier Python_project
 
     def _explorer_dossier_audio(self, chemin:str, fichier_sortie :str) -> str:  
         """
@@ -185,7 +185,7 @@ class Explorer():
 
             Retourne :
             - str : Le chemin du fichier de sortie, ou None en cas d'erreur.
-        """
+        
         audio_tab = []
         try:
             for racine, sous_dossiers, fichiers in os.walk(chemin):  # Parcours les fichiers dans le répertoire.
@@ -202,3 +202,4 @@ class Explorer():
         except Exception as e:
             print(f"Une erreur est survenue lors de l'écriture dans le fichier : {e}")
             return None  # Retourne None en cas d'erreur.
+        """

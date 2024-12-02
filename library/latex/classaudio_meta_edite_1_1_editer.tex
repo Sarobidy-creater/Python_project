@@ -1,0 +1,110 @@
+\doxysection{audio\+Meta\+Edite.\+Editer Class Reference}
+\hypertarget{classaudio_meta_edite_1_1_editer}{}\label{classaudio_meta_edite_1_1_editer}\index{audioMetaEdite.Editer@{audioMetaEdite.Editer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{classaudio_meta_edite_1_1_editer_ab53f76b7138a0d96f77f034887edf410}{creation\+\_\+meta\+\_\+donnees}} (self, str titre, str artiste, str album, str genre, int ladate, str organisation)
+\item 
+None \mbox{\hyperlink{classaudio_meta_edite_1_1_editer_addac91c48681f90a1ece1cc894484a62}{afficher\+\_\+et\+\_\+modifier\+\_\+metadata}} (self, str chemin\+\_\+audio, str chemin\+\_\+image, str titre, str artiste, str album, str genre, int ladate, str organisation)
+\item 
+None \mbox{\hyperlink{classaudio_meta_edite_1_1_editer_a604c5d4fba3b2a69627418f2ff381622}{modify\+\_\+mp3\+\_\+cover}} (self, str chemin\+\_\+audio, str cover\+\_\+image\+\_\+path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classaudio_meta_edite_1_1_editer_a6b2d161bcc1a16e23cec11642bf355c5}{\+\_\+afficher\+\_\+et\+\_\+modifier\+\_\+meta\+\_\+mp3}} (self, str chemin\+\_\+audio, dict meta\+\_\+donnees)
+\item 
+None \mbox{\hyperlink{classaudio_meta_edite_1_1_editer_ab029cf202727fea9db9d238a9f00570e}{\+\_\+afficher\+\_\+et\+\_\+modifier\+\_\+meta\+\_\+flac}} (self, str chemin\+\_\+audio, dict meta\+\_\+donnees, str chemin\+\_\+image)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classaudio_meta_edite_1_1_editer_ab029cf202727fea9db9d238a9f00570e}\label{classaudio_meta_edite_1_1_editer_ab029cf202727fea9db9d238a9f00570e} 
+\index{audioMetaEdite.Editer@{audioMetaEdite.Editer}!\_afficher\_et\_modifier\_meta\_flac@{\_afficher\_et\_modifier\_meta\_flac}}
+\index{\_afficher\_et\_modifier\_meta\_flac@{\_afficher\_et\_modifier\_meta\_flac}!audioMetaEdite.Editer@{audioMetaEdite.Editer}}
+\doxysubsubsection{\texorpdfstring{\_afficher\_et\_modifier\_meta\_flac()}{\_afficher\_et\_modifier\_meta\_flac()}}
+{\footnotesize\ttfamily  None audio\+Meta\+Edite.\+Editer.\+\_\+afficher\+\_\+et\+\_\+modifier\+\_\+meta\+\_\+flac (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{chemin\+\_\+audio,  }\item[{dict}]{meta\+\_\+donnees,  }\item[{str}]{chemin\+\_\+image }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}    Fonction qui affiche et modifie les métadonnées d'un fichier FLAC.
+
+    Paramètre :
+    - chemin_audio : str : Le chemin du dossier contenant le fichier audio.
+    - meta_donnees : dict : Dictionnaire de méta donnée.
+    - chemin_image : str : Le chemin du cover pour remplacer l'ancien.
+
+    Retour :
+    - None : Aucune valeur de retour.
+\end{DoxyVerb}
+ \Hypertarget{classaudio_meta_edite_1_1_editer_a6b2d161bcc1a16e23cec11642bf355c5}\label{classaudio_meta_edite_1_1_editer_a6b2d161bcc1a16e23cec11642bf355c5} 
+\index{audioMetaEdite.Editer@{audioMetaEdite.Editer}!\_afficher\_et\_modifier\_meta\_mp3@{\_afficher\_et\_modifier\_meta\_mp3}}
+\index{\_afficher\_et\_modifier\_meta\_mp3@{\_afficher\_et\_modifier\_meta\_mp3}!audioMetaEdite.Editer@{audioMetaEdite.Editer}}
+\doxysubsubsection{\texorpdfstring{\_afficher\_et\_modifier\_meta\_mp3()}{\_afficher\_et\_modifier\_meta\_mp3()}}
+{\footnotesize\ttfamily  None audio\+Meta\+Edite.\+Editer.\+\_\+afficher\+\_\+et\+\_\+modifier\+\_\+meta\+\_\+mp3 (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{chemin\+\_\+audio,  }\item[{dict}]{meta\+\_\+donnees }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}    Fonction qui affiche et modifie les métadonnées d'un fichier MP3.
+
+    Paramètre :
+    - chemin_audio : str : Le chemin du dossier contenant le fichier audio.
+    - meta_donnees : dict : Dictionnaire de méta donnée.
+
+    Retour :
+    - None : Aucune valeur de retour.
+\end{DoxyVerb}
+ \Hypertarget{classaudio_meta_edite_1_1_editer_addac91c48681f90a1ece1cc894484a62}\label{classaudio_meta_edite_1_1_editer_addac91c48681f90a1ece1cc894484a62} 
+\index{audioMetaEdite.Editer@{audioMetaEdite.Editer}!afficher\_et\_modifier\_metadata@{afficher\_et\_modifier\_metadata}}
+\index{afficher\_et\_modifier\_metadata@{afficher\_et\_modifier\_metadata}!audioMetaEdite.Editer@{audioMetaEdite.Editer}}
+\doxysubsubsection{\texorpdfstring{afficher\_et\_modifier\_metadata()}{afficher\_et\_modifier\_metadata()}}
+{\footnotesize\ttfamily  None audio\+Meta\+Edite.\+Editer.\+afficher\+\_\+et\+\_\+modifier\+\_\+metadata (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{chemin\+\_\+audio,  }\item[{str}]{chemin\+\_\+image,  }\item[{str}]{titre,  }\item[{str}]{artiste,  }\item[{str}]{album,  }\item[{str}]{genre,  }\item[{int}]{ladate,  }\item[{str}]{organisation }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui détecte le format du fichier et gère l'affichage et la modification des métadonnées.
+
+    Paramètre :
+    - titre : str : Le titre du fichier audio.
+    - artiste : str : Le nom de l'artiste.
+    - album : str : Le nom de l'album.
+    - genre : str : Le genre de la musique.
+    - ladate : int : La date du fichier audio.
+    - organisation : str : L' organisation ou le label.
+
+    Retour :
+    - None : Aucune valeur de retour.
+\end{DoxyVerb}
+ \Hypertarget{classaudio_meta_edite_1_1_editer_ab53f76b7138a0d96f77f034887edf410}\label{classaudio_meta_edite_1_1_editer_ab53f76b7138a0d96f77f034887edf410} 
+\index{audioMetaEdite.Editer@{audioMetaEdite.Editer}!creation\_meta\_donnees@{creation\_meta\_donnees}}
+\index{creation\_meta\_donnees@{creation\_meta\_donnees}!audioMetaEdite.Editer@{audioMetaEdite.Editer}}
+\doxysubsubsection{\texorpdfstring{creation\_meta\_donnees()}{creation\_meta\_donnees()}}
+{\footnotesize\ttfamily  dict audio\+Meta\+Edite.\+Editer.\+creation\+\_\+meta\+\_\+donnees (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{titre,  }\item[{str}]{artiste,  }\item[{str}]{album,  }\item[{str}]{genre,  }\item[{int}]{ladate,  }\item[{str}]{organisation }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui créer la méta donnée d'un fichier audio.
+
+    Paramètre :
+    - titre : str : Le titre du fichier audio.
+    - artiste : str : Le nom de l'artiste.
+    - album : str : Le nom de l'album.
+    - genre : str : Le genre de la musique.
+    - ladate : int : La date du fichier audio.
+    - organisation : str : L' organisation ou le label.
+
+    Retour :
+    - Dict : renvoie une dictionaire de données.
+\end{DoxyVerb}
+ \Hypertarget{classaudio_meta_edite_1_1_editer_a604c5d4fba3b2a69627418f2ff381622}\label{classaudio_meta_edite_1_1_editer_a604c5d4fba3b2a69627418f2ff381622} 
+\index{audioMetaEdite.Editer@{audioMetaEdite.Editer}!modify\_mp3\_cover@{modify\_mp3\_cover}}
+\index{modify\_mp3\_cover@{modify\_mp3\_cover}!audioMetaEdite.Editer@{audioMetaEdite.Editer}}
+\doxysubsubsection{\texorpdfstring{modify\_mp3\_cover()}{modify\_mp3\_cover()}}
+{\footnotesize\ttfamily  None audio\+Meta\+Edite.\+Editer.\+modify\+\_\+mp3\+\_\+cover (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{chemin\+\_\+audio,  }\item[{str}]{cover\+\_\+image\+\_\+path }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui modifie la couverture d'un fichier MP3.
+
+    Paramètre :
+    - chemin_audio : str : Le chemin du dossier contenant le fichier audio.
+    - cover_image_path : str : Le chemin du cover pour remplacer l'ancien.
+
+    Retour :
+    - None : Aucune valeur de retour.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+audio\+Meta\+Edite.\+py\end{DoxyCompactItemize}

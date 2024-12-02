@@ -1,0 +1,123 @@
+\doxysection{exploration\+Dossier.\+Explorer Class Reference}
+\hypertarget{classexploration_dossier_1_1_explorer}{}\label{classexploration_dossier_1_1_explorer}\index{explorationDossier.Explorer@{explorationDossier.Explorer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classexploration_dossier_1_1_explorer_aadd08657d77a4c2cf856f1471b047a01}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+None \mbox{\hyperlink{classexploration_dossier_1_1_explorer_aa4fb05f156e4760889b45a3198a2a94d}{explorer\+\_\+dossier\+\_\+console}} (self, str chemin\+\_\+name)
+\item 
+str \mbox{\hyperlink{classexploration_dossier_1_1_explorer_a4dc211d427e05f1a341353a67ccf7c7d}{explorer\+\_\+dossier\+\_\+gui}} (self, str chemin)
+\item 
+str \mbox{\hyperlink{classexploration_dossier_1_1_explorer_ab7cc0fc51863be2ea622b08bfaa6ac2a}{explorer\+\_\+\+Playlist}} (self)
+\item 
+list \mbox{\hyperlink{classexploration_dossier_1_1_explorer_afe3219f6f4b5f770cde4f940097b92da}{extraire\+\_\+pistes\+\_\+de\+\_\+playlist}} (self, str chemin\+\_\+complet)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classexploration_dossier_1_1_explorer_aa83f6accf7d8c031f212d3862ca64a11}\label{classexploration_dossier_1_1_explorer_aa83f6accf7d8c031f212d3862ca64a11} 
+{\bfseries fichier\+\_\+sortie}
+\item 
+\Hypertarget{classexploration_dossier_1_1_explorer_a0d11007362409b14aabc15d6267e5aab}\label{classexploration_dossier_1_1_explorer_a0d11007362409b14aabc15d6267e5aab} 
+{\bfseries chemin\+\_\+python\+\_\+project}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classexploration_dossier_1_1_explorer_a3efc6c85fda42230ee1c5134e92a8939}{\+\_\+explorer\+\_\+dossier\+\_\+audio}} (self, str chemin, str fichier\+\_\+sortie)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}    Une classe qui permet d'explorer des dossiers et de gérer les fichiers audio.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classexploration_dossier_1_1_explorer_aadd08657d77a4c2cf856f1471b047a01}\label{classexploration_dossier_1_1_explorer_aadd08657d77a4c2cf856f1471b047a01} 
+\index{explorationDossier.Explorer@{explorationDossier.Explorer}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!explorationDossier.Explorer@{explorationDossier.Explorer}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily exploration\+Dossier.\+Explorer.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialisation de l'exploration des dossiers et de gérer les fichiers audio\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classexploration_dossier_1_1_explorer_a3efc6c85fda42230ee1c5134e92a8939}\label{classexploration_dossier_1_1_explorer_a3efc6c85fda42230ee1c5134e92a8939} 
+\index{explorationDossier.Explorer@{explorationDossier.Explorer}!\_explorer\_dossier\_audio@{\_explorer\_dossier\_audio}}
+\index{\_explorer\_dossier\_audio@{\_explorer\_dossier\_audio}!explorationDossier.Explorer@{explorationDossier.Explorer}}
+\doxysubsubsection{\texorpdfstring{\_explorer\_dossier\_audio()}{\_explorer\_dossier\_audio()}}
+{\footnotesize\ttfamily  str exploration\+Dossier.\+Explorer.\+\_\+explorer\+\_\+dossier\+\_\+audio (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{chemin,  }\item[{str}]{fichier\+\_\+sortie }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}    Fonction qui explore le dossier spécifié et enregistre les chemins des fichiers audio (MP3, FLAC) dans un fichier.
+
+    Paramètres :
+    - chemin : str : Le chemin du dossier à explorer.
+    - fichier_sortie : str : Le chemin du fichier de sortie où enregistrer les chemins audio.
+
+    Retourne :
+    - str : Le chemin du fichier de sortie, ou None en cas d'erreur.
+\end{DoxyVerb}
+ \Hypertarget{classexploration_dossier_1_1_explorer_aa4fb05f156e4760889b45a3198a2a94d}\label{classexploration_dossier_1_1_explorer_aa4fb05f156e4760889b45a3198a2a94d} 
+\index{explorationDossier.Explorer@{explorationDossier.Explorer}!explorer\_dossier\_console@{explorer\_dossier\_console}}
+\index{explorer\_dossier\_console@{explorer\_dossier\_console}!explorationDossier.Explorer@{explorationDossier.Explorer}}
+\doxysubsubsection{\texorpdfstring{explorer\_dossier\_console()}{explorer\_dossier\_console()}}
+{\footnotesize\ttfamily  None exploration\+Dossier.\+Explorer.\+explorer\+\_\+dossier\+\_\+console (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str  }]{chemin\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui explore un dossier donné et affiche les chemins des fichiers audio (MP3, FLAC) dans la console.
+
+    Paramètre :
+    - chemin_name : str : Le chemin du dossier à explorer. Utilisez "." pour indiquer le répertoire courant.
+
+    Retourne :
+    - None : Aucune valeur de retour.
+\end{DoxyVerb}
+ \Hypertarget{classexploration_dossier_1_1_explorer_a4dc211d427e05f1a341353a67ccf7c7d}\label{classexploration_dossier_1_1_explorer_a4dc211d427e05f1a341353a67ccf7c7d} 
+\index{explorationDossier.Explorer@{explorationDossier.Explorer}!explorer\_dossier\_gui@{explorer\_dossier\_gui}}
+\index{explorer\_dossier\_gui@{explorer\_dossier\_gui}!explorationDossier.Explorer@{explorationDossier.Explorer}}
+\doxysubsubsection{\texorpdfstring{explorer\_dossier\_gui()}{explorer\_dossier\_gui()}}
+{\footnotesize\ttfamily  str exploration\+Dossier.\+Explorer.\+explorer\+\_\+dossier\+\_\+gui (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{chemin }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui explore un dossier donné et enregistre les chemins des fichiers audio (MP3, FLAC) dans un fichier temporaire.
+
+    Paramètre :
+    - chemin : str : Le chemin du dossier à explorer.
+
+    Retourne :
+    - str : Le chemin du fichier temporaire contenant les chemins des fichiers audio, ou None en cas d'erreur.
+\end{DoxyVerb}
+ \Hypertarget{classexploration_dossier_1_1_explorer_ab7cc0fc51863be2ea622b08bfaa6ac2a}\label{classexploration_dossier_1_1_explorer_ab7cc0fc51863be2ea622b08bfaa6ac2a} 
+\index{explorationDossier.Explorer@{explorationDossier.Explorer}!explorer\_Playlist@{explorer\_Playlist}}
+\index{explorer\_Playlist@{explorer\_Playlist}!explorationDossier.Explorer@{explorationDossier.Explorer}}
+\doxysubsubsection{\texorpdfstring{explorer\_Playlist()}{explorer\_Playlist()}}
+{\footnotesize\ttfamily  str exploration\+Dossier.\+Explorer.\+explorer\+\_\+\+Playlist (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}   Fonction qui recherche les fichiers de playlist .xspf dans le répertoire courant.
+
+    Paramètre :
+    - None : Aucune valeur en paramètre.
+
+    Retourne :
+    - str : Un tableau de chemin absolu de chaque fichier .xspf.
+\end{DoxyVerb}
+ \Hypertarget{classexploration_dossier_1_1_explorer_afe3219f6f4b5f770cde4f940097b92da}\label{classexploration_dossier_1_1_explorer_afe3219f6f4b5f770cde4f940097b92da} 
+\index{explorationDossier.Explorer@{explorationDossier.Explorer}!extraire\_pistes\_de\_playlist@{extraire\_pistes\_de\_playlist}}
+\index{extraire\_pistes\_de\_playlist@{extraire\_pistes\_de\_playlist}!explorationDossier.Explorer@{explorationDossier.Explorer}}
+\doxysubsubsection{\texorpdfstring{extraire\_pistes\_de\_playlist()}{extraire\_pistes\_de\_playlist()}}
+{\footnotesize\ttfamily  list exploration\+Dossier.\+Explorer.\+extraire\+\_\+pistes\+\_\+de\+\_\+playlist (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{chemin\+\_\+complet }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}   Fonction qui extrait les chemins audio d'une playlist .xspf donnée.
+
+    Paramètre :
+    - chemin_complet : str : Le chemin absolu d'un fichier .xspf.
+
+    Retourne :
+    - str : Une liste des chemins absolu de chaque fichier audio dans la playlist .xspf.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+exploration\+Dossier.\+py\end{DoxyCompactItemize}

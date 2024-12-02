@@ -1,0 +1,279 @@
+\doxysection{fetcher.\+Fetcher Class Reference}
+\hypertarget{classfetcher_1_1_fetcher}{}\label{classfetcher_1_1_fetcher}\index{fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfetcher_1_1_fetcher_a921d8a12da82208d288b90c81bd510bf}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+bool \mbox{\hyperlink{classfetcher_1_1_fetcher_a29fe5967075577002c4cce7c89e06e6e}{check\+\_\+internet\+\_\+and\+\_\+authorize}} (self)
+\item 
+bool \mbox{\hyperlink{classfetcher_1_1_fetcher_ab56a8b0631cce4a7c848c4a5abb4ad80}{is\+\_\+internet\+\_\+available}} (self)
+\item 
+bool \mbox{\hyperlink{classfetcher_1_1_fetcher_aea8f36b4c421049933ff2b66d3dc33c3}{authorize\+\_\+client}} (self)
+\item 
+int \mbox{\hyperlink{classfetcher_1_1_fetcher_add1ac16f4b0df6a41681df409744e5d5}{token\+\_\+is\+\_\+valid}} (self)
+\item 
+dict \mbox{\hyperlink{classfetcher_1_1_fetcher_a41e2d03b99797ddb308a7113e861edb6}{search}} (self, str query, APIQuery\+Type query\+\_\+type)
+\item 
+None \mbox{\hyperlink{classfetcher_1_1_fetcher_a0d69582c9da9c3525baacdd421b46a1a}{save\+\_\+to\+\_\+json}} (self, dict data, str filename)
+\item 
+dict \mbox{\hyperlink{classfetcher_1_1_fetcher_ad457757bb64c8b8db043f32b64d28903}{get\+\_\+artist\+\_\+info}} (self, str artist\+\_\+name)
+\item 
+dict \mbox{\hyperlink{classfetcher_1_1_fetcher_a0ad9f9645fb3ffc3c94790cc72d8b666}{get\+\_\+album\+\_\+info}} (self, str album\+\_\+name)
+\item 
+dict \mbox{\hyperlink{classfetcher_1_1_fetcher_ab1eefcbf8353c1d008ce3e3638ed7256}{get\+\_\+track\+\_\+info}} (self, str track\+\_\+name)
+\item 
+dict \mbox{\hyperlink{classfetcher_1_1_fetcher_aa59807348b283be8c98506f347de499c}{lire\+\_\+fichier\+\_\+json}} (self, str filename)
+\item 
+str \mbox{\hyperlink{classfetcher_1_1_fetcher_a2d08d2ca3a483c6e7b65f7da2346a3e8}{afficher\+\_\+artiste\+\_\+infos}} (self)
+\item 
+str \mbox{\hyperlink{classfetcher_1_1_fetcher_a239aa80392eb750717aee3ac93cfa267}{afficher\+\_\+album\+\_\+infos}} (self)
+\item 
+str \mbox{\hyperlink{classfetcher_1_1_fetcher_ae914aee3a8122e6ebbc06444c70e4c71}{afficher\+\_\+track\+\_\+infos}} (self)
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_a38d1a0be06ec411662f06b38edb23c7a}\label{classfetcher_1_1_fetcher_a38d1a0be06ec411662f06b38edb23c7a} 
+None {\bfseries creation\+\_\+json} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_a78a8c10954d25cb748aaa3bc6c57b650}\label{classfetcher_1_1_fetcher_a78a8c10954d25cb748aaa3bc6c57b650} 
+{\bfseries client\+\_\+id}
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_a35cb59b231de440bface455a45810ad0}\label{classfetcher_1_1_fetcher_a35cb59b231de440bface455a45810ad0} 
+{\bfseries client\+\_\+secret}
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_a199bbd50f23f0da8b111b07766bcf4d2}\label{classfetcher_1_1_fetcher_a199bbd50f23f0da8b111b07766bcf4d2} 
+{\bfseries authorization\+\_\+token}
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_a0489249c021c72fbb48cf6cd78b21751}\label{classfetcher_1_1_fetcher_a0489249c021c72fbb48cf6cd78b21751} 
+{\bfseries token\+\_\+url}
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_a6a9b57f3a999eaa2a8801f948dc026f8}\label{classfetcher_1_1_fetcher_a6a9b57f3a999eaa2a8801f948dc026f8} 
+{\bfseries spotify\+\_\+api\+\_\+url}
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_a2c788cb9db51588d634f81f08eb8dc2b}\label{classfetcher_1_1_fetcher_a2c788cb9db51588d634f81f08eb8dc2b} 
+{\bfseries chemin\+\_\+artist\+\_\+json}
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_a3dabfefc44757a0c81a1bcfa333aca4e}\label{classfetcher_1_1_fetcher_a3dabfefc44757a0c81a1bcfa333aca4e} 
+{\bfseries chemin\+\_\+album\+\_\+json}
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_aaa7b88da358c6d20fba9359baef320e2}\label{classfetcher_1_1_fetcher_aaa7b88da358c6d20fba9359baef320e2} 
+{\bfseries chemin\+\_\+track\+\_\+json}
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_ab27c3ff17079c29eb7ceccb7dc22f687}\label{classfetcher_1_1_fetcher_ab27c3ff17079c29eb7ceccb7dc22f687} 
+{\bfseries chemin\+\_\+python\+\_\+project}
+\item 
+\Hypertarget{classfetcher_1_1_fetcher_ae902a11eb18c8cf3f93326288344a116}\label{classfetcher_1_1_fetcher_ae902a11eb18c8cf3f93326288344a116} 
+{\bfseries token\+\_\+expiry\+\_\+time}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classfetcher_1_1_fetcher_a921d8a12da82208d288b90c81bd510bf}\label{classfetcher_1_1_fetcher_a921d8a12da82208d288b90c81bd510bf} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily fetcher.\+Fetcher.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialise la classe avec l'ID client et le secret client.
+Puis tente d'autoriser le client avec l'API Spotify.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classfetcher_1_1_fetcher_a239aa80392eb750717aee3ac93cfa267}\label{classfetcher_1_1_fetcher_a239aa80392eb750717aee3ac93cfa267} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!afficher\_album\_infos@{afficher\_album\_infos}}
+\index{afficher\_album\_infos@{afficher\_album\_infos}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{afficher\_album\_infos()}{afficher\_album\_infos()}}
+{\footnotesize\ttfamily  str fetcher.\+Fetcher.\+afficher\+\_\+album\+\_\+infos (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui récupère et retourne les informations sur les albums depuis un fichier JSON.
+
+    Paramètre :
+    - None : Aucune valeur en paramètre.
+
+    Retour :
+    - str : Une chaîne contenant les informations des albums ou un message d'erreur.
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_a2d08d2ca3a483c6e7b65f7da2346a3e8}\label{classfetcher_1_1_fetcher_a2d08d2ca3a483c6e7b65f7da2346a3e8} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!afficher\_artiste\_infos@{afficher\_artiste\_infos}}
+\index{afficher\_artiste\_infos@{afficher\_artiste\_infos}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{afficher\_artiste\_infos()}{afficher\_artiste\_infos()}}
+{\footnotesize\ttfamily  str fetcher.\+Fetcher.\+afficher\+\_\+artiste\+\_\+infos (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui récupère et retourne les informations sur les artistes depuis un fichier JSON.
+
+    Paramètre :
+    - None : Aucune valeur en paramètre.
+
+    Retour :
+    - str : Une chaîne contenant les informations des artistes ou un message d'erreur.
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_ae914aee3a8122e6ebbc06444c70e4c71}\label{classfetcher_1_1_fetcher_ae914aee3a8122e6ebbc06444c70e4c71} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!afficher\_track\_infos@{afficher\_track\_infos}}
+\index{afficher\_track\_infos@{afficher\_track\_infos}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{afficher\_track\_infos()}{afficher\_track\_infos()}}
+{\footnotesize\ttfamily  str fetcher.\+Fetcher.\+afficher\+\_\+track\+\_\+infos (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui récupère et retourne les informations sur les pistes depuis un fichier JSON.
+
+    Paramètre :
+    - None : Aucune valeur en paramètre.
+
+    Retour :
+    - str : Une chaîne contenant les informations des pistes ou un message d'erreur.
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_aea8f36b4c421049933ff2b66d3dc33c3}\label{classfetcher_1_1_fetcher_aea8f36b4c421049933ff2b66d3dc33c3} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!authorize\_client@{authorize\_client}}
+\index{authorize\_client@{authorize\_client}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{authorize\_client()}{authorize\_client()}}
+{\footnotesize\ttfamily  bool fetcher.\+Fetcher.\+authorize\+\_\+client (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui récupère un jeton d'authentification et autorise l'accès à l'API Spotify.
+    
+    Paramètre :
+    - None : Aucune valeur en paramètre.
+    
+    Retour :
+    - bool : Renvoie si l'authentification a réussi ou non.
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_a29fe5967075577002c4cce7c89e06e6e}\label{classfetcher_1_1_fetcher_a29fe5967075577002c4cce7c89e06e6e} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!check\_internet\_and\_authorize@{check\_internet\_and\_authorize}}
+\index{check\_internet\_and\_authorize@{check\_internet\_and\_authorize}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{check\_internet\_and\_authorize()}{check\_internet\_and\_authorize()}}
+{\footnotesize\ttfamily  bool fetcher.\+Fetcher.\+check\+\_\+internet\+\_\+and\+\_\+authorize (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui vérifie si une connexion Internet est disponible et tente d'obtenir un jeton d'authentification si possible.
+    
+    Paramètre :
+    - None : Aucune valeur en paramètre.
+    
+    Retour :
+    - bool : Retourne vrai si l'autorisation est réussie faux sinon.
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_a0ad9f9645fb3ffc3c94790cc72d8b666}\label{classfetcher_1_1_fetcher_a0ad9f9645fb3ffc3c94790cc72d8b666} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!get\_album\_info@{get\_album\_info}}
+\index{get\_album\_info@{get\_album\_info}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{get\_album\_info()}{get\_album\_info()}}
+{\footnotesize\ttfamily  dict fetcher.\+Fetcher.\+get\+\_\+album\+\_\+info (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{album\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui récupère les informations d’un album via l'API Spotify.
+
+    Paramètre :
+    - album_name : str : Le nom de l’album à rechercher.
+
+    Retour :
+    - dict : Un dictionnaire contenant les informations de l’album, avec :
+        - Clé : ID unique Spotify de l’album
+        - Valeurs : Titre de l’album, artiste, date de sortie
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_ad457757bb64c8b8db043f32b64d28903}\label{classfetcher_1_1_fetcher_ad457757bb64c8b8db043f32b64d28903} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!get\_artist\_info@{get\_artist\_info}}
+\index{get\_artist\_info@{get\_artist\_info}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{get\_artist\_info()}{get\_artist\_info()}}
+{\footnotesize\ttfamily  dict fetcher.\+Fetcher.\+get\+\_\+artist\+\_\+info (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{artist\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui récupère les informations d’un artiste via l'API Spotify.
+
+    Paramètre :
+    - artist_name : str : Le nom de l’artiste à rechercher.
+
+    Retour :
+    - dict : Un dictionnaire contenant les informations de l’artiste, avec :
+        - Clé : ID unique Spotify de l’artiste
+        - Valeurs : Dictionnaire des informations (nom, popularité, followers, genres)
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_ab1eefcbf8353c1d008ce3e3638ed7256}\label{classfetcher_1_1_fetcher_ab1eefcbf8353c1d008ce3e3638ed7256} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!get\_track\_info@{get\_track\_info}}
+\index{get\_track\_info@{get\_track\_info}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{get\_track\_info()}{get\_track\_info()}}
+{\footnotesize\ttfamily  dict fetcher.\+Fetcher.\+get\+\_\+track\+\_\+info (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{track\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui récupère les informations d’un titre via l'API Spotify.
+
+    Paramètre :
+    - track_name : str : Le nom du titre à rechercher.
+
+    Retour :
+    - dict : Un dictionnaire contenant les informations du titre, avec :
+        - Clé : ID unique Spotify du titre
+        - Valeurs : Titre, artiste, album
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_ab56a8b0631cce4a7c848c4a5abb4ad80}\label{classfetcher_1_1_fetcher_ab56a8b0631cce4a7c848c4a5abb4ad80} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!is\_internet\_available@{is\_internet\_available}}
+\index{is\_internet\_available@{is\_internet\_available}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{is\_internet\_available()}{is\_internet\_available()}}
+{\footnotesize\ttfamily  bool fetcher.\+Fetcher.\+is\+\_\+internet\+\_\+available (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui vérifie si une connexion Internet est disponible en envoyant une requête à Google.
+    
+    Paramètre :
+    - None : Aucune valeur en paramètre.
+    
+    Retour :
+    - bool : la requête réussit ou pas, l'Internet est disponible ou pas.
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_aa59807348b283be8c98506f347de499c}\label{classfetcher_1_1_fetcher_aa59807348b283be8c98506f347de499c} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!lire\_fichier\_json@{lire\_fichier\_json}}
+\index{lire\_fichier\_json@{lire\_fichier\_json}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{lire\_fichier\_json()}{lire\_fichier\_json()}}
+{\footnotesize\ttfamily  dict fetcher.\+Fetcher.\+lire\+\_\+fichier\+\_\+json (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{filename }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui lit les données d'un fichier JSON et les retourne sous forme de dictionnaire.
+
+    Paramètre :
+    - filename : str : 
+
+    Retour :
+    - dict : Dictionnaire contenant les données du fichier JSON.
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_a0d69582c9da9c3525baacdd421b46a1a}\label{classfetcher_1_1_fetcher_a0d69582c9da9c3525baacdd421b46a1a} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!save\_to\_json@{save\_to\_json}}
+\index{save\_to\_json@{save\_to\_json}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{save\_to\_json()}{save\_to\_json()}}
+{\footnotesize\ttfamily  None fetcher.\+Fetcher.\+save\+\_\+to\+\_\+json (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{dict}]{data,  }\item[{str}]{filename }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui enregistre les données dans un fichier JSON.
+
+    Paramètres :
+    - data : dict : Dictionnaire contenant les données à sauvegarder.
+    - filename : str : Chemin du fichier dans lequel les données seront enregistrées. 
+
+    Retour :
+    - None : Aucune valeur de retour.
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_a41e2d03b99797ddb308a7113e861edb6}\label{classfetcher_1_1_fetcher_a41e2d03b99797ddb308a7113e861edb6} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!search@{search}}
+\index{search@{search}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{search()}{search()}}
+{\footnotesize\ttfamily  dict fetcher.\+Fetcher.\+search (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{query,  }\item[{APIQuery\+Type}]{query\+\_\+type }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui effectue une recherche dans l'API Spotify selon le type de requête.
+
+    Paramètre :
+    - query : str : La chaîne de recherche à envoyer à l'API Spotify.
+    - query_type : APIQueryType : Enum spécifiant le type de recherche (artiste, album ou morceau).
+
+    Retour :
+    - dict : Résultat de la recherche renvoyé par l'API Spotify sous forme de dictionnaire JSON.
+\end{DoxyVerb}
+ \Hypertarget{classfetcher_1_1_fetcher_add1ac16f4b0df6a41681df409744e5d5}\label{classfetcher_1_1_fetcher_add1ac16f4b0df6a41681df409744e5d5} 
+\index{fetcher.Fetcher@{fetcher.Fetcher}!token\_is\_valid@{token\_is\_valid}}
+\index{token\_is\_valid@{token\_is\_valid}!fetcher.Fetcher@{fetcher.Fetcher}}
+\doxysubsubsection{\texorpdfstring{token\_is\_valid()}{token\_is\_valid()}}
+{\footnotesize\ttfamily  int fetcher.\+Fetcher.\+token\+\_\+is\+\_\+valid (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}    Fonction qui vérifie si le jeton d'authentification est encore valide.
+
+    Paramètre :
+    - None : Aucune valeur en paramètre.
+    
+    Retour : Renvoie vrai si l'heure actuelle est avant l'heure d'expiration du token.
+    -  : 
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+fetcher.\+py\end{DoxyCompactItemize}
