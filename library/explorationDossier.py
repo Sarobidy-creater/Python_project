@@ -175,31 +175,16 @@ class Explorer():
         except Exception as e:
             print(f"Erreur inconnue pour le fichier {chemin_complet} : {e}")
 
-
+    def explorer_dossier_interface(self, chemin) -> str:
         """
-            Fonction qui explore le dossier spécifié et enregistre les chemins des fichiers audio (MP3, FLAC) dans un fichier.
+            Fonction qui explore un dossier donné et enregistre les chemins des fichiers audio (MP3, FLAC) dans un fichier temporaire.
 
-            Paramètres :
+            Paramètre :
             - chemin : str : Le chemin du dossier à explorer.
-            - fichier_sortie : str : Le chemin du fichier de sortie où enregistrer les chemins audio.
 
             Retourne :
-            - str : Le chemin du fichier de sortie, ou None en cas d'erreur.
-        
-        audio_tab = []
-        try:
-            for racine, sous_dossiers, fichiers in os.walk(chemin):  # Parcours les fichiers dans le répertoire.
-                for fichier in fichiers:
-                    chemin_coplt = os.path.join(racine, fichier)  # Construit le chemin complet du fichier.
-                    chemin_complet = chemin_coplt.replace("\\", "/")
-                    nom = os.path.basename(chemin_complet)  # Récupère le nom du fichier.
-                    # Vérifie si le nom du fichier se termine par '.mp3' ou '.flac'.
-                    if nom.endswith(".mp3") or nom.endswith(".flac"):
-                        type_mime, _ = mimetypes.guess_type(chemin_complet)  # Détermine le type MIME du fichier.
-                        if type_mime in ['audio/mpeg', 'audio/x-flac']:  # Vérifie que le type MIME est valide.
-                            audio_tab.append(chemin_complet)
-            return audio_tab  # Retourne le chemin du fichier de sortie.
-        except Exception as e:
-            print(f"Une erreur est survenue lors de l'écriture dans le fichier : {e}")
-            return None  # Retourne None en cas d'erreur.
+            - str : Le chemin du fichier temporaire contenant les chemins des fichiers audio, ou None en cas d'erreur.
         """
+        fichier_sortie = os.path.abspath(r'FichierTemp\TempFile.txt')
+         
+        return self._explorer_dossier_audio(chemin, fichier_sortie)  # Appelle la méthode d'exploration des fichiers audio.

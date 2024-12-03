@@ -1,19 +1,14 @@
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-1 - La thune.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-10 - Ta reine.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-11 - Flemme.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-12 - Flou.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-2 - Balance ton quoi.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-3 - Jalousie.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-4 - Tout oublier.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-5 - La loi de Murphy.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-6 - Nombreux.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-7 - Victime des réseaux.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-8 - Les matins.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/1-9 - Je veux tes yeux.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/2-1 - Perdus.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/2-2 - Oui ou non.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/2-3 - Insomnies.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/2-4 - Tu me regardes.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/2-5 - J'entends.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/2-6 - Que du love.mp3
-C:/Users/nelly/card/musique audio/album musique/Angèle - Brol La Suite 2019/2-7 - Ta reine (Version orchestrale).mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/02 - Overtime.mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/03 - Under The Influence.mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/08 - belle.mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/1 - Hollywood's Bleeding.mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/1-2 - Balance ton quoi.mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/1-3 - Jalousie.mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/1-4 - Tout oublier.mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/2 - Saint-Tropez.mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/Aries (YuGo) Part 2 ft. Quavo, Pharrell.mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/Imagine Dragons  Bad Liar.mp3
+C:/Users/nelly/Desktop/propro/Python_project/music/Imagine-Dragons-Bad-Liar.flac
+C:/Users/nelly/Desktop/propro/Python_project/music/sample2.flac
+C:/Users/nelly/Desktop/propro/Python_project/music/sample4.flac
+C:/Users/nelly/Desktop/propro/Python_project/music/Symphony No.6 (1st movement).flac

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<playlist xmlns="http://xspf.org/ns/0/" version="1">
+  <date>03-12-24 17:21:27</date>
+  <trackList>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/02 - Overtime.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/03 - Under The Influence.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/08 - belle.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/1 - Hollywood's Bleeding.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/1-2 - Balance ton quoi.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/1-3 - Jalousie.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/1-4 - Tout oublier.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/2 - Saint-Tropez.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/Aries (YuGo) Part 2 ft. Quavo, Pharrell.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/Imagine Dragons  Bad Liar.mp3</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/Imagine-Dragons-Bad-Liar.flac</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/sample2.flac</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/sample4.flac</location>
+    </track>
+    <track>
+      <location>file:///C:/Users/nelly/Desktop/propro/Python_project/music/Symphony No.6 (1st movement).flac</location>
+    </track>
+  </trackList>
+</playlist>
