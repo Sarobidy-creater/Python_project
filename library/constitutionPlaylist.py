@@ -15,6 +15,10 @@ class Playlist():
     def __init__(self):
         """Initialisation de la création et l'écriture de fichiers de playlist au format XSPF"""
         self.dossier = 'Playlist'  # Définition du chemin du dossier où le fichier sera créé
+        # Vérifier si le dossier existe, sinon le créer
+        os.makedirs("music", exist_ok=True)
+        os.makedirs("Playlist", exist_ok=True)
+        os.makedirs("FichierTemp", exist_ok=True)
         self.path_che = os.path.abspath(r'FichierTemp\options_selectionnees.txt') 
         self.chemin_python_project = os.path.join(os.getcwd(), "")  # Obtenir le chemin complet du dossier Python_project
 

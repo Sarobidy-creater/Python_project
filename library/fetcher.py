@@ -22,7 +22,7 @@ class Fetcher:
         self.authorization_token = None  # Initialisation du token d'autorisation comme non défini
         self.token_url = 'https://accounts.spotify.com/api/token'  # URL pour obtenir un jeton d'accès
         self.spotify_api_url = 'https://api.spotify.com/v1'  # URL de base pour les requêtes vers l'API Spotify
-
+        os.makedirs("json_Dir", exist_ok=True)
         # Chemins des fichiers JSON pour sauvegarder les données des artistes, albums et titres
         self.chemin_artist_json = os.path.abspath(r"json_Dir\\artist_json.json")  # Chemin complet du fichier JSON pour les artistes
         self.chemin_album_json = os.path.abspath(r"json_Dir\\album_json.json")  # Chemin complet du fichier JSON pour les albums

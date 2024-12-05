@@ -17,7 +17,10 @@ class Explorer():
     """
     def __init__(self):
         """Initialisation de l'exploration des dossiers et de gérer les fichiers audio"""
-
+        
+        # Vérifier si le dossier existe, sinon le créer
+        os.makedirs("music", exist_ok=True)
+        os.makedirs("FichierTemp", exist_ok=True)
         self.fichier_sortie = os.path.abspath(r'FichierTemp\TempFile.txt')  
         self.chemin_python_project = os.path.join(os.getcwd(), "")  # Obtenir le chemin complet du dossier Python_project
 
