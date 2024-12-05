@@ -99,11 +99,23 @@ class Interface:
 
         # Charger l'image depuis le répertoire du projet
         chem_image = os.path.join(base_dir, "img", "nn.webp")
-        self.image = Image.open(chem_image)  # Charger l'image
-        self.image = self.image.resize((200, 200))  # Redimensionner l'image
-        self.image_tk = ImageTk.PhotoImage(self.image)  # Convertir pour l'utiliser avec tkinter
-        self.label_image = tk.Label(self.panel1, image=self.image_tk, bg="#87CEEB")  # Ajouter l'image au label
-        self.label_image.pack(pady=20)  # Afficher l'image avec espacement vertical
+        self.image_tk = None  # Initialiser à None pour le cas où l'image n'est pas trouvée
+        try:
+            self.image = Image.open(chem_image)  # Charger l'image
+            self.image = self.image.resize((200, 200))  # Redimensionner l'image
+            self.image_tk = ImageTk.PhotoImage(self.image)  # Convertir pour tkinter
+        except FileNotFoundError:
+            print(f"L'image '{chem_image}' n'a pas été trouvée. Une alternative sera affichée.")
+        except Exception as e:
+            print(f"Une erreur est survenue lors du chargement de l'image : {e}")
+
+        # Afficher soit l'image, soit un message
+        if self.image_tk:
+            self.label_image = tk.Label(self.panel1, image=self.image_tk, bg="#87CEEB")  # Ajouter l'image au label
+        else:
+            self.label_image = tk.Label(self.panel1, text="Image non disponible", bg="#87CEEB", fg="red")  # Texte alternatif
+
+        self.label_image.pack(pady=20)  # Afficher le label avec espacement vertical
 
         # Bouton pour changer de panneau (panel2)
         self.bouton_switch = tk.Button(self.panel1, text="Aller Go", command=self.direct_Goto)
@@ -227,12 +239,26 @@ class Interface:
         self.zone_petit_logo.grid(row=0, column=2, sticky='nsew',padx=2, pady=2)
 
         # logo image en bas pour le style de l'interface du panneau 2
-        chem_im = self.chem_im 
-        self.im = Image.open(chem_im)  # Remplace par le chemin de ton image
-        self.im = self.im.resize((24, 24))  # Redimensionner si nécessaire
-        self.im_tk = ImageTk.PhotoImage(self.im)
-        self.label_img_petit_logo = tk.Label(self.zone_petit_logo, image=self.im_tk, bg=self.dodgerblue)
-        self.label_img_petit_logo.pack(side=tk.RIGHT, padx=10, pady=10) 
+        chem_im = self.chem_im  # Chemin vers l'image
+        self.im_tk = None  # Initialisation à None
+
+        try:
+            self.im = Image.open(chem_im)  # Charger l'image
+            self.im = self.im.resize((24, 24))  # Redimensionner si nécessaire
+            self.im_tk = ImageTk.PhotoImage(self.im)  # Convertir pour tkinter
+        except FileNotFoundError:
+            print(f"L'image '{chem_im}' n'a pas été trouvée. Une alternative sera affichée.")
+        except Exception as e:
+            print(f"Une erreur est survenue lors du chargement de l'image : {e}")
+
+        # Afficher soit le logo, soit un texte ou un autre widget
+        if self.im_tk:
+            self.label_img_petit_logo = tk.Label(self.zone_petit_logo, image=self.im_tk, bg=self.dodgerblue)
+        else:
+            self.label_img_petit_logo = tk.Label(self.zone_petit_logo, text="Logo non disponible", bg=self.dodgerblue, fg="white", font=("Arial", 10))
+
+        self.label_img_petit_logo.pack(side=tk.RIGHT, padx=10, pady=10)
+
 
         # QUE Des Boutons******************************************
         # Création d'un bouton pour explorer les dossiers audio
@@ -572,33 +598,46 @@ class Interface:
             elif isinstance(audio, FLAC):
                 cover_image = next((picture.data for picture in audio.pictures if isinstance(picture, Picture)), None)
             
-            image_album = None  # Initialisation de la variable pour l'image de couverture
+            # Initialisation de la variable pour l'image de couverture
+            image_album = None  
 
             if cover_image:
-                # Si une couverture a été trouvée, on la charge et la redimensionne
-                image = Image.open(io.BytesIO(cover_image))  # Ouvre l'image à partir des données binaires
-                image = image.resize((214, 214))  # Redimensionne l'image à la taille du label
-                image_alb = ImageTk.PhotoImage(image)  # Convertir l'image en format compatible avec Tkinter
-                
-                image_album = image_alb  # Stocke l'image de couverture
+                try:
+                    # Si une couverture a été trouvée, on la charge et la redimensionne
+                    image = Image.open(io.BytesIO(cover_image))  # Ouvre l'image à partir des données binaires
+                    image = image.resize((214, 214))  # Redimensionne l'image à la taille du label
+                    image_alb = ImageTk.PhotoImage(image)  # Convertit l'image en format compatible avec Tkinter
+
+                    image_album = image_alb  # Stocke l'image de couverture
+                except Exception as e:
+                    print("Erreur lors du chargement de la couverture :", e)
+                    self.A_label_cover.config(text="Erreur de chargement de la couverture.")
             else:
                 # Si aucune couverture n'est trouvée, on charge une image par défaut
                 image_path = self.image_path  # Le chemin de l'image par défaut
                 try:
+                    if not os.path.isfile(image_path):  # Vérifie si le fichier existe
+                        raise FileNotFoundError(f"L'image par défaut '{image_path}' est introuvable.")
+
                     image = Image.open(image_path)  # Ouvre l'image par défaut
                     image = image.resize((214, 214))  # Redimensionne l'image à la taille du label
                     photo = ImageTk.PhotoImage(image)  # Convertit l'image pour Tkinter
 
                     image_album = photo  # Stocke l'image par défaut
+                except FileNotFoundError as fnf_error:
+                    print(fnf_error)
+                    self.A_label_cover.config(text="Image par défaut introuvable.")
                 except Exception as e:
-                    # En cas d'erreur lors du chargement de l'image par défaut
                     print("Erreur lors du chargement de l'image par défaut :", e)
-                    self.A_label_cover.config(text="Erreur de chargement de l'image.")  # Affiche un message d'erreur dans le label
+                    self.A_label_cover.config(text="Erreur de chargement de l'image.")
 
-            # Mettre à jour le label avec l'image de couverture (soit celle trouvée, soit l'image par défaut)
-            self.A_label_cover.config(image=image_album)  # Affecte l'image au label de couverture
-            self.A_label_cover.image = image_album  # Conserve une référence à l'image pour éviter qu'elle ne soit collectée par le garbage collector
-            self.A_label_cover.config(text="")  # Efface tout texte du label pour n'afficher que l'image
+            # Mettre à jour le label avec l'image de couverture ou un texte si aucune image n'est disponible
+            if image_album:
+                self.A_label_cover.config(image=image_album, text="")
+                self.A_label_cover.image = image_album  # Empêche le ramasse-miettes de supprimer l'image
+            else:
+                self.A_label_cover.config(text="Aucune image disponible.", image="")
+                self.A_label_cover.config(padx=1, pady=1)
         except Exception as e:
             # En cas d'erreur lors du traitement de l'audio (problème de lecture, de format, etc.)
             print("Erreur lors du traitement de l'audio :", e)
