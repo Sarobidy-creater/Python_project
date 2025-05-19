@@ -17,8 +17,8 @@ class Fetcher:
         Puis tente d'autoriser le client avec l'API Spotify.
         """
         # Initialisation des identifiants nécessaires à l'authentification Spotify
-        self.client_id = "45a8a345769d4ac0b91d95622d331f05"  # Identifiant client fourni par Spotify
-        self.client_secret = "1fc622291bbd48f487b2375179fcbc23"  # Secret client associé à l'ID client
+        self.client_id = "xxxxxxidxxxxw"  # Identifiant client fourni par Spotify
+        self.client_secret = "xxxxxxidxxxxw"  # Secret client associé à l'ID client
         self.authorization_token = None  # Initialisation du token d'autorisation comme non défini
         self.token_url = 'https://accounts.spotify.com/api/token'  # URL pour obtenir un jeton d'accès
         self.spotify_api_url = 'https://api.spotify.com/v1'  # URL de base pour les requêtes vers l'API Spotify
